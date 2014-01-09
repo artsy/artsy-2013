@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"><head><title>Artsy in 2014</title><style>#foreground {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+#foreground li {
+  display: none;
+  padding: 50px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+#foreground li.foreground-item-active {
+  display: block;
+}
+#foreground li header,
+#foreground li footer {
+  width: 400px;
+  padding-top: 20px;
+  border-top: 2px solid;
+  position: absolute;
+}
+#foreground li header {
+  top: 50px;
+}
+#foreground li header h1 {
+  font-size: 28px;
+}
+#foreground li footer {
+  bottom: 50px;
+}
+#foreground li small {
+  display: block;
+  margin-top: 20px;
+  font-size: 13px;
+}
+#foreground-social-buttons {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+}
+#foreground-social-buttons button {
+  padding: 25px;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: transparent;
+  background: no-repeat center center;
+  -webkit-background-size: 50%;
+  -moz-background-size: 50%;
+  background-size: 50%;
+}
+#foreground-social-buttons #foreground-facebook-button {
+  margin-right: 20px;
+  background-image: url("images/facebook.svg");
+}
+#foreground-social-buttons #foreground-twitter-button {
+  background-image: url("images/twitter.svg");
+}
+#background {
+  padding: 50px;
+}
+#background > ul {
+  float: right;
+  width: 70%;
+}
+#background > ul li {
+  margin-bottom: 400px;
+}
+#background > ul li img {
+  width: 100%;
+  margin-bottom: 40px;
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'adobe-garamond-pro', 'AGaramondPro-Regular', 'Times New Roman', 'Times', 'serif';
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+</style></head><body><div id="content"><div id="foreground"><ul class="foreground-content"><li class="foreground-item-active"><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li></ul><div id="foreground-social-buttons"><button id="foreground-facebook-button"></button><button id="foreground-twitter-button"></button></div></div><div id="background"><ul><li><img src="images/turell-1.jpg"><img src="images/turell-2.jpg"></li><li><img src="images/ici-1.jpg"><img src="images/ici-2.jpg"><img src="images/ici-3.jpg"></li></ul></div></div><div id="scripts"><script src="http://code.jquery.com/jquery-1.10.2.min.js"></script><script>(function() {
+  var onScroll;
+
+  $(function() {
+    return $(window).on('scroll', onScroll);
+  });
+
+  onScroll = function() {
+    return $('#background li').each(function() {
+      if ($(window).scrollTop() + $(window).height() >= $(this).offset().top) {
+        $("#foreground li").hide();
+        return $("#foreground li:eq(" + ($(this).index()) + ")").show();
+      }
+    });
+  };
+
+}).call(this);
+</script></div></body></html>

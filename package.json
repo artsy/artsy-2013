@@ -1,0 +1,12 @@
+{
+  "name": "artsy-2014",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "jade": "*",
+    "stylus": "*",
+    "coffee-script": "*",
+    "nib": "*"
+  }
+}

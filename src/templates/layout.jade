@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+  head
+    title Artsy in 2014
+    style
+      include:stylus ../stylesheets/index.styl
+  body
+    #content
+      block content
+    #scripts
+      include scripts
+      script
+        include:coffeescript ../scripts/index.coffee
