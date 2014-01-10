@@ -7,16 +7,14 @@
   z-index 2
 
 #foreground li
-  display none
   padding foreground-padding
   height 100%
   width 100%
   position absolute
-  &.foreground-item-active
-    display block
+  opacity 0
 
   header, footer
-    width 400px
+    width 40%
     padding-top 20px
     border-top 2px solid
     position absolute
@@ -24,7 +22,8 @@
   header
     top foreground-padding
     h1
-      font-size 28px
+      font-size 34px
+      line-height 1.1em
 
   footer
     bottom foreground-padding
@@ -34,18 +33,25 @@
     margin-top 20px
     font-size 13px
 
+#foreground-gradient
+  background linear-gradient(top, transparent, black)
+  width 100%
+  height 40%
+  bottom 0
+  position absolute
+  left 0
+
 #foreground-social-buttons
   position absolute
   right foreground-padding
   bottom foreground-padding
-
   button
     padding 25px
     border 2px solid white
     border-radius 50px
     background transparent
     background no-repeat center center
-    background-size 50%
+    background-size 40%
   #foreground-facebook-button
     margin-right 20px
     background-image url(images/facebook.svg)
