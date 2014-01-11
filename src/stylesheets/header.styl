@@ -1,0 +1,39 @@
+@import 'lib'
+
+#main-header
+  width 100%
+  min-height 300px
+  position relative
+  background url('images/header/1.jpg') center center no-repeat
+  background-size cover
+  margin-bottom 100px
+  #logo
+    background url('images/logo.svg') center center no-repeat
+    background-size contain
+    width 150px
+    height 60px
+    position absolute
+    left foreground-padding
+    top @left
+  h1
+    font-size 54px
+    position absolute
+    bottom 30%
+    left foreground-padding
+
+#main-header-black-gradient
+  background linear-gradient(top, transparent, black)
+  position absolute
+  bottom 0
+  width 100%
+  height 20%
+
+#main-header-down-arrow
+  background center center no-repeat url('images/down-arrow.svg')
+  width 40px
+  height @width
+  margin auto
+  position absolute
+  bottom 30px
+  left 50%
+  margin-left (@width / 2)

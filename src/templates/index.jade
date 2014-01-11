@@ -5,9 +5,12 @@ html(lang="en")
     style
       include:stylus ../stylesheets/index.styl
   body
+    header#main-header
+      include header
     #content
-      block content
+      include content
     #scripts
       include scripts
       script
-        include:coffeescript ../scripts/index.coffee
+        include:coffeescript ../scripts/header.coffee
+        include:coffeescript ../scripts/fade.coffee
