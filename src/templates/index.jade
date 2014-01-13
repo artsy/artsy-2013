@@ -5,12 +5,12 @@ html(lang="en")
     style
       include:stylus ../stylesheets/index.styl
   body
-    include foreground
     #wrapper
       #scroller
         header#main-header
           include header
         #content
+          include foreground
           include background
     #scripts
       include scripts

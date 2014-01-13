@@ -1,5 +1,8 @@
+# Constants
+# ---------
+
 # The gap between items is based on the viewport size
-window.GAP_PERCENT_OF_VIEWPORT = 0.5
+GAP_PERCENT_OF_VIEWPORT = 0.5
 
 # The point at which one foreground item is at 0 opacity and the next item is fading in.
 # e.g. 0.9 will mean the fade out of the first item is long and the fade in of the next
@@ -13,25 +16,38 @@ FADE_GAP_OF_BLACK = 0.6
 
 # Offset what point the fade begins after the bottom of the previous element,
 # based on viewportHeight
-startOffest = (viewportHeight) -> 0 # (viewportHeight / 2)
+startOffest = (vpHeight) -> 0 # (vpHeight / 2)
 
 # Offset what point the fade begins after the bottom of the previous element,
 # based on viewportHeight
-window.END_OFFSET = 1.1
-endOffest = (viewportHeight) -> (viewportHeight * END_OFFSET)
+END_OFFSET = 1.1
+endOffest = (vpHeight) -> (vpHeight * END_OFFSET)
 
-# Use a custom scrollTop variable in place of $(window).scrollTop() for iScroll
-# support.
-window.scrollTop = 0
+# Top-level variables
+# -------------------
 
-$ -> imagesLoaded 'body', ->
-  setupIscroll()
+myScroll = null # Reference to iScroll instance
+contentGap = 0
+
+# Use a custom scrollTop & viewportHeight variable in place of window references for
+# iScroll support.
+scrollTop = 0
+viewportHeight = 0
+
+# Functions
+# ---------
+
+$ -> imagesLoaded 'body', init
+
+init = ->
   $(window).on 'resize', onResize
   onResize()
+  setupIscroll()
   $('#main-header-down-arrow').click onClickHeaderDownArrow
+  setContentGap()
 
 setupIscroll = ->
-  $('#wrapper').height $(window).height()
+  $('#wrapper').height viewportHeight
   myScroll = new IScroll '#wrapper',
     momentum: false
     probeType: 3
@@ -43,7 +59,10 @@ setupIscroll = ->
   document.addEventListener('touchmove', ((e) -> e.preventDefault()), false);
 
 setScrollTop = ->
-  window.scrollTop = -(this.y>>0) ? $(window).scrollTop()
+  scrollTop = -(this.y>>0)
+
+setContentGap = ->
+  contentGap = -($('#scroller').offset().top - $('#content').offset().top)
 
 onClickHeaderDownArrow = ->
   $('html, body').animate {
@@ -52,26 +71,33 @@ onClickHeaderDownArrow = ->
   false
 
 onResize = ->
+  viewportHeight = $(window).height()
   setBackgroundItemGap()
   setForegroundInitHeight()
   resizeHeader()
+  setContentGap()
 
 onScroll = ->
-  # fadeForeground()
+  fixForeground()
+  fadeForeground()
   toggleForegroundInit()
   fadeHeaderOnScroll()
+
+fixForeground = ->
+  top = scrollTop - contentGap
+  $('#foreground').css top: Math.max(top, 0)
 
 fadeForeground = ->
   $('#background li').each ->
     index = $(@).index()
 
     # Alias common positions we'll be calculating
-    viewportHeight = $(window).height()
-    viewportBottom = scrollTop + $(window).height()
-    viewportTop = scrollTop
+    viewportBottom = scrollTop + viewportHeight
     elTop = $(@).offset()?.top
     elBottom = elTop + $(@).height()
     nextTop = $(@).next()?.offset()?.top
+
+    console.log viewportBottom, elTop, elBottom, nextTop
 
     # Values pertaining to when to start fading and when to fade in the next one
     startPoint = elBottom + startOffest(viewportHeight)
@@ -87,18 +113,17 @@ fadeForeground = ->
       $("#foreground li:eq(#{index + 1})").css opacity: percentNextItem
 
 setBackgroundItemGap = ->
-  $('#background li').css 'margin-bottom': $(window).height() * GAP_PERCENT_OF_VIEWPORT
+  $('#background li').css 'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
 
 setForegroundInitHeight = ->
-  $('#foreground').height $(window).height()
+  $('#foreground').height viewportHeight
 
 toggleForegroundInit = ->
-  if scrollTop < $('#content').offset().top
-    $('#foreground').css top: $('#content').offset().top - scrollTop
+  return
 
 resizeHeader = ->
-  $('#main-header').height $(window).height()
+  $('#main-header').height viewportHeight
 
 fadeHeaderOnScroll = ->
-  opacity = 1 - scrollTop / $(window).height()
+  opacity = 1 - scrollTop / viewportHeight
   $('#main-header').css opacity: opacity
