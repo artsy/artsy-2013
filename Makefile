@@ -1,6 +1,6 @@
 BIN = node_modules/.bin
 
-start:
+s:
 	open out/index.html
 	$(BIN)/jade src/templates/index.jade -w -o out
 
