@@ -20,14 +20,44 @@ startOffest = (viewportHeight) -> 0 # (viewportHeight / 2)
 window.END_OFFSET = 1.1
 endOffest = (viewportHeight) -> (viewportHeight * END_OFFSET)
 
-$ ->
-  $(window).on 'scroll', onScroll
-  $(window).on 'resize', onResize
-  onScroll()
-  onResize()
-  $('#main-header-down-arrow').click scrollDownFromTop
+IS_IPAD = true
 
-scrollDownFromTop = ->
+# Use a custom scrollTop variable in place of $(window).scrollTop() for iScroll
+# support.
+window.scrollTop = 0
+
+$ -> afterAllImagesLoad ->
+  if IS_IPAD
+    setupIscroll()
+  else
+    $(window).on 'scroll', onScroll
+    onScroll()
+  $(window).on 'resize', onResize
+  onResize()
+  $('#main-header-down-arrow').click onClickHeaderDownArrow
+
+afterAllImagesLoad = (callback) ->
+  total = $('img').length
+  $('img').on 'load', ->
+    total--
+    callback() if total is 0
+
+setupIscroll = ->
+  $('#wrapper').height $(window).height()
+  myScroll = new IScroll '#wrapper',
+    momentum: false
+    probeType: 3
+    mouseWheel: true
+  myScroll.on('scroll', setScrollTop)
+  myScroll.on('scrollEnd', setScrollTop)
+  myScroll.on('scroll', onScroll)
+  myScroll.on('scrollEnd', onScroll)
+  document.addEventListener('touchmove', ((e) -> e.preventDefault()), false);
+
+setScrollTop = ->
+  window.scrollTop = -(this.y>>0) ? $(window).scrollTop()
+
+onClickHeaderDownArrow = ->
   $('html, body').animate {
     scrollTop: $('#content').offset().top
   }, 700, 'easeInOutCubic'
@@ -39,9 +69,14 @@ onResize = ->
   resizeHeader()
 
 onScroll = ->
-  fadeForeground()
+  # fadeForeground()
   toggleForegroundInit()
   fadeHeaderOnScroll()
+  fixForeground()
+
+fixForeground = ->
+  top = Math.max(0, scrollTop - $(window).height() - 100)
+  $('#foreground').css(top: top)
 
 fadeForeground = ->
   $('#background li').each ->
@@ -49,8 +84,8 @@ fadeForeground = ->
 
     # Alias common positions we'll be calculating
     viewportHeight = $(window).height()
-    viewportBottom = $(window).scrollTop() + $(window).height()
-    viewportTop = $(window).scrollTop()
+    viewportBottom = scrollTop + $(window).height()
+    viewportTop = scrollTop
     elTop = $(@).offset()?.top
     elBottom = elTop + $(@).height()
     nextTop = $(@).next()?.offset()?.top
@@ -75,7 +110,7 @@ setForegroundInitHeight = ->
   $('#foreground').height $(window).height()
 
 toggleForegroundInit = ->
-  if $(window).scrollTop() > $('#content').offset().top
+  if scrollTop > $('#content').offset().top
     $('#foreground').removeClass 'foreground-init'
   else
     $('#foreground').addClass 'foreground-init'
@@ -84,5 +119,5 @@ resizeHeader = ->
   $('#main-header').height $(window).height()
 
 fadeHeaderOnScroll = ->
-  opacity = 1 - $(window).scrollTop() / $(window).height()
+  opacity = 1 - scrollTop / $(window).height()
   $('#main-header').css opacity: opacity
