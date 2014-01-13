@@ -20,27 +20,15 @@ startOffest = (viewportHeight) -> 0 # (viewportHeight / 2)
 window.END_OFFSET = 1.1
 endOffest = (viewportHeight) -> (viewportHeight * END_OFFSET)
 
-IS_IPAD = true
-
 # Use a custom scrollTop variable in place of $(window).scrollTop() for iScroll
 # support.
 window.scrollTop = 0
 
-$ -> afterAllImagesLoad ->
-  if IS_IPAD
-    setupIscroll()
-  else
-    $(window).on 'scroll', onScroll
-    onScroll()
+$ -> imagesLoaded 'body', ->
+  setupIscroll()
   $(window).on 'resize', onResize
   onResize()
   $('#main-header-down-arrow').click onClickHeaderDownArrow
-
-afterAllImagesLoad = (callback) ->
-  total = $('img').length
-  $('img').on 'load', ->
-    total--
-    callback() if total is 0
 
 setupIscroll = ->
   $('#wrapper').height $(window).height()
@@ -72,11 +60,6 @@ onScroll = ->
   # fadeForeground()
   toggleForegroundInit()
   fadeHeaderOnScroll()
-  fixForeground()
-
-fixForeground = ->
-  top = Math.max(0, scrollTop - $(window).height() - 100)
-  $('#foreground').css(top: top)
 
 fadeForeground = ->
   $('#background li').each ->
@@ -110,10 +93,8 @@ setForegroundInitHeight = ->
   $('#foreground').height $(window).height()
 
 toggleForegroundInit = ->
-  if scrollTop > $('#content').offset().top
-    $('#foreground').removeClass 'foreground-init'
-  else
-    $('#foreground').addClass 'foreground-init'
+  if scrollTop < $('#content').offset().top
+    $('#foreground').css top: $('#content').offset().top - scrollTop
 
 resizeHeader = ->
   $('#main-header').height $(window).height()

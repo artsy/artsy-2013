@@ -5,15 +5,17 @@ html(lang="en")
     style
       include:stylus ../stylesheets/index.styl
   body
+    include foreground
     #wrapper
       #scroller
         header#main-header
           include header
         #content
-          include content
+          include background
     #scripts
       include scripts
       script
         include ../scripts/iscroll-probe.js
         include ../scripts/jquery-ui-easings.js
+        include ../scripts/imagesloaded.js
         include:coffeescript ../scripts/index.coffee
