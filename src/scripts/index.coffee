@@ -22,12 +22,28 @@ endOffest = (viewportHeight) -> (viewportHeight * END_OFFSET)
 
 $ ->
   $(window).on 'scroll', onScroll
-  $(window).on 'resize', setBackgroundItemMargin
+  $(window).on 'resize', onResize
   onScroll()
-  setBackgroundItemMargin()
-  $("#foreground li").first().animate { opacity: 1 }, 'fast'
+  onResize()
+  $('#main-header-down-arrow').click scrollDownFromTop
+
+scrollDownFromTop = ->
+  $('html, body').animate {
+    scrollTop: $('#content').offset().top
+  }, 700, 'easeInOutCubic'
+  false
+
+onResize = ->
+  setBackgroundItemGap()
+  setForegroundInitHeight()
+  resizeHeader()
 
 onScroll = ->
+  fadeForeground()
+  toggleForegroundInit()
+  fadeHeaderOnScroll()
+
+fadeForeground = ->
   $('#background li').each ->
     index = $(@).index()
 
@@ -45,10 +61,6 @@ onScroll = ->
     midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint
     firstMidPoint = midPoint - ((viewportHeight * GAP_PERCENT_OF_VIEWPORT)) * FADE_GAP_OF_BLACK
 
-    # Between an item so make sure it's opacity is 1
-    # if viewportTop > elTop and viewportBottom < elBottom
-    #   $("#foreground li:eq(#{index})").css opacity: 1
-
     # Between items so transition opacities as you scroll
     if viewportBottom > startPoint and viewportBottom < endPoint
       percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint)
@@ -56,6 +68,21 @@ onScroll = ->
       $("#foreground li:eq(#{index})").css opacity: percentPrevItem
       $("#foreground li:eq(#{index + 1})").css opacity: percentNextItem
 
-
-setBackgroundItemMargin = ->
+setBackgroundItemGap = ->
   $('#background li').css 'margin-bottom': $(window).height() * GAP_PERCENT_OF_VIEWPORT
+
+setForegroundInitHeight = ->
+  $('#foreground').height $(window).height()
+
+toggleForegroundInit = ->
+  if $(window).scrollTop() > $('#content').offset().top
+    $('#foreground').removeClass 'foreground-init'
+  else
+    $('#foreground').addClass 'foreground-init'
+
+resizeHeader = ->
+  $('#main-header').height $(window).height()
+
+fadeHeaderOnScroll = ->
+  opacity = 1 - $(window).scrollTop() / $(window).height()
+  $('#main-header').css opacity: opacity

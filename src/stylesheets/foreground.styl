@@ -5,6 +5,9 @@
   width 100%
   height 100%
   z-index 2
+  top 0
+  &.foreground-init
+    position absolute
 
 #foreground li
   padding foreground-padding
@@ -12,6 +15,8 @@
   width 100%
   position absolute
   opacity 0
+  &:first-child
+    opacity 1
 
   header, footer
     width 40%

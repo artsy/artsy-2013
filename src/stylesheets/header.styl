@@ -15,11 +15,16 @@
     position absolute
     left foreground-padding
     top @left
-  h1
-    font-size 54px
+  #main-header-hgroup
     position absolute
     bottom 30%
     left foreground-padding
+  h1
+    font-size 54px
+    line-height 1em
+  h2
+    avant-garde()
+    margin-bottom 15px
 
 #main-header-black-gradient
   background linear-gradient(top, transparent, black)
@@ -36,4 +41,5 @@
   position absolute
   bottom 30px
   left 50%
-  margin-left (@width / 2)
+  margin-left -(@width / 2)
+  cursor pointer
