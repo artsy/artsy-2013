@@ -26,8 +26,18 @@ endOffest = (vpHeight) -> (vpHeight * END_OFFSET)
 # Top-level variables
 # -------------------
 
+# Cached elements
+$scroller = null
+$backgroundItems = null
+$foreground = null
+$mainHeader = null
+$content = null
+$wrapper = null
+$mainArrow = null
+$foregroundItems = null
+
 myScroll = null # Reference to iScroll instance
-contentGap = 0
+contentGap = 0 # The distance from the top of the page to the content
 
 # Use a custom scrollTop & viewportHeight variable in place of window references for
 # iScroll support.
@@ -37,37 +47,50 @@ viewportHeight = 0
 # Functions
 # ---------
 
-$ -> imagesLoaded 'body', init
-
 init = ->
+  cacheElements()
   $(window).on 'resize', onResize
   onResize()
   setupIscroll()
-  $('#main-header-down-arrow').click onClickHeaderDownArrow
+  $mainArrow.click onClickHeaderDownArrow
+  $mainArrow.on 'tap', onClickHeaderDownArrow
   setContentGap()
 
+cacheElements = ->
+  $scroller = $('#scroller')
+  $backgroundItems = $('#background li')
+  $foreground = $('#foreground')
+  $foregroundItems = $("#foreground li")
+  $mainHeader = $('#main-header')
+  $content = $('#content')
+  $wrapper = $('#wrapper')
+  $mainArrow = $('#main-header-down-arrow')
+
 setupIscroll = ->
-  $('#wrapper').height viewportHeight
+  $wrapper.height viewportHeight
   myScroll = new IScroll '#wrapper',
-    momentum: false
     probeType: 3
     mouseWheel: true
   myScroll.on('scroll', setScrollTop)
   myScroll.on('scrollEnd', setScrollTop)
   myScroll.on('scroll', onScroll)
   myScroll.on('scrollEnd', onScroll)
-  document.addEventListener('touchmove', ((e) -> e.preventDefault()), false);
+  document.addEventListener 'touchmove', ((e) -> e.preventDefault()), false
+
+offset = ($el) ->
+  {
+    top: -($scroller.offset()?.top - $el.offset()?.top)
+    left: $el.offset()?.left
+  }
 
 setScrollTop = ->
   scrollTop = -(this.y>>0)
 
 setContentGap = ->
-  contentGap = -($('#scroller').offset().top - $('#content').offset().top)
+  contentGap = offset($content).top
 
 onClickHeaderDownArrow = ->
-  $('html, body').animate {
-    scrollTop: $('#content').offset().top
-  }, 700, 'easeInOutCubic'
+  myScroll.scrollToElement '#content', 700, null, null, IScroll.utils.ease.quadratic
   false
 
 onResize = ->
@@ -79,25 +102,22 @@ onResize = ->
 
 onScroll = ->
   fixForeground()
-  fadeForeground()
-  toggleForegroundInit()
+  fadeBetweenForegroundItems()
   fadeHeaderOnScroll()
 
 fixForeground = ->
   top = scrollTop - contentGap
-  $('#foreground').css top: Math.max(top, 0)
+  $foreground.css top: Math.max(top, 0)
 
-fadeForeground = ->
-  $('#background li').each ->
+fadeBetweenForegroundItems = ->
+  $backgroundItems.each ->
     index = $(@).index()
 
     # Alias common positions we'll be calculating
     viewportBottom = scrollTop + viewportHeight
-    elTop = $(@).offset()?.top
+    elTop = offset($(@)).top
     elBottom = elTop + $(@).height()
-    nextTop = $(@).next()?.offset()?.top
-
-    console.log viewportBottom, elTop, elBottom, nextTop
+    nextTop = offset($(@).next()).top
 
     # Values pertaining to when to start fading and when to fade in the next one
     startPoint = elBottom + startOffest(viewportHeight)
@@ -109,21 +129,22 @@ fadeForeground = ->
     if viewportBottom > startPoint and viewportBottom < endPoint
       percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint)
       percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint)
-      $("#foreground li:eq(#{index})").css opacity: percentPrevItem
-      $("#foreground li:eq(#{index + 1})").css opacity: percentNextItem
+      $foregroundItems.eq(index).css opacity: percentPrevItem
+      $foregroundItems.eq(index + 1).css opacity: percentNextItem
 
 setBackgroundItemGap = ->
-  $('#background li').css 'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
+  $backgroundItems.css 'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
 
 setForegroundInitHeight = ->
-  $('#foreground').height viewportHeight
-
-toggleForegroundInit = ->
-  return
+  $foreground.height viewportHeight
 
 resizeHeader = ->
-  $('#main-header').height viewportHeight
+  $mainHeader.height viewportHeight
 
 fadeHeaderOnScroll = ->
   opacity = 1 - scrollTop / viewportHeight
-  $('#main-header').css opacity: opacity
+  $mainHeader.css opacity: opacity
+
+# Start your engines
+# ------------------
+$ init
