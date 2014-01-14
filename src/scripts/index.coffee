@@ -1,6 +1,9 @@
 # Constants
 # ---------
 
+# The total number of header background before it loops
+TOTAL_HEADER_BACKGROUNDS = 4
+
 # The time it takes to scroll to an element with iscroll
 SCROLL_TO_EL_TIME = 700
 
@@ -42,6 +45,8 @@ $footer = null
 $background = null
 $fgFacebookLink = null
 $fgTwitterLink = null
+$headerLogo = null
+$headerBackgrounds = null
 
 window.router = router = null # Our Backbone router (Backbone is needed b/c path.js doen't
               # support router.navigate(trigger: false))
@@ -75,6 +80,7 @@ class Router extends Backbone.Router
 # ---------
 
 init = ->
+  renderHeaderBackgrounds()
   cacheElements()
   $(window).on 'resize', onResize
   onResize()
@@ -84,6 +90,7 @@ init = ->
   $fgFacebookLink.click shareOnFacebook
   $fgTwitterLink.click shareOnTwitter
   setContentGap()
+  transitionHeaderBackground()
   router = new Router
   Backbone.history.start()
 
@@ -91,15 +98,20 @@ onResize = ->
   viewportHeight = $(window).height()
   setBackgroundItemGap()
   setContentGap()
+  setHeaderSize()
   $foreground.height viewportHeight
   $mainHeader.height viewportHeight
   $footer.height viewportHeight
 
+setHeaderSize = ->
+  $('#header-background').height viewportHeight
+
 onScroll = ->
-  fixHeader()
   popLockForeground()
   fadeBetweenForegroundItems()
   fadeOutHeaderImage()
+  toggleFirstForegroundItem()
+  setHrefForIndex()
 
 shareOnFacebook = (e) ->
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
@@ -129,6 +141,8 @@ cacheElements = ->
   $background = $('#background')
   $fgFacebookLink = $('#foreground .social-button-facebook')
   $fgTwitterLink = $('#foreground .social-button-twitter')
+  $headerBackgrounds = $('#header-background li')
+  $headerLogo = $('#main-header-logo')
 
 setupIscroll = ->
   $wrapper.height viewportHeight
@@ -190,7 +204,7 @@ fadeBetweenForegroundItems = ->
     if scrollTop > elTop and viewportBottom < elBottom
       $foregroundItems.removeClass('foreground-item-active')
       $curItem.css(opacity: 1).addClass('foreground-item-active')
-      router.navigate "##{$curItem.data 'slug'}", trigger: false
+      router.navigate "##{$curItem.data 'slug'}"
 
     # In the gap between items so transition opacities as you scroll
     else if viewportBottom > startPoint and viewportBottom < endPoint
@@ -200,14 +214,43 @@ fadeBetweenForegroundItems = ->
       $nextItem.css opacity: percentNextItem
 
 fadeOutHeaderImage = ->
-  $wrapper.css background: "rgba(0,0,0,#{scrollTop / viewportHeight})"
+  $('#header-background').css opacity: 1 - (scrollTop / viewportHeight)
+  $('#header-background-gradient').css opacity: (scrollTop / viewportHeight) * 2
 
 setBackgroundItemGap = ->
   $backgroundItems.css('margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT)
   $backgroundItems.last().css('margin-bottom': 0)
 
-fixHeader = ->
-  $mainHeader.css 'background-position-y': scrollTop
+renderHeaderBackgrounds = ->
+  $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
+    "<li style='background-image: url(images/header/#{i}.jpg)'></li>"
+  ).join('')
+  $('#header-background li').first().show()
+
+transitionHeaderBackground = ->
+  $headerLogo.addClass 'active'
+  setTimeout ->
+    setTimeout ->
+      index = $($headerBackgrounds.filter(-> $(@).hasClass('active'))[0]).index()
+      nextIndex = if index + 1 >= TOTAL_HEADER_BACKGROUNDS then 0 else index + 1
+      # $headerLogo.removeClass 'active'
+      $cur = $ $headerBackgrounds.eq(index)
+      $next = $ $headerBackgrounds.eq(nextIndex)
+      $cur.removeClass 'active'
+      $next.addClass 'active'
+      transitionHeaderBackground()
+    , 700
+  , 1000
+
+toggleFirstForegroundItem = ->
+  if scrollTop + viewportHeight >= offset($foreground).top
+    $foreground.css opacity: 1
+  else
+    $foreground.css opacity: 0
+
+setHrefForIndex = ->
+  if scrollTop + viewportHeight <= offset($foreground).top
+    router.navigate ''
 
 # Start your engines
 # ------------------

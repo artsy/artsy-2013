@@ -2,6 +2,14 @@
   position: absolute;
   width: 100%;
   z-index: 2;
+  -webkit-transition: opacity 0.7s ease-in-out 1s;
+  -moz-transition: opacity 0.7s ease-in-out 1s;
+  -o-transition: opacity 0.7s ease-in-out 1s;
+  -ms-transition: opacity 0.7s ease-in-out 1s;
+  transition: opacity 0.7s ease-in-out 1s;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
 }
 #foreground li {
   padding: 50px;
@@ -77,38 +85,83 @@
   width: 100%;
   margin-bottom: 40px;
 }
+#header-background {
+  position: absolute;
+  width: 100%;
+}
+#header-background #header-background-gradient {
+  content: '.';
+  color: 'transparent';
+  background: -webkit-linear-gradient(top, transparent, #000);
+  background: -moz-linear-gradient(top, transparent, #000);
+  background: -o-linear-gradient(top, transparent, #000);
+  background: -ms-linear-gradient(top, transparent, #000);
+  background: linear-gradient(to bottom, transparent, #000);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+#header-background li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+#header-background li.active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
 #main-header {
   width: 100%;
-  min-height: 300px;
-  position: relative;
-  margin-bottom: 100px;
+  height: 100%;
   position: relative;
 }
-#main-header #logo {
-  background: url("images/logo.svg") center center no-repeat;
+#main-header-logo {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  background: url("images/header-logo.svg") center center no-repeat;
   -webkit-background-size: contain;
   -moz-background-size: contain;
   background-size: contain;
-  width: 150px;
-  height: 60px;
+  top: 50%;
+  height: 140px;
+  width: 100%;
   position: absolute;
-  left: 50px;
-  top: 50px;
+  margin-top: -70px;
+  -webkit-transition: opacity 0s;
+  -moz-transition: opacity 0s;
+  -o-transition: opacity 0s;
+  -ms-transition: opacity 0s;
+  transition: opacity 0s;
 }
-#main-header #main-header-hgroup {
-  position: absolute;
-  bottom: 30%;
-  left: 50px;
-}
-#main-header h1 {
-  font-size: 54px;
-  line-height: 1em;
-}
-#main-header h2 {
-  font-family: 'AvantGardeGothicITCW01D 731075', 'AvantGardeGothicITCW01Dm', 'Helvetica', 'sans-serif';
-  -webkit-font-smoothing: antialiased;
-  text-transform: uppercase;
-  margin-bottom: 15px;
+#main-header-logo.active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+  -o-transition: opacity 0.5s ease-in;
+  -ms-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
 }
 #main-header-down-arrow {
   background: center center no-repeat url("images/down-arrow.svg");
@@ -188,7 +241,7 @@
 }
 #footer {
   position: relative;
-  background: url("images/header/1.jpg") center center no-repeat;
+  background: url("images/footer/1.jpg") center center no-repeat;
   margin-top: 200px;
 }
 #footer::after {
@@ -345,10 +398,7 @@ a img {
   border: none;
 }
 body {
-  background: url("images/header/1.jpg") center center no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
+  background: #000;
   color: #fff;
   font-family: 'adobe-garamond-pro', 'AGaramondPro-Regular', 'Times New Roman', 'Times', 'serif';
   -webkit-font-smoothing: antialiased;
@@ -367,6 +417,7 @@ a {
 }
 #content {
   position: relative;
+  margin-top: 600px;
 }
 @font-face {
   font-family: 'AvantGardeGothicITCW01D 731075';
@@ -374,7 +425,7 @@ a {
   font-style: style;
   src: url("fonts/c18aee57-7585-4a8b-9a1c-69d226301d73.woff") format("woff");
 }
-</style></head><body><div id="wrapper"><div id="scroller"><header id="main-header"><div id="logo"></div><div id="main-header-hgroup"><h2>2013 Annual Review</h2><h1>The greatest year.<br>The greatest art.</h1></div><button id="main-header-down-arrow"></button></header><main id="content"><div id="foreground"><div id="foreground-gradient"></div><ul id="foreground-content"><li data-slug="turrel"><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li data-slug="ici"><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li></ul><div id="foreground-social-buttons"><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></div><div id="background"><ul><li><img src="images/turell-1.jpg"><img src="images/turell-2.jpg"></li><li><img src="images/ici-1.jpg"><img src="images/ici-2.jpg"><img src="images/ici-3.jpg"></li></ul></div></main><footer id="footer"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></footer></div></div><div id="scripts"><script src="http://zeptojs.com/zepto.min.js"></script><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
+</style></head><body><div id="wrapper"><div id="scroller"><div id="header-background"><div id="header-background-gradient"></div><ul></ul></div><header id="main-header"><div id="main-header-logo"></div><div id="main-header-down-arrow"></div></header><main id="content"><div id="foreground"><div id="foreground-gradient"></div><ul id="foreground-content"><li data-slug="turrel"><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li data-slug="ici"><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li></ul><div id="foreground-social-buttons"><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></div><div id="background"><ul><li><img src="images/content/turell-1.jpg"><img src="images/content/turell-2.jpg"></li><li><img src="images/content/ici-1.jpg"><img src="images/content/ici-2.jpg"><img src="images/content/ici-3.jpg"></li></ul></div></main><footer id="footer"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></footer></div></div><div id="scripts"><script src="http://zeptojs.com/zepto.min.js"></script><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
 (function() {
   var mtiTracking = document.createElement('script');
   mtiTracking.type='text/javascript';
@@ -6973,9 +7024,11 @@ window.$ === undefined && (window.$ = Zepto)
 
 }).call(this);
 (function() {
-  var $background, $backgroundItems, $content, $fgFacebookLink, $fgTwitterLink, $footer, $foreground, $foregroundItems, $mainArrow, $mainHeader, $scroller, $wrapper, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, Router, SCROLL_TO_EL_TIME, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeOutHeaderImage, fixHeader, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockForeground, router, scrollTop, setBackgroundItemGap, setContentGap, setScrollTop, setupIscroll, shareOnFacebook, shareOnTwitter, startOffest, viewportHeight, _ref,
+  var $background, $backgroundItems, $content, $fgFacebookLink, $fgTwitterLink, $footer, $foreground, $foregroundItems, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $wrapper, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, Router, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockForeground, renderHeaderBackgrounds, router, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setHrefForIndex, setScrollTop, setupIscroll, shareOnFacebook, shareOnTwitter, startOffest, toggleFirstForegroundItem, transitionHeaderBackground, viewportHeight, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  TOTAL_HEADER_BACKGROUNDS = 4;
 
   SCROLL_TO_EL_TIME = 700;
 
@@ -7019,6 +7072,10 @@ window.$ === undefined && (window.$ = Zepto)
 
   $fgTwitterLink = null;
 
+  $headerLogo = null;
+
+  $headerBackgrounds = null;
+
   window.router = router = null;
 
   myScroll = null;
@@ -7054,6 +7111,7 @@ window.$ === undefined && (window.$ = Zepto)
   })(Backbone.Router);
 
   init = function() {
+    renderHeaderBackgrounds();
     cacheElements();
     $(window).on('resize', onResize);
     onResize();
@@ -7063,6 +7121,7 @@ window.$ === undefined && (window.$ = Zepto)
     $fgFacebookLink.click(shareOnFacebook);
     $fgTwitterLink.click(shareOnTwitter);
     setContentGap();
+    transitionHeaderBackground();
     router = new Router;
     return Backbone.history.start();
   };
@@ -7071,16 +7130,22 @@ window.$ === undefined && (window.$ = Zepto)
     viewportHeight = $(window).height();
     setBackgroundItemGap();
     setContentGap();
+    setHeaderSize();
     $foreground.height(viewportHeight);
     $mainHeader.height(viewportHeight);
     return $footer.height(viewportHeight);
   };
 
+  setHeaderSize = function() {
+    return $('#header-background').height(viewportHeight);
+  };
+
   onScroll = function() {
-    fixHeader();
     popLockForeground();
     fadeBetweenForegroundItems();
-    return fadeOutHeaderImage();
+    fadeOutHeaderImage();
+    toggleFirstForegroundItem();
+    return setHrefForIndex();
   };
 
   shareOnFacebook = function(e) {
@@ -7114,7 +7179,9 @@ window.$ === undefined && (window.$ = Zepto)
     $footer = $('#footer');
     $background = $('#background');
     $fgFacebookLink = $('#foreground .social-button-facebook');
-    return $fgTwitterLink = $('#foreground .social-button-twitter');
+    $fgTwitterLink = $('#foreground .social-button-twitter');
+    $headerBackgrounds = $('#header-background li');
+    return $headerLogo = $('#main-header-logo');
   };
 
   setupIscroll = function() {
@@ -7184,9 +7251,7 @@ window.$ === undefined && (window.$ = Zepto)
         $curItem.css({
           opacity: 1
         }).addClass('foreground-item-active');
-        return router.navigate("#" + ($curItem.data('slug')), {
-          trigger: false
-        });
+        return router.navigate("#" + ($curItem.data('slug')));
       } else if (viewportBottom > startPoint && viewportBottom < endPoint) {
         percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint);
         percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint);
@@ -7201,8 +7266,11 @@ window.$ === undefined && (window.$ = Zepto)
   };
 
   fadeOutHeaderImage = function() {
-    return $wrapper.css({
-      background: "rgba(0,0,0," + (scrollTop / viewportHeight) + ")"
+    $('#header-background').css({
+      opacity: 1 - (scrollTop / viewportHeight)
+    });
+    return $('#header-background-gradient').css({
+      opacity: (scrollTop / viewportHeight) * 2
     });
   };
 
@@ -7215,10 +7283,53 @@ window.$ === undefined && (window.$ = Zepto)
     });
   };
 
-  fixHeader = function() {
-    return $mainHeader.css({
-      'background-position-y': scrollTop
-    });
+  renderHeaderBackgrounds = function() {
+    var i;
+    $('#header-background ul').html(((function() {
+      var _i, _results;
+      _results = [];
+      for (i = _i = 0; 0 <= TOTAL_HEADER_BACKGROUNDS ? _i <= TOTAL_HEADER_BACKGROUNDS : _i >= TOTAL_HEADER_BACKGROUNDS; i = 0 <= TOTAL_HEADER_BACKGROUNDS ? ++_i : --_i) {
+        _results.push("<li style='background-image: url(images/header/" + i + ".jpg)'></li>");
+      }
+      return _results;
+    })()).join(''));
+    return $('#header-background li').first().show();
+  };
+
+  transitionHeaderBackground = function() {
+    $headerLogo.addClass('active');
+    return setTimeout(function() {
+      return setTimeout(function() {
+        var $cur, $next, index, nextIndex;
+        index = $($headerBackgrounds.filter(function() {
+          return $(this).hasClass('active');
+        })[0]).index();
+        nextIndex = index + 1 >= TOTAL_HEADER_BACKGROUNDS ? 0 : index + 1;
+        $cur = $($headerBackgrounds.eq(index));
+        $next = $($headerBackgrounds.eq(nextIndex));
+        $cur.removeClass('active');
+        $next.addClass('active');
+        return transitionHeaderBackground();
+      }, 700);
+    }, 1000);
+  };
+
+  toggleFirstForegroundItem = function() {
+    if (scrollTop + viewportHeight >= offset($foreground).top) {
+      return $foreground.css({
+        opacity: 1
+      });
+    } else {
+      return $foreground.css({
+        opacity: 0
+      });
+    }
+  };
+
+  setHrefForIndex = function() {
+    if (scrollTop + viewportHeight <= offset($foreground).top) {
+      return router.navigate('');
+    }
   };
 
   $(init);
