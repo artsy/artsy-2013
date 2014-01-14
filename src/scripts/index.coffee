@@ -35,6 +35,8 @@ $content = null
 $wrapper = null
 $mainArrow = null
 $foregroundItems = null
+$footer = null
+$background = null
 
 myScroll = null # Reference to iScroll instance
 contentGap = 0 # The distance from the top of the page to the content
@@ -65,6 +67,8 @@ cacheElements = ->
   $content = $('#content')
   $wrapper = $('#wrapper')
   $mainArrow = $('#main-header-down-arrow')
+  $footer = $('#footer')
+  $background = $('#background')
 
 setupIscroll = ->
   $wrapper.height viewportHeight
@@ -77,10 +81,12 @@ setupIscroll = ->
   myScroll.on('scrollEnd', onScroll)
   document.addEventListener 'touchmove', ((e) -> e.preventDefault()), false
 
-offset = ($el) ->
+offset = window.offset = ($el) ->
+  top = -($scroller.offset()?.top - $el.offset()?.top)
   {
-    top: -($scroller.offset()?.top - $el.offset()?.top)
+    top: top
     left: $el.offset()?.left
+    bottom: top + $el.height()
   }
 
 setScrollTop = ->
@@ -96,9 +102,10 @@ onClickHeaderDownArrow = ->
 onResize = ->
   viewportHeight = $(window).height()
   setBackgroundItemGap()
-  setForegroundInitHeight()
-  resizeHeader()
   setContentGap()
+  $foreground.height viewportHeight
+  $mainHeader.height viewportHeight
+  $footer.height viewportHeight
 
 onScroll = ->
   fixForeground()
@@ -107,7 +114,10 @@ onScroll = ->
 
 fixForeground = ->
   top = scrollTop - contentGap
-  $foreground.css top: Math.max(top, 0)
+  x = (offset($background).bottom - viewportHeight - contentGap)
+  top = Math.min(top, x)
+  # console.log top, _top, x
+  $foreground.css top: Math.max 0, top
 
 fadeBetweenForegroundItems = ->
   $backgroundItems.each ->
@@ -116,7 +126,7 @@ fadeBetweenForegroundItems = ->
     # Alias common positions we'll be calculating
     viewportBottom = scrollTop + viewportHeight
     elTop = offset($(@)).top
-    elBottom = elTop + $(@).height()
+    elBottom = offset($(@)).bottom
     nextTop = offset($(@).next()).top
 
     # Values pertaining to when to start fading and when to fade in the next one
@@ -133,13 +143,8 @@ fadeBetweenForegroundItems = ->
       $foregroundItems.eq(index + 1).css opacity: percentNextItem
 
 setBackgroundItemGap = ->
-  $backgroundItems.css 'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
-
-setForegroundInitHeight = ->
-  $foreground.height viewportHeight
-
-resizeHeader = ->
-  $mainHeader.height viewportHeight
+  $backgroundItems.css('margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT)
+  $backgroundItems.last().css('margin-bottom': 0)
 
 fadeHeaderOnScroll = ->
   opacity = 1 - scrollTop / viewportHeight
