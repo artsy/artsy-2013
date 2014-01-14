@@ -1,7 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><title>Artsy in 2014</title><style>#foreground {
   position: absolute;
   width: 100%;
-  height: 100%;
   z-index: 2;
 }
 #foreground li {
@@ -82,25 +81,8 @@
   width: 100%;
   min-height: 300px;
   position: relative;
-  background: url("images/header/1.jpg") center center no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
   margin-bottom: 100px;
   position: relative;
-}
-#main-header::after {
-  content: '.';
-  color: 'transparent';
-  background: -webkit-linear-gradient(top, transparent, #000);
-  background: -moz-linear-gradient(top, transparent, #000);
-  background: -o-linear-gradient(top, transparent, #000);
-  background: -ms-linear-gradient(top, transparent, #000);
-  background: linear-gradient(to bottom, transparent, #000);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 20%;
 }
 #main-header #logo {
   background: url("images/logo.svg") center center no-repeat;
@@ -363,7 +345,10 @@ a img {
   border: none;
 }
 body {
-  background: #000;
+  background: url("images/header/1.jpg") center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
   color: #fff;
   font-family: 'adobe-garamond-pro', 'AGaramondPro-Regular', 'Times New Roman', 'Times', 'serif';
   -webkit-font-smoothing: antialiased;
@@ -4130,7 +4115,7 @@ window.$ === undefined && (window.$ = Zepto)
     $.fn[eventName] = function(callback){ return this.on(eventName, callback) }
   })
 })(Zepto);(function() {
-  var $background, $backgroundItems, $content, $fgFacebookLink, $fgTwitterLink, $footer, $foreground, $foregroundItems, $mainArrow, $mainHeader, $scroller, $wrapper, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeHeaderOnScroll, fixForeground, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, scrollTop, setBackgroundItemGap, setContentGap, setScrollTop, setupIscroll, shareOnFacebook, startOffest, viewportHeight;
+  var $background, $backgroundItems, $content, $fgFacebookLink, $fgTwitterLink, $footer, $foreground, $foregroundItems, $mainArrow, $mainHeader, $scroller, $wrapper, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeOutHeaderImage, fixHeader, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockForeground, scrollTop, setBackgroundItemGap, setContentGap, setScrollTop, setupIscroll, shareOnFacebook, startOffest, viewportHeight;
 
   GAP_PERCENT_OF_VIEWPORT = 0.5;
 
@@ -4263,12 +4248,13 @@ window.$ === undefined && (window.$ = Zepto)
   };
 
   onScroll = function() {
-    fixForeground();
+    fixHeader();
+    popLockForeground();
     fadeBetweenForegroundItems();
-    return fadeHeaderOnScroll();
+    return fadeOutHeaderImage();
   };
 
-  fixForeground = function() {
+  popLockForeground = function() {
     var top, x;
     top = scrollTop - contentGap;
     x = offset($background).bottom - viewportHeight - contentGap;
@@ -4310,6 +4296,12 @@ window.$ === undefined && (window.$ = Zepto)
     });
   };
 
+  fadeOutHeaderImage = function() {
+    return $wrapper.css({
+      background: "rgba(0,0,0," + (scrollTop / viewportHeight) + ")"
+    });
+  };
+
   setBackgroundItemGap = function() {
     $backgroundItems.css({
       'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
@@ -4319,11 +4311,9 @@ window.$ === undefined && (window.$ = Zepto)
     });
   };
 
-  fadeHeaderOnScroll = function() {
-    var opacity;
-    opacity = 1 - scrollTop / viewportHeight;
+  fixHeader = function() {
     return $mainHeader.css({
-      opacity: opacity
+      'background-position-y': scrollTop
     });
   };
 

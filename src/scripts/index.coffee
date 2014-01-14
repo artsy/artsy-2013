@@ -120,11 +120,12 @@ onResize = ->
   $footer.height viewportHeight
 
 onScroll = ->
-  fixForeground()
+  fixHeader()
+  popLockForeground()
   fadeBetweenForegroundItems()
-  fadeHeaderOnScroll()
+  fadeOutHeaderImage()
 
-fixForeground = ->
+popLockForeground = ->
   top = scrollTop - contentGap
   x = (offset($background).bottom - viewportHeight - contentGap)
   top = Math.min(top, x)
@@ -163,13 +164,15 @@ fadeBetweenForegroundItems = ->
       $curItem.css opacity: percentPrevItem
       $nextItem.css opacity: percentNextItem
 
+fadeOutHeaderImage = ->
+  $wrapper.css background: "rgba(0,0,0,#{scrollTop / viewportHeight})"
+
 setBackgroundItemGap = ->
   $backgroundItems.css('margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT)
   $backgroundItems.last().css('margin-bottom': 0)
 
-fadeHeaderOnScroll = ->
-  opacity = 1 - scrollTop / viewportHeight
-  $mainHeader.css opacity: opacity
+fixHeader = ->
+  $mainHeader.css 'background-position-y': scrollTop
 
 # Start your engines
 # ------------------
