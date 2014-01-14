@@ -1,8 +1,9 @@
 doctype html
 html(lang="en")
   head
-    title Artsy in 2014
+    title Artsy 2013 Annual Review
     meta( name="viewport", content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no" )
+    meta( property="og:image" content="http://2013.artsy.net/images/fb-thumb.jpg" )
     style
       include:stylus ../stylesheets/index.styl
   body
@@ -11,8 +12,7 @@ html(lang="en")
         header#main-header
           include header
         main#content
-          include foreground
-          include background
+          include content
         footer#footer
           include footer
     #scripts
@@ -21,4 +21,6 @@ html(lang="en")
         include ../scripts/iscroll-probe.js
         include ../scripts/zepto.js
         include ../scripts/zepto.touch.js
+        include ../scripts/underscore.js
+        include ../scripts/backbone.js
         include:coffeescript ../scripts/index.coffee

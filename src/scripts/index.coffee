@@ -1,6 +1,9 @@
 # Constants
 # ---------
 
+# The time it takes to scroll to an element with iscroll
+SCROLL_TO_EL_TIME = 700
+
 # The gap between items is based on the viewport size
 GAP_PERCENT_OF_VIEWPORT = 0.5
 
@@ -40,6 +43,8 @@ $background = null
 $fgFacebookLink = null
 $fgTwitterLink = null
 
+window.router = router = null # Our Backbone router (Backbone is needed b/c path.js doen't
+              # support router.navigate(trigger: false))
 myScroll = null # Reference to iScroll instance
 contentGap = 0 # The distance from the top of the page to the content
 
@@ -47,6 +52,24 @@ contentGap = 0 # The distance from the top of the page to the content
 # iScroll support.
 scrollTop = 0
 viewportHeight = 0
+
+# Router
+# ------
+
+class Router extends Backbone.Router
+
+  routes:
+    ':slug': 'scrollToSlug'
+
+  scrollToSlug: (slug) ->
+    $item = $("#foreground-content > li[data-slug=#{slug}]")
+    index = $item.index()
+    myScroll.scrollToElement(
+      "#background > ul:nth-child(#{index + 1})"
+      SCROLL_TO_EL_TIME, null, null,
+      IScroll.utils.ease.quadratic
+    )
+    setTimeout onScroll, SCROLL_TO_EL_TIME
 
 # Functions
 # ---------
@@ -59,13 +82,38 @@ init = ->
   $mainArrow.click onClickHeaderDownArrow
   $mainArrow.on 'tap', onClickHeaderDownArrow
   $fgFacebookLink.click shareOnFacebook
+  $fgTwitterLink.click shareOnTwitter
   setContentGap()
+  router = new Router
+  Backbone.history.start()
+
+onResize = ->
+  viewportHeight = $(window).height()
+  setBackgroundItemGap()
+  setContentGap()
+  $foreground.height viewportHeight
+  $mainHeader.height viewportHeight
+  $footer.height viewportHeight
+
+onScroll = ->
+  fixHeader()
+  popLockForeground()
+  fadeBetweenForegroundItems()
+  fadeOutHeaderImage()
 
 shareOnFacebook = (e) ->
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
-  facebookHref = encodeURIComponent $('.foreground-item-active').data('facebook-href')
-  url = "https://www.facebook.com/sharer/sharer.php?u=#{facebookHref}"
+  url = "https://www.facebook.com/sharer/sharer.php?u=#{encodeURIComponent location.href}"
   window.open url, 'facebook', opts
+  false
+
+shareOnTwitter = (e) ->
+  opts = "status=1,width=750,height=400,top=249.5,left=1462"
+  $curHeader = $("#foreground li[data-slug='#{location.hash.replace('#', '')}'] h1")
+  text = encodeURIComponent $curHeader.text() + ' | ' + $('title').text()
+  href = encodeURIComponent location.href
+  url = "https://twitter.com/intent/tweet?original_referer=#{href}&text=#{text}&url=#{href}"
+  window.open url, 'twitter', opts
   false
 
 cacheElements = ->
@@ -80,7 +128,7 @@ cacheElements = ->
   $footer = $('#footer')
   $background = $('#background')
   $fgFacebookLink = $('#foreground .social-button-facebook')
-  $fgTwitterLink = $('#foreground .social-button-facebook')
+  $fgTwitterLink = $('#foreground .social-button-twitter')
 
 setupIscroll = ->
   $wrapper.height viewportHeight
@@ -110,20 +158,6 @@ setContentGap = ->
 onClickHeaderDownArrow = ->
   myScroll.scrollToElement '#content', 700, null, null, IScroll.utils.ease.quadratic
   false
-
-onResize = ->
-  viewportHeight = $(window).height()
-  setBackgroundItemGap()
-  setContentGap()
-  $foreground.height viewportHeight
-  $mainHeader.height viewportHeight
-  $footer.height viewportHeight
-
-onScroll = ->
-  fixHeader()
-  popLockForeground()
-  fadeBetweenForegroundItems()
-  fadeOutHeaderImage()
 
 popLockForeground = ->
   top = scrollTop - contentGap
@@ -156,6 +190,7 @@ fadeBetweenForegroundItems = ->
     if scrollTop > elTop and viewportBottom < elBottom
       $foregroundItems.removeClass('foreground-item-active')
       $curItem.css(opacity: 1).addClass('foreground-item-active')
+      router.navigate "##{$curItem.data 'slug'}", trigger: false
 
     # In the gap between items so transition opacities as you scroll
     else if viewportBottom > startPoint and viewportBottom < endPoint

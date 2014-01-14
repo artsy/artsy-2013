@@ -9,6 +9,7 @@
     "coffee-script": "*",
     "nib": "*",
     "knox": "*",
-    "glob": "*"
+    "glob": "*",
+    "express": "*"
   }
 }
