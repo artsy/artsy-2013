@@ -54,29 +54,6 @@
   position: absolute;
   left: 0;
 }
-#foreground-social-buttons {
-  position: absolute;
-  right: 50px;
-  bottom: 50px;
-}
-#foreground-social-buttons button {
-  padding: 25px;
-  border: 2px solid #fff;
-  -webkit-border-radius: 50px;
-  border-radius: 50px;
-  background: transparent;
-  background: no-repeat center center;
-  -webkit-background-size: 40%;
-  -moz-background-size: 40%;
-  background-size: 40%;
-}
-#foreground-social-buttons #foreground-facebook-button {
-  margin-right: 20px;
-  background-image: url("images/facebook.svg");
-}
-#foreground-social-buttons #foreground-twitter-button {
-  background-image: url("images/twitter.svg");
-}
 #background {
   padding: 50px;
   z-index: -2;
@@ -110,6 +87,20 @@
   -moz-background-size: cover;
   background-size: cover;
   margin-bottom: 100px;
+  position: relative;
+}
+#main-header::after {
+  content: '.';
+  color: 'transparent';
+  background: -webkit-linear-gradient(top, transparent, #000);
+  background: -moz-linear-gradient(top, transparent, #000);
+  background: -o-linear-gradient(top, transparent, #000);
+  background: -ms-linear-gradient(top, transparent, #000);
+  background: linear-gradient(to bottom, transparent, #000);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
 }
 #main-header #logo {
   background: url("images/logo.svg") center center no-repeat;
@@ -137,17 +128,6 @@
   text-transform: uppercase;
   margin-bottom: 15px;
 }
-#main-header-black-gradient {
-  background: -webkit-linear-gradient(top, transparent, #000);
-  background: -moz-linear-gradient(top, transparent, #000);
-  background: -o-linear-gradient(top, transparent, #000);
-  background: -ms-linear-gradient(top, transparent, #000);
-  background: linear-gradient(to bottom, transparent, #000);
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 20%;
-}
 #main-header-down-arrow {
   background: center center no-repeat url("images/down-arrow.svg");
   width: 100%;
@@ -156,6 +136,8 @@
   position: absolute;
   bottom: 0;
   cursor: pointer;
+  border: 0;
+  z-index: 2;
 }
 #wrapper {
   position: relative;
@@ -195,6 +177,97 @@
   -o-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
+}
+#foreground-social-buttons {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+}
+.social-button-facebook,
+.social-button-twitter {
+  padding: 25px;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: transparent;
+  background: no-repeat center center;
+  -webkit-background-size: 40%;
+  -moz-background-size: 40%;
+  background-size: 40%;
+}
+.social-button-facebook {
+  margin-right: 20px;
+  background-image: url("images/facebook.svg");
+}
+.social-button-twitter {
+  background-image: url("images/twitter.svg");
+}
+#footer {
+  position: relative;
+  background: url("images/header/1.jpg") center center no-repeat;
+  margin-top: 200px;
+}
+#footer::after {
+  content: '.';
+  color: 'transparent';
+  background: -webkit-linear-gradient(top, transparent, #000);
+  background: -moz-linear-gradient(top, transparent, #000);
+  background: -o-linear-gradient(top, transparent, #000);
+  background: -ms-linear-gradient(top, transparent, #000);
+  background: linear-gradient(to bottom, transparent, #000);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+}
+#footer::before {
+  content: '.';
+  color: 'transparent';
+  background: -webkit-linear-gradient(bottom, transparent, #000);
+  background: -moz-linear-gradient(bottom, transparent, #000);
+  background: -o-linear-gradient(bottom, transparent, #000);
+  background: -ms-linear-gradient(bottom, transparent, #000);
+  background: linear-gradient(to top, transparent, #000);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 20%;
+}
+#footer-social-buttons {
+  position: absolute;
+  bottom: 50px;
+  text-align: center;
+  width: 100%;
+  z-index: 2;
+}
+#footer-social-buttons button {
+  display: inline-block;
+}
+#footer-social-buttons h4 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+#footer-header {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  margin-top: -40px;
+  font-size: 54px;
+  display: block;
+  width: 100%;
+}
+#footer-links {
+  text-align: center;
+  display: block;
+  width: 100%;
+  bottom: 200px;
+  position: absolute;
+  font-size: 26px;
+  line-height: 1.4em;
+}
+#footer-links a {
+  display: block;
 }
 html,
 body,
@@ -300,6 +373,10 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+button,
+a {
+  outline: none;
+}
 #content {
   position: relative;
 }
@@ -309,7 +386,7 @@ body {
   font-style: style;
   src: url("fonts/c18aee57-7585-4a8b-9a1c-69d226301d73.woff") format("woff");
 }
-</style></head><body><div id="wrapper"><div id="scroller"><header id="main-header"><div id="main-header-black-gradient"></div><div id="logo"></div><div id="main-header-hgroup"><h2>2013 Annual Review</h2><h1>The greatest year.<br>The greatest art.</h1></div><div id="main-header-down-arrow"></div></header><div id="content"><div id="foreground"><div id="foreground-gradient"></div><ul class="foreground-content"><li><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li></ul><div id="foreground-social-buttons"><button id="foreground-facebook-button"></button><button id="foreground-twitter-button"></button></div></div><div id="background"><ul><li><img src="images/turell-1.jpg"><img src="images/turell-2.jpg"></li><li><img src="images/ici-1.jpg"><img src="images/ici-2.jpg"><img src="images/ici-3.jpg"></li><li><img src="images/turell-1.jpg"><img src="images/turell-2.jpg"></li><li><img src="images/ici-1.jpg"><img src="images/ici-2.jpg"><img src="images/ici-3.jpg"></li><li><img src="images/turell-1.jpg"><img src="images/turell-2.jpg"></li><li><img src="images/ici-1.jpg"><img src="images/ici-2.jpg"><img src="images/ici-3.jpg"></li></ul></div></div></div></div><div id="scripts"><script src="http://zeptojs.com/zepto.min.js"></script><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
+</style></head><body><div id="wrapper"><div id="scroller"><header id="main-header"><div id="logo"></div><div id="main-header-hgroup"><h2>2013 Annual Review</h2><h1>The greatest year.<br>The greatest art.</h1></div><button id="main-header-down-arrow"></button></header><main id="content"><div id="foreground"><div id="foreground-gradient"></div><ul class="foreground-content"><li><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li></ul><div id="foreground-social-buttons"><button class="social-button-facebook"></button><button class="social-button-twitter"></button></div></div><div id="background"><ul><li><img src="images/turell-1.jpg"><img src="images/turell-2.jpg"></li><li><img src="images/ici-1.jpg"><img src="images/ici-2.jpg"><img src="images/ici-3.jpg"></li></ul></div></main><footer id="footer"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><button class="social-button-facebook"></button><button class="social-button-twitter"></button></div></footer></div></div><div id="scripts"><script src="http://zeptojs.com/zepto.min.js"></script><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
 (function() {
   var mtiTracking = document.createElement('script');
   mtiTracking.type='text/javascript';
@@ -4051,7 +4128,7 @@ window.$ === undefined && (window.$ = Zepto)
     $.fn[eventName] = function(callback){ return this.on(eventName, callback) }
   })
 })(Zepto);(function() {
-  var $backgroundItems, $content, $foreground, $foregroundItems, $mainArrow, $mainHeader, $scroller, $wrapper, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeHeaderOnScroll, fixForeground, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, resizeHeader, scrollTop, setBackgroundItemGap, setContentGap, setForegroundInitHeight, setScrollTop, setupIscroll, startOffest, viewportHeight;
+  var $background, $backgroundItems, $content, $footer, $foreground, $foregroundItems, $mainArrow, $mainHeader, $scroller, $wrapper, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeHeaderOnScroll, fixForeground, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, scrollTop, setBackgroundItemGap, setContentGap, setScrollTop, setupIscroll, startOffest, viewportHeight;
 
   GAP_PERCENT_OF_VIEWPORT = 0.5;
 
@@ -4085,6 +4162,10 @@ window.$ === undefined && (window.$ = Zepto)
 
   $foregroundItems = null;
 
+  $footer = null;
+
+  $background = null;
+
   myScroll = null;
 
   contentGap = 0;
@@ -4111,7 +4192,9 @@ window.$ === undefined && (window.$ = Zepto)
     $mainHeader = $('#main-header');
     $content = $('#content');
     $wrapper = $('#wrapper');
-    return $mainArrow = $('#main-header-down-arrow');
+    $mainArrow = $('#main-header-down-arrow');
+    $footer = $('#footer');
+    return $background = $('#background');
   };
 
   setupIscroll = function() {
@@ -4129,11 +4212,13 @@ window.$ === undefined && (window.$ = Zepto)
     }), false);
   };
 
-  offset = function($el) {
-    var _ref, _ref1, _ref2;
+  offset = window.offset = function($el) {
+    var top, _ref, _ref1, _ref2;
+    top = -(((_ref = $scroller.offset()) != null ? _ref.top : void 0) - ((_ref1 = $el.offset()) != null ? _ref1.top : void 0));
     return {
-      top: -(((_ref = $scroller.offset()) != null ? _ref.top : void 0) - ((_ref1 = $el.offset()) != null ? _ref1.top : void 0)),
-      left: (_ref2 = $el.offset()) != null ? _ref2.left : void 0
+      top: top,
+      left: (_ref2 = $el.offset()) != null ? _ref2.left : void 0,
+      bottom: top + $el.height()
     };
   };
 
@@ -4153,9 +4238,10 @@ window.$ === undefined && (window.$ = Zepto)
   onResize = function() {
     viewportHeight = $(window).height();
     setBackgroundItemGap();
-    setForegroundInitHeight();
-    resizeHeader();
-    return setContentGap();
+    setContentGap();
+    $foreground.height(viewportHeight);
+    $mainHeader.height(viewportHeight);
+    return $footer.height(viewportHeight);
   };
 
   onScroll = function() {
@@ -4165,10 +4251,12 @@ window.$ === undefined && (window.$ = Zepto)
   };
 
   fixForeground = function() {
-    var top;
+    var top, x;
     top = scrollTop - contentGap;
+    x = offset($background).bottom - viewportHeight - contentGap;
+    top = Math.min(top, x);
     return $foreground.css({
-      top: Math.max(top, 0)
+      top: Math.max(0, top)
     });
   };
 
@@ -4178,7 +4266,7 @@ window.$ === undefined && (window.$ = Zepto)
       index = $(this).index();
       viewportBottom = scrollTop + viewportHeight;
       elTop = offset($(this)).top;
-      elBottom = elTop + $(this).height();
+      elBottom = offset($(this)).bottom;
       nextTop = offset($(this).next()).top;
       startPoint = elBottom + startOffest(viewportHeight);
       endPoint = nextTop + endOffest(viewportHeight);
@@ -4198,17 +4286,12 @@ window.$ === undefined && (window.$ = Zepto)
   };
 
   setBackgroundItemGap = function() {
-    return $backgroundItems.css({
+    $backgroundItems.css({
       'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
     });
-  };
-
-  setForegroundInitHeight = function() {
-    return $foreground.height(viewportHeight);
-  };
-
-  resizeHeader = function() {
-    return $mainHeader.height(viewportHeight);
+    return $backgroundItems.last().css({
+      'margin-bottom': 0
+    });
   };
 
   fadeHeaderOnScroll = function() {

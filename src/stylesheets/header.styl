@@ -7,6 +7,15 @@
   background url('images/header/1.jpg') center center no-repeat
   background-size cover
   margin-bottom 100px
+  position relative
+  &::after
+    content '.'
+    color 'transparent'
+    background linear-gradient(top, transparent, black)
+    position absolute
+    bottom 0
+    width 100%
+    height 20%
   #logo
     background url('images/logo.svg') center center no-repeat
     background-size contain
@@ -26,13 +35,6 @@
     avant-garde()
     margin-bottom 15px
 
-#main-header-black-gradient
-  background linear-gradient(top, transparent, black)
-  position absolute
-  bottom 0
-  width 100%
-  height 20%
-
 #main-header-down-arrow
   background center center no-repeat url('images/down-arrow.svg')
   width 100%
@@ -41,3 +43,5 @@
   position absolute
   bottom 0
   cursor pointer
+  border 0
+  z-index 2
