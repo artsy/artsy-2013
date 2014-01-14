@@ -1,6 +1,9 @@
 # Constants
 # ---------
 
+# The time it takes to scroll to an element with iscroll
+SCROLL_TO_EL_TIME = 700
+
 # The gap between items is based on the viewport size
 GAP_PERCENT_OF_VIEWPORT = 0.5
 
@@ -63,9 +66,10 @@ class Router extends Backbone.Router
     index = $item.index()
     myScroll.scrollToElement(
       "#background > ul:nth-child(#{index + 1})"
-      700, null, null,
+      SCROLL_TO_EL_TIME, null, null,
       IScroll.utils.ease.quadratic
     )
+    setTimeout onScroll, SCROLL_TO_EL_TIME
 
 # Functions
 # ---------
@@ -78,6 +82,7 @@ init = ->
   $mainArrow.click onClickHeaderDownArrow
   $mainArrow.on 'tap', onClickHeaderDownArrow
   $fgFacebookLink.click shareOnFacebook
+  $fgTwitterLink.click shareOnTwitter
   setContentGap()
   router = new Router
   Backbone.history.start()
@@ -102,6 +107,15 @@ shareOnFacebook = (e) ->
   window.open url, 'facebook', opts
   false
 
+shareOnTwitter = (e) ->
+  opts = "status=1,width=750,height=400,top=249.5,left=1462"
+  $curHeader = $("#foreground li[data-slug='#{location.hash.replace('#', '')}'] h1")
+  text = encodeURIComponent $curHeader.text() + ' | ' + $('title').text()
+  href = encodeURIComponent location.href
+  url = "https://twitter.com/intent/tweet?original_referer=#{href}&text=#{text}&url=#{href}"
+  window.open url, 'twitter', opts
+  false
+
 cacheElements = ->
   $scroller = $('#scroller')
   $backgroundItems = $('#background li')
@@ -114,7 +128,7 @@ cacheElements = ->
   $footer = $('#footer')
   $background = $('#background')
   $fgFacebookLink = $('#foreground .social-button-facebook')
-  $fgTwitterLink = $('#foreground .social-button-facebook')
+  $fgTwitterLink = $('#foreground .social-button-twitter')
 
 setupIscroll = ->
   $wrapper.height viewportHeight
