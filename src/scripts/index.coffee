@@ -37,6 +37,8 @@ $mainArrow = null
 $foregroundItems = null
 $footer = null
 $background = null
+$fgFacebookLink = null
+$fgTwitterLink = null
 
 myScroll = null # Reference to iScroll instance
 contentGap = 0 # The distance from the top of the page to the content
@@ -56,7 +58,15 @@ init = ->
   setupIscroll()
   $mainArrow.click onClickHeaderDownArrow
   $mainArrow.on 'tap', onClickHeaderDownArrow
+  $fgFacebookLink.click shareOnFacebook
   setContentGap()
+
+shareOnFacebook = (e) ->
+  opts = "status=1,width=750,height=400,top=249.5,left=1462"
+  facebookHref = encodeURIComponent $('.foreground-item-active').data('facebook-href')
+  url = "https://www.facebook.com/sharer/sharer.php?u=#{facebookHref}"
+  window.open url, 'facebook', opts
+  false
 
 cacheElements = ->
   $scroller = $('#scroller')
@@ -69,6 +79,8 @@ cacheElements = ->
   $mainArrow = $('#main-header-down-arrow')
   $footer = $('#footer')
   $background = $('#background')
+  $fgFacebookLink = $('#foreground .social-button-facebook')
+  $fgTwitterLink = $('#foreground .social-button-facebook')
 
 setupIscroll = ->
   $wrapper.height viewportHeight
@@ -116,12 +128,15 @@ fixForeground = ->
   top = scrollTop - contentGap
   x = (offset($background).bottom - viewportHeight - contentGap)
   top = Math.min(top, x)
-  # console.log top, _top, x
   $foreground.css top: Math.max 0, top
 
 fadeBetweenForegroundItems = ->
   $backgroundItems.each ->
     index = $(@).index()
+
+    # Alias current and next items
+    $curItem = $foregroundItems.eq(index)
+    $nextItem = $foregroundItems.eq(index + 1)
 
     # Alias common positions we'll be calculating
     viewportBottom = scrollTop + viewportHeight
@@ -135,12 +150,18 @@ fadeBetweenForegroundItems = ->
     midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint
     firstMidPoint = midPoint - ((viewportHeight * GAP_PERCENT_OF_VIEWPORT)) * FADE_GAP_OF_BLACK
 
-    # Between items so transition opacities as you scroll
-    if viewportBottom > startPoint and viewportBottom < endPoint
+    # Between an item so make sure it's opacity is 1 and the social icons are
+    # pointing to the right place.
+    if scrollTop > elTop and viewportBottom < elBottom
+      $foregroundItems.removeClass('foreground-item-active')
+      $curItem.css(opacity: 1).addClass('foreground-item-active')
+
+    # In the gap between items so transition opacities as you scroll
+    else if viewportBottom > startPoint and viewportBottom < endPoint
       percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint)
       percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint)
-      $foregroundItems.eq(index).css opacity: percentPrevItem
-      $foregroundItems.eq(index + 1).css opacity: percentNextItem
+      $curItem.css opacity: percentPrevItem
+      $nextItem.css opacity: percentNextItem
 
 setBackgroundItemGap = ->
   $backgroundItems.css('margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT)
