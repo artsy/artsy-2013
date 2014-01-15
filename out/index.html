@@ -20,8 +20,8 @@
 #foreground li header,
 #foreground li footer {
   width: 40%;
-  padding-top: 20px;
-  border-top: 2px solid;
+  padding-top: 30px;
+  border-top: 3px solid #fff;
   position: absolute;
 }
 #foreground li header {
@@ -40,6 +40,9 @@
   display: block;
   margin-top: 20px;
   font-size: 18px;
+}
+#foreground li p {
+  margin-bottom: 1em;
 }
 #foreground-gradient {
   background: -webkit-linear-gradient(top, transparent, #000);
@@ -70,12 +73,53 @@
   float: right;
   width: 70%;
 }
-#background > ul li {
-  margin-bottom: 200px;
-}
-#background > ul li img {
+#background-content li img {
   width: 100%;
   margin-bottom: 40px;
+}
+#background-content li figure {
+  margin-bottom: 40px;
+}
+#background-content li figure img {
+  margin-bottom: 10px;
+}
+#background-content li figure figcaption {
+  font-style: italic;
+}
+.two-column-images {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+}
+.two-column-images li {
+  margin-bottom: 40px;
+}
+.two-column-images img {
+  margin-bottom: 10px !important;
+}
+.two-column-images p,
+.two-column-images em {
+  display: block;
+  margin: 0;
+  color: #999;
+}
+#background-code {
+  font-family: "Courier New", Courier, monospace;
+  position: relative;
+  font-size: 13px;
+  overflow: hidden;
+}
+#background-code-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+.artist-info {
+  color: #999;
 }
 #header-background {
   position: absolute;
@@ -135,10 +179,10 @@
   -moz-background-size: contain;
   background-size: contain;
   top: 50%;
-  height: 140px;
+  height: 16%;
   width: 100%;
   position: absolute;
-  margin-top: -70px;
+  margin-top: -8%;
   -webkit-transition: opacity 0s;
   -moz-transition: opacity 0s;
   -o-transition: opacity 0s;
@@ -192,6 +236,7 @@
 }
 #scroller {
   position: absolute;
+  width: 100%;
 /* Prevent elements to be highlighted on tap */
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 /* Put the scroller into the HW Compositing layer right from the start */
@@ -406,9 +451,29 @@ body {
 button,
 a {
   outline: none;
+  color: #fff;
 }
 #content {
   position: relative;
+}
+.faux-underline {
+  display: inline;
+  position: relative;
+  text-decoration: none;
+}
+.faux-underline:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  margin-top: 0.15em;
+  border-bottom: 1px solid #777;
+  color: #505050;
+}
+.faux-underline:hover {
+  text-decoration: none;
 }
 @font-face {
   font-family: 'AvantGardeGothicITCW01D 731075';
@@ -416,7 +481,146 @@ a {
   font-style: style;
   src: url("fonts/c18aee57-7585-4a8b-9a1c-69d226301d73.woff") format("woff");
 }
-</style></head><body><div id="wrapper"><div id="scroller"><div id="header-background"><div id="header-background-gradient"></div><ul></ul></div><header id="main-header"><div id="main-header-logo"></div><div id="main-header-down-arrow"></div></header><main id="content"><div id="foreground"><div id="foreground-gradient"></div><ul id="foreground-content"><li data-slug="turrel"><header><h1><em>March &mdash;</em><br>James Turrel</h1></header><footer>In April we brought the highly anticipated James Turrel...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li><li data-slug="ici"><header><h1><em>November &mdash;</em><br>Live Bidding</h1></header><footer>In November we partnered with ICI to support their yearly...<p>dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino</p><small>Explore Madonna & Child</small></footer></li></ul><div id="foreground-social-buttons"><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></div><div id="background"><ul><li><img src="images/content/turell-1.jpg"><img src="images/content/turell-2.jpg"></li><li><img src="images/content/ici-1.jpg"><img src="images/content/ici-2.jpg"><img src="images/content/ici-3.jpg"></li></ul></div></main><footer id="footer"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></footer></div></div><div id="scripts"><script src="http://zeptojs.com/zepto.min.js"></script><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
+</style></head><body><div id="wrapper"><div id="scroller"><div id="header-background"><div id="header-background-gradient"></div><ul></ul></div><header id="main-header" class="viewport-height"><div id="main-header-logo"></div><div id="main-header-down-arrow"></div></header><main id="content"><div id="foreground" class="viewport-height"><div id="foreground-gradient"></div><ul id="foreground-content"><li><header><h1><em>January &mdash;</em><br>The Average Sale:<br> Over 2,000 miles</h1></header><footer><p>In January we sold works between New York and Oslo, London and Los Angeles, Singapore and Houston.</p><blockquote>“Thanks to Artsy, we sold 3 works prior to the opening. The client felt comfortable buying the work, site unseen, because of the quality of presentation on the Artsy site.”<br>– Deborah Herringer Kiss, Gallery Owner</blockquote></footer></li><li><header><h1><em>February &mdash;</em><br>Eye Contact</h1></header><footer><p>In 2013, we added our 1,000th category to The Art Genome project – the classification system for art that powers Artsy. Our favorite in February was “Eye Contact.”</p><p>During the year our Art Genome team analyzed over 44,000 artworks and applied over 700,000 categories.</p><a href="http://artsy.net/gene/eye-contact" target="_blank" class="faux-underline">Explore Eye Contact</a></footer></li><li><header><h1><em>March &mdash;</em><br>The Armory Show</h1></header><footer><p>Artsy’s partnership with The Armory Show included 97% of exhibitors participating and over 200,000 visitors viewing 10 million artworks.</p><p>In 2013 Artsy covered 17 art fairs from around the world, including Art Basel in Basel, Hong Kong, and Miami; Frieze London; ArtRio; and Contemporary Istanbul.</p><a href="http://artsy.net/thearmoryshow" target="_blank" class="faux-underline">Revisit the fairs from 2013 on Artsy</a></footer></li><li><header><h1><em>May &mdash;</em><br>Ragnar Relay</h1></header><footer><p>In May we ran the Ragnar relay. 26 hours and 52 minutes of continuous running. 197 miles covered. Beaten by teams like “U.S. Department of Minimal Effort” and “Fanny Pack Gold” but we got an A for effort.</p><a href="https://artsy.net/about/jobs" target="_blank" class="faux-underline">Run the relay with us in 2014</a></footer></li><li><header><h1><em>June &mdash;</em><br>JR turns Artsy inside out</h1></header><footer><p>In June the Artsy NYC team headed uptown to have our portraits taken by the artist JR; and soon after, displayed with pride across our 25th floor headquarters.</p><a href="https://artsy.net/artist/jr" target="_blank" class="faux-underline">Follow JR on Artsy</a></footer></li><li><header><h1><em>July &mdash;</em><br>30th Open-Source Project Released</h1></header><footer><p>In July we released our 30th open-source project. We love open-source at Artsy. It lets us build better software, faster. We also like to give back to the community by contributing to existing open-source libraries, and by releasing our own code under open-source licences.</p><a href="http://artsy.github.io" target="_blank" class="faux-underline">Go to Arty's Engineering Blog</a></footer></li><li><header><h1><em>August &mdash;</em><br>Art & Science</h1></header><footer><p>In August Artsy’s 7th artist/engineer,<a href="https://artsy.net/artist/damon-zucconi">Damon,</a>joined the team. We are now 66 artists, engineers, art historians, designers, curators, writers, and mathematicians. 40 of us are women, 26 men. 6 of us have kids, and 5 of us are avid Magic the Gathering players.</p><a href="https://artsy.net/about/team" target="_blank" class="faux-underline">Find out more about the roles at Artsy</a></footer></li><li><header><h1><em>September &mdash;</em><br>Art in your pocket</h1></header><footer><p>In September we shrunk Artsy. 120,000 people downloaded our iPhone app–named a “Best new app” by Apple. Art lovers have viewed and saved more than 4 million artworks since the launch.</p><a href="http://iphone.artsy.net/" target="_blank" class="faux-underline">Download the Artsy iPhone app</a></footer></li><li><header><h1><em>October &mdash;</em><br>Art in Schools</h1></header><footer><p>In October Artsy become an official part of public education in New York as a partner for Digital Ready – a program designed to help NYC public high schools use technology to improve their students’ readiness for college and careers. More than 25,000 open-access images on Artsy are freely downloadable for educational use.</p><a href="#" target="_blank" class="faux-underline">Learn more about how Artsy is used the classroom</a></footer></li><li><header><h1><em>November &mdash;</em><br>Better tools for Benefit Auctions</h1></header><footer><p>November we partnered with Independent Curators International (ICI) to support their annual benefit auction. This year bidding wasn’t limited to the 300 people at the gala event. Anyone from around the world could participate from computer, tablet or mobile phone. All lots sold, and we helped raise 50% more than ICI’s target to support their educational programming.</p><p>For more information about our auctions, get in touch with us at&nbsp;<br><a href="mailto:partners@artsy.net" target="_blank" class="faux-underline">partners@artsy.net</a></p></footer></li><li><header><h1><em>December &mdash;</em><br>Gallery meets Collector</h1></header><footer><p>In the last week of December we introduced more collectors to galleries than in the entire year of 2012.</p><a href="http://artsy.net" target="_blank" class="faux-underline">Find your new favorite work on Artsy</a></footer></li></ul><div id="foreground-social-buttons"><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></div><div id="background"><ul id="background-content"><li><img src="images/content/map.svg"><div class="half-viewport-height"></div></li><li><ul class="two-column-images"><li><img src="images/content/eye-contact-thomas.jpg"><p>Mickalene Thomas</p><em>Qusuquzah, Une Trés Belle Négresse 1,, 2012</em><em>Lehmann Maupin</em><em>$18,500</em></li><li><img src="images/content/eye-contact-abramovic.jpg"><p>Marina Abramović</p><em>Golden Lips, 2009</em><p>Sean Kelly Gallery</p></li><li><img src="images/content/eye-contact-longo.jpg"><p>Robert Longo</p><em>Untitled (Leo)</em><p>Christie's Post-War & Contemporary Art</p><em>$250,000 - 350,000</em></li><li><img src="images/content/eye-contact-roversi.jpg"><p>Paolo Roversi</p><em>Tanel Bedrossiantz (Jean Paul Gaultier’s “Barbès” women’s ready-to-wear fall-winter collection of 1984–85), 1992</em><p>Brooklyn Museum</p></li><li><img src="images/content/eye-contact-vermeer.jpg"><p>Johannes Vermeer</p><em>Girl with the Red Hat, ca. 1665/1666</em><p>National Gallery of Art, Washington D.C.</p></li><li><img src="images/content/eye-contact-close.jpg"><p>Chuck Close</p><em>Untitled (Kate - 16), 2011</em><p>Adamson Gallery</p><em>$38,000</em></li><div class="half-viewport-height"></div></ul></li><li><figure><img src="images/content/fairs-armory.jpg"><figcaption>The Armory Show at Pier 92 and Pier 94 in New York</figcaption></figure><figure><img src="images/content/fairs-dm.jpg"><figcaption>Design Miami — Formlessfinder's “Tent Pile”</figcaption></figure><figure><img src="images/content/fairs-frieze.jpg"><figcaption>Frieeze – Geometric Mirrors VI by Jeppe Hein in the Frieze Sculpture park</figcaption></figure></li><li><ul class="two-column-images"><li><img src="images/content/ragnar-pose.jpg"></li><li><img src="images/content/ragnar-camp.jpg"></li><li><img src="images/content/ragnar-carter.jpg"></li><li><img src="images/content/ragnar-party.jpg"></li><li><img src="images/content/ragnar-woot.jpg"></li><li><img src="images/content/ragnar-group.jpg"></li></ul><img src="images/content/ragnar-course.jpg"></li><li><img src="images/content/jr-wide.jpg"><img src="images/content/jr-close.jpg"><img src="images/content/jr-inside.jpg"></li><li><pre id="background-code"><p>
+
+
+
+module.exports.js = function(pkg, gzip) {
+  var contents, filename, fingerprint, output, src, _ref, _ref1;
+  if (gzip == null) {
+    gzip = _this.gzip;
+  }
+  if (_this.assets.js[pkg] == null) {
+    throw new Error("Cannot find package '" + pkg + "'");
+  }
+  if (_this.mode === 'production') {
+    if (_this.mode === 'production') {
+      fingerprint = '-' + fingerprintForPkg('js', pkg);
+    }
+    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".js");
+    if (gzip) {
+      src += '.jgz';
+    }
+    return "<script src='" + src + "' type='text/javascript'></script>";
+  }
+  expandAssetGlobs();
+  output = '';
+  _ref1 = preprocessPkg(pkg, 'js');
+  for (filename in _ref1) {
+    contents = _ref1[filename];
+    if (!_this.usingMiddleware) {
+      writeFile(filename, contents);
+    }
+    output += "<script src='" + _this._assetsDir + "/" + filename + "' type='text/javascript'></script>";
+  }
+  return output;
+};
+
+module.exports.css = function(pkg, gzip) {
+  var contents, filename, fingerprint, output, src, _ref, _ref1;
+  if (gzip == null) {
+    gzip = _this.gzip;
+  }
+  if (_this.assets.css[pkg] == null) {
+    throw new Error("Cannot find package '" + pkg + "'");
+  }
+  if (_this.mode === 'production') {
+    if (_this.mode === 'production') {
+      fingerprint = '-' + fingerprintForPkg('css', pkg);
+    }
+    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".css");
+    if (gzip) {
+      src += '.cgz';
+    }
+    return "<link href='" + src + "' rel='stylesheet' type='text/css'>";
+  }
+  expandAssetGlobs();
+  output = '';
+  _ref1 = preprocessPkg(pkg, 'css');
+  for (filename in _ref1) {
+    contents = _ref1[filename];
+    if (!_this.usingMiddleware) {
+      writeFile(filename, contents);
+    }
+    output += "<link href='" + _this._assetsDir + "/" + filename + "' rel='stylesheet' type='text/css'>";
+  }
+  return output;
+};
+
+module.exports.jst = function(pkg, gzip) {
+  var fingerprint, src, _ref;
+  if (gzip == null) {
+    gzip = _this.gzip;
+  }
+  if (_this.assets.jst[pkg] == null) {
+    throw new Error("Cannot find package '" + pkg + "'");
+  }
+  if (_this.mode === 'production') {
+    if (_this.mode === 'production') {
+      fingerprint = '-' + fingerprintForPkg('jst', pkg);
+    }
+    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".jst.js");
+    if (gzip) {
+      src += '.jgz';
+    }
+    return "<script src='" + src + "' type='text/javascript'></script>";
+  }
+  expandAssetGlobs();
+  if (!_this.usingMiddleware) {
+    fs.writeFileSync(_this._outputDir + '/' + pkg + '.jst.js', generateJSTs(pkg));
+    fs.writeFileSync(_this._outputDir + '/nap-templates-prefix.js', _this._tmplPrefix);
+  }
+  return "<script src='" + _this._assetsDir + "/nap-templates-prefix.js' type='text/javascript'></script>\n<script src='" + _this._assetsDir + "/" + pkg + ".jst.js' type='text/javascript'></script>";
+};
+
+module.exports["package"] = function(callback) {
+  var contents, filename, files, fingerprint, fn, key, pkg, pkgs, total, _ref, _ref1, _ref2, _results;
+  if (callback == null) {
+    callback = function() {};
+  }
+  clearAssetsDir();
+  total = _.reduce((function() {
+    var _ref, _results;
+    _ref = this.assets;
+    _results = [];
+    for (key in _ref) {
+      pkgs = _ref[key];
+      _results.push(_.values(pkgs).length);
+    }
+    return _results;
+  }).call(_this), function(memo, num) {
+    return memo + num;
+  });
+  callback = _.after(total, callback);
+  if (_this.assets.js != null) {
+    _ref = _this.assets.js;
+    for (pkg in _ref) {
+      files = _ref[pkg];
+      contents = ((function() {
+        var _ref1, _results;
+        _ref1 = preprocessPkg(pkg, 'js');
+        _results = [];
+        for (fn in _ref1) {
+          contents = _ref1[fn];
+          _results.push(contents);
+        }
+        return _results;
+      })()).join(';\n');
+      if (_this.mode === 'production' && _this.minify) {
+        contents = uglify(contents);
+      }
+      fingerprint = '-' + fingerprintForPkg('js', pkg);
+      filename = "" + pkg + (fingerprint != null ? fingerprint : '') + ".js";
+      writeFile(filename, contents);
+      if (_this.gzip) {
+        gzipPkg(contents, filename, callback);
+      } else {
+        callback();
+      }
+      total++;
+    }
+  }
+};</p><img id="background-code-mask" src="images/logo-mask.svg" class="viewport-height"></pre></li><li><figure><img src="images/content/damon.jpg"><figcaption class="artist-info"><p>Damon Zucconi</p><p>Tetradic Edit, 2013</p><p>JTT Gallery</p></figcaption></figure><div class="half-viewport-height"></div></li><li><img src="images/content/iphone-screens.jpg"></li><li><figure><img src="images/content/doe-kids.jpg"><figcaption>Three students at Brooklyn International High School, one of ten schools participating in New York Citi’s Digital Ready program.</figcaption></figure><figure><img src="images/content/doe-meeting.jpg"><figcaption>Mayor Bloomberg and Chancellor Walcott announce the expansion of New York City’s Digital Roadmap for New York schools.</figcaption></figure></li><li><img src="images/content/auction-phone.jpg"><img src="images/content/auction-ici.jpg"><img src="images/content/auction-marina.jpg"></li><li><img src="images/content/dec-graph.jpg"></li></ul></div></main><footer id="footer" class="viewport-height"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></footer></div></div><div id="scripts"><script src="http://zeptojs.com/zepto.min.js"></script><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
 (function() {
   var mtiTracking = document.createElement('script');
   mtiTracking.type='text/javascript';
@@ -5438,7 +5642,7 @@ window.$ === undefined && (window.$ = Zepto)
 
 }).call(this);
 (function() {
-  var $background, $backgroundItems, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockForeground, renderHeaderBackgrounds, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIscroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
+  var $background, $backgroundItems, $code, $codeMask, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $halfViewportHeights, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $viewportHeights, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockCodeMask, popLockForeground, renderBackgroundCode, renderHeaderBackgrounds, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIscroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
 
   TOTAL_HEADER_BACKGROUNDS = 4;
 
@@ -5492,6 +5696,14 @@ window.$ === undefined && (window.$ = Zepto)
 
   $firstForegroundItem = null;
 
+  $viewportHeights = null;
+
+  $halfViewportHeights = null;
+
+  $codeMask = null;
+
+  $code = null;
+
   myScroll = null;
 
   contentGap = 0;
@@ -5513,6 +5725,10 @@ window.$ === undefined && (window.$ = Zepto)
     setContentGap();
     transitionHeaderBackground();
     return mixpanel.track("Viewed page");
+  };
+
+  renderBackgroundCode = function() {
+    return $('#background-code').text($('html').html());
   };
 
   renderHeaderBackgrounds = function() {
@@ -5545,7 +5761,7 @@ window.$ === undefined && (window.$ = Zepto)
 
   cacheElements = function() {
     $scroller = $('#scroller');
-    $backgroundItems = $('#background li');
+    $backgroundItems = $('#background-content > li');
     $foreground = $('#foreground');
     $foregroundItems = $("#foreground li");
     $mainHeader = $('#main-header');
@@ -5558,7 +5774,11 @@ window.$ === undefined && (window.$ = Zepto)
     $fgTwitterLink = $('#foreground .social-button-twitter');
     $headerBackgrounds = $('#header-background li');
     $headerLogo = $('#main-header-logo');
-    return $firstForegroundItem = $('#foreground li:first-child');
+    $firstForegroundItem = $('#foreground li:first-child');
+    $viewportHeights = $('.viewport-height');
+    $halfViewportHeights = $('.half-viewport-height');
+    $codeMask = $('#background-code-mask');
+    return $code = $('#background-code');
   };
 
   offset = function($el) {
@@ -5601,7 +5821,8 @@ window.$ === undefined && (window.$ = Zepto)
     popLockForeground();
     fadeBetweenForegroundItems();
     fadeOutHeaderImage();
-    return fadeInFirstForegroundItem();
+    fadeInFirstForegroundItem();
+    return popLockCodeMask();
   };
 
   setScrollTop = function() {
@@ -5677,6 +5898,20 @@ window.$ === undefined && (window.$ = Zepto)
     }, 1000);
   };
 
+  popLockCodeMask = function() {
+    var codeBottom, codeTop, maskTop;
+    codeTop = offset($code).top;
+    codeBottom = offset($code).bottom;
+    if (scrollTop < codeTop || (scrollTop + viewportHeight) > codeBottom) {
+      return;
+    }
+    maskTop = scrollTop - codeTop;
+    console.log(codeTop, maskTop);
+    return $codeMask.css({
+      'margin-top': maskTop
+    });
+  };
+
   fadeInFirstForegroundItem = function() {
     var end, opacity, start;
     end = offset($firstForegroundItem).top;
@@ -5695,9 +5930,8 @@ window.$ === undefined && (window.$ = Zepto)
     setBackgroundItemGap();
     setContentGap();
     setHeaderSize();
-    $foreground.height(viewportHeight);
-    $mainHeader.height(viewportHeight);
-    return $footer.height(viewportHeight);
+    $viewportHeights.height(viewportHeight);
+    return $halfViewportHeights.height(viewportHeight / 2);
   };
 
   setHeaderSize = function() {

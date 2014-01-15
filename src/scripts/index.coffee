@@ -51,6 +51,10 @@ $fgTwitterLink = null
 $headerLogo = null
 $headerBackgrounds = null
 $firstForegroundItem = null
+$viewportHeights = null
+$halfViewportHeights = null
+$codeMask = null
+$code = null
 
 myScroll = null # Reference to iScroll instance
 contentGap = 0 # The distance from the top of the page to the content
@@ -77,6 +81,9 @@ init = ->
   transitionHeaderBackground()
   mixpanel.track "Viewed page"
 
+renderBackgroundCode = ->
+  $('#background-code').text $('html').html()
+
 renderHeaderBackgrounds = ->
   $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
     "<li style='background-image: url(images/header/#{i}.jpg)'></li>"
@@ -96,7 +103,7 @@ setupIscroll = ->
 
 cacheElements = ->
   $scroller = $('#scroller')
-  $backgroundItems = $('#background li')
+  $backgroundItems = $('#background-content > li')
   $foreground = $('#foreground')
   $foregroundItems = $("#foreground li")
   $mainHeader = $('#main-header')
@@ -110,6 +117,10 @@ cacheElements = ->
   $headerBackgrounds = $('#header-background li')
   $headerLogo = $('#main-header-logo')
   $firstForegroundItem = $('#foreground li:first-child')
+  $viewportHeights = $('.viewport-height')
+  $halfViewportHeights = $('.half-viewport-height')
+  $codeMask = $('#background-code-mask')
+  $code = $('#background-code')
 
 # Utility functions
 # -----------------
@@ -154,6 +165,7 @@ onScroll = ->
   fadeBetweenForegroundItems()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
+  popLockCodeMask()
 
 setScrollTop = ->
   scrollTop = -(this.y>>0)
@@ -216,6 +228,14 @@ transitionHeaderBackground = ->
     , 700
   , 1000
 
+popLockCodeMask = ->
+  codeTop = offset($code).top
+  codeBottom = offset($code).bottom
+  return if scrollTop < codeTop or (scrollTop + viewportHeight) > codeBottom
+  maskTop = scrollTop - codeTop
+  console.log codeTop, maskTop
+  $codeMask.css 'margin-top': maskTop
+
 fadeInFirstForegroundItem = ->
   end = offset($firstForegroundItem).top
   return if scrollTop >= end
@@ -231,9 +251,8 @@ onResize = ->
   setBackgroundItemGap()
   setContentGap()
   setHeaderSize()
-  $foreground.height viewportHeight
-  $mainHeader.height viewportHeight
-  $footer.height viewportHeight
+  $viewportHeights.height viewportHeight
+  $halfViewportHeights.height viewportHeight / 2
 
 setHeaderSize = ->
   $('#header-background').height viewportHeight

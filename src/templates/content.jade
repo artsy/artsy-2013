@@ -1,45 +1,182 @@
-#foreground
-  #foreground-gradient
-  ul#foreground-content
+extends content-layout
 
-    //- Turrel
-    li( data-slug="turrel" )
-      header
-        h1
-          em March &mdash;
-          br
-          | James Turrel
-      footer
-        | In April we brought the highly anticipated James Turrel...
-        p dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino
-        small Explore Madonna & Child
+//- Janurary: Sales Distance
+append foreground
+  +fg-item('January', 'The Average Sale:<br> Over 2,000 miles')
+    p In January we sold works between New York and Oslo, London and Los Angeles, Singapore and Houston.
+    blockquote “Thanks to Artsy, we sold 3 works prior to the opening. The client felt comfortable buying the work, site unseen, because of the quality of presentation on the Artsy site.”
+      br
+      | – Deborah Herringer Kiss, Gallery Owner
+append background
+  li
+    img( src='images/content/map.svg' )
+    .half-viewport-height
 
-    //- ICI
-    li( data-slug="ici" )
-      header
-        h1
-          em November &mdash;
-          br
-          | Live Bidding
-      footer
-        | In November we partnered with ICI to support their yearly...
-        p dipisicing flexitarian Thundercats lo-fi XOXO, Banksy Etsy tempor vinyl gentrify. Banjo small batch kale chips, quinoa chia readymade squid tousled placeat roof party selfies. Shabby chic Vice ex, chia street art leggings tempor excepteur nisi brunch quino
-        small Explore Madonna & Child
+//- Feburary: Eye Contact
+append foreground
+  +fg-item('February', 'Eye Contact')
+    p In 2013, we added our 1,000th category to The Art Genome project – the classification system for art that powers Artsy. Our favorite in February was “Eye Contact.”
+    p During the year our Art Genome team analyzed over 44,000 artworks and applied over 700,000 categories.
+    a.faux-underline( href="http://artsy.net/gene/eye-contact", target='_blank' ) Explore Eye Contact
+append background
+  li
+    ul.two-column-images
+      li
+        img( src='images/content/eye-contact-thomas.jpg' )
+        p Mickalene Thomas
+        em Qusuquzah, Une Trés Belle Négresse 1,, 2012
+        em Lehmann Maupin
+        em $18,500
+      li
+        img( src='images/content/eye-contact-abramovic.jpg' )
+        p Marina Abramović
+        em Golden Lips, 2009
+        p Sean Kelly Gallery
+      li
+        img( src='images/content/eye-contact-longo.jpg' )
+        p Robert Longo
+        em Untitled (Leo)
+        p Christie's Post-War & Contemporary Art
+        em $250,000 - 350,000
+      li
+        img( src='images/content/eye-contact-roversi.jpg' )
+        p Paolo Roversi
+        em Tanel Bedrossiantz (Jean Paul Gaultier’s “Barbès” women’s ready-to-wear fall-winter collection of 1984–85), 1992
+        p Brooklyn Museum
+      li
+        img( src='images/content/eye-contact-vermeer.jpg' )
+        p Johannes Vermeer
+        em Girl with the Red Hat, ca. 1665/1666
+        p National Gallery of Art, Washington D.C.
+      li
+        img( src='images/content/eye-contact-close.jpg' )
+        p Chuck Close
+        em Untitled (Kate - 16), 2011
+        p Adamson Gallery
+        em $38,000
+      .half-viewport-height
 
-  #foreground-social-buttons
-    a.social-button-facebook
-    a.social-button-twitter
+//- March: The Armory Show
+append foreground
+  +fg-item('March', 'The Armory Show')
+    p Artsy’s partnership with The Armory Show included 97% of exhibitors participating and over 200,000 visitors viewing 10 million artworks.
+    p In 2013 Artsy covered 17 art fairs from around the world, including Art Basel in Basel, Hong Kong, and Miami; Frieze London; ArtRio; and Contemporary Istanbul.
+    a.faux-underline( href="http://artsy.net/thearmoryshow", target='_blank' ) Revisit the fairs from 2013 on Artsy
+append background
+  li
+    figure
+      img( src='images/content/fairs-armory.jpg' )
+      figcaption The Armory Show at Pier 92 and Pier 94 in New York
+    figure
+      img( src='images/content/fairs-dm.jpg' )
+      figcaption Design Miami — Formlessfinder's “Tent Pile”
+    figure
+      img( src='images/content/fairs-frieze.jpg' )
+      figcaption Frieeze – Geometric Mirrors VI by Jeppe Hein in the Frieze Sculpture park
 
-#background
-  ul
+//- May: Ragnar Relay
+append foreground
+  +fg-item('May', 'Ragnar Relay')
+    p In May we ran the Ragnar relay. 26 hours and 52 minutes of continuous running. 197 miles covered. Beaten by teams like “U.S. Department of Minimal Effort” and “Fanny Pack Gold” but we got an A for effort.
+    a.faux-underline( href="https://artsy.net/about/jobs", target='_blank' ) Run the relay with us in 2014
+append background
+  li
+    ul.two-column-images
+      li
+        img( src='images/content/ragnar-pose.jpg' )
+      li
+        img( src='images/content/ragnar-camp.jpg' )
+      li
+        img( src='images/content/ragnar-carter.jpg' )
+      li
+        img( src='images/content/ragnar-party.jpg' )
+      li
+        img( src='images/content/ragnar-woot.jpg' )
+      li
+        img( src='images/content/ragnar-group.jpg' )
+    img( src='images/content/ragnar-course.jpg' )
 
-    //- Turrel
-    li
-      img( src='images/content/turell-1.jpg' )
-      img( src='images/content/turell-2.jpg' )
+//- June: JR
+append foreground
+  +fg-item('June', 'JR turns Artsy inside out')
+    p In June the Artsy NYC team headed uptown to have our portraits taken by the artist JR; and soon after, displayed with pride across our 25th floor headquarters.
+    a.faux-underline( href="https://artsy.net/artist/jr", target='_blank' ) Follow JR on Artsy
+append background
+  li
+    img( src='images/content/jr-wide.jpg' )
+    img( src='images/content/jr-close.jpg' )
+    img( src='images/content/jr-inside.jpg' )
 
-    //- ICI
-    li
-      img( src='images/content/ici-1.jpg' )
-      img( src='images/content/ici-2.jpg' )
-      img( src='images/content/ici-3.jpg' )
+//- July: Open Source
+append foreground
+  +fg-item('July', '30th Open-Source Project Released')
+    p In July we released our 30th open-source project. We love open-source at Artsy. It lets us build better software, faster. We also like to give back to the community by contributing to existing open-source libraries, and by releasing our own code under open-source licences.
+    a.faux-underline( href="http://artsy.github.io", target='_blank' ) Go to Arty's Engineering Blog
+append background
+  li
+    pre#background-code
+      p
+        include code.txt
+      img#background-code-mask.viewport-height( src='images/logo-mask.svg')
+
+//- August: Art & Science
+append foreground
+  +fg-item('August', 'Art & Science')
+    p In August Artsy’s 7th artist/engineer,
+      a( href='https://artsy.net/artist/damon-zucconi' ) Damon,
+      | joined the team. We are now 66 artists, engineers, art historians, designers, curators, writers, and mathematicians. 40 of us are women, 26 men. 6 of us have kids, and 5 of us are avid Magic the Gathering players.
+    a.faux-underline( href="https://artsy.net/about/team", target='_blank' ) Find out more about the roles at Artsy
+append background
+  li
+    figure
+      img( src='images/content/damon.jpg' )
+      figcaption.artist-info
+        p Damon Zucconi
+        p Tetradic Edit, 2013
+        p JTT Gallery
+    .half-viewport-height
+
+//- September: Art in your pocket
+append foreground
+  +fg-item('September', 'Art in your pocket')
+    p In September we shrunk Artsy. 120,000 people downloaded our iPhone app–named a “Best new app” by Apple. Art lovers have viewed and saved more than 4 million artworks since the launch.
+    a.faux-underline( href="http://iphone.artsy.net/", target='_blank' ) Download the Artsy iPhone app
+append background
+  li
+    img( src='images/content/iphone-screens.jpg' )
+
+//- October: Art in Schools
+append foreground
+  +fg-item('October', 'Art in Schools')
+    p In October Artsy become an official part of public education in New York as a partner for Digital Ready – a program designed to help NYC public high schools use technology to improve their students’ readiness for college and careers. More than 25,000 open-access images on Artsy are freely downloadable for educational use.
+    a.faux-underline( href="#", target='_blank' ) Learn more about how Artsy is used the classroom
+append background
+  li
+    figure
+      img( src='images/content/doe-kids.jpg' )
+      figcaption Three students at Brooklyn International High School, one of ten schools participating in New York Citi’s Digital Ready program.
+    figure
+      img( src='images/content/doe-meeting.jpg' )
+      figcaption Mayor Bloomberg and Chancellor Walcott announce the expansion of New York City’s Digital Roadmap for New York schools.
+
+//- November: Better tools for Benefit Auctions
+append foreground
+  +fg-item('November', 'Better tools for Benefit Auctions')
+    p November we partnered with Independent Curators International (ICI) to support their annual benefit auction. This year bidding wasn’t limited to the 300 people at the gala event. Anyone from around the world could participate from computer, tablet or mobile phone. All lots sold, and we helped raise 50% more than ICI’s target to support their educational programming.
+    p For more information about our auctions, get in touch with us at&nbsp;
+      br
+      a.faux-underline( href="mailto:partners@artsy.net", target='_blank' ) partners@artsy.net
+append background
+  li
+    img( src='images/content/auction-phone.jpg' )
+    img( src='images/content/auction-ici.jpg' )
+    img( src='images/content/auction-marina.jpg' )
+
+//- December: Gallery meets Collector
+append foreground
+  +fg-item('December', 'Gallery meets Collector')
+    p In the last week of December we introduced more collectors to galleries than in the entire year of 2012.
+    a.faux-underline( href="http://artsy.net", target='_blank' ) Find your new favorite work on Artsy
+append background
+  li
+    img( src='images/content/dec-graph.jpg' )
