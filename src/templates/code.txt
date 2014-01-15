@@ -1,140 +1,117 @@
+var jsdom = require('jsdom');
+var rewire = require('rewire');
+var path = require('path');
+var fs = require('fs');
 
+var domGlobals = [
+  'navigator',
+  'document',
+  'location',
+  'getComputedStyle'
+];
 
+var globals = {};
 
+// Exposes a stubbed browser API and benv.globals into the node.js global namespace
+// so the current process can act like a browser environment.
+//
+// @param {Function} callback
 
-module.exports.js = function(pkg, gzip) {
-  var contents, filename, fingerprint, output, src, _ref, _ref1;
-  if (gzip == null) {
-    gzip = _this.gzip;
-  }
-  if (_this.assets.js[pkg] == null) {
-    throw new Error("Cannot find package '" + pkg + "'");
-  }
-  if (_this.mode === 'production') {
-    if (_this.mode === 'production') {
-      fingerprint = '-' + fingerprintForPkg('js', pkg);
+module.exports.setup = function(callback) {
+  if (typeof window != 'undefined') return callback && callback();
+  jsdom.env({
+    html: "<html><body></body></html>",
+    done: function(errs, w) {
+      global.window = w;
+      domGlobals.forEach(function(varName) {
+        global[varName] = w[varName];
+      });
+      if (callback) callback();
     }
-    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".js");
-    if (gzip) {
-      src += '.jgz';
-    }
-    return "<script src='" + src + "' type='text/javascript'></script>";
-  }
-  expandAssetGlobs();
-  output = '';
-  _ref1 = preprocessPkg(pkg, 'js');
-  for (filename in _ref1) {
-    contents = _ref1[filename];
-    if (!_this.usingMiddleware) {
-      writeFile(filename, contents);
-    }
-    output += "<script src='" + _this._assetsDir + "/" + filename + "' type='text/javascript'></script>";
-  }
-  return output;
-};
+  })
+}
 
-module.exports.css = function(pkg, gzip) {
-  var contents, filename, fingerprint, output, src, _ref, _ref1;
-  if (gzip == null) {
-    gzip = _this.gzip;
-  }
-  if (_this.assets.css[pkg] == null) {
-    throw new Error("Cannot find package '" + pkg + "'");
-  }
-  if (_this.mode === 'production') {
-    if (_this.mode === 'production') {
-      fingerprint = '-' + fingerprintForPkg('css', pkg);
-    }
-    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".css");
-    if (gzip) {
-      src += '.cgz';
-    }
-    return "<link href='" + src + "' rel='stylesheet' type='text/css'>";
-  }
-  expandAssetGlobs();
-  output = '';
-  _ref1 = preprocessPkg(pkg, 'css');
-  for (filename in _ref1) {
-    contents = _ref1[filename];
-    if (!_this.usingMiddleware) {
-      writeFile(filename, contents);
-    }
-    output += "<link href='" + _this._assetsDir + "/" + filename + "' rel='stylesheet' type='text/css'>";
-  }
-  return output;
-};
+// Pass in common client-side dependencies and expose them globally.
+//
+// @param {Object} globals
 
-module.exports.jst = function(pkg, gzip) {
-  var fingerprint, src, _ref;
-  if (gzip == null) {
-    gzip = _this.gzip;
+module.exports.expose = function(_globals) {
+  for(var key in _globals) {
+    global[key] = globals[key] = _globals[key];
   }
-  if (_this.assets.jst[pkg] == null) {
-    throw new Error("Cannot find package '" + pkg + "'");
-  }
-  if (_this.mode === 'production') {
-    if (_this.mode === 'production') {
-      fingerprint = '-' + fingerprintForPkg('jst', pkg);
-    }
-    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".jst.js");
-    if (gzip) {
-      src += '.jgz';
-    }
-    return "<script src='" + src + "' type='text/javascript'></script>";
-  }
-  expandAssetGlobs();
-  if (!_this.usingMiddleware) {
-    fs.writeFileSync(_this._outputDir + '/' + pkg + '.jst.js', generateJSTs(pkg));
-    fs.writeFileSync(_this._outputDir + '/nap-templates-prefix.js', _this._tmplPrefix);
-  }
-  return "<script src='" + _this._assetsDir + "/nap-templates-prefix.js' type='text/javascript'></script>\n<script src='" + _this._assetsDir + "/" + pkg + ".jst.js' type='text/javascript'></script>";
-};
+}
 
-module.exports["package"] = function(callback) {
-  var contents, filename, files, fingerprint, fn, key, pkg, pkgs, total, _ref, _ref1, _ref2, _results;
-  if (callback == null) {
-    callback = function() {};
-  }
-  clearAssetsDir();
-  total = _.reduce((function() {
-    var _ref, _results;
-    _ref = this.assets;
-    _results = [];
-    for (key in _ref) {
-      pkgs = _ref[key];
-      _results.push(_.values(pkgs).length);
-    }
-    return _results;
-  }).call(_this), function(memo, num) {
-    return memo + num;
+// Deletes the stubbed browser API, benv.globals, and cleans things up so other
+// tests can run without being harmed.
+
+module.exports.teardown = function() {
+  delete global.window;
+  domGlobals.forEach(function(varName) {
+    delete global[varName];
   });
-  callback = _.after(total, callback);
-  if (_this.assets.js != null) {
-    _ref = _this.assets.js;
-    for (pkg in _ref) {
-      files = _ref[pkg];
-      contents = ((function() {
-        var _ref1, _results;
-        _ref1 = preprocessPkg(pkg, 'js');
-        _results = [];
-        for (fn in _ref1) {
-          contents = _ref1[fn];
-          _results.push(contents);
-        }
-        return _results;
-      })()).join(';\n');
-      if (_this.mode === 'production' && _this.minify) {
-        contents = uglify(contents);
-      }
-      fingerprint = '-' + fingerprintForPkg('js', pkg);
-      filename = "" + pkg + (fingerprint != null ? fingerprint : '') + ".js";
-      writeFile(filename, contents);
-      if (_this.gzip) {
-        gzipPkg(contents, filename, callback);
-      } else {
-        callback();
-      }
-      total++;
-    }
+  for(var key in globals) {
+    delete global[key];
   }
-};
+}
+
+// Require non-commonjs modules by specifying their global variable.
+//
+// @param {String} filename Path to non-commonjs file
+// @param {String} globalVarName Exposed global like Zepto or GMaps
+
+module.exports.require = function(filename, globalVarName) {
+  var fullPath = path.resolve(path.dirname(module.parent.filename), filename);
+  if (!fs.existsSync(fullPath)) fullPath = require.resolve(filename);
+  var mod = rewire(fullPath);
+  var w = mod.__get__('window');
+  return globalVarName ? (w[globalVarName] || mod.__get__(globalVarName)) : mod;
+}
+
+// Renders a server-side template into a fake browser's body.
+// Will strip out all script tag first to avoid jsdom trying to run scripts.
+//
+// @param {String} filename
+// @param {Object} data data passed into template like jade locals
+
+module.exports.render = function(filename, data, callback) {
+  if (!window) throw Error('You must run benv.setup first.');
+  if (!filename.match('.jade')) throw Error('Could not identify template type');
+  var fullPath = path.resolve(path.dirname(module.parent.filename), filename);
+  var html = require('jade').compile(
+    fs.readFileSync(fullPath),
+    { filename: fullPath }
+  )(data);
+  jsdom.env(html, function(err, w) {
+    var scriptEls = w.document.getElementsByTagName('script');
+    Array.prototype.forEach.call(scriptEls, function(el) {
+      el.parentNode.removeChild(el);
+    });
+    var bodyHtml = w.document.getElementsByTagName('body')[0].innerHTML;
+    document.getElementsByTagName('body')[0].innerHTML = bodyHtml;
+    if (callback) callback();
+  });
+}
+
+// Rewires jadeify templates to work in node again.
+//
+// @param {String} filename
+// @param {Array} varNames Strings of template variable names
+
+module.exports.requireWithJadeify = function(filename, varNames) {
+  var fullPath = path.resolve(path.dirname(module.parent.filename), filename);
+  var mod = rewire(fullPath);
+  var dir = path.dirname(mod.__get__('module').filename);
+  varNames.forEach(function(varName) {
+    var section = mod.__get__(varName).toString()
+      .match(/require\('(.*).jade'\)/);
+    if(!section) section = mod.__get__(varName).toString()
+      .match(/require\("(.*).jade"\)/);
+    var tmplFilename = section[1] + '.jade'
+    tmplFilename = path.resolve(dir, tmplFilename);
+    mod.__set__(varName, require('jade').compile(
+      fs.readFileSync(tmplFilename),
+      { filename: tmplFilename }
+    ));
+  });
+  return mod;
+}
