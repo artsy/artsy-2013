@@ -10,6 +10,9 @@ SCROLL_TO_EL_TIME = 700
 # The gap between items is based on the viewport size
 GAP_PERCENT_OF_VIEWPORT = 0.5
 
+# The gap between the content and the header
+CONTENT_GAP_PERCENT_OF_VIEWPORT = 0.8
+
 # The point at which one foreground item is at 0 opacity and the next item is fading in.
 # e.g. 0.9 will mean the fade out of the first item is long and the fade in of the next
 # item is very short.
@@ -47,9 +50,12 @@ $fgFacebookLink = null
 $fgTwitterLink = null
 $headerLogo = null
 $headerBackgrounds = null
+$firstForegroundItem = null
+$viewportHeights = null
+$halfViewportHeights = null
+$codeMask = null
+$code = null
 
-window.router = router = null # Our Backbone router (Backbone is needed b/c path.js doen't
-              # support router.navigate(trigger: false))
 myScroll = null # Reference to iScroll instance
 contentGap = 0 # The distance from the top of the page to the content
 
@@ -58,26 +64,8 @@ contentGap = 0 # The distance from the top of the page to the content
 scrollTop = 0
 viewportHeight = 0
 
-# Router
-# ------
-
-class Router extends Backbone.Router
-
-  routes:
-    ':slug': 'scrollToSlug'
-
-  scrollToSlug: (slug) ->
-    $item = $("#foreground-content > li[data-slug=#{slug}]")
-    index = $item.index()
-    myScroll.scrollToElement(
-      "#background > ul:nth-child(#{index + 1})"
-      SCROLL_TO_EL_TIME, null, null,
-      IScroll.utils.ease.quadratic
-    )
-    setTimeout onScroll, SCROLL_TO_EL_TIME
-
-# Functions
-# ---------
+# Setup functions
+# ---------------
 
 init = ->
   renderHeaderBackgrounds()
@@ -91,58 +79,16 @@ init = ->
   $fgTwitterLink.click shareOnTwitter
   setContentGap()
   transitionHeaderBackground()
-  router = new Router
-  Backbone.history.start()
+  mixpanel.track "Viewed page"
 
-onResize = ->
-  viewportHeight = $(window).height()
-  setBackgroundItemGap()
-  setContentGap()
-  setHeaderSize()
-  $foreground.height viewportHeight
-  $mainHeader.height viewportHeight
-  $footer.height viewportHeight
+renderBackgroundCode = ->
+  $('#background-code').text $('html').html()
 
-setHeaderSize = ->
-  $('#header-background').height viewportHeight
-
-onScroll = ->
-  popLockForeground()
-  fadeBetweenForegroundItems()
-  fadeOutHeaderImage()
-  toggleFirstForegroundItem()
-  setHrefForIndex()
-
-shareOnFacebook = (e) ->
-  opts = "status=1,width=750,height=400,top=249.5,left=1462"
-  url = "https://www.facebook.com/sharer/sharer.php?u=#{encodeURIComponent location.href}"
-  window.open url, 'facebook', opts
-  false
-
-shareOnTwitter = (e) ->
-  opts = "status=1,width=750,height=400,top=249.5,left=1462"
-  $curHeader = $("#foreground li[data-slug='#{location.hash.replace('#', '')}'] h1")
-  text = encodeURIComponent $curHeader.text() + ' | ' + $('title').text()
-  href = encodeURIComponent location.href
-  url = "https://twitter.com/intent/tweet?original_referer=#{href}&text=#{text}&url=#{href}"
-  window.open url, 'twitter', opts
-  false
-
-cacheElements = ->
-  $scroller = $('#scroller')
-  $backgroundItems = $('#background li')
-  $foreground = $('#foreground')
-  $foregroundItems = $("#foreground li")
-  $mainHeader = $('#main-header')
-  $content = $('#content')
-  $wrapper = $('#wrapper')
-  $mainArrow = $('#main-header-down-arrow')
-  $footer = $('#footer')
-  $background = $('#background')
-  $fgFacebookLink = $('#foreground .social-button-facebook')
-  $fgTwitterLink = $('#foreground .social-button-twitter')
-  $headerBackgrounds = $('#header-background li')
-  $headerLogo = $('#main-header-logo')
+renderHeaderBackgrounds = ->
+  $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
+    "<li style='background-image: url(images/header/#{i}.jpg)'></li>"
+  ).join('')
+  $('#header-background li').first().show()
 
 setupIscroll = ->
   $wrapper.height viewportHeight
@@ -155,7 +101,31 @@ setupIscroll = ->
   myScroll.on('scrollEnd', onScroll)
   document.addEventListener 'touchmove', ((e) -> e.preventDefault()), false
 
-offset = window.offset = ($el) ->
+cacheElements = ->
+  $scroller = $('#scroller')
+  $backgroundItems = $('#background-content > li')
+  $foreground = $('#foreground')
+  $foregroundItems = $("#foreground li")
+  $mainHeader = $('#main-header')
+  $content = $('#content')
+  $wrapper = $('#wrapper')
+  $mainArrow = $('#main-header-down-arrow')
+  $footer = $('#footer')
+  $background = $('#background')
+  $fgFacebookLink = $('#foreground .social-button-facebook')
+  $fgTwitterLink = $('#foreground .social-button-twitter')
+  $headerBackgrounds = $('#header-background li')
+  $headerLogo = $('#main-header-logo')
+  $firstForegroundItem = $('#foreground li:first-child')
+  $viewportHeights = $('.viewport-height')
+  $halfViewportHeights = $('.half-viewport-height')
+  $codeMask = $('#background-code-mask')
+  $code = $('#background-code')
+
+# Utility functions
+# -----------------
+
+offset = ($el) ->
   top = -($scroller.offset()?.top - $el.offset()?.top)
   {
     top: top
@@ -163,21 +133,42 @@ offset = window.offset = ($el) ->
     bottom: top + $el.height()
   }
 
-setScrollTop = ->
-  scrollTop = -(this.y>>0)
-
-setContentGap = ->
-  contentGap = offset($content).top
+# Click handlers
+# --------------
 
 onClickHeaderDownArrow = ->
-  myScroll.scrollToElement '#content', 700, null, null, IScroll.utils.ease.quadratic
+  myScroll.scrollToElement '#content', 1200, null, null, IScroll.utils.ease.quadratic
   false
 
-popLockForeground = ->
-  top = scrollTop - contentGap
-  x = (offset($background).bottom - viewportHeight - contentGap)
-  top = Math.min(top, x)
-  $foreground.css top: Math.max 0, top
+shareOnFacebook = (e) ->
+  mixpanel.track "Shared on Facebook"
+  opts = "status=1,width=750,height=400,top=249.5,left=1462"
+  url = "https://www.facebook.com/sharer/sharer.php?u=#{encodeURIComponent location.href}"
+  window.open url, 'facebook', opts
+  false
+
+shareOnTwitter = (e) ->
+  mixpanel.track "Shared on Twitter"
+  opts = "status=1,width=750,height=400,top=249.5,left=1462"
+  $curHeader = $("#foreground li[data-slug='#{location.hash.replace('#', '')}'] h1")
+  text = encodeURIComponent $curHeader.text() + ' | ' + $('title').text()
+  href = encodeURIComponent location.href
+  url = "https://twitter.com/intent/tweet?original_referer=#{href}&text=#{text}&url=#{href}"
+  window.open url, 'twitter', opts
+  false
+
+# On scroll functions
+# -------------------
+
+onScroll = ->
+  popLockForeground()
+  fadeBetweenForegroundItems()
+  fadeOutHeaderImage()
+  fadeInFirstForegroundItem()
+  popLockCodeMask()
+
+setScrollTop = ->
+  scrollTop = -(this.y>>0)
 
 fadeBetweenForegroundItems = ->
   $backgroundItems.each ->
@@ -204,7 +195,6 @@ fadeBetweenForegroundItems = ->
     if scrollTop > elTop and viewportBottom < elBottom
       $foregroundItems.removeClass('foreground-item-active')
       $curItem.css(opacity: 1).addClass('foreground-item-active')
-      router.navigate "##{$curItem.data 'slug'}"
 
     # In the gap between items so transition opacities as you scroll
     else if viewportBottom > startPoint and viewportBottom < endPoint
@@ -217,15 +207,11 @@ fadeOutHeaderImage = ->
   $('#header-background').css opacity: 1 - (scrollTop / viewportHeight)
   $('#header-background-gradient').css opacity: (scrollTop / viewportHeight) * 2
 
-setBackgroundItemGap = ->
-  $backgroundItems.css('margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT)
-  $backgroundItems.last().css('margin-bottom': 0)
-
-renderHeaderBackgrounds = ->
-  $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
-    "<li style='background-image: url(images/header/#{i}.jpg)'></li>"
-  ).join('')
-  $('#header-background li').first().show()
+popLockForeground = ->
+  top = scrollTop - contentGap
+  x = (offset($background).bottom - viewportHeight - contentGap)
+  top = Math.min(top, x)
+  $foreground.css top: Math.max 0, top
 
 transitionHeaderBackground = ->
   $headerLogo.addClass 'active'
@@ -242,16 +228,44 @@ transitionHeaderBackground = ->
     , 700
   , 1000
 
-toggleFirstForegroundItem = ->
-  if scrollTop + viewportHeight >= offset($foreground).top
-    $foreground.css opacity: 1
-  else
-    $foreground.css opacity: 0
+popLockCodeMask = ->
+  codeTop = offset($code).top
+  codeBottom = offset($code).bottom
+  return if scrollTop < codeTop or (scrollTop + viewportHeight) > codeBottom
+  maskTop = scrollTop - codeTop
+  console.log codeTop, maskTop
+  $codeMask.css 'margin-top': maskTop
 
-setHrefForIndex = ->
-  if scrollTop + viewportHeight <= offset($foreground).top
-    router.navigate ''
+fadeInFirstForegroundItem = ->
+  end = offset($firstForegroundItem).top
+  return if scrollTop >= end
+  start = offset($firstForegroundItem).top - (viewportHeight / 2)
+  opacity = (scrollTop - start) / (end - start)
+  $firstForegroundItem.css opacity: opacity
+
+# On resize functions
+# -------------------
+
+onResize = ->
+  viewportHeight = $(window).height()
+  setBackgroundItemGap()
+  setContentGap()
+  setHeaderSize()
+  $viewportHeights.height viewportHeight
+  $halfViewportHeights.height viewportHeight / 2
+
+setHeaderSize = ->
+  $('#header-background').height viewportHeight
+
+setContentGap = ->
+  $content.css 'margin-top': (viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT)
+  contentGap = offset($content).top
+
+setBackgroundItemGap = ->
+  $backgroundItems.css('margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT)
+  $backgroundItems.last().css('margin-bottom': 0)
 
 # Start your engines
 # ------------------
+
 $ init

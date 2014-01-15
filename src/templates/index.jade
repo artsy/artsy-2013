@@ -12,12 +12,12 @@ html(lang="en")
         #header-background
           #header-background-gradient
           ul
-        header#main-header
+        header#main-header.viewport-height
           #main-header-logo
           #main-header-down-arrow
         main#content
           include content
-        footer#footer
+        footer#footer.viewport-height
           include footer
     #scripts
       include scripts
@@ -26,5 +26,4 @@ html(lang="en")
         include ../scripts/zepto.js
         include ../scripts/zepto.touch.js
         include ../scripts/underscore.js
-        include ../scripts/backbone.js
         include:coffeescript ../scripts/index.coffee

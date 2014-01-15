@@ -1,0 +1,21 @@
+mixin fg-item(month, title)
+  li
+    header
+      h1
+        em #{month} &mdash;
+        br
+        != title
+    footer
+      block
+
+#foreground.viewport-height
+  #foreground-gradient
+  ul#foreground-content
+    block foreground
+  #foreground-social-buttons
+    a.social-button-facebook
+    a.social-button-twitter
+
+#background
+  ul#background-content
+    block background

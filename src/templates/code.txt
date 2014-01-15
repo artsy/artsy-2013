@@ -1,0 +1,140 @@
+
+
+
+
+module.exports.js = function(pkg, gzip) {
+  var contents, filename, fingerprint, output, src, _ref, _ref1;
+  if (gzip == null) {
+    gzip = _this.gzip;
+  }
+  if (_this.assets.js[pkg] == null) {
+    throw new Error("Cannot find package '" + pkg + "'");
+  }
+  if (_this.mode === 'production') {
+    if (_this.mode === 'production') {
+      fingerprint = '-' + fingerprintForPkg('js', pkg);
+    }
+    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".js");
+    if (gzip) {
+      src += '.jgz';
+    }
+    return "<script src='" + src + "' type='text/javascript'></script>";
+  }
+  expandAssetGlobs();
+  output = '';
+  _ref1 = preprocessPkg(pkg, 'js');
+  for (filename in _ref1) {
+    contents = _ref1[filename];
+    if (!_this.usingMiddleware) {
+      writeFile(filename, contents);
+    }
+    output += "<script src='" + _this._assetsDir + "/" + filename + "' type='text/javascript'></script>";
+  }
+  return output;
+};
+
+module.exports.css = function(pkg, gzip) {
+  var contents, filename, fingerprint, output, src, _ref, _ref1;
+  if (gzip == null) {
+    gzip = _this.gzip;
+  }
+  if (_this.assets.css[pkg] == null) {
+    throw new Error("Cannot find package '" + pkg + "'");
+  }
+  if (_this.mode === 'production') {
+    if (_this.mode === 'production') {
+      fingerprint = '-' + fingerprintForPkg('css', pkg);
+    }
+    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".css");
+    if (gzip) {
+      src += '.cgz';
+    }
+    return "<link href='" + src + "' rel='stylesheet' type='text/css'>";
+  }
+  expandAssetGlobs();
+  output = '';
+  _ref1 = preprocessPkg(pkg, 'css');
+  for (filename in _ref1) {
+    contents = _ref1[filename];
+    if (!_this.usingMiddleware) {
+      writeFile(filename, contents);
+    }
+    output += "<link href='" + _this._assetsDir + "/" + filename + "' rel='stylesheet' type='text/css'>";
+  }
+  return output;
+};
+
+module.exports.jst = function(pkg, gzip) {
+  var fingerprint, src, _ref;
+  if (gzip == null) {
+    gzip = _this.gzip;
+  }
+  if (_this.assets.jst[pkg] == null) {
+    throw new Error("Cannot find package '" + pkg + "'");
+  }
+  if (_this.mode === 'production') {
+    if (_this.mode === 'production') {
+      fingerprint = '-' + fingerprintForPkg('jst', pkg);
+    }
+    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".jst.js");
+    if (gzip) {
+      src += '.jgz';
+    }
+    return "<script src='" + src + "' type='text/javascript'></script>";
+  }
+  expandAssetGlobs();
+  if (!_this.usingMiddleware) {
+    fs.writeFileSync(_this._outputDir + '/' + pkg + '.jst.js', generateJSTs(pkg));
+    fs.writeFileSync(_this._outputDir + '/nap-templates-prefix.js', _this._tmplPrefix);
+  }
+  return "<script src='" + _this._assetsDir + "/nap-templates-prefix.js' type='text/javascript'></script>\n<script src='" + _this._assetsDir + "/" + pkg + ".jst.js' type='text/javascript'></script>";
+};
+
+module.exports["package"] = function(callback) {
+  var contents, filename, files, fingerprint, fn, key, pkg, pkgs, total, _ref, _ref1, _ref2, _results;
+  if (callback == null) {
+    callback = function() {};
+  }
+  clearAssetsDir();
+  total = _.reduce((function() {
+    var _ref, _results;
+    _ref = this.assets;
+    _results = [];
+    for (key in _ref) {
+      pkgs = _ref[key];
+      _results.push(_.values(pkgs).length);
+    }
+    return _results;
+  }).call(_this), function(memo, num) {
+    return memo + num;
+  });
+  callback = _.after(total, callback);
+  if (_this.assets.js != null) {
+    _ref = _this.assets.js;
+    for (pkg in _ref) {
+      files = _ref[pkg];
+      contents = ((function() {
+        var _ref1, _results;
+        _ref1 = preprocessPkg(pkg, 'js');
+        _results = [];
+        for (fn in _ref1) {
+          contents = _ref1[fn];
+          _results.push(contents);
+        }
+        return _results;
+      })()).join(';\n');
+      if (_this.mode === 'production' && _this.minify) {
+        contents = uglify(contents);
+      }
+      fingerprint = '-' + fingerprintForPkg('js', pkg);
+      filename = "" + pkg + (fingerprint != null ? fingerprint : '') + ".js";
+      writeFile(filename, contents);
+      if (_this.gzip) {
+        gzipPkg(contents, filename, callback);
+      } else {
+        callback();
+      }
+      total++;
+    }
+  }
+};
