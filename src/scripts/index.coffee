@@ -1,8 +1,10 @@
 # Constants
 # ---------
 
+MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f"
+
 # The total number of header background before it loops
-TOTAL_HEADER_BACKGROUNDS = 4
+TOTAL_HEADER_BACKGROUNDS = 3
 
 # The time it takes to scroll to an element with iscroll
 SCROLL_TO_EL_TIME = 700
@@ -72,17 +74,16 @@ init = ->
   cacheElements()
   $(window).on 'resize', onResize
   onResize()
-  setupIscroll()
+  setupIScroll()
   $mainArrow.click onClickHeaderDownArrow
   $mainArrow.on 'tap', onClickHeaderDownArrow
   $fgFacebookLink.click shareOnFacebook
   $fgTwitterLink.click shareOnTwitter
   setContentGap()
   transitionHeaderBackground()
+  renderSocialShares()
+  mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
-
-renderBackgroundCode = ->
-  $('#background-code').text $('html').html()
 
 renderHeaderBackgrounds = ->
   $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
@@ -90,7 +91,21 @@ renderHeaderBackgrounds = ->
   ).join('')
   $('#header-background li').first().show()
 
-setupIscroll = ->
+renderSocialShares = ->
+  shareUrl = location.href
+  $.ajax
+    url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=#{shareUrl}"
+    success: (res) ->
+      $('#social-button-facebook-count')
+        .html($(res).find('share_count').text() or 0).show()
+  window.twitterCountJSONPCallback = (res) ->
+    return unless res.count
+    $('#social-button-twitter-count').html(res.count or 0).show()
+  $.ajax
+    url: "http://urls.api.twitter.com/1/urls/count.json?url=#{shareUrl}&callback=twitterCountJSONPCallback"
+    dataType: 'jsonp'
+
+setupIScroll = ->
   $wrapper.height viewportHeight
   myScroll = new IScroll '#wrapper',
     probeType: 3
@@ -143,7 +158,7 @@ onClickHeaderDownArrow = ->
 shareOnFacebook = (e) ->
   mixpanel.track "Shared on Facebook"
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
-  url = "https://www.facebook.com/sharer/sharer.php?u=#{encodeURIComponent location.href}"
+  url = "https://www.facebook.com/sharer/sharer.php?u=#{location.href}"
   window.open url, 'facebook', opts
   false
 
@@ -152,8 +167,10 @@ shareOnTwitter = (e) ->
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
   $curHeader = $("#foreground li[data-slug='#{location.hash.replace('#', '')}'] h1")
   text = encodeURIComponent $curHeader.text() + ' | ' + $('title').text()
-  href = encodeURIComponent location.href
-  url = "https://twitter.com/intent/tweet?original_referer=#{href}&text=#{text}&url=#{href}"
+  url = "https://twitter.com/intent/tweet?" +
+        "original_referer=#{location.href}" +
+        "&text=#{text}" +
+        "&url=#{location.href}"
   window.open url, 'twitter', opts
   false
 
@@ -233,7 +250,6 @@ popLockCodeMask = ->
   codeBottom = offset($code).bottom
   return if scrollTop < codeTop or (scrollTop + viewportHeight) > codeBottom
   maskTop = scrollTop - codeTop
-  console.log codeTop, maskTop
   $codeMask.css 'margin-top': maskTop
 
 fadeInFirstForegroundItem = ->
@@ -268,4 +284,4 @@ setBackgroundItemGap = ->
 # Start your engines
 # ------------------
 
-$ init
+$ -> imagesLoaded 'body', init
