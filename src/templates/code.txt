@@ -1,117 +1,335 @@
-var jsdom = require('jsdom');
-var rewire = require('rewire');
-var path = require('path');
-var fs = require('fs');
+var $background, $backgroundItems, $code, $codeMask, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $halfViewportHeights, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $viewportHeights, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, MIXPANEL_ID, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockCodeMask, popLockForeground, renderHeaderBackgrounds, renderSocialShares, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIScroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
 
-var domGlobals = [
-  'navigator',
-  'document',
-  'location',
-  'getComputedStyle'
-];
+MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f";
 
-var globals = {};
+TOTAL_HEADER_BACKGROUNDS = 3;
 
-// Exposes a stubbed browser API and benv.globals into the node.js global namespace
-// so the current process can act like a browser environment.
-//
-// @param {Function} callback
+SCROLL_TO_EL_TIME = 700;
 
-module.exports.setup = function(callback) {
-  if (typeof window != 'undefined') return callback && callback();
-  jsdom.env({
-    html: "<html><body></body></html>",
-    done: function(errs, w) {
-      global.window = w;
-      domGlobals.forEach(function(varName) {
-        global[varName] = w[varName];
-      });
-      if (callback) callback();
+GAP_PERCENT_OF_VIEWPORT = 0.5;
+
+CONTENT_GAP_PERCENT_OF_VIEWPORT = 0.8;
+
+MID_FADE_PERCENT = 0.5;
+
+FADE_GAP_OF_BLACK = 0.6;
+
+startOffest = function(vpHeight) {
+  return 0;
+};
+
+END_OFFSET = 1.1;
+
+endOffest = function(vpHeight) {
+  return vpHeight * END_OFFSET;
+};
+
+$scroller = null;
+
+$backgroundItems = null;
+
+$foreground = null;
+
+$mainHeader = null;
+
+$content = null;
+
+$wrapper = null;
+
+$mainArrow = null;
+
+$foregroundItems = null;
+
+$footer = null;
+
+$background = null;
+
+$fgFacebookLink = null;
+
+$fgTwitterLink = null;
+
+$headerLogo = null;
+
+$headerBackgrounds = null;
+
+$firstForegroundItem = null;
+
+$viewportHeights = null;
+
+$halfViewportHeights = null;
+
+$codeMask = null;
+
+$code = null;
+
+myScroll = null;
+
+contentGap = 0;
+
+scrollTop = 0;
+
+viewportHeight = 0;
+
+init = function() {
+  renderHeaderBackgrounds();
+  cacheElements();
+  $(window).on('resize', onResize);
+  onResize();
+  setupIScroll();
+  $mainArrow.click(onClickHeaderDownArrow);
+  $mainArrow.on('tap', onClickHeaderDownArrow);
+  $fgFacebookLink.click(shareOnFacebook);
+  $fgTwitterLink.click(shareOnTwitter);
+  setContentGap();
+  transitionHeaderBackground();
+  renderSocialShares();
+  mixpanel.init(MIXPANEL_ID);
+  return mixpanel.track("Viewed page");
+};
+
+renderHeaderBackgrounds = function() {
+  var i;
+  $('#header-background ul').html(((function() {
+    var _i, _results;
+    _results = [];
+    for (i = _i = 0; 0 <= TOTAL_HEADER_BACKGROUNDS ? _i <= TOTAL_HEADER_BACKGROUNDS : _i >= TOTAL_HEADER_BACKGROUNDS; i = 0 <= TOTAL_HEADER_BACKGROUNDS ? ++_i : --_i) {
+      _results.push("<li style='background-image: url(images/header/" + i + ".jpg)'></li>");
     }
-  })
-}
+    return _results;
+  })()).join(''));
+  return $('#header-background li').first().show();
+};
 
-// Pass in common client-side dependencies and expose them globally.
-//
-// @param {Object} globals
+renderSocialShares = function() {
+  var shareUrl;
+  shareUrl = "http://2013.artsy.net/" || location.href;
+  $.ajax({
+    url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=" + shareUrl,
+    success: function(res) {
+      return $('#social-button-facebook-count').html($(res).find('share_count').text() || 0).show();
+    }
+  });
+  window.twitterCountJSONPCallback = function(res) {
+    if (res.count == null) {
+      return;
+    }
+    return $('#social-button-twitter-count').html(res.count || 0).show();
+  };
+  return $.ajax({
+    url: "http://urls.api.twitter.com/1/urls/count.json?url=" + shareUrl + "&callback=twitterCountJSONPCallback",
+    dataType: 'jsonp'
+  });
+};
 
-module.exports.expose = function(_globals) {
-  for(var key in _globals) {
-    global[key] = globals[key] = _globals[key];
+setupIScroll = function() {
+  $wrapper.height(viewportHeight);
+  myScroll = new IScroll('#wrapper', {
+    probeType: 3,
+    mouseWheel: true
+  });
+  myScroll.on('scroll', setScrollTop);
+  myScroll.on('scrollEnd', setScrollTop);
+  myScroll.on('scroll', onScroll);
+  myScroll.on('scrollEnd', onScroll);
+  return document.addEventListener('touchmove', (function(e) {
+    return e.preventDefault();
+  }), false);
+};
+
+cacheElements = function() {
+  $scroller = $('#scroller');
+  $backgroundItems = $('#background-content > li');
+  $foreground = $('#foreground');
+  $foregroundItems = $("#foreground li");
+  $mainHeader = $('#main-header');
+  $content = $('#content');
+  $wrapper = $('#wrapper');
+  $mainArrow = $('#main-header-down-arrow');
+  $footer = $('#footer');
+  $background = $('#background');
+  $fgFacebookLink = $('#foreground .social-button-facebook');
+  $fgTwitterLink = $('#foreground .social-button-twitter');
+  $headerBackgrounds = $('#header-background li');
+  $headerLogo = $('#main-header-logo');
+  $firstForegroundItem = $('#foreground li:first-child');
+  $viewportHeights = $('.viewport-height');
+  $halfViewportHeights = $('.half-viewport-height');
+  $codeMask = $('#background-code-mask');
+  return $code = $('#background-code');
+};
+
+offset = function($el) {
+  var top, _ref, _ref1, _ref2;
+  top = -(((_ref = $scroller.offset()) != null ? _ref.top : void 0) - ((_ref1 = $el.offset()) != null ? _ref1.top : void 0));
+  return {
+    top: top,
+    left: (_ref2 = $el.offset()) != null ? _ref2.left : void 0,
+    bottom: top + $el.height()
+  };
+};
+
+onClickHeaderDownArrow = function() {
+  myScroll.scrollToElement('#content', 1200, null, null, IScroll.utils.ease.quadratic);
+  return false;
+};
+
+shareOnFacebook = function(e) {
+  var opts, url;
+  mixpanel.track("Shared on Facebook");
+  opts = "status=1,width=750,height=400,top=249.5,left=1462";
+  url = "https://www.facebook.com/sharer/sharer.php?u=" + location.href;
+  window.open(url, 'facebook', opts);
+  return false;
+};
+
+shareOnTwitter = function(e) {
+  var $curHeader, opts, text, url;
+  mixpanel.track("Shared on Twitter");
+  opts = "status=1,width=750,height=400,top=249.5,left=1462";
+  $curHeader = $("#foreground li[data-slug='" + (location.hash.replace('#', '')) + "'] h1");
+  text = encodeURIComponent($curHeader.text() + ' | ' + $('title').text());
+  url = "https://twitter.com/intent/tweet?" + ("original_referer=" + location.href) + ("&text=" + text) + ("&url=" + location.href);
+  window.open(url, 'twitter', opts);
+  return false;
+};
+
+onScroll = function() {
+  popLockForeground();
+  fadeBetweenForegroundItems();
+  fadeOutHeaderImage();
+  fadeInFirstForegroundItem();
+  return popLockCodeMask();
+};
+
+setScrollTop = function() {
+  return scrollTop = -(this.y >> 0);
+};
+
+fadeBetweenForegroundItems = function() {
+  return $backgroundItems.each(function() {
+    var $curItem, $nextItem, elBottom, elTop, endPoint, firstMidPoint, index, midPoint, nextTop, percentNextItem, percentPrevItem, startPoint, viewportBottom;
+    index = $(this).index();
+    $curItem = $foregroundItems.eq(index);
+    $nextItem = $foregroundItems.eq(index + 1);
+    viewportBottom = scrollTop + viewportHeight;
+    elTop = offset($(this)).top;
+    elBottom = offset($(this)).bottom;
+    nextTop = offset($(this).next()).top;
+    startPoint = elBottom + startOffest(viewportHeight);
+    endPoint = nextTop + endOffest(viewportHeight);
+    midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint;
+    firstMidPoint = midPoint - (viewportHeight * GAP_PERCENT_OF_VIEWPORT) * FADE_GAP_OF_BLACK;
+    if (scrollTop > elTop && viewportBottom < elBottom) {
+      $foregroundItems.removeClass('foreground-item-active');
+      return $curItem.css({
+        opacity: 1
+      }).addClass('foreground-item-active');
+    } else if (viewportBottom > startPoint && viewportBottom < endPoint) {
+      percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint);
+      percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint);
+      $curItem.css({
+        opacity: percentPrevItem
+      });
+      return $nextItem.css({
+        opacity: percentNextItem
+      });
+    }
+  });
+};
+
+fadeOutHeaderImage = function() {
+  $('#header-background').css({
+    opacity: 1 - (scrollTop / viewportHeight)
+  });
+  return $('#header-background-gradient').css({
+    opacity: (scrollTop / viewportHeight) * 2
+  });
+};
+
+popLockForeground = function() {
+  var top, x;
+  top = scrollTop - contentGap;
+  x = offset($background).bottom - viewportHeight - contentGap;
+  top = Math.min(top, x);
+  return $foreground.css({
+    top: Math.max(0, top)
+  });
+};
+
+transitionHeaderBackground = function() {
+  $headerLogo.addClass('active');
+  return setTimeout(function() {
+    return setTimeout(function() {
+      var $cur, $next, index, nextIndex;
+      index = $($headerBackgrounds.filter(function() {
+        return $(this).hasClass('active');
+      })[0]).index();
+      nextIndex = index + 1 >= TOTAL_HEADER_BACKGROUNDS ? 0 : index + 1;
+      $cur = $($headerBackgrounds.eq(index));
+      $next = $($headerBackgrounds.eq(nextIndex));
+      $cur.removeClass('active');
+      $next.addClass('active');
+      return transitionHeaderBackground();
+    }, 700);
+  }, 1000);
+};
+
+popLockCodeMask = function() {
+  var codeBottom, codeTop, maskTop;
+  codeTop = offset($code).top;
+  codeBottom = offset($code).bottom;
+  if (scrollTop < codeTop || (scrollTop + viewportHeight) > codeBottom) {
+    return;
   }
-}
-
-// Deletes the stubbed browser API, benv.globals, and cleans things up so other
-// tests can run without being harmed.
-
-module.exports.teardown = function() {
-  delete global.window;
-  domGlobals.forEach(function(varName) {
-    delete global[varName];
+  maskTop = scrollTop - codeTop;
+  return $codeMask.css({
+    'margin-top': maskTop
   });
-  for(var key in globals) {
-    delete global[key];
+};
+
+fadeInFirstForegroundItem = function() {
+  var end, opacity, start;
+  end = offset($firstForegroundItem).top;
+  if (scrollTop >= end) {
+    return;
   }
-}
-
-// Require non-commonjs modules by specifying their global variable.
-//
-// @param {String} filename Path to non-commonjs file
-// @param {String} globalVarName Exposed global like Zepto or GMaps
-
-module.exports.require = function(filename, globalVarName) {
-  var fullPath = path.resolve(path.dirname(module.parent.filename), filename);
-  if (!fs.existsSync(fullPath)) fullPath = require.resolve(filename);
-  var mod = rewire(fullPath);
-  var w = mod.__get__('window');
-  return globalVarName ? (w[globalVarName] || mod.__get__(globalVarName)) : mod;
-}
-
-// Renders a server-side template into a fake browser's body.
-// Will strip out all script tag first to avoid jsdom trying to run scripts.
-//
-// @param {String} filename
-// @param {Object} data data passed into template like jade locals
-
-module.exports.render = function(filename, data, callback) {
-  if (!window) throw Error('You must run benv.setup first.');
-  if (!filename.match('.jade')) throw Error('Could not identify template type');
-  var fullPath = path.resolve(path.dirname(module.parent.filename), filename);
-  var html = require('jade').compile(
-    fs.readFileSync(fullPath),
-    { filename: fullPath }
-  )(data);
-  jsdom.env(html, function(err, w) {
-    var scriptEls = w.document.getElementsByTagName('script');
-    Array.prototype.forEach.call(scriptEls, function(el) {
-      el.parentNode.removeChild(el);
-    });
-    var bodyHtml = w.document.getElementsByTagName('body')[0].innerHTML;
-    document.getElementsByTagName('body')[0].innerHTML = bodyHtml;
-    if (callback) callback();
+  start = offset($firstForegroundItem).top - (viewportHeight / 2);
+  opacity = (scrollTop - start) / (end - start);
+  return $firstForegroundItem.css({
+    opacity: opacity
   });
-}
+};
 
-// Rewires jadeify templates to work in node again.
-//
-// @param {String} filename
-// @param {Array} varNames Strings of template variable names
+onResize = function() {
+  viewportHeight = $(window).height();
+  setBackgroundItemGap();
+  setContentGap();
+  setHeaderSize();
+  $viewportHeights.height(viewportHeight);
+  return $halfViewportHeights.height(viewportHeight / 2);
+};
 
-module.exports.requireWithJadeify = function(filename, varNames) {
-  var fullPath = path.resolve(path.dirname(module.parent.filename), filename);
-  var mod = rewire(fullPath);
-  var dir = path.dirname(mod.__get__('module').filename);
-  varNames.forEach(function(varName) {
-    var section = mod.__get__(varName).toString()
-      .match(/require\('(.*).jade'\)/);
-    if(!section) section = mod.__get__(varName).toString()
-      .match(/require\("(.*).jade"\)/);
-    var tmplFilename = section[1] + '.jade'
-    tmplFilename = path.resolve(dir, tmplFilename);
-    mod.__set__(varName, require('jade').compile(
-      fs.readFileSync(tmplFilename),
-      { filename: tmplFilename }
-    ));
+setHeaderSize = function() {
+  return $('#header-background').height(viewportHeight);
+};
+
+setContentGap = function() {
+  $content.css({
+    'margin-top': viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT
   });
-  return mod;
-}
+  return contentGap = offset($content).top;
+};
+
+setBackgroundItemGap = function() {
+  $backgroundItems.css({
+    'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
+  });
+  return $backgroundItems.last().css({
+    'margin-bottom': 0
+  });
+};
+
+$(function() {
+  return imagesLoaded('body', init);
+});
+RunLink
