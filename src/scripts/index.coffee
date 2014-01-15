@@ -92,14 +92,14 @@ renderHeaderBackgrounds = ->
   $('#header-background li').first().show()
 
 renderSocialShares = ->
-  shareUrl = location.href
+  shareUrl = "http://2013.artsy.net/" or location.href
   $.ajax
     url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=#{shareUrl}"
     success: (res) ->
       $('#social-button-facebook-count')
         .html($(res).find('share_count').text() or 0).show()
   window.twitterCountJSONPCallback = (res) ->
-    return unless res.count
+    return unless res.count?
     $('#social-button-twitter-count').html(res.count or 0).show()
   $.ajax
     url: "http://urls.api.twitter.com/1/urls/count.json?url=#{shareUrl}&callback=twitterCountJSONPCallback"
