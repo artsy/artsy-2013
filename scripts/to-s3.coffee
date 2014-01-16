@@ -22,5 +22,5 @@ uploadFile = (file) ->
     console.log "Uploaded #{file}!"
     res.resume()
 
-for ext in ['html', 'css', 'js', 'jpg', 'svg']
+for ext in ['html', 'css', 'js', 'jpg', 'png', 'svg']
   uploadFile(file) for file in glob.sync('out/**/*.' + ext)

@@ -1,5 +1,5 @@
-_ = require './vendor/underscore.js'
-IScroll = require './vendor/iscroll-probe.js'
+_ = require 'underscore'
+IScroll = require 'iscroll/build/iscroll-probe.js'
 require './vendor/zepto.js'
 require './vendor/zepto.touch.js'
 
@@ -288,9 +288,9 @@ toggleSlideShow = ->
     stopSlideShow = true
     clearTimeout slideshowTimeout
   if scrollTop > viewportHeight
-    $headerBackground.hide()
+    $headerBackgrounds.removeClass('active')
   else
-    $headerBackground.show()
+    $headerBackgrounds.first().addClass('active')
 
 nextHeaderSlide = ->
   return if stopSlideShow
@@ -306,7 +306,6 @@ nextHeaderSlide = ->
       nextHeaderSlide()
     , 700
   , 1500
-
 
 # On resize functions
 # -------------------
