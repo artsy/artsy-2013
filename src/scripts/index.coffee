@@ -84,6 +84,7 @@ init = ->
   renderSocialShares()
   mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
+  copyForegroundContentToBackgroundForPhone()
 
 renderHeaderBackgrounds = ->
   $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
@@ -115,6 +116,15 @@ setupIScroll = ->
   myScroll.on('scroll', onScroll)
   myScroll.on('scrollEnd', onScroll)
   document.addEventListener 'touchmove', ((e) -> e.preventDefault()), false
+
+copyForegroundContentToBackgroundForPhone = ->
+  $foregroundItems.each (i, el) ->
+    $container = $backgroundItems.eq(i).find('.phone-foreground-container')
+    $container.html(
+      "<div class='phone-foreground-content'>" +
+        $(el).html() +
+      "</div>"
+    )
 
 cacheElements = ->
   $scroller = $('#scroller')
