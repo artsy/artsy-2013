@@ -63,6 +63,7 @@ $halfViewportHeights = null
 $codeMask = null
 $code = null
 $headerBackground = null
+$headerGradient = null
 
 slideshowTimeout = null # Timeout until next slide is show
 stopSlideShow = false # Used to stop the slideshow after scrolling down
@@ -153,6 +154,7 @@ cacheElements = ->
   $fgTwitterLink = $('#foreground .social-button-twitter')
   $headerBackground = $('#header-background')
   $headerBackgrounds = $('#header-background li')
+  $headerGradient = $('#header-background-gradient')
   $headerLogo = $('#main-header-logo')
   $firstForegroundItem = $('#foreground li:first-child')
   $viewportHeights = $('.viewport-height')
@@ -206,11 +208,11 @@ shareOnTwitter = (e) ->
 onScroll = ->
   popLockCodeMask()
   toggleSlideShow()
-  return if viewportWidth <= 640
+  return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
   popLockForeground()
-  fadeBetweenForegroundItems()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
+  fadeBetweenForegroundItems()
 
 setScrollTop = ->
   scrollTop = -(this.y>>0)
@@ -235,8 +237,7 @@ fadeBetweenForegroundItems = ->
     midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint
     firstMidPoint = midPoint - ((viewportHeight * GAP_PERCENT_OF_VIEWPORT)) * FADE_GAP_OF_BLACK
 
-    # Between an item so make sure it's opacity is 1 and the social icons are
-    # pointing to the right place.
+    # Between an item so make sure it's opacity is 1 and add an active class
     if scrollTop > elTop and viewportBottom < elBottom
       $foregroundItems.removeClass('foreground-item-active')
       $curItem.css(opacity: 1).addClass('foreground-item-active')
@@ -249,14 +250,21 @@ fadeBetweenForegroundItems = ->
       $nextItem.css opacity: percentNextItem
 
 fadeOutHeaderImage = ->
-  $('#header-background').css opacity: 1 - (scrollTop / viewportHeight)
-  $('#header-background-gradient').css opacity: (scrollTop / viewportHeight) * 2
+  return if scrollTop > viewportHeight
+  $headerBackground.css opacity: 1 - (scrollTop / viewportHeight)
+  $headerGradient.css opacity: (scrollTop / viewportHeight) * 2
 
 popLockForeground = ->
   top = scrollTop - contentGap
   x = (offset($background).bottom - viewportHeight - contentGap)
-  top = Math.min(top, x)
-  $foreground.css top: Math.max 0, top
+  top = Math.round(Math.max 0, Math.min(top, x))
+  val = "translate3d(0px, #{top}px, 0px)"
+  $foreground.css
+    '-webkit-transform': val
+    '-moz-transform': val
+    '-o-transform': val
+    '-ms-transform': val
+    'transform': val
 
 popLockCodeMask = ->
   codeTop = offset($code).top
