@@ -107,9 +107,11 @@ renderSocialShares = ->
 
 setupIScroll = ->
   $wrapper.height viewportHeight
-  myScroll = new IScroll '#wrapper',
+  window.myScroll = myScroll = new IScroll '#wrapper',
     probeType: 3
     mouseWheel: true
+    scrollbars: true
+    interactiveScrollbars: true
   myScroll.on('scroll', setScrollTop)
   myScroll.on('scrollEnd', setScrollTop)
   myScroll.on('scroll', onScroll)
@@ -177,7 +179,7 @@ shareOnTwitter = (e) ->
 # On scroll functions
 # -------------------
 
-onScroll = ->
+window.onScroll = onScroll = ->
   popLockForeground()
   fadeBetweenForegroundItems()
   fadeOutHeaderImage()
@@ -262,7 +264,7 @@ fadeInFirstForegroundItem = ->
 # On resize functions
 # -------------------
 
-onResize = ->
+window.onResize = ->
   viewportHeight = $(window).height()
   setBackgroundItemGap()
   setContentGap()

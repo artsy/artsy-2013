@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>Artsy 2013 Annual Review</title><meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no"><meta property="og:image" content="http://2013.artsy.net/images/fb-thumb.jpg"><style>#foreground {
+<!DOCTYPE html><html lang="en"><head><title>Artsy 2013 Annual Review</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"><meta property="og:image" content="http://2013.artsy.net/images/fb-thumb.jpg"><style>#foreground {
   position: absolute;
   width: 100%;
   z-index: 2;
@@ -6640,7 +6640,7 @@ if ( typeof define === 'function' && define.amd ) {
   init = function() {
     renderHeaderBackgrounds();
     cacheElements();
-    $(window).on('resize', _.debounce(onResize, 100));
+    $(window).on('resize', _.throttle(onResize, 200));
     onResize();
     setupIScroll();
     $mainArrow.click(onClickHeaderDownArrow);
