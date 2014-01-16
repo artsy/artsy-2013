@@ -62,7 +62,10 @@ $viewportHeights = null
 $halfViewportHeights = null
 $codeMask = null
 $code = null
+$headerBackground = null
 
+slideshowTimeout = null # Timeout until next slide is show
+stopSlideShow = false # Used to stop the slideshow after scrolling down
 myScroll = null # Reference to iScroll instance
 contentGap = 0 # The distance from the top of the page to the content
 
@@ -86,7 +89,7 @@ init = ->
   $fgFacebookLink.click shareOnFacebook
   $fgTwitterLink.click shareOnTwitter
   setContentGap()
-  transitionHeaderBackground()
+  nextHeaderSlide()
   renderSocialShares()
   refreshIscrollOnImageLoads()
   mixpanel.init MIXPANEL_ID
@@ -148,6 +151,7 @@ cacheElements = ->
   $background = $('#background')
   $fgFacebookLink = $('#foreground .social-button-facebook')
   $fgTwitterLink = $('#foreground .social-button-twitter')
+  $headerBackground = $('#header-background')
   $headerBackgrounds = $('#header-background li')
   $headerLogo = $('#main-header-logo')
   $firstForegroundItem = $('#foreground li:first-child')
@@ -201,6 +205,7 @@ shareOnTwitter = (e) ->
 
 onScroll = ->
   popLockCodeMask()
+  toggleSlideShow()
   return if viewportWidth <= 640
   popLockForeground()
   fadeBetweenForegroundItems()
@@ -253,21 +258,6 @@ popLockForeground = ->
   top = Math.min(top, x)
   $foreground.css top: Math.max 0, top
 
-transitionHeaderBackground = ->
-  $headerLogo.addClass 'active'
-  setTimeout ->
-    setTimeout ->
-      index = $($headerBackgrounds.filter(-> $(@).hasClass('active'))[0]).index()
-      nextIndex = if index + 1 >= TOTAL_HEADER_BACKGROUNDS then 0 else index + 1
-      # $headerLogo.removeClass 'active'
-      $cur = $ $headerBackgrounds.eq(index)
-      $next = $ $headerBackgrounds.eq(nextIndex)
-      $cur.removeClass 'active'
-      $next.addClass 'active'
-      transitionHeaderBackground()
-    , 700
-  , 1000
-
 popLockCodeMask = ->
   codeTop = offset($code).top
   codeBottom = offset($code).bottom
@@ -281,6 +271,34 @@ fadeInFirstForegroundItem = ->
   start = offset($firstForegroundItem).top - (viewportHeight / 2)
   opacity = (scrollTop - start) / (end - start)
   $firstForegroundItem.css opacity: opacity
+
+toggleSlideShow = ->
+  if stopSlideShow and scrollTop <= 10
+    stopSlideShow = false
+    nextHeaderSlide()
+  else if scrollTop > 10
+    stopSlideShow = true
+    clearTimeout slideshowTimeout
+  if scrollTop > viewportHeight
+    $headerBackground.hide()
+  else
+    $headerBackground.show()
+
+nextHeaderSlide = ->
+  return if stopSlideShow
+  $headerLogo.addClass 'active'
+  slideshowTimeout = setTimeout ->
+    slideshowTimeout = setTimeout ->
+      index = $($headerBackgrounds.filter(-> $(@).hasClass('active'))[0]).index()
+      nextIndex = if index + 1 > TOTAL_HEADER_BACKGROUNDS then 0 else index + 1
+      $cur = $ $headerBackgrounds.eq(index)
+      $next = $ $headerBackgrounds.eq(nextIndex)
+      $cur.removeClass 'active'
+      $next.addClass 'active'
+      nextHeaderSlide()
+    , 700
+  , 1500
+
 
 # On resize functions
 # -------------------
