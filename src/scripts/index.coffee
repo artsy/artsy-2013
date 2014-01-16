@@ -72,7 +72,7 @@ viewportHeight = 0
 init = ->
   renderHeaderBackgrounds()
   cacheElements()
-  $(window).on 'resize', onResize
+  $(window).on 'resize', _.debounce onResize, 100
   onResize()
   setupIScroll()
   $mainArrow.click onClickHeaderDownArrow
@@ -269,6 +269,7 @@ onResize = ->
   setHeaderSize()
   $viewportHeights.height viewportHeight
   $halfViewportHeights.height viewportHeight / 2
+  _.defer -> myScroll.refresh()
 
 setHeaderSize = ->
   $('#header-background').height viewportHeight
