@@ -1,0 +1,5651 @@
+<!DOCTYPE html><html lang="en"><head><title>Artsy 2013 Annual Review</title><meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no"><meta property="og:image" content="http://2013.artsy.net/images/fb-thumb.jpg"><style>#foreground {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+#foreground li {
+  padding: 50px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+#foreground li:first-child {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+#foreground header {
+  width: calc(40% - 40px);
+}
+#foreground small,
+.phone-foreground-container small {
+  display: block;
+  margin-top: 20px;
+  font-size: 18px;
+}
+#foreground p,
+.phone-foreground-container p {
+  margin-bottom: 1em;
+}
+#foreground blockquote,
+.phone-foreground-container blockquote {
+  font-style: italic;
+}
+#foreground header,
+.phone-foreground-container header {
+  padding-top: 30px;
+  border-top: 3px solid #fff;
+  position: absolute;
+  position: relative;
+}
+#foreground header h1,
+.phone-foreground-container header h1 {
+  font-size: 54px;
+  line-height: 1em;
+}
+#foreground header .foreground-header-body,
+.phone-foreground-container header .foreground-header-body {
+  bottom: 50px;
+  font-size: 18px;
+  line-height: 1.4em;
+  margin-top: 40px;
+}
+#foreground-gradient {
+  background: -webkit-linear-gradient(top, transparent, #000);
+  background: -moz-linear-gradient(top, transparent, #000);
+  background: -o-linear-gradient(top, transparent, #000);
+  background: -ms-linear-gradient(top, transparent, #000);
+  background: linear-gradient(to bottom, transparent, #000);
+  width: 100%;
+  height: 30%;
+  bottom: 0;
+  position: absolute;
+  left: 0;
+}
+#background {
+  padding: 50px;
+  z-index: -2;
+  zoom: 1;
+}
+#background:before,
+#background:after {
+  content: "";
+  display: table;
+}
+#background:after {
+  clear: both;
+}
+#background > ul {
+  float: right;
+  width: 60%;
+}
+#background-content li img {
+  width: 100%;
+  margin-bottom: 40px;
+}
+#background-content li figure {
+  margin: 0 0 40px 0;
+}
+#background-content li figure img {
+  margin-bottom: 10px;
+}
+#background-content li figure figcaption {
+  font-style: italic;
+}
+.two-column-images {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+}
+.two-column-images li {
+  margin-bottom: 40px;
+}
+.two-column-images img {
+  margin-bottom: 10px !important;
+}
+.two-column-images p,
+.two-column-images em {
+  display: block;
+  margin: 0;
+  color: #999;
+}
+#background-code {
+  font-family: "Courier New", Courier, monospace;
+  position: relative;
+  overflow: hidden;
+  line-height: 1em;
+  font-size: 13px;
+}
+#background-code pre {
+  padding-left: 20%;
+}
+#background-code-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+.artist-info {
+  color: #999;
+}
+.phone-foreground-container {
+  display: none;
+}
+#header-background {
+  position: absolute;
+  width: 100%;
+}
+#header-background #header-background-gradient {
+  content: '.';
+  color: 'transparent';
+  background: -webkit-linear-gradient(top, transparent, #000);
+  background: -moz-linear-gradient(top, transparent, #000);
+  background: -o-linear-gradient(top, transparent, #000);
+  background: -ms-linear-gradient(top, transparent, #000);
+  background: linear-gradient(to bottom, transparent, #000);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+#header-background li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+#header-background li.active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+#main-header {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#main-header-logo {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  background: url("images/header-logo.svg") center center no-repeat;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  background-size: contain;
+  top: 50%;
+  height: 16%;
+  width: 100%;
+  position: absolute;
+  margin-top: -8%;
+  -webkit-transition: opacity 0s;
+  -moz-transition: opacity 0s;
+  -o-transition: opacity 0s;
+  -ms-transition: opacity 0s;
+  transition: opacity 0s;
+}
+#main-header-logo.active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+  -o-transition: opacity 0.5s ease-in;
+  -ms-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+}
+#main-header-down-arrow {
+  background: center center no-repeat url("images/down-arrow.svg");
+  width: 100%;
+  height: 80px;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+  border: 0;
+  z-index: 2;
+}
+#wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+/* Prevent native touch events on Windows */
+  -ms-touch-action: none;
+/* Prevent the callout on tap-hold and text selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+/* Prevent text resize on orientation change, useful for web-apps */
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  -o-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+}
+#scroller {
+  position: absolute;
+  width: 100%;
+/* Prevent elements to be highlighted on tap */
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+/* Put the scroller into the HW Compositing layer right from the start */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+#foreground-social-buttons {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+}
+.social-button-facebook,
+.social-button-twitter {
+  padding: 25px;
+  border: 2px solid #fff;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  background: transparent;
+  background: no-repeat center center;
+  -webkit-background-size: 40%;
+  -moz-background-size: 40%;
+  background-size: 40%;
+  font-size: 0;
+  cursor: pointer;
+}
+.social-button-facebook {
+  margin-right: 20px;
+  background-image: url("images/facebook.svg");
+}
+.social-button-twitter {
+  background-image: url("images/twitter.svg");
+}
+#footer {
+  position: relative;
+  background: url("images/footer/1.jpg") center center no-repeat;
+  margin-top: 200px;
+}
+#footer::after {
+  content: '.';
+  color: 'transparent';
+  background: -webkit-linear-gradient(top, transparent, #000);
+  background: -moz-linear-gradient(top, transparent, #000);
+  background: -o-linear-gradient(top, transparent, #000);
+  background: -ms-linear-gradient(top, transparent, #000);
+  background: linear-gradient(to bottom, transparent, #000);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+}
+#footer::before {
+  content: '.';
+  color: 'transparent';
+  background: -webkit-linear-gradient(bottom, transparent, #000);
+  background: -moz-linear-gradient(bottom, transparent, #000);
+  background: -o-linear-gradient(bottom, transparent, #000);
+  background: -ms-linear-gradient(bottom, transparent, #000);
+  background: linear-gradient(to top, transparent, #000);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 20%;
+}
+#footer-social-buttons {
+  position: absolute;
+  bottom: 50px;
+  text-align: center;
+  width: 100%;
+  z-index: 2;
+}
+#footer-social-buttons button {
+  display: inline-block;
+}
+#footer-social-buttons h4 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+#footer-header {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  margin-top: -40px;
+  font-size: 54px;
+  display: block;
+  width: 100%;
+}
+#footer-links {
+  text-align: center;
+  display: block;
+  width: 100%;
+  bottom: 200px;
+  position: absolute;
+  font-size: 26px;
+  line-height: 1.4em;
+}
+#footer-links a {
+  display: block;
+}
+.social-button-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  vertical-align: top;
+  display: inline-block;
+}
+.social-button-container small {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+}
+.social-button-container a {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 20px;
+}
+@media (max-width: 640px) {
+  #foreground {
+    display: none;
+  }
+  .phone-foreground-container {
+    display: block;
+    margin-bottom: 30px;
+  }
+  #background {
+    padding: 30px;
+  }
+  #background ul {
+    width: 100%;
+  }
+  #background ul li {
+    margin-bottom: 40px !important;
+  }
+  .half-viewport-height,
+  .viewport-height {
+    height: 40px !important;
+  }
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'adobe-garamond-pro', 'AGaramondPro-Regular', 'Times New Roman', 'Times', 'serif';
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+button,
+a {
+  outline: none;
+  color: #fff;
+}
+#content {
+  position: relative;
+}
+.faux-underline {
+  display: inline;
+  position: relative;
+  text-decoration: none;
+}
+.faux-underline:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  margin-top: 0.15em;
+  border-bottom: 1px solid #777;
+  color: #505050;
+}
+.faux-underline:hover {
+  text-decoration: none;
+}
+@font-face {
+  font-family: 'AvantGardeGothicITCW01D 731075';
+  font-weight: normal;
+  font-style: normal;
+  src: url("fonts/c18aee57-7585-4a8b-9a1c-69d226301d73.woff") format("woff");
+}
+</style></head><body><div id="wrapper"><div id="scroller"><div id="header-background"><div id="header-background-gradient"></div><ul></ul></div><header id="main-header" class="viewport-height"><div id="main-header-logo"></div><div id="main-header-down-arrow"></div></header><main id="content"><div id="foreground" class="viewport-height"><div id="foreground-gradient"></div><ul id="foreground-content"><li><header><h1><em>January &mdash;</em><br>The Average Sale:<br> Over 2,000 miles</h1><div class="foreground-header-body"><p>In January we sold works between New York and Oslo, London and Los Angeles, Singapore and Houston.</p><blockquote>“Thanks to Artsy, we sold 3 works prior to the opening. The client felt comfortable buying the work, site unseen, because of the quality of presentation on the Artsy site.”<br>– Deborah Herringer Kiss, Gallery Owner</blockquote></div></header></li><li><header><h1><em>February &mdash;</em><br>Eye Contact</h1><div class="foreground-header-body"><p>In 2013, we added our 1,000th category to The Art Genome project – the classification system for art that powers Artsy. Our favorite in February was “Eye Contact.”</p><p>During the year our Art Genome team analyzed over 44,000 artworks and applied over 700,000 categories.</p><a href="http://artsy.net/gene/eye-contact" target="_blank" class="faux-underline">Explore Eye Contact</a></div></header></li><li><header><h1><em>March &mdash;</em><br>The Armory Show</h1><div class="foreground-header-body"><p>Artsy’s partnership with The Armory Show included 97% of exhibitors participating and over 200,000 visitors viewing 10 million artworks.</p><p>In 2013 Artsy covered 17 art fairs from around the world, including Art Basel in Basel, Hong Kong, and Miami; Frieze London; ArtRio; and Contemporary Istanbul.</p><a href="http://artsy.net/thearmoryshow" target="_blank" class="faux-underline">Revisit the fairs from 2013 on Artsy</a></div></header></li><li><header><h1><em>May &mdash;</em><br>Ragnar Relay</h1><div class="foreground-header-body"><p>In May we ran the Ragnar relay. 26 hours and 52 minutes of continuous running. 197 miles covered. Beaten by teams like “U.S. Department of Minimal Effort” and “Fanny Pack Gold” but we got an A for effort.</p><a href="https://artsy.net/about/jobs" target="_blank" class="faux-underline">Run the relay with us in 2014</a></div></header></li><li><header><h1><em>June &mdash;</em><br>JR turns Artsy inside out</h1><div class="foreground-header-body"><p>In June the Artsy NYC team headed uptown to have our portraits taken by the artist JR; and soon after, displayed with pride across our 25th floor headquarters.</p><a href="https://artsy.net/artist/jr" target="_blank" class="faux-underline">Follow JR on Artsy</a></div></header></li><li><header><h1><em>July &mdash;</em><br>30th Open-Source Project Released</h1><div class="foreground-header-body"><p>In July we released our 30th open-source project. We love open-source at Artsy. It lets us build better software, faster. We also like to give back to the community by contributing to existing open-source libraries, and by releasing our own code under open-source licences.</p><a href="http://artsy.github.io" target="_blank" class="faux-underline">Go to Arty's Engineering Blog</a></div></header></li><li><header><h1><em>August &mdash;</em><br>Art & Science</h1><div class="foreground-header-body"><p>In August Artsy’s 7th artist/engineer,<a href="https://artsy.net/artist/damon-zucconi">Damon,</a>joined the team. We are now 66 artists, engineers, art historians, designers, curators, writers, and mathematicians. 40 of us are women, 26 men. 6 of us have kids, and 5 of us are avid Magic the Gathering players.</p><a href="https://artsy.net/about/team" target="_blank" class="faux-underline">Find out more about the roles at Artsy</a></div></header></li><li><header><h1><em>September &mdash;</em><br>Art in your pocket</h1><div class="foreground-header-body"><p>In September we shrunk Artsy. 120,000 people downloaded our iPhone app–named a “Best new app” by Apple. Art lovers have viewed and saved more than 4 million artworks since the launch.</p><a href="http://iphone.artsy.net/" target="_blank" class="faux-underline">Download the Artsy iPhone app</a></div></header></li><li><header><h1><em>October &mdash;</em><br>Art in Schools</h1><div class="foreground-header-body"><p>In October Artsy become an official part of public education in New York as a partner for Digital Ready – a program designed to help NYC public high schools use technology to improve their students’ readiness for college and careers. More than 25,000 open-access images on Artsy are freely downloadable for educational use.</p><a href="#" target="_blank" class="faux-underline">Learn more about how Artsy is used the classroom</a></div></header></li><li><header><h1><em>November &mdash;</em><br>Better tools for Benefit Auctions</h1><div class="foreground-header-body"><p>November we partnered with Independent Curators International (ICI) to support their annual benefit auction. This year bidding wasn’t limited to the 300 people at the gala event. Anyone from around the world could participate from computer, tablet or mobile phone. All lots sold, and we helped raise 50% more than ICI’s target to support their educational programming.</p><p>For more information about our auctions, get in touch with us at&nbsp;<br><a href="mailto:partners@artsy.net" target="_blank" class="faux-underline">partners@artsy.net</a></p></div></header></li><li><header><h1><em>December &mdash;</em><br>Gallery meets Collector</h1><div class="foreground-header-body"><p>In the last week of December we introduced more collectors to galleries than in the entire year of 2012.</p><a href="http://artsy.net" target="_blank" class="faux-underline">Find your new favorite work on Artsy</a></div></header></li></ul><div id="foreground-social-buttons"><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></div><div id="background"><ul id="background-content"><li><div class="phone-foreground-container"></div><img src="images/content/map.svg"><div class="half-viewport-height"></div></li><li><div class="phone-foreground-container"></div><ul class="two-column-images"><li><img src="images/content/eye-contact-thomas.jpg"><p>Mickalene Thomas</p><em>Qusuquzah, Une Trés Belle Négresse 1,, 2012</em><em>Lehmann Maupin</em><em>$18,500</em></li><li><img src="images/content/eye-contact-abramovic.jpg"><p>Marina Abramović</p><em>Golden Lips, 2009</em><p>Sean Kelly Gallery</p></li><li><img src="images/content/eye-contact-longo.jpg"><p>Robert Longo</p><em>Untitled (Leo)</em><p>Christie's Post-War & Contemporary Art</p><em>$250,000 - 350,000</em></li><li><img src="images/content/eye-contact-roversi.jpg"><p>Paolo Roversi</p><em>Tanel Bedrossiantz (Jean Paul Gaultier’s “Barbès” women’s ready-to-wear fall-winter collection of 1984–85), 1992</em><p>Brooklyn Museum</p></li><li><img src="images/content/eye-contact-vermeer.jpg"><p>Johannes Vermeer</p><em>Girl with the Red Hat, ca. 1665/1666</em><p>National Gallery of Art, Washington D.C.</p></li><li><img src="images/content/eye-contact-close.jpg"><p>Chuck Close</p><em>Untitled (Kate - 16), 2011</em><p>Adamson Gallery</p><em>$38,000</em></li><div class="half-viewport-height"></div></ul></li><li><div class="phone-foreground-container"></div><figure><img src="images/content/fairs-armory.jpg"><figcaption>The Armory Show at Pier 92 and Pier 94 in New York</figcaption></figure><figure><img src="images/content/fairs-dm.jpg"><figcaption>Design Miami — Formlessfinder's “Tent Pile”</figcaption></figure><figure><img src="images/content/fairs-frieze.jpg"><figcaption>Frieeze – Geometric Mirrors VI by Jeppe Hein in the Frieze Sculpture park</figcaption></figure></li><li><div class="phone-foreground-container"></div><ul class="two-column-images"><li><img src="images/content/ragnar-pose.jpg"></li><li><img src="images/content/ragnar-camp.jpg"></li><li><img src="images/content/ragnar-carter.jpg"></li><li><img src="images/content/ragnar-party.jpg"></li><li><img src="images/content/ragnar-woot.jpg"></li><li><img src="images/content/ragnar-group.jpg"></li></ul><img src="images/content/ragnar-course.jpg"></li><li><div class="phone-foreground-container"></div><img src="images/content/jr-wide.jpg"><img src="images/content/jr-close.jpg"><img src="images/content/jr-inside.jpg"></li><li><div class="phone-foreground-container"></div><div id="background-code"><div class="viewport-height"></div><pre>renderHeaderBackgrounds = function() {
+  var i;
+  $('#header-background ul').html(((function() {
+    var _i, _results;
+    _results = [];
+    for (i = _i = 0; 0 <= TOTAL_HEADER_BACKGROUNDS ? _i <= TOTAL_HEADER_BACKGROUNDS : _i >= TOTAL_HEADER_BACKGROUNDS; i = 0 <= TOTAL_HEADER_BACKGROUNDS ? ++_i : --_i) {
+      _results.push("<li style='background-image: url(images/header/" + i + ".jpg)'></li>");
+    }
+    return _results;
+  })()).join(''));
+  return $('#header-background li').first().show();
+};
+
+renderSocialShares = function() {
+  var shareUrl;
+  shareUrl = "http://2013.artsy.net/" || location.href;
+  $.ajax({
+    url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=" + shareUrl,
+    success: function(res) {
+      return $('#social-button-facebook-count').html($(res).find('share_count').text() || 0).show();
+    }
+  });
+  window.twitterCountJSONPCallback = function(res) {
+    if (res.count == null) {
+      return;
+    }
+    return $('#social-button-twitter-count').html(res.count || 0).show();
+  };
+  return $.ajax({
+    url: "http://urls.api.twitter.com/1/urls/count.json?url=" + shareUrl + "&callback=twitterCountJSONPCallback",
+    dataType: 'jsonp'
+  });
+};
+
+setupIScroll = function() {
+  $wrapper.height(viewportHeight);
+  myScroll = new IScroll('#wrapper', {
+    probeType: 3,
+    mouseWheel: true
+  });
+  myScroll.on('scroll', setScrollTop);
+  myScroll.on('scrollEnd', setScrollTop);
+  myScroll.on('scroll', onScroll);
+  myScroll.on('scrollEnd', onScroll);
+  return document.addEventListener('touchmove', (function(e) {
+    return e.preventDefault();
+  }), false);
+};
+
+offset = function($el) {
+  var top, _ref, _ref1, _ref2;
+  top = -(((_ref = $scroller.offset()) != null ? _ref.top : void 0) - ((_ref1 = $el.offset()) != null ? _ref1.top : void 0));
+  return {
+    top: top,
+    left: (_ref2 = $el.offset()) != null ? _ref2.left : void 0,
+    bottom: top + $el.height()
+  };
+};
+
+onClickHeaderDownArrow = function() {
+  myScroll.scrollToElement('#content', 1200, null, null, IScroll.utils.ease.quadratic);
+  return false;
+};
+
+shareOnFacebook = function(e) {
+  var opts, url;
+  mixpanel.track("Shared on Facebook");
+  opts = "status=1,width=750,height=400,top=249.5,left=1462";
+  url = "https://www.facebook.com/sharer/sharer.php?u=" + location.href;
+  window.open(url, 'facebook', opts);
+  return false;
+};
+
+shareOnTwitter = function(e) {
+  var $curHeader, opts, text, url;
+  mixpanel.track("Shared on Twitter");
+  opts = "status=1,width=750,height=400,top=249.5,left=1462";
+  $curHeader = $("#foreground li[data-slug='" + (location.hash.replace('#', '')) + "'] h1");
+  text = encodeURIComponent($curHeader.text() + ' | ' + $('title').text());
+  url = "https://twitter.com/intent/tweet?" + ("original_referer=" + location.href) + ("&text=" + text) + ("&url=" + location.href);
+  window.open(url, 'twitter', opts);
+  return false;
+};
+
+onScroll = function() {
+  popLockForeground();
+  fadeBetweenForegroundItems();
+  fadeOutHeaderImage();
+  fadeInFirstForegroundItem();
+  return popLockCodeMask();
+};
+
+setScrollTop = function() {
+  return scrollTop = -(this.y >> 0);
+};
+
+fadeBetweenForegroundItems = function() {
+  return $backgroundItems.each(function() {
+    var $curItem, $nextItem, elBottom, elTop, endPoint, firstMidPoint, index, midPoint, nextTop, percentNextItem, percentPrevItem, startPoint, viewportBottom;
+    index = $(this).index();
+    $curItem = $foregroundItems.eq(index);
+    $nextItem = $foregroundItems.eq(index + 1);
+    viewportBottom = scrollTop + viewportHeight;
+    elTop = offset($(this)).top;
+    elBottom = offset($(this)).bottom;
+    nextTop = offset($(this).next()).top;
+    startPoint = elBottom + startOffest(viewportHeight);
+    endPoint = nextTop + endOffest(viewportHeight);
+    midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint;
+    firstMidPoint = midPoint - (viewportHeight * GAP_PERCENT_OF_VIEWPORT) * FADE_GAP_OF_BLACK;
+    if (scrollTop > elTop && viewportBottom < elBottom) {
+      $foregroundItems.removeClass('foreground-item-active');
+      return $curItem.css({
+        opacity: 1
+      }).addClass('foreground-item-active');
+    } else if (viewportBottom > startPoint && viewportBottom < endPoint) {
+      percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint);
+      percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint);
+      $curItem.css({
+        opacity: percentPrevItem
+      });
+      return $nextItem.css({
+        opacity: percentNextItem
+      });
+    }
+  });
+};
+
+transitionHeaderBackground = function() {
+  $headerLogo.addClass('active');
+  return setTimeout(function() {
+    return setTimeout(function() {
+      var $cur, $next, index, nextIndex;
+      index = $($headerBackgrounds.filter(function() {
+        return $(this).hasClass('active');
+      })[0]).index();
+      nextIndex = index + 1 >= TOTAL_HEADER_BACKGROUNDS ? 0 : index + 1;
+      $cur = $($headerBackgrounds.eq(index));
+      $next = $($headerBackgrounds.eq(nextIndex));
+      $cur.removeClass('active');
+      $next.addClass('active');
+      return transitionHeaderBackground();
+    }, 700);
+  }, 1000);
+};</pre><div class="viewport-height"></div><img id="background-code-mask" src="images/logo-mask.svg" class="viewport-height"></div></li><li><div class="phone-foreground-container"></div><figure><img src="images/content/damon.jpg"><figcaption class="artist-info"><p>Damon Zucconi</p><p>Tetradic Edit, 2013</p><p>JTT Gallery</p></figcaption></figure><div class="half-viewport-height"></div></li><li><div class="phone-foreground-container"></div><img src="images/content/iphone-screens.jpg"></li><li><div class="phone-foreground-container"></div><figure><img src="images/content/doe-kids.jpg"><figcaption>Three students at Brooklyn International High School, one of ten schools participating in New York Citi’s Digital Ready program.</figcaption></figure><figure><img src="images/content/doe-meeting.jpg"><figcaption>Mayor Bloomberg and Chancellor Walcott announce the expansion of New York City’s Digital Roadmap for New York schools.</figcaption></figure></li><li><div class="phone-foreground-container"></div><img src="images/content/auction-phone.jpg"><img src="images/content/auction-ici.jpg"><img src="images/content/auction-marina.jpg"></li><li><div class="phone-foreground-container"></div><img src="images/content/dec-graph.jpg"></li></ul></div></main><footer id="footer" class="viewport-height"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><div class="social-button-container"><small id="social-button-facebook-count">0</small><a class="social-button-facebook"></a></div><div class="social-button-container"><small id="social-button-twitter-count">0</small><a class="social-button-twitter"></a></div></div></footer></div></div><div id="scripts"><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
+(function() {
+  var mtiTracking = document.createElement('script');
+  mtiTracking.type='text/javascript';
+  mtiTracking.async='true';
+  mtiTracking.src=('https:'==document.location.protocol?'https:':'http:')+'//fast.fonts.net/t/trackingCode.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild( mtiTracking );
+})();
+</script><script>(function() {
+  var config = {
+    kitId: 'jyb7dwm',
+    scriptTimeout: 3000
+  };
+  var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+})();
+</script><!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
+typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);
+b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
+</script><!-- end Mixpanel --><script>/*! iScroll v5.1.1 ~ (c) 2008-2014 Matteo Spinelli ~ http://cubiq.org/license */
+(function (window, document, Math) {
+var rAF = window.requestAnimationFrame	||
+	window.webkitRequestAnimationFrame	||
+	window.mozRequestAnimationFrame		||
+	window.oRequestAnimationFrame		||
+	window.msRequestAnimationFrame		||
+	function (callback) { window.setTimeout(callback, 1000 / 60); };
+
+var utils = (function () {
+	var me = {};
+
+	var _elementStyle = document.createElement('div').style;
+	var _vendor = (function () {
+		var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
+			transform,
+			i = 0,
+			l = vendors.length;
+
+		for ( ; i < l; i++ ) {
+			transform = vendors[i] + 'ransform';
+			if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
+		}
+
+		return false;
+	})();
+
+	function _prefixStyle (style) {
+		if ( _vendor === false ) return false;
+		if ( _vendor === '' ) return style;
+		return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
+	}
+
+	me.getTime = Date.now || function getTime () { return new Date().getTime(); };
+
+	me.extend = function (target, obj) {
+		for ( var i in obj ) {
+			target[i] = obj[i];
+		}
+	};
+
+	me.addEvent = function (el, type, fn, capture) {
+		el.addEventListener(type, fn, !!capture);
+	};
+
+	me.removeEvent = function (el, type, fn, capture) {
+		el.removeEventListener(type, fn, !!capture);
+	};
+
+	me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration) {
+		var distance = current - start,
+			speed = Math.abs(distance) / time,
+			destination,
+			duration;
+
+		deceleration = deceleration === undefined ? 0.0006 : deceleration;
+
+		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
+		duration = speed / deceleration;
+
+		if ( destination < lowerMargin ) {
+			destination = wrapperSize ? lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) ) : lowerMargin;
+			distance = Math.abs(destination - current);
+			duration = distance / speed;
+		} else if ( destination > 0 ) {
+			destination = wrapperSize ? wrapperSize / 2.5 * ( speed / 8 ) : 0;
+			distance = Math.abs(current) + destination;
+			duration = distance / speed;
+		}
+
+		return {
+			destination: Math.round(destination),
+			duration: duration
+		};
+	};
+
+	var _transform = _prefixStyle('transform');
+
+	me.extend(me, {
+		hasTransform: _transform !== false,
+		hasPerspective: _prefixStyle('perspective') in _elementStyle,
+		hasTouch: 'ontouchstart' in window,
+		hasPointer: navigator.msPointerEnabled,
+		hasTransition: _prefixStyle('transition') in _elementStyle
+	});
+
+	// This should find all Android browsers lower than build 535.19 (both stock browser and webview)
+	me.isBadAndroid = /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion));
+
+	me.extend(me.style = {}, {
+		transform: _transform,
+		transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
+		transitionDuration: _prefixStyle('transitionDuration'),
+		transitionDelay: _prefixStyle('transitionDelay'),
+		transformOrigin: _prefixStyle('transformOrigin')
+	});
+
+	me.hasClass = function (e, c) {
+		var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
+		return re.test(e.className);
+	};
+
+	me.addClass = function (e, c) {
+		if ( me.hasClass(e, c) ) {
+			return;
+		}
+
+		var newclass = e.className.split(' ');
+		newclass.push(c);
+		e.className = newclass.join(' ');
+	};
+
+	me.removeClass = function (e, c) {
+		if ( !me.hasClass(e, c) ) {
+			return;
+		}
+
+		var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
+		e.className = e.className.replace(re, ' ');
+	};
+
+	me.offset = function (el) {
+		var left = -el.offsetLeft,
+			top = -el.offsetTop;
+
+		// jshint -W084
+		while (el = el.offsetParent) {
+			left -= el.offsetLeft;
+			top -= el.offsetTop;
+		}
+		// jshint +W084
+
+		return {
+			left: left,
+			top: top
+		};
+	};
+
+	me.preventDefaultException = function (el, exceptions) {
+		for ( var i in exceptions ) {
+			if ( exceptions[i].test(el[i]) ) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	me.extend(me.eventType = {}, {
+		touchstart: 1,
+		touchmove: 1,
+		touchend: 1,
+
+		mousedown: 2,
+		mousemove: 2,
+		mouseup: 2,
+
+		MSPointerDown: 3,
+		MSPointerMove: 3,
+		MSPointerUp: 3
+	});
+
+	me.extend(me.ease = {}, {
+		quadratic: {
+			style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+			fn: function (k) {
+				return k * ( 2 - k );
+			}
+		},
+		circular: {
+			style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',	// Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
+			fn: function (k) {
+				return Math.sqrt( 1 - ( --k * k ) );
+			}
+		},
+		back: {
+			style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+			fn: function (k) {
+				var b = 4;
+				return ( k = k - 1 ) * k * ( ( b + 1 ) * k + b ) + 1;
+			}
+		},
+		bounce: {
+			style: '',
+			fn: function (k) {
+				if ( ( k /= 1 ) < ( 1 / 2.75 ) ) {
+					return 7.5625 * k * k;
+				} else if ( k < ( 2 / 2.75 ) ) {
+					return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
+				} else if ( k < ( 2.5 / 2.75 ) ) {
+					return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
+				} else {
+					return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
+				}
+			}
+		},
+		elastic: {
+			style: '',
+			fn: function (k) {
+				var f = 0.22,
+					e = 0.4;
+
+				if ( k === 0 ) { return 0; }
+				if ( k == 1 ) { return 1; }
+
+				return ( e * Math.pow( 2, - 10 * k ) * Math.sin( ( k - f / 4 ) * ( 2 * Math.PI ) / f ) + 1 );
+			}
+		}
+	});
+
+	me.tap = function (e, eventName) {
+		var ev = document.createEvent('Event');
+		ev.initEvent(eventName, true, true);
+		ev.pageX = e.pageX;
+		ev.pageY = e.pageY;
+		e.target.dispatchEvent(ev);
+	};
+
+	me.click = function (e) {
+		var target = e.target,
+			ev;
+
+		if ( !(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName) ) {
+			ev = document.createEvent('MouseEvents');
+			ev.initMouseEvent('click', true, true, e.view, 1,
+				target.screenX, target.screenY, target.clientX, target.clientY,
+				e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
+				0, null);
+
+			ev._constructed = true;
+			target.dispatchEvent(ev);
+		}
+	};
+
+	return me;
+})();
+
+function IScroll (el, options) {
+	this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
+	this.scroller = this.wrapper.children[0];
+	this.scrollerStyle = this.scroller.style;		// cache style for better performance
+
+	this.options = {
+
+		resizeScrollbars: true,
+
+		mouseWheelSpeed: 20,
+
+		snapThreshold: 0.334,
+
+// INSERT POINT: OPTIONS 
+
+		startX: 0,
+		startY: 0,
+		scrollY: true,
+		directionLockThreshold: 5,
+		momentum: true,
+
+		bounce: true,
+		bounceTime: 600,
+		bounceEasing: '',
+
+		preventDefault: true,
+		preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
+
+		HWCompositing: true,
+		useTransition: true,
+		useTransform: true
+	};
+
+	for ( var i in options ) {
+		this.options[i] = options[i];
+	}
+
+	// Normalize options
+	this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
+
+	this.options.useTransition = utils.hasTransition && this.options.useTransition;
+	this.options.useTransform = utils.hasTransform && this.options.useTransform;
+
+	this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
+	this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
+
+	// If you want eventPassthrough I have to lock one of the axes
+	this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
+	this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
+
+	// With eventPassthrough we also need lockDirection mechanism
+	this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
+	this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
+
+	this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
+
+	this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
+
+	if ( this.options.tap === true ) {
+		this.options.tap = 'tap';
+	}
+
+	if ( this.options.shrinkScrollbars == 'scale' ) {
+		this.options.useTransition = false;
+	}
+
+	this.options.invertWheelDirection = this.options.invertWheelDirection ? -1 : 1;
+
+	if ( this.options.probeType == 3 ) {
+		this.options.useTransition = false;	}
+
+// INSERT POINT: NORMALIZATION
+
+	// Some defaults	
+	this.x = 0;
+	this.y = 0;
+	this.directionX = 0;
+	this.directionY = 0;
+	this._events = {};
+
+// INSERT POINT: DEFAULTS
+
+	this._init();
+	this.refresh();
+
+	this.scrollTo(this.options.startX, this.options.startY);
+	this.enable();
+}
+
+IScroll.prototype = {
+	version: '5.1.1',
+
+	_init: function () {
+		this._initEvents();
+
+		if ( this.options.scrollbars || this.options.indicators ) {
+			this._initIndicators();
+		}
+
+		if ( this.options.mouseWheel ) {
+			this._initWheel();
+		}
+
+		if ( this.options.snap ) {
+			this._initSnap();
+		}
+
+		if ( this.options.keyBindings ) {
+			this._initKeys();
+		}
+
+// INSERT POINT: _init
+
+	},
+
+	destroy: function () {
+		this._initEvents(true);
+
+		this._execEvent('destroy');
+	},
+
+	_transitionEnd: function (e) {
+		if ( e.target != this.scroller || !this.isInTransition ) {
+			return;
+		}
+
+		this._transitionTime();
+		if ( !this.resetPosition(this.options.bounceTime) ) {
+			this.isInTransition = false;
+			this._execEvent('scrollEnd');
+		}
+	},
+
+	_start: function (e) {
+		// React to left mouse button only
+		if ( utils.eventType[e.type] != 1 ) {
+			if ( e.button !== 0 ) {
+				return;
+			}
+		}
+
+		if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
+			return;
+		}
+
+		if ( this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+			e.preventDefault();
+		}
+
+		var point = e.touches ? e.touches[0] : e,
+			pos;
+
+		this.initiated	= utils.eventType[e.type];
+		this.moved		= false;
+		this.distX		= 0;
+		this.distY		= 0;
+		this.directionX = 0;
+		this.directionY = 0;
+		this.directionLocked = 0;
+
+		this._transitionTime();
+
+		this.startTime = utils.getTime();
+
+		if ( this.options.useTransition && this.isInTransition ) {
+			this.isInTransition = false;
+			pos = this.getComputedPosition();
+			this._translate(Math.round(pos.x), Math.round(pos.y));
+			this._execEvent('scrollEnd');
+		} else if ( !this.options.useTransition && this.isAnimating ) {
+			this.isAnimating = false;
+			this._execEvent('scrollEnd');
+		}
+
+		this.startX    = this.x;
+		this.startY    = this.y;
+		this.absStartX = this.x;
+		this.absStartY = this.y;
+		this.pointX    = point.pageX;
+		this.pointY    = point.pageY;
+
+		this._execEvent('beforeScrollStart');
+	},
+
+	_move: function (e) {
+		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+			return;
+		}
+
+		if ( this.options.preventDefault ) {	// increases performance on Android? TODO: check!
+			e.preventDefault();
+		}
+
+		var point		= e.touches ? e.touches[0] : e,
+			deltaX		= point.pageX - this.pointX,
+			deltaY		= point.pageY - this.pointY,
+			timestamp	= utils.getTime(),
+			newX, newY,
+			absDistX, absDistY;
+
+		this.pointX		= point.pageX;
+		this.pointY		= point.pageY;
+
+		this.distX		+= deltaX;
+		this.distY		+= deltaY;
+		absDistX		= Math.abs(this.distX);
+		absDistY		= Math.abs(this.distY);
+
+		// We need to move at least 10 pixels for the scrolling to initiate
+		if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
+			return;
+		}
+
+		// If you are scrolling in one direction lock the other
+		if ( !this.directionLocked && !this.options.freeScroll ) {
+			if ( absDistX > absDistY + this.options.directionLockThreshold ) {
+				this.directionLocked = 'h';		// lock horizontally
+			} else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
+				this.directionLocked = 'v';		// lock vertically
+			} else {
+				this.directionLocked = 'n';		// no lock
+			}
+		}
+
+		if ( this.directionLocked == 'h' ) {
+			if ( this.options.eventPassthrough == 'vertical' ) {
+				e.preventDefault();
+			} else if ( this.options.eventPassthrough == 'horizontal' ) {
+				this.initiated = false;
+				return;
+			}
+
+			deltaY = 0;
+		} else if ( this.directionLocked == 'v' ) {
+			if ( this.options.eventPassthrough == 'horizontal' ) {
+				e.preventDefault();
+			} else if ( this.options.eventPassthrough == 'vertical' ) {
+				this.initiated = false;
+				return;
+			}
+
+			deltaX = 0;
+		}
+
+		deltaX = this.hasHorizontalScroll ? deltaX : 0;
+		deltaY = this.hasVerticalScroll ? deltaY : 0;
+
+		newX = this.x + deltaX;
+		newY = this.y + deltaY;
+
+		// Slow down if outside of the boundaries
+		if ( newX > 0 || newX < this.maxScrollX ) {
+			newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+		}
+		if ( newY > 0 || newY < this.maxScrollY ) {
+			newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+		}
+
+		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+		this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+
+		if ( !this.moved ) {
+			this._execEvent('scrollStart');
+		}
+
+		this.moved = true;
+
+		this._translate(newX, newY);
+
+/* REPLACE START: _move */
+		if ( timestamp - this.startTime > 300 ) {
+			this.startTime = timestamp;
+			this.startX = this.x;
+			this.startY = this.y;
+
+			if ( this.options.probeType == 1 ) {
+				this._execEvent('scroll');
+			}
+		}
+
+		if ( this.options.probeType > 1 ) {
+			this._execEvent('scroll');
+		}
+/* REPLACE END: _move */
+
+	},
+
+	_end: function (e) {
+		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+			return;
+		}
+
+		if ( this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+			e.preventDefault();
+		}
+
+		var point = e.changedTouches ? e.changedTouches[0] : e,
+			momentumX,
+			momentumY,
+			duration = utils.getTime() - this.startTime,
+			newX = Math.round(this.x),
+			newY = Math.round(this.y),
+			distanceX = Math.abs(newX - this.startX),
+			distanceY = Math.abs(newY - this.startY),
+			time = 0,
+			easing = '';
+
+		this.isInTransition = 0;
+		this.initiated = 0;
+		this.endTime = utils.getTime();
+
+		// reset if we are outside of the boundaries
+		if ( this.resetPosition(this.options.bounceTime) ) {
+			return;
+		}
+
+		this.scrollTo(newX, newY);	// ensures that the last position is rounded
+
+		// we scrolled less than 10 pixels
+		if ( !this.moved ) {
+			if ( this.options.tap ) {
+				utils.tap(e, this.options.tap);
+			}
+
+			if ( this.options.click ) {
+				utils.click(e);
+			}
+
+			this._execEvent('scrollCancel');
+			return;
+		}
+
+		if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
+			this._execEvent('flick');
+			return;
+		}
+
+		// start momentum animation if needed
+		if ( this.options.momentum && duration < 300 ) {
+			momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
+			momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: newY, duration: 0 };
+			newX = momentumX.destination;
+			newY = momentumY.destination;
+			time = Math.max(momentumX.duration, momentumY.duration);
+			this.isInTransition = 1;
+		}
+
+
+		if ( this.options.snap ) {
+			var snap = this._nearestSnap(newX, newY);
+			this.currentPage = snap;
+			time = this.options.snapSpeed || Math.max(
+					Math.max(
+						Math.min(Math.abs(newX - snap.x), 1000),
+						Math.min(Math.abs(newY - snap.y), 1000)
+					), 300);
+			newX = snap.x;
+			newY = snap.y;
+
+			this.directionX = 0;
+			this.directionY = 0;
+			easing = this.options.bounceEasing;
+		}
+
+// INSERT POINT: _end
+
+		if ( newX != this.x || newY != this.y ) {
+			// change easing function when scroller goes out of the boundaries
+			if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
+				easing = utils.ease.quadratic;
+			}
+
+			this.scrollTo(newX, newY, time, easing);
+			return;
+		}
+
+		this._execEvent('scrollEnd');
+	},
+
+	_resize: function () {
+		var that = this;
+
+		clearTimeout(this.resizeTimeout);
+
+		this.resizeTimeout = setTimeout(function () {
+			that.refresh();
+		}, this.options.resizePolling);
+	},
+
+	resetPosition: function (time) {
+		var x = this.x,
+			y = this.y;
+
+		time = time || 0;
+
+		if ( !this.hasHorizontalScroll || this.x > 0 ) {
+			x = 0;
+		} else if ( this.x < this.maxScrollX ) {
+			x = this.maxScrollX;
+		}
+
+		if ( !this.hasVerticalScroll || this.y > 0 ) {
+			y = 0;
+		} else if ( this.y < this.maxScrollY ) {
+			y = this.maxScrollY;
+		}
+
+		if ( x == this.x && y == this.y ) {
+			return false;
+		}
+
+		this.scrollTo(x, y, time, this.options.bounceEasing);
+
+		return true;
+	},
+
+	disable: function () {
+		this.enabled = false;
+	},
+
+	enable: function () {
+		this.enabled = true;
+	},
+
+	refresh: function () {
+		var rf = this.wrapper.offsetHeight;		// Force reflow
+
+		this.wrapperWidth	= this.wrapper.clientWidth;
+		this.wrapperHeight	= this.wrapper.clientHeight;
+
+/* REPLACE START: refresh */
+
+		this.scrollerWidth	= this.scroller.offsetWidth;
+		this.scrollerHeight	= this.scroller.offsetHeight;
+
+		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
+		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
+
+/* REPLACE END: refresh */
+
+		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
+		this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
+
+		if ( !this.hasHorizontalScroll ) {
+			this.maxScrollX = 0;
+			this.scrollerWidth = this.wrapperWidth;
+		}
+
+		if ( !this.hasVerticalScroll ) {
+			this.maxScrollY = 0;
+			this.scrollerHeight = this.wrapperHeight;
+		}
+
+		this.endTime = 0;
+		this.directionX = 0;
+		this.directionY = 0;
+
+		this.wrapperOffset = utils.offset(this.wrapper);
+
+		this._execEvent('refresh');
+
+		this.resetPosition();
+
+// INSERT POINT: _refresh
+
+	},
+
+	on: function (type, fn) {
+		if ( !this._events[type] ) {
+			this._events[type] = [];
+		}
+
+		this._events[type].push(fn);
+	},
+
+	off: function (type, fn) {
+		if ( !this._events[type] ) {
+			return;
+		}
+
+		var index = this._events[type].indexOf(fn);
+
+		if ( index > -1 ) {
+			this._events[type].splice(index, 1);
+		}
+	},
+
+	_execEvent: function (type) {
+		if ( !this._events[type] ) {
+			return;
+		}
+
+		var i = 0,
+			l = this._events[type].length;
+
+		if ( !l ) {
+			return;
+		}
+
+		for ( ; i < l; i++ ) {
+			this._events[type][i].apply(this, [].slice.call(arguments, 1));
+		}
+	},
+
+	scrollBy: function (x, y, time, easing) {
+		x = this.x + x;
+		y = this.y + y;
+		time = time || 0;
+
+		this.scrollTo(x, y, time, easing);
+	},
+
+	scrollTo: function (x, y, time, easing) {
+		easing = easing || utils.ease.circular;
+
+		this.isInTransition = this.options.useTransition && time > 0;
+
+		if ( !time || (this.options.useTransition && easing.style) ) {
+			this._transitionTimingFunction(easing.style);
+			this._transitionTime(time);
+			this._translate(x, y);
+		} else {
+			this._animate(x, y, time, easing.fn);
+		}
+	},
+
+	scrollToElement: function (el, time, offsetX, offsetY, easing) {
+		el = el.nodeType ? el : this.scroller.querySelector(el);
+
+		if ( !el ) {
+			return;
+		}
+
+		var pos = utils.offset(el);
+
+		pos.left -= this.wrapperOffset.left;
+		pos.top  -= this.wrapperOffset.top;
+
+		// if offsetX/Y are true we center the element to the screen
+		if ( offsetX === true ) {
+			offsetX = Math.round(el.offsetWidth / 2 - this.wrapper.offsetWidth / 2);
+		}
+		if ( offsetY === true ) {
+			offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
+		}
+
+		pos.left -= offsetX || 0;
+		pos.top  -= offsetY || 0;
+
+		pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
+		pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
+
+		time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x-pos.left), Math.abs(this.y-pos.top)) : time;
+
+		this.scrollTo(pos.left, pos.top, time, easing);
+	},
+
+	_transitionTime: function (time) {
+		time = time || 0;
+
+		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
+
+		if ( !time && utils.isBadAndroid ) {
+			this.scrollerStyle[utils.style.transitionDuration] = '0.001s';
+		}
+
+
+		if ( this.indicators ) {
+			for ( var i = this.indicators.length; i--; ) {
+				this.indicators[i].transitionTime(time);
+			}
+		}
+
+
+// INSERT POINT: _transitionTime
+
+	},
+
+	_transitionTimingFunction: function (easing) {
+		this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
+
+
+		if ( this.indicators ) {
+			for ( var i = this.indicators.length; i--; ) {
+				this.indicators[i].transitionTimingFunction(easing);
+			}
+		}
+
+
+// INSERT POINT: _transitionTimingFunction
+
+	},
+
+	_translate: function (x, y) {
+		if ( this.options.useTransform ) {
+
+/* REPLACE START: _translate */
+
+			this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
+
+/* REPLACE END: _translate */
+
+		} else {
+			x = Math.round(x);
+			y = Math.round(y);
+			this.scrollerStyle.left = x + 'px';
+			this.scrollerStyle.top = y + 'px';
+		}
+
+		this.x = x;
+		this.y = y;
+
+
+	if ( this.indicators ) {
+		for ( var i = this.indicators.length; i--; ) {
+			this.indicators[i].updatePosition();
+		}
+	}
+
+
+// INSERT POINT: _translate
+
+	},
+
+	_initEvents: function (remove) {
+		var eventType = remove ? utils.removeEvent : utils.addEvent,
+			target = this.options.bindToWrapper ? this.wrapper : window;
+
+		eventType(window, 'orientationchange', this);
+		eventType(window, 'resize', this);
+
+		if ( this.options.click ) {
+			eventType(this.wrapper, 'click', this, true);
+		}
+
+		if ( !this.options.disableMouse ) {
+			eventType(this.wrapper, 'mousedown', this);
+			eventType(target, 'mousemove', this);
+			eventType(target, 'mousecancel', this);
+			eventType(target, 'mouseup', this);
+		}
+
+		if ( utils.hasPointer && !this.options.disablePointer ) {
+			eventType(this.wrapper, 'MSPointerDown', this);
+			eventType(target, 'MSPointerMove', this);
+			eventType(target, 'MSPointerCancel', this);
+			eventType(target, 'MSPointerUp', this);
+		}
+
+		if ( utils.hasTouch && !this.options.disableTouch ) {
+			eventType(this.wrapper, 'touchstart', this);
+			eventType(target, 'touchmove', this);
+			eventType(target, 'touchcancel', this);
+			eventType(target, 'touchend', this);
+		}
+
+		eventType(this.scroller, 'transitionend', this);
+		eventType(this.scroller, 'webkitTransitionEnd', this);
+		eventType(this.scroller, 'oTransitionEnd', this);
+		eventType(this.scroller, 'MSTransitionEnd', this);
+	},
+
+	getComputedPosition: function () {
+		var matrix = window.getComputedStyle(this.scroller, null),
+			x, y;
+
+		if ( this.options.useTransform ) {
+			matrix = matrix[utils.style.transform].split(')')[0].split(', ');
+			x = +(matrix[12] || matrix[4]);
+			y = +(matrix[13] || matrix[5]);
+		} else {
+			x = +matrix.left.replace(/[^-\d.]/g, '');
+			y = +matrix.top.replace(/[^-\d.]/g, '');
+		}
+
+		return { x: x, y: y };
+	},
+
+	_initIndicators: function () {
+		var interactive = this.options.interactiveScrollbars,
+			customStyle = typeof this.options.scrollbars != 'string',
+			indicators = [],
+			indicator;
+
+		var that = this;
+
+		this.indicators = [];
+
+		if ( this.options.scrollbars ) {
+			// Vertical scrollbar
+			if ( this.options.scrollY ) {
+				indicator = {
+					el: createDefaultScrollbar('v', interactive, this.options.scrollbars),
+					interactive: interactive,
+					defaultScrollbars: true,
+					customStyle: customStyle,
+					resize: this.options.resizeScrollbars,
+					shrink: this.options.shrinkScrollbars,
+					fade: this.options.fadeScrollbars,
+					listenX: false
+				};
+
+				this.wrapper.appendChild(indicator.el);
+				indicators.push(indicator);
+			}
+
+			// Horizontal scrollbar
+			if ( this.options.scrollX ) {
+				indicator = {
+					el: createDefaultScrollbar('h', interactive, this.options.scrollbars),
+					interactive: interactive,
+					defaultScrollbars: true,
+					customStyle: customStyle,
+					resize: this.options.resizeScrollbars,
+					shrink: this.options.shrinkScrollbars,
+					fade: this.options.fadeScrollbars,
+					listenY: false
+				};
+
+				this.wrapper.appendChild(indicator.el);
+				indicators.push(indicator);
+			}
+		}
+
+		if ( this.options.indicators ) {
+			// TODO: check concat compatibility
+			indicators = indicators.concat(this.options.indicators);
+		}
+
+		for ( var i = indicators.length; i--; ) {
+			this.indicators.push( new Indicator(this, indicators[i]) );
+		}
+
+		// TODO: check if we can use array.map (wide compatibility and performance issues)
+		function _indicatorsMap (fn) {
+			for ( var i = that.indicators.length; i--; ) {
+				fn.call(that.indicators[i]);
+			}
+		}
+
+		if ( this.options.fadeScrollbars ) {
+			this.on('scrollEnd', function () {
+				_indicatorsMap(function () {
+					this.fade();
+				});
+			});
+
+			this.on('scrollCancel', function () {
+				_indicatorsMap(function () {
+					this.fade();
+				});
+			});
+
+			this.on('scrollStart', function () {
+				_indicatorsMap(function () {
+					this.fade(1);
+				});
+			});
+
+			this.on('beforeScrollStart', function () {
+				_indicatorsMap(function () {
+					this.fade(1, true);
+				});
+			});
+		}
+
+
+		this.on('refresh', function () {
+			_indicatorsMap(function () {
+				this.refresh();
+			});
+		});
+
+		this.on('destroy', function () {
+			_indicatorsMap(function () {
+				this.destroy();
+			});
+
+			delete this.indicators;
+		});
+	},
+
+	_initWheel: function () {
+		utils.addEvent(this.wrapper, 'wheel', this);
+		utils.addEvent(this.wrapper, 'mousewheel', this);
+		utils.addEvent(this.wrapper, 'DOMMouseScroll', this);
+
+		this.on('destroy', function () {
+			utils.removeEvent(this.wrapper, 'wheel', this);
+			utils.removeEvent(this.wrapper, 'mousewheel', this);
+			utils.removeEvent(this.wrapper, 'DOMMouseScroll', this);
+		});
+	},
+
+	_wheel: function (e) {
+		if ( !this.enabled ) {
+			return;
+		}
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		var wheelDeltaX, wheelDeltaY,
+			newX, newY,
+			that = this;
+
+		if ( this.wheelTimeout === undefined ) {
+			that._execEvent('scrollStart');
+		}
+
+		// Execute the scrollEnd event after 400ms the wheel stopped scrolling
+		clearTimeout(this.wheelTimeout);
+		this.wheelTimeout = setTimeout(function () {
+			that._execEvent('scrollEnd');
+			that.wheelTimeout = undefined;
+		}, 400);
+
+		if ( 'deltaX' in e ) {
+			wheelDeltaX = -e.deltaX;
+			wheelDeltaY = -e.deltaY;
+		} else if ( 'wheelDeltaX' in e ) {
+			wheelDeltaX = e.wheelDeltaX / 120 * this.options.mouseWheelSpeed;
+			wheelDeltaY = e.wheelDeltaY / 120 * this.options.mouseWheelSpeed;
+		} else if ( 'wheelDelta' in e ) {
+			wheelDeltaX = wheelDeltaY = e.wheelDelta / 120 * this.options.mouseWheelSpeed;
+		} else if ( 'detail' in e ) {
+			wheelDeltaX = wheelDeltaY = -e.detail / 3 * this.options.mouseWheelSpeed;
+		} else {
+			return;
+		}
+
+		wheelDeltaX *= this.options.invertWheelDirection;
+		wheelDeltaY *= this.options.invertWheelDirection;
+
+		if ( !this.hasVerticalScroll ) {
+			wheelDeltaX = wheelDeltaY;
+			wheelDeltaY = 0;
+		}
+
+		if ( this.options.snap ) {
+			newX = this.currentPage.pageX;
+			newY = this.currentPage.pageY;
+
+			if ( wheelDeltaX > 0 ) {
+				newX--;
+			} else if ( wheelDeltaX < 0 ) {
+				newX++;
+			}
+
+			if ( wheelDeltaY > 0 ) {
+				newY--;
+			} else if ( wheelDeltaY < 0 ) {
+				newY++;
+			}
+
+			this.goToPage(newX, newY);
+
+			return;
+		}
+
+		newX = this.x + Math.round(this.hasHorizontalScroll ? wheelDeltaX : 0);
+		newY = this.y + Math.round(this.hasVerticalScroll ? wheelDeltaY : 0);
+
+		if ( newX > 0 ) {
+			newX = 0;
+		} else if ( newX < this.maxScrollX ) {
+			newX = this.maxScrollX;
+		}
+
+		if ( newY > 0 ) {
+			newY = 0;
+		} else if ( newY < this.maxScrollY ) {
+			newY = this.maxScrollY;
+		}
+
+		this.scrollTo(newX, newY, 0);
+
+		if ( this.options.probeType > 1 ) {
+			this._execEvent('scroll');
+		}
+
+// INSERT POINT: _wheel
+	},
+
+	_initSnap: function () {
+		this.currentPage = {};
+
+		if ( typeof this.options.snap == 'string' ) {
+			this.options.snap = this.scroller.querySelectorAll(this.options.snap);
+		}
+
+		this.on('refresh', function () {
+			var i = 0, l,
+				m = 0, n,
+				cx, cy,
+				x = 0, y,
+				stepX = this.options.snapStepX || this.wrapperWidth,
+				stepY = this.options.snapStepY || this.wrapperHeight,
+				el;
+
+			this.pages = [];
+
+			if ( !this.wrapperWidth || !this.wrapperHeight || !this.scrollerWidth || !this.scrollerHeight ) {
+				return;
+			}
+
+			if ( this.options.snap === true ) {
+				cx = Math.round( stepX / 2 );
+				cy = Math.round( stepY / 2 );
+
+				while ( x > -this.scrollerWidth ) {
+					this.pages[i] = [];
+					l = 0;
+					y = 0;
+
+					while ( y > -this.scrollerHeight ) {
+						this.pages[i][l] = {
+							x: Math.max(x, this.maxScrollX),
+							y: Math.max(y, this.maxScrollY),
+							width: stepX,
+							height: stepY,
+							cx: x - cx,
+							cy: y - cy
+						};
+
+						y -= stepY;
+						l++;
+					}
+
+					x -= stepX;
+					i++;
+				}
+			} else {
+				el = this.options.snap;
+				l = el.length;
+				n = -1;
+
+				for ( ; i < l; i++ ) {
+					if ( i === 0 || el[i].offsetLeft <= el[i-1].offsetLeft ) {
+						m = 0;
+						n++;
+					}
+
+					if ( !this.pages[m] ) {
+						this.pages[m] = [];
+					}
+
+					x = Math.max(-el[i].offsetLeft, this.maxScrollX);
+					y = Math.max(-el[i].offsetTop, this.maxScrollY);
+					cx = x - Math.round(el[i].offsetWidth / 2);
+					cy = y - Math.round(el[i].offsetHeight / 2);
+
+					this.pages[m][n] = {
+						x: x,
+						y: y,
+						width: el[i].offsetWidth,
+						height: el[i].offsetHeight,
+						cx: cx,
+						cy: cy
+					};
+
+					if ( x > this.maxScrollX ) {
+						m++;
+					}
+				}
+			}
+
+			this.goToPage(this.currentPage.pageX || 0, this.currentPage.pageY || 0, 0);
+
+			// Update snap threshold if needed
+			if ( this.options.snapThreshold % 1 === 0 ) {
+				this.snapThresholdX = this.options.snapThreshold;
+				this.snapThresholdY = this.options.snapThreshold;
+			} else {
+				this.snapThresholdX = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width * this.options.snapThreshold);
+				this.snapThresholdY = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height * this.options.snapThreshold);
+			}
+		});
+
+		this.on('flick', function () {
+			var time = this.options.snapSpeed || Math.max(
+					Math.max(
+						Math.min(Math.abs(this.x - this.startX), 1000),
+						Math.min(Math.abs(this.y - this.startY), 1000)
+					), 300);
+
+			this.goToPage(
+				this.currentPage.pageX + this.directionX,
+				this.currentPage.pageY + this.directionY,
+				time
+			);
+		});
+	},
+
+	_nearestSnap: function (x, y) {
+		if ( !this.pages.length ) {
+			return { x: 0, y: 0, pageX: 0, pageY: 0 };
+		}
+
+		var i = 0,
+			l = this.pages.length,
+			m = 0;
+
+		// Check if we exceeded the snap threshold
+		if ( Math.abs(x - this.absStartX) < this.snapThresholdX &&
+			Math.abs(y - this.absStartY) < this.snapThresholdY ) {
+			return this.currentPage;
+		}
+
+		if ( x > 0 ) {
+			x = 0;
+		} else if ( x < this.maxScrollX ) {
+			x = this.maxScrollX;
+		}
+
+		if ( y > 0 ) {
+			y = 0;
+		} else if ( y < this.maxScrollY ) {
+			y = this.maxScrollY;
+		}
+
+		for ( ; i < l; i++ ) {
+			if ( x >= this.pages[i][0].cx ) {
+				x = this.pages[i][0].x;
+				break;
+			}
+		}
+
+		l = this.pages[i].length;
+
+		for ( ; m < l; m++ ) {
+			if ( y >= this.pages[0][m].cy ) {
+				y = this.pages[0][m].y;
+				break;
+			}
+		}
+
+		if ( i == this.currentPage.pageX ) {
+			i += this.directionX;
+
+			if ( i < 0 ) {
+				i = 0;
+			} else if ( i >= this.pages.length ) {
+				i = this.pages.length - 1;
+			}
+
+			x = this.pages[i][0].x;
+		}
+
+		if ( m == this.currentPage.pageY ) {
+			m += this.directionY;
+
+			if ( m < 0 ) {
+				m = 0;
+			} else if ( m >= this.pages[0].length ) {
+				m = this.pages[0].length - 1;
+			}
+
+			y = this.pages[0][m].y;
+		}
+
+		return {
+			x: x,
+			y: y,
+			pageX: i,
+			pageY: m
+		};
+	},
+
+	goToPage: function (x, y, time, easing) {
+		easing = easing || this.options.bounceEasing;
+
+		if ( x >= this.pages.length ) {
+			x = this.pages.length - 1;
+		} else if ( x < 0 ) {
+			x = 0;
+		}
+
+		if ( y >= this.pages[x].length ) {
+			y = this.pages[x].length - 1;
+		} else if ( y < 0 ) {
+			y = 0;
+		}
+
+		var posX = this.pages[x][y].x,
+			posY = this.pages[x][y].y;
+
+		time = time === undefined ? this.options.snapSpeed || Math.max(
+			Math.max(
+				Math.min(Math.abs(posX - this.x), 1000),
+				Math.min(Math.abs(posY - this.y), 1000)
+			), 300) : time;
+
+		this.currentPage = {
+			x: posX,
+			y: posY,
+			pageX: x,
+			pageY: y
+		};
+
+		this.scrollTo(posX, posY, time, easing);
+	},
+
+	next: function (time, easing) {
+		var x = this.currentPage.pageX,
+			y = this.currentPage.pageY;
+
+		x++;
+
+		if ( x >= this.pages.length && this.hasVerticalScroll ) {
+			x = 0;
+			y++;
+		}
+
+		this.goToPage(x, y, time, easing);
+	},
+
+	prev: function (time, easing) {
+		var x = this.currentPage.pageX,
+			y = this.currentPage.pageY;
+
+		x--;
+
+		if ( x < 0 && this.hasVerticalScroll ) {
+			x = 0;
+			y--;
+		}
+
+		this.goToPage(x, y, time, easing);
+	},
+
+	_initKeys: function (e) {
+		// default key bindings
+		var keys = {
+			pageUp: 33,
+			pageDown: 34,
+			end: 35,
+			home: 36,
+			left: 37,
+			up: 38,
+			right: 39,
+			down: 40
+		};
+		var i;
+
+		// if you give me characters I give you keycode
+		if ( typeof this.options.keyBindings == 'object' ) {
+			for ( i in this.options.keyBindings ) {
+				if ( typeof this.options.keyBindings[i] == 'string' ) {
+					this.options.keyBindings[i] = this.options.keyBindings[i].toUpperCase().charCodeAt(0);
+				}
+			}
+		} else {
+			this.options.keyBindings = {};
+		}
+
+		for ( i in keys ) {
+			this.options.keyBindings[i] = this.options.keyBindings[i] || keys[i];
+		}
+
+		utils.addEvent(window, 'keydown', this);
+
+		this.on('destroy', function () {
+			utils.removeEvent(window, 'keydown', this);
+		});
+	},
+
+	_key: function (e) {
+		if ( !this.enabled ) {
+			return;
+		}
+
+		var snap = this.options.snap,	// we are using this alot, better to cache it
+			newX = snap ? this.currentPage.pageX : this.x,
+			newY = snap ? this.currentPage.pageY : this.y,
+			now = utils.getTime(),
+			prevTime = this.keyTime || 0,
+			acceleration = 0.250,
+			pos;
+
+		if ( this.options.useTransition && this.isInTransition ) {
+			pos = this.getComputedPosition();
+
+			this._translate(Math.round(pos.x), Math.round(pos.y));
+			this.isInTransition = false;
+		}
+
+		this.keyAcceleration = now - prevTime < 200 ? Math.min(this.keyAcceleration + acceleration, 50) : 0;
+
+		switch ( e.keyCode ) {
+			case this.options.keyBindings.pageUp:
+				if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+					newX += snap ? 1 : this.wrapperWidth;
+				} else {
+					newY += snap ? 1 : this.wrapperHeight;
+				}
+				break;
+			case this.options.keyBindings.pageDown:
+				if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+					newX -= snap ? 1 : this.wrapperWidth;
+				} else {
+					newY -= snap ? 1 : this.wrapperHeight;
+				}
+				break;
+			case this.options.keyBindings.end:
+				newX = snap ? this.pages.length-1 : this.maxScrollX;
+				newY = snap ? this.pages[0].length-1 : this.maxScrollY;
+				break;
+			case this.options.keyBindings.home:
+				newX = 0;
+				newY = 0;
+				break;
+			case this.options.keyBindings.left:
+				newX += snap ? -1 : 5 + this.keyAcceleration>>0;
+				break;
+			case this.options.keyBindings.up:
+				newY += snap ? 1 : 5 + this.keyAcceleration>>0;
+				break;
+			case this.options.keyBindings.right:
+				newX -= snap ? -1 : 5 + this.keyAcceleration>>0;
+				break;
+			case this.options.keyBindings.down:
+				newY -= snap ? 1 : 5 + this.keyAcceleration>>0;
+				break;
+			default:
+				return;
+		}
+
+		if ( snap ) {
+			this.goToPage(newX, newY);
+			return;
+		}
+
+		if ( newX > 0 ) {
+			newX = 0;
+			this.keyAcceleration = 0;
+		} else if ( newX < this.maxScrollX ) {
+			newX = this.maxScrollX;
+			this.keyAcceleration = 0;
+		}
+
+		if ( newY > 0 ) {
+			newY = 0;
+			this.keyAcceleration = 0;
+		} else if ( newY < this.maxScrollY ) {
+			newY = this.maxScrollY;
+			this.keyAcceleration = 0;
+		}
+
+		this.scrollTo(newX, newY, 0);
+
+		this.keyTime = now;
+	},
+
+	_animate: function (destX, destY, duration, easingFn) {
+		var that = this,
+			startX = this.x,
+			startY = this.y,
+			startTime = utils.getTime(),
+			destTime = startTime + duration;
+
+		function step () {
+			var now = utils.getTime(),
+				newX, newY,
+				easing;
+
+			if ( now >= destTime ) {
+				that.isAnimating = false;
+				that._translate(destX, destY);
+				
+				if ( !that.resetPosition(that.options.bounceTime) ) {
+					that._execEvent('scrollEnd');
+				}
+
+				return;
+			}
+
+			now = ( now - startTime ) / duration;
+			easing = easingFn(now);
+			newX = ( destX - startX ) * easing + startX;
+			newY = ( destY - startY ) * easing + startY;
+			that._translate(newX, newY);
+
+			if ( that.isAnimating ) {
+				rAF(step);
+			}
+
+			if ( that.options.probeType == 3 ) {
+				that._execEvent('scroll');
+			}
+		}
+
+		this.isAnimating = true;
+		step();
+	},
+
+	handleEvent: function (e) {
+		switch ( e.type ) {
+			case 'touchstart':
+			case 'MSPointerDown':
+			case 'mousedown':
+				this._start(e);
+				break;
+			case 'touchmove':
+			case 'MSPointerMove':
+			case 'mousemove':
+				this._move(e);
+				break;
+			case 'touchend':
+			case 'MSPointerUp':
+			case 'mouseup':
+			case 'touchcancel':
+			case 'MSPointerCancel':
+			case 'mousecancel':
+				this._end(e);
+				break;
+			case 'orientationchange':
+			case 'resize':
+				this._resize();
+				break;
+			case 'transitionend':
+			case 'webkitTransitionEnd':
+			case 'oTransitionEnd':
+			case 'MSTransitionEnd':
+				this._transitionEnd(e);
+				break;
+			case 'wheel':
+			case 'DOMMouseScroll':
+			case 'mousewheel':
+				this._wheel(e);
+				break;
+			case 'keydown':
+				this._key(e);
+				break;
+			case 'click':
+				if ( !e._constructed ) {
+					e.preventDefault();
+					e.stopPropagation();
+				}
+				break;
+		}
+	}
+};
+function createDefaultScrollbar (direction, interactive, type) {
+	var scrollbar = document.createElement('div'),
+		indicator = document.createElement('div');
+
+	if ( type === true ) {
+		scrollbar.style.cssText = 'position:absolute;z-index:9999';
+		indicator.style.cssText = '-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px';
+	}
+
+	indicator.className = 'iScrollIndicator';
+
+	if ( direction == 'h' ) {
+		if ( type === true ) {
+			scrollbar.style.cssText += ';height:7px;left:2px;right:2px;bottom:0';
+			indicator.style.height = '100%';
+		}
+		scrollbar.className = 'iScrollHorizontalScrollbar';
+	} else {
+		if ( type === true ) {
+			scrollbar.style.cssText += ';width:7px;bottom:2px;top:2px;right:1px';
+			indicator.style.width = '100%';
+		}
+		scrollbar.className = 'iScrollVerticalScrollbar';
+	}
+
+	scrollbar.style.cssText += ';overflow:hidden';
+
+	if ( !interactive ) {
+		scrollbar.style.pointerEvents = 'none';
+	}
+
+	scrollbar.appendChild(indicator);
+
+	return scrollbar;
+}
+
+function Indicator (scroller, options) {
+	this.wrapper = typeof options.el == 'string' ? document.querySelector(options.el) : options.el;
+	this.wrapperStyle = this.wrapper.style;
+	this.indicator = this.wrapper.children[0];
+	this.indicatorStyle = this.indicator.style;
+	this.scroller = scroller;
+
+	this.options = {
+		listenX: true,
+		listenY: true,
+		interactive: false,
+		resize: true,
+		defaultScrollbars: false,
+		shrink: false,
+		fade: false,
+		speedRatioX: 0,
+		speedRatioY: 0
+	};
+
+	for ( var i in options ) {
+		this.options[i] = options[i];
+	}
+
+	this.sizeRatioX = 1;
+	this.sizeRatioY = 1;
+	this.maxPosX = 0;
+	this.maxPosY = 0;
+
+	if ( this.options.interactive ) {
+		if ( !this.options.disableTouch ) {
+			utils.addEvent(this.indicator, 'touchstart', this);
+			utils.addEvent(window, 'touchend', this);
+		}
+		if ( !this.options.disablePointer ) {
+			utils.addEvent(this.indicator, 'MSPointerDown', this);
+			utils.addEvent(window, 'MSPointerUp', this);
+		}
+		if ( !this.options.disableMouse ) {
+			utils.addEvent(this.indicator, 'mousedown', this);
+			utils.addEvent(window, 'mouseup', this);
+		}
+	}
+
+	if ( this.options.fade ) {
+		this.wrapperStyle[utils.style.transform] = this.scroller.translateZ;
+		this.wrapperStyle[utils.style.transitionDuration] = utils.isBadAndroid ? '0.001s' : '0ms';
+		this.wrapperStyle.opacity = '0';
+	}
+}
+
+Indicator.prototype = {
+	handleEvent: function (e) {
+		switch ( e.type ) {
+			case 'touchstart':
+			case 'MSPointerDown':
+			case 'mousedown':
+				this._start(e);
+				break;
+			case 'touchmove':
+			case 'MSPointerMove':
+			case 'mousemove':
+				this._move(e);
+				break;
+			case 'touchend':
+			case 'MSPointerUp':
+			case 'mouseup':
+			case 'touchcancel':
+			case 'MSPointerCancel':
+			case 'mousecancel':
+				this._end(e);
+				break;
+		}
+	},
+
+	destroy: function () {
+		if ( this.options.interactive ) {
+			utils.removeEvent(this.indicator, 'touchstart', this);
+			utils.removeEvent(this.indicator, 'MSPointerDown', this);
+			utils.removeEvent(this.indicator, 'mousedown', this);
+
+			utils.removeEvent(window, 'touchmove', this);
+			utils.removeEvent(window, 'MSPointerMove', this);
+			utils.removeEvent(window, 'mousemove', this);
+
+			utils.removeEvent(window, 'touchend', this);
+			utils.removeEvent(window, 'MSPointerUp', this);
+			utils.removeEvent(window, 'mouseup', this);
+		}
+
+		if ( this.options.defaultScrollbars ) {
+			this.wrapper.parentNode.removeChild(this.wrapper);
+		}
+	},
+
+	_start: function (e) {
+		var point = e.touches ? e.touches[0] : e;
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		this.transitionTime();
+
+		this.initiated = true;
+		this.moved = false;
+		this.lastPointX	= point.pageX;
+		this.lastPointY	= point.pageY;
+
+		this.startTime	= utils.getTime();
+
+		if ( !this.options.disableTouch ) {
+			utils.addEvent(window, 'touchmove', this);
+		}
+		if ( !this.options.disablePointer ) {
+			utils.addEvent(window, 'MSPointerMove', this);
+		}
+		if ( !this.options.disableMouse ) {
+			utils.addEvent(window, 'mousemove', this);
+		}
+
+		this.scroller._execEvent('beforeScrollStart');
+	},
+
+	_move: function (e) {
+		var point = e.touches ? e.touches[0] : e,
+			deltaX, deltaY,
+			newX, newY,
+			timestamp = utils.getTime();
+
+		if ( !this.moved ) {
+			this.scroller._execEvent('scrollStart');
+		}
+
+		this.moved = true;
+
+		deltaX = point.pageX - this.lastPointX;
+		this.lastPointX = point.pageX;
+
+		deltaY = point.pageY - this.lastPointY;
+		this.lastPointY = point.pageY;
+
+		newX = this.x + deltaX;
+		newY = this.y + deltaY;
+
+		this._pos(newX, newY);
+
+
+		if ( this.scroller.options.probeType == 1 && timestamp - this.startTime > 300 ) {
+			this.startTime = timestamp;
+			this.scroller._execEvent('scroll');
+		} else if ( this.scroller.options.probeType > 1 ) {
+			this.scroller._execEvent('scroll');
+		}
+
+
+// INSERT POINT: indicator._move
+
+		e.preventDefault();
+		e.stopPropagation();
+	},
+
+	_end: function (e) {
+		if ( !this.initiated ) {
+			return;
+		}
+
+		this.initiated = false;
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		utils.removeEvent(window, 'touchmove', this);
+		utils.removeEvent(window, 'MSPointerMove', this);
+		utils.removeEvent(window, 'mousemove', this);
+
+		if ( this.scroller.options.snap ) {
+			var snap = this.scroller._nearestSnap(this.scroller.x, this.scroller.y);
+
+			var time = this.options.snapSpeed || Math.max(
+					Math.max(
+						Math.min(Math.abs(this.scroller.x - snap.x), 1000),
+						Math.min(Math.abs(this.scroller.y - snap.y), 1000)
+					), 300);
+
+			if ( this.scroller.x != snap.x || this.scroller.y != snap.y ) {
+				this.scroller.directionX = 0;
+				this.scroller.directionY = 0;
+				this.scroller.currentPage = snap;
+				this.scroller.scrollTo(snap.x, snap.y, time, this.scroller.options.bounceEasing);
+			}
+		}
+
+		if ( this.moved ) {
+			this.scroller._execEvent('scrollEnd');
+		}
+	},
+
+	transitionTime: function (time) {
+		time = time || 0;
+		this.indicatorStyle[utils.style.transitionDuration] = time + 'ms';
+
+		if ( !time && utils.isBadAndroid ) {
+			this.indicatorStyle[utils.style.transitionDuration] = '0.001s';
+		}
+	},
+
+	transitionTimingFunction: function (easing) {
+		this.indicatorStyle[utils.style.transitionTimingFunction] = easing;
+	},
+
+	refresh: function () {
+		this.transitionTime();
+
+		if ( this.options.listenX && !this.options.listenY ) {
+			this.indicatorStyle.display = this.scroller.hasHorizontalScroll ? 'block' : 'none';
+		} else if ( this.options.listenY && !this.options.listenX ) {
+			this.indicatorStyle.display = this.scroller.hasVerticalScroll ? 'block' : 'none';
+		} else {
+			this.indicatorStyle.display = this.scroller.hasHorizontalScroll || this.scroller.hasVerticalScroll ? 'block' : 'none';
+		}
+
+		if ( this.scroller.hasHorizontalScroll && this.scroller.hasVerticalScroll ) {
+			utils.addClass(this.wrapper, 'iScrollBothScrollbars');
+			utils.removeClass(this.wrapper, 'iScrollLoneScrollbar');
+
+			if ( this.options.defaultScrollbars && this.options.customStyle ) {
+				if ( this.options.listenX ) {
+					this.wrapper.style.right = '8px';
+				} else {
+					this.wrapper.style.bottom = '8px';
+				}
+			}
+		} else {
+			utils.removeClass(this.wrapper, 'iScrollBothScrollbars');
+			utils.addClass(this.wrapper, 'iScrollLoneScrollbar');
+
+			if ( this.options.defaultScrollbars && this.options.customStyle ) {
+				if ( this.options.listenX ) {
+					this.wrapper.style.right = '2px';
+				} else {
+					this.wrapper.style.bottom = '2px';
+				}
+			}
+		}
+
+		var r = this.wrapper.offsetHeight;	// force refresh
+
+		if ( this.options.listenX ) {
+			this.wrapperWidth = this.wrapper.clientWidth;
+			if ( this.options.resize ) {
+				this.indicatorWidth = Math.max(Math.round(this.wrapperWidth * this.wrapperWidth / (this.scroller.scrollerWidth || this.wrapperWidth || 1)), 8);
+				this.indicatorStyle.width = this.indicatorWidth + 'px';
+			} else {
+				this.indicatorWidth = this.indicator.clientWidth;
+			}
+
+			this.maxPosX = this.wrapperWidth - this.indicatorWidth;
+
+			if ( this.options.shrink == 'clip' ) {
+				this.minBoundaryX = -this.indicatorWidth + 8;
+				this.maxBoundaryX = this.wrapperWidth - 8;
+			} else {
+				this.minBoundaryX = 0;
+				this.maxBoundaryX = this.maxPosX;
+			}
+
+			this.sizeRatioX = this.options.speedRatioX || (this.scroller.maxScrollX && (this.maxPosX / this.scroller.maxScrollX));	
+		}
+
+		if ( this.options.listenY ) {
+			this.wrapperHeight = this.wrapper.clientHeight;
+			if ( this.options.resize ) {
+				this.indicatorHeight = Math.max(Math.round(this.wrapperHeight * this.wrapperHeight / (this.scroller.scrollerHeight || this.wrapperHeight || 1)), 8);
+				this.indicatorStyle.height = this.indicatorHeight + 'px';
+			} else {
+				this.indicatorHeight = this.indicator.clientHeight;
+			}
+
+			this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+
+			if ( this.options.shrink == 'clip' ) {
+				this.minBoundaryY = -this.indicatorHeight + 8;
+				this.maxBoundaryY = this.wrapperHeight - 8;
+			} else {
+				this.minBoundaryY = 0;
+				this.maxBoundaryY = this.maxPosY;
+			}
+
+			this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+			this.sizeRatioY = this.options.speedRatioY || (this.scroller.maxScrollY && (this.maxPosY / this.scroller.maxScrollY));
+		}
+
+		this.updatePosition();
+	},
+
+	updatePosition: function () {
+		var x = this.options.listenX && Math.round(this.sizeRatioX * this.scroller.x) || 0,
+			y = this.options.listenY && Math.round(this.sizeRatioY * this.scroller.y) || 0;
+
+		if ( !this.options.ignoreBoundaries ) {
+			if ( x < this.minBoundaryX ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.width = Math.max(this.indicatorWidth + x, 8);
+					this.indicatorStyle.width = this.width + 'px';
+				}
+				x = this.minBoundaryX;
+			} else if ( x > this.maxBoundaryX ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.width = Math.max(this.indicatorWidth - (x - this.maxPosX), 8);
+					this.indicatorStyle.width = this.width + 'px';
+					x = this.maxPosX + this.indicatorWidth - this.width;
+				} else {
+					x = this.maxBoundaryX;
+				}
+			} else if ( this.options.shrink == 'scale' && this.width != this.indicatorWidth ) {
+				this.width = this.indicatorWidth;
+				this.indicatorStyle.width = this.width + 'px';
+			}
+
+			if ( y < this.minBoundaryY ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.height = Math.max(this.indicatorHeight + y * 3, 8);
+					this.indicatorStyle.height = this.height + 'px';
+				}
+				y = this.minBoundaryY;
+			} else if ( y > this.maxBoundaryY ) {
+				if ( this.options.shrink == 'scale' ) {
+					this.height = Math.max(this.indicatorHeight - (y - this.maxPosY) * 3, 8);
+					this.indicatorStyle.height = this.height + 'px';
+					y = this.maxPosY + this.indicatorHeight - this.height;
+				} else {
+					y = this.maxBoundaryY;
+				}
+			} else if ( this.options.shrink == 'scale' && this.height != this.indicatorHeight ) {
+				this.height = this.indicatorHeight;
+				this.indicatorStyle.height = this.height + 'px';
+			}
+		}
+
+		this.x = x;
+		this.y = y;
+
+		if ( this.scroller.options.useTransform ) {
+			this.indicatorStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.scroller.translateZ;
+		} else {
+			this.indicatorStyle.left = x + 'px';
+			this.indicatorStyle.top = y + 'px';
+		}
+	},
+
+	_pos: function (x, y) {
+		if ( x < 0 ) {
+			x = 0;
+		} else if ( x > this.maxPosX ) {
+			x = this.maxPosX;
+		}
+
+		if ( y < 0 ) {
+			y = 0;
+		} else if ( y > this.maxPosY ) {
+			y = this.maxPosY;
+		}
+
+		x = this.options.listenX ? Math.round(x / this.sizeRatioX) : this.scroller.x;
+		y = this.options.listenY ? Math.round(y / this.sizeRatioY) : this.scroller.y;
+
+		this.scroller.scrollTo(x, y);
+	},
+
+	fade: function (val, hold) {
+		if ( hold && !this.visible ) {
+			return;
+		}
+
+		clearTimeout(this.fadeTimeout);
+		this.fadeTimeout = null;
+
+		var time = val ? 250 : 500,
+			delay = val ? 0 : 300;
+
+		val = val ? '1' : '0';
+
+		this.wrapperStyle[utils.style.transitionDuration] = time + 'ms';
+
+		this.fadeTimeout = setTimeout((function (val) {
+			this.wrapperStyle.opacity = val;
+			this.visible = +val;
+		}).bind(this, val), delay);
+	}
+};
+
+IScroll.utils = utils;
+
+if ( typeof module != 'undefined' && module.exports ) {
+	module.exports = IScroll;
+} else {
+	window.IScroll = IScroll;
+}
+
+})(window, document, Math);/* Zepto v1.1.2 - zepto event ajax form ie - zeptojs.com/license */
+
+
+var Zepto = (function() {
+  var undefined, key, $, classList, emptyArray = [], slice = emptyArray.slice, filter = emptyArray.filter,
+    document = window.document,
+    elementDisplay = {}, classCache = {},
+    cssNumber = { 'column-count': 1, 'columns': 1, 'font-weight': 1, 'line-height': 1,'opacity': 1, 'z-index': 1, 'zoom': 1 },
+    fragmentRE = /^\s*<(\w+|!)[^>]*>/,
+    singleTagRE = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
+    tagExpanderRE = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig,
+    rootNodeRE = /^(?:body|html)$/i,
+    capitalRE = /([A-Z])/g,
+
+    // special attributes that should be get/set via method calls
+    methodAttributes = ['val', 'css', 'html', 'text', 'data', 'width', 'height', 'offset'],
+
+    adjacencyOperators = [ 'after', 'prepend', 'before', 'append' ],
+    table = document.createElement('table'),
+    tableRow = document.createElement('tr'),
+    containers = {
+      'tr': document.createElement('tbody'),
+      'tbody': table, 'thead': table, 'tfoot': table,
+      'td': tableRow, 'th': tableRow,
+      '*': document.createElement('div')
+    },
+    readyRE = /complete|loaded|interactive/,
+    classSelectorRE = /^\.([\w-]+)$/,
+    idSelectorRE = /^#([\w-]*)$/,
+    simpleSelectorRE = /^[\w-]*$/,
+    class2type = {},
+    toString = class2type.toString,
+    zepto = {},
+    camelize, uniq,
+    tempParent = document.createElement('div'),
+    propMap = {
+      'tabindex': 'tabIndex',
+      'readonly': 'readOnly',
+      'for': 'htmlFor',
+      'class': 'className',
+      'maxlength': 'maxLength',
+      'cellspacing': 'cellSpacing',
+      'cellpadding': 'cellPadding',
+      'rowspan': 'rowSpan',
+      'colspan': 'colSpan',
+      'usemap': 'useMap',
+      'frameborder': 'frameBorder',
+      'contenteditable': 'contentEditable'
+    }
+
+  zepto.matches = function(element, selector) {
+    if (!selector || !element || element.nodeType !== 1) return false
+    var matchesSelector = element.webkitMatchesSelector || element.mozMatchesSelector ||
+                          element.oMatchesSelector || element.matchesSelector
+    if (matchesSelector) return matchesSelector.call(element, selector)
+    // fall back to performing a selector:
+    var match, parent = element.parentNode, temp = !parent
+    if (temp) (parent = tempParent).appendChild(element)
+    match = ~zepto.qsa(parent, selector).indexOf(element)
+    temp && tempParent.removeChild(element)
+    return match
+  }
+
+  function type(obj) {
+    return obj == null ? String(obj) :
+      class2type[toString.call(obj)] || "object"
+  }
+
+  function isFunction(value) { return type(value) == "function" }
+  function isWindow(obj)     { return obj != null && obj == obj.window }
+  function isDocument(obj)   { return obj != null && obj.nodeType == obj.DOCUMENT_NODE }
+  function isObject(obj)     { return type(obj) == "object" }
+  function isPlainObject(obj) {
+    return isObject(obj) && !isWindow(obj) && Object.getPrototypeOf(obj) == Object.prototype
+  }
+  function isArray(value) { return value instanceof Array }
+  function likeArray(obj) { return typeof obj.length == 'number' }
+
+  function compact(array) { return filter.call(array, function(item){ return item != null }) }
+  function flatten(array) { return array.length > 0 ? $.fn.concat.apply([], array) : array }
+  camelize = function(str){ return str.replace(/-+(.)?/g, function(match, chr){ return chr ? chr.toUpperCase() : '' }) }
+  function dasherize(str) {
+    return str.replace(/::/g, '/')
+           .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+           .replace(/([a-z\d])([A-Z])/g, '$1_$2')
+           .replace(/_/g, '-')
+           .toLowerCase()
+  }
+  uniq = function(array){ return filter.call(array, function(item, idx){ return array.indexOf(item) == idx }) }
+
+  function classRE(name) {
+    return name in classCache ?
+      classCache[name] : (classCache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'))
+  }
+
+  function maybeAddPx(name, value) {
+    return (typeof value == "number" && !cssNumber[dasherize(name)]) ? value + "px" : value
+  }
+
+  function defaultDisplay(nodeName) {
+    var element, display
+    if (!elementDisplay[nodeName]) {
+      element = document.createElement(nodeName)
+      document.body.appendChild(element)
+      display = getComputedStyle(element, '').getPropertyValue("display")
+      element.parentNode.removeChild(element)
+      display == "none" && (display = "block")
+      elementDisplay[nodeName] = display
+    }
+    return elementDisplay[nodeName]
+  }
+
+  function children(element) {
+    return 'children' in element ?
+      slice.call(element.children) :
+      $.map(element.childNodes, function(node){ if (node.nodeType == 1) return node })
+  }
+
+  // `$.zepto.fragment` takes a html string and an optional tag name
+  // to generate DOM nodes nodes from the given html string.
+  // The generated DOM nodes are returned as an array.
+  // This function can be overriden in plugins for example to make
+  // it compatible with browsers that don't support the DOM fully.
+  zepto.fragment = function(html, name, properties) {
+    var dom, nodes, container
+
+    // A special case optimization for a single tag
+    if (singleTagRE.test(html)) dom = $(document.createElement(RegExp.$1))
+
+    if (!dom) {
+      if (html.replace) html = html.replace(tagExpanderRE, "<$1></$2>")
+      if (name === undefined) name = fragmentRE.test(html) && RegExp.$1
+      if (!(name in containers)) name = '*'
+
+      container = containers[name]
+      container.innerHTML = '' + html
+      dom = $.each(slice.call(container.childNodes), function(){
+        container.removeChild(this)
+      })
+    }
+
+    if (isPlainObject(properties)) {
+      nodes = $(dom)
+      $.each(properties, function(key, value) {
+        if (methodAttributes.indexOf(key) > -1) nodes[key](value)
+        else nodes.attr(key, value)
+      })
+    }
+
+    return dom
+  }
+
+  // `$.zepto.Z` swaps out the prototype of the given `dom` array
+  // of nodes with `$.fn` and thus supplying all the Zepto functions
+  // to the array. Note that `__proto__` is not supported on Internet
+  // Explorer. This method can be overriden in plugins.
+  zepto.Z = function(dom, selector) {
+    dom = dom || []
+    dom.__proto__ = $.fn
+    dom.selector = selector || ''
+    return dom
+  }
+
+  // `$.zepto.isZ` should return `true` if the given object is a Zepto
+  // collection. This method can be overriden in plugins.
+  zepto.isZ = function(object) {
+    return object instanceof zepto.Z
+  }
+
+  // `$.zepto.init` is Zepto's counterpart to jQuery's `$.fn.init` and
+  // takes a CSS selector and an optional context (and handles various
+  // special cases).
+  // This method can be overriden in plugins.
+  zepto.init = function(selector, context) {
+    var dom
+    // If nothing given, return an empty Zepto collection
+    if (!selector) return zepto.Z()
+    // Optimize for string selectors
+    else if (typeof selector == 'string') {
+      selector = selector.trim()
+      // If it's a html fragment, create nodes from it
+      // Note: In both Chrome 21 and Firefox 15, DOM error 12
+      // is thrown if the fragment doesn't begin with <
+      if (selector[0] == '<' && fragmentRE.test(selector))
+        dom = zepto.fragment(selector, RegExp.$1, context), selector = null
+      // If there's a context, create a collection on that context first, and select
+      // nodes from there
+      else if (context !== undefined) return $(context).find(selector)
+      // If it's a CSS selector, use it to select nodes.
+      else dom = zepto.qsa(document, selector)
+    }
+    // If a function is given, call it when the DOM is ready
+    else if (isFunction(selector)) return $(document).ready(selector)
+    // If a Zepto collection is given, just return it
+    else if (zepto.isZ(selector)) return selector
+    else {
+      // normalize array if an array of nodes is given
+      if (isArray(selector)) dom = compact(selector)
+      // Wrap DOM nodes.
+      else if (isObject(selector))
+        dom = [selector], selector = null
+      // If it's a html fragment, create nodes from it
+      else if (fragmentRE.test(selector))
+        dom = zepto.fragment(selector.trim(), RegExp.$1, context), selector = null
+      // If there's a context, create a collection on that context first, and select
+      // nodes from there
+      else if (context !== undefined) return $(context).find(selector)
+      // And last but no least, if it's a CSS selector, use it to select nodes.
+      else dom = zepto.qsa(document, selector)
+    }
+    // create a new Zepto collection from the nodes found
+    return zepto.Z(dom, selector)
+  }
+
+  // `$` will be the base `Zepto` object. When calling this
+  // function just call `$.zepto.init, which makes the implementation
+  // details of selecting nodes and creating Zepto collections
+  // patchable in plugins.
+  $ = function(selector, context){
+    return zepto.init(selector, context)
+  }
+
+  function extend(target, source, deep) {
+    for (key in source)
+      if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+        if (isPlainObject(source[key]) && !isPlainObject(target[key]))
+          target[key] = {}
+        if (isArray(source[key]) && !isArray(target[key]))
+          target[key] = []
+        extend(target[key], source[key], deep)
+      }
+      else if (source[key] !== undefined) target[key] = source[key]
+  }
+
+  // Copy all but undefined properties from one or more
+  // objects to the `target` object.
+  $.extend = function(target){
+    var deep, args = slice.call(arguments, 1)
+    if (typeof target == 'boolean') {
+      deep = target
+      target = args.shift()
+    }
+    args.forEach(function(arg){ extend(target, arg, deep) })
+    return target
+  }
+
+  // `$.zepto.qsa` is Zepto's CSS selector implementation which
+  // uses `document.querySelectorAll` and optimizes for some special cases, like `#id`.
+  // This method can be overriden in plugins.
+  zepto.qsa = function(element, selector){
+    var found,
+        maybeID = selector[0] == '#',
+        maybeClass = !maybeID && selector[0] == '.',
+        nameOnly = maybeID || maybeClass ? selector.slice(1) : selector, // Ensure that a 1 char tag name still gets checked
+        isSimple = simpleSelectorRE.test(nameOnly)
+    return (isDocument(element) && isSimple && maybeID) ?
+      ( (found = element.getElementById(nameOnly)) ? [found] : [] ) :
+      (element.nodeType !== 1 && element.nodeType !== 9) ? [] :
+      slice.call(
+        isSimple && !maybeID ?
+          maybeClass ? element.getElementsByClassName(nameOnly) : // If it's simple, it could be a class
+          element.getElementsByTagName(selector) : // Or a tag
+          element.querySelectorAll(selector) // Or it's not simple, and we need to query all
+      )
+  }
+
+  function filtered(nodes, selector) {
+    return selector == null ? $(nodes) : $(nodes).filter(selector)
+  }
+
+  $.contains = function(parent, node) {
+    return parent !== node && parent.contains(node)
+  }
+
+  function funcArg(context, arg, idx, payload) {
+    return isFunction(arg) ? arg.call(context, idx, payload) : arg
+  }
+
+  function setAttribute(node, name, value) {
+    value == null ? node.removeAttribute(name) : node.setAttribute(name, value)
+  }
+
+  // access className property while respecting SVGAnimatedString
+  function className(node, value){
+    var klass = node.className,
+        svg   = klass && klass.baseVal !== undefined
+
+    if (value === undefined) return svg ? klass.baseVal : klass
+    svg ? (klass.baseVal = value) : (node.className = value)
+  }
+
+  // "true"  => true
+  // "false" => false
+  // "null"  => null
+  // "42"    => 42
+  // "42.5"  => 42.5
+  // "08"    => "08"
+  // JSON    => parse if valid
+  // String  => self
+  function deserializeValue(value) {
+    var num
+    try {
+      return value ?
+        value == "true" ||
+        ( value == "false" ? false :
+          value == "null" ? null :
+          !/^0/.test(value) && !isNaN(num = Number(value)) ? num :
+          /^[\[\{]/.test(value) ? $.parseJSON(value) :
+          value )
+        : value
+    } catch(e) {
+      return value
+    }
+  }
+
+  $.type = type
+  $.isFunction = isFunction
+  $.isWindow = isWindow
+  $.isArray = isArray
+  $.isPlainObject = isPlainObject
+
+  $.isEmptyObject = function(obj) {
+    var name
+    for (name in obj) return false
+    return true
+  }
+
+  $.inArray = function(elem, array, i){
+    return emptyArray.indexOf.call(array, elem, i)
+  }
+
+  $.camelCase = camelize
+  $.trim = function(str) {
+    return str == null ? "" : String.prototype.trim.call(str)
+  }
+
+  // plugin compatibility
+  $.uuid = 0
+  $.support = { }
+  $.expr = { }
+
+  $.map = function(elements, callback){
+    var value, values = [], i, key
+    if (likeArray(elements))
+      for (i = 0; i < elements.length; i++) {
+        value = callback(elements[i], i)
+        if (value != null) values.push(value)
+      }
+    else
+      for (key in elements) {
+        value = callback(elements[key], key)
+        if (value != null) values.push(value)
+      }
+    return flatten(values)
+  }
+
+  $.each = function(elements, callback){
+    var i, key
+    if (likeArray(elements)) {
+      for (i = 0; i < elements.length; i++)
+        if (callback.call(elements[i], i, elements[i]) === false) return elements
+    } else {
+      for (key in elements)
+        if (callback.call(elements[key], key, elements[key]) === false) return elements
+    }
+
+    return elements
+  }
+
+  $.grep = function(elements, callback){
+    return filter.call(elements, callback)
+  }
+
+  if (window.JSON) $.parseJSON = JSON.parse
+
+  // Populate the class2type map
+  $.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function(i, name) {
+    class2type[ "[object " + name + "]" ] = name.toLowerCase()
+  })
+
+  // Define methods that will be available on all
+  // Zepto collections
+  $.fn = {
+    // Because a collection acts like an array
+    // copy over these useful array functions.
+    forEach: emptyArray.forEach,
+    reduce: emptyArray.reduce,
+    push: emptyArray.push,
+    sort: emptyArray.sort,
+    indexOf: emptyArray.indexOf,
+    concat: emptyArray.concat,
+
+    // `map` and `slice` in the jQuery API work differently
+    // from their array counterparts
+    map: function(fn){
+      return $($.map(this, function(el, i){ return fn.call(el, i, el) }))
+    },
+    slice: function(){
+      return $(slice.apply(this, arguments))
+    },
+
+    ready: function(callback){
+      // need to check if document.body exists for IE as that browser reports
+      // document ready when it hasn't yet created the body element
+      if (readyRE.test(document.readyState) && document.body) callback($)
+      else document.addEventListener('DOMContentLoaded', function(){ callback($) }, false)
+      return this
+    },
+    get: function(idx){
+      return idx === undefined ? slice.call(this) : this[idx >= 0 ? idx : idx + this.length]
+    },
+    toArray: function(){ return this.get() },
+    size: function(){
+      return this.length
+    },
+    remove: function(){
+      return this.each(function(){
+        if (this.parentNode != null)
+          this.parentNode.removeChild(this)
+      })
+    },
+    each: function(callback){
+      emptyArray.every.call(this, function(el, idx){
+        return callback.call(el, idx, el) !== false
+      })
+      return this
+    },
+    filter: function(selector){
+      if (isFunction(selector)) return this.not(this.not(selector))
+      return $(filter.call(this, function(element){
+        return zepto.matches(element, selector)
+      }))
+    },
+    add: function(selector,context){
+      return $(uniq(this.concat($(selector,context))))
+    },
+    is: function(selector){
+      return this.length > 0 && zepto.matches(this[0], selector)
+    },
+    not: function(selector){
+      var nodes=[]
+      if (isFunction(selector) && selector.call !== undefined)
+        this.each(function(idx){
+          if (!selector.call(this,idx)) nodes.push(this)
+        })
+      else {
+        var excludes = typeof selector == 'string' ? this.filter(selector) :
+          (likeArray(selector) && isFunction(selector.item)) ? slice.call(selector) : $(selector)
+        this.forEach(function(el){
+          if (excludes.indexOf(el) < 0) nodes.push(el)
+        })
+      }
+      return $(nodes)
+    },
+    has: function(selector){
+      return this.filter(function(){
+        return isObject(selector) ?
+          $.contains(this, selector) :
+          $(this).find(selector).size()
+      })
+    },
+    eq: function(idx){
+      return idx === -1 ? this.slice(idx) : this.slice(idx, + idx + 1)
+    },
+    first: function(){
+      var el = this[0]
+      return el && !isObject(el) ? el : $(el)
+    },
+    last: function(){
+      var el = this[this.length - 1]
+      return el && !isObject(el) ? el : $(el)
+    },
+    find: function(selector){
+      var result, $this = this
+      if (typeof selector == 'object')
+        result = $(selector).filter(function(){
+          var node = this
+          return emptyArray.some.call($this, function(parent){
+            return $.contains(parent, node)
+          })
+        })
+      else if (this.length == 1) result = $(zepto.qsa(this[0], selector))
+      else result = this.map(function(){ return zepto.qsa(this, selector) })
+      return result
+    },
+    closest: function(selector, context){
+      var node = this[0], collection = false
+      if (typeof selector == 'object') collection = $(selector)
+      while (node && !(collection ? collection.indexOf(node) >= 0 : zepto.matches(node, selector)))
+        node = node !== context && !isDocument(node) && node.parentNode
+      return $(node)
+    },
+    parents: function(selector){
+      var ancestors = [], nodes = this
+      while (nodes.length > 0)
+        nodes = $.map(nodes, function(node){
+          if ((node = node.parentNode) && !isDocument(node) && ancestors.indexOf(node) < 0) {
+            ancestors.push(node)
+            return node
+          }
+        })
+      return filtered(ancestors, selector)
+    },
+    parent: function(selector){
+      return filtered(uniq(this.pluck('parentNode')), selector)
+    },
+    children: function(selector){
+      return filtered(this.map(function(){ return children(this) }), selector)
+    },
+    contents: function() {
+      return this.map(function() { return slice.call(this.childNodes) })
+    },
+    siblings: function(selector){
+      return filtered(this.map(function(i, el){
+        return filter.call(children(el.parentNode), function(child){ return child!==el })
+      }), selector)
+    },
+    empty: function(){
+      return this.each(function(){ this.innerHTML = '' })
+    },
+    // `pluck` is borrowed from Prototype.js
+    pluck: function(property){
+      return $.map(this, function(el){ return el[property] })
+    },
+    show: function(){
+      return this.each(function(){
+        this.style.display == "none" && (this.style.display = '')
+        if (getComputedStyle(this, '').getPropertyValue("display") == "none")
+          this.style.display = defaultDisplay(this.nodeName)
+      })
+    },
+    replaceWith: function(newContent){
+      return this.before(newContent).remove()
+    },
+    wrap: function(structure){
+      var func = isFunction(structure)
+      if (this[0] && !func)
+        var dom   = $(structure).get(0),
+            clone = dom.parentNode || this.length > 1
+
+      return this.each(function(index){
+        $(this).wrapAll(
+          func ? structure.call(this, index) :
+            clone ? dom.cloneNode(true) : dom
+        )
+      })
+    },
+    wrapAll: function(structure){
+      if (this[0]) {
+        $(this[0]).before(structure = $(structure))
+        var children
+        // drill down to the inmost element
+        while ((children = structure.children()).length) structure = children.first()
+        $(structure).append(this)
+      }
+      return this
+    },
+    wrapInner: function(structure){
+      var func = isFunction(structure)
+      return this.each(function(index){
+        var self = $(this), contents = self.contents(),
+            dom  = func ? structure.call(this, index) : structure
+        contents.length ? contents.wrapAll(dom) : self.append(dom)
+      })
+    },
+    unwrap: function(){
+      this.parent().each(function(){
+        $(this).replaceWith($(this).children())
+      })
+      return this
+    },
+    clone: function(){
+      return this.map(function(){ return this.cloneNode(true) })
+    },
+    hide: function(){
+      return this.css("display", "none")
+    },
+    toggle: function(setting){
+      return this.each(function(){
+        var el = $(this)
+        ;(setting === undefined ? el.css("display") == "none" : setting) ? el.show() : el.hide()
+      })
+    },
+    prev: function(selector){ return $(this.pluck('previousElementSibling')).filter(selector || '*') },
+    next: function(selector){ return $(this.pluck('nextElementSibling')).filter(selector || '*') },
+    html: function(html){
+      return arguments.length === 0 ?
+        (this.length > 0 ? this[0].innerHTML : null) :
+        this.each(function(idx){
+          var originHtml = this.innerHTML
+          $(this).empty().append( funcArg(this, html, idx, originHtml) )
+        })
+    },
+    text: function(text){
+      return arguments.length === 0 ?
+        (this.length > 0 ? this[0].textContent : null) :
+        this.each(function(){ this.textContent = (text === undefined) ? '' : ''+text })
+    },
+    attr: function(name, value){
+      var result
+      return (typeof name == 'string' && value === undefined) ?
+        (this.length == 0 || this[0].nodeType !== 1 ? undefined :
+          (name == 'value' && this[0].nodeName == 'INPUT') ? this.val() :
+          (!(result = this[0].getAttribute(name)) && name in this[0]) ? this[0][name] : result
+        ) :
+        this.each(function(idx){
+          if (this.nodeType !== 1) return
+          if (isObject(name)) for (key in name) setAttribute(this, key, name[key])
+          else setAttribute(this, name, funcArg(this, value, idx, this.getAttribute(name)))
+        })
+    },
+    removeAttr: function(name){
+      return this.each(function(){ this.nodeType === 1 && setAttribute(this, name) })
+    },
+    prop: function(name, value){
+      name = propMap[name] || name
+      return (value === undefined) ?
+        (this[0] && this[0][name]) :
+        this.each(function(idx){
+          this[name] = funcArg(this, value, idx, this[name])
+        })
+    },
+    data: function(name, value){
+      var data = this.attr('data-' + name.replace(capitalRE, '-$1').toLowerCase(), value)
+      return data !== null ? deserializeValue(data) : undefined
+    },
+    val: function(value){
+      return arguments.length === 0 ?
+        (this[0] && (this[0].multiple ?
+           $(this[0]).find('option').filter(function(){ return this.selected }).pluck('value') :
+           this[0].value)
+        ) :
+        this.each(function(idx){
+          this.value = funcArg(this, value, idx, this.value)
+        })
+    },
+    offset: function(coordinates){
+      if (coordinates) return this.each(function(index){
+        var $this = $(this),
+            coords = funcArg(this, coordinates, index, $this.offset()),
+            parentOffset = $this.offsetParent().offset(),
+            props = {
+              top:  coords.top  - parentOffset.top,
+              left: coords.left - parentOffset.left
+            }
+
+        if ($this.css('position') == 'static') props['position'] = 'relative'
+        $this.css(props)
+      })
+      if (this.length==0) return null
+      var obj = this[0].getBoundingClientRect()
+      return {
+        left: obj.left + window.pageXOffset,
+        top: obj.top + window.pageYOffset,
+        width: Math.round(obj.width),
+        height: Math.round(obj.height)
+      }
+    },
+    css: function(property, value){
+      if (arguments.length < 2) {
+        var element = this[0], computedStyle = getComputedStyle(element, '')
+        if(!element) return
+        if (typeof property == 'string')
+          return element.style[camelize(property)] || computedStyle.getPropertyValue(property)
+        else if (isArray(property)) {
+          var props = {}
+          $.each(isArray(property) ? property: [property], function(_, prop){
+            props[prop] = (element.style[camelize(prop)] || computedStyle.getPropertyValue(prop))
+          })
+          return props
+        }
+      }
+
+      var css = ''
+      if (type(property) == 'string') {
+        if (!value && value !== 0)
+          this.each(function(){ this.style.removeProperty(dasherize(property)) })
+        else
+          css = dasherize(property) + ":" + maybeAddPx(property, value)
+      } else {
+        for (key in property)
+          if (!property[key] && property[key] !== 0)
+            this.each(function(){ this.style.removeProperty(dasherize(key)) })
+          else
+            css += dasherize(key) + ':' + maybeAddPx(key, property[key]) + ';'
+      }
+
+      return this.each(function(){ this.style.cssText += ';' + css })
+    },
+    index: function(element){
+      return element ? this.indexOf($(element)[0]) : this.parent().children().indexOf(this[0])
+    },
+    hasClass: function(name){
+      if (!name) return false
+      return emptyArray.some.call(this, function(el){
+        return this.test(className(el))
+      }, classRE(name))
+    },
+    addClass: function(name){
+      if (!name) return this
+      return this.each(function(idx){
+        classList = []
+        var cls = className(this), newName = funcArg(this, name, idx, cls)
+        newName.split(/\s+/g).forEach(function(klass){
+          if (!$(this).hasClass(klass)) classList.push(klass)
+        }, this)
+        classList.length && className(this, cls + (cls ? " " : "") + classList.join(" "))
+      })
+    },
+    removeClass: function(name){
+      return this.each(function(idx){
+        if (name === undefined) return className(this, '')
+        classList = className(this)
+        funcArg(this, name, idx, classList).split(/\s+/g).forEach(function(klass){
+          classList = classList.replace(classRE(klass), " ")
+        })
+        className(this, classList.trim())
+      })
+    },
+    toggleClass: function(name, when){
+      if (!name) return this
+      return this.each(function(idx){
+        var $this = $(this), names = funcArg(this, name, idx, className(this))
+        names.split(/\s+/g).forEach(function(klass){
+          (when === undefined ? !$this.hasClass(klass) : when) ?
+            $this.addClass(klass) : $this.removeClass(klass)
+        })
+      })
+    },
+    scrollTop: function(value){
+      if (!this.length) return
+      var hasScrollTop = 'scrollTop' in this[0]
+      if (value === undefined) return hasScrollTop ? this[0].scrollTop : this[0].pageYOffset
+      return this.each(hasScrollTop ?
+        function(){ this.scrollTop = value } :
+        function(){ this.scrollTo(this.scrollX, value) })
+    },
+    scrollLeft: function(value){
+      if (!this.length) return
+      var hasScrollLeft = 'scrollLeft' in this[0]
+      if (value === undefined) return hasScrollLeft ? this[0].scrollLeft : this[0].pageXOffset
+      return this.each(hasScrollLeft ?
+        function(){ this.scrollLeft = value } :
+        function(){ this.scrollTo(value, this.scrollY) })
+    },
+    position: function() {
+      if (!this.length) return
+
+      var elem = this[0],
+        // Get *real* offsetParent
+        offsetParent = this.offsetParent(),
+        // Get correct offsets
+        offset       = this.offset(),
+        parentOffset = rootNodeRE.test(offsetParent[0].nodeName) ? { top: 0, left: 0 } : offsetParent.offset()
+
+      // Subtract element margins
+      // note: when an element has margin: auto the offsetLeft and marginLeft
+      // are the same in Safari causing offset.left to incorrectly be 0
+      offset.top  -= parseFloat( $(elem).css('margin-top') ) || 0
+      offset.left -= parseFloat( $(elem).css('margin-left') ) || 0
+
+      // Add offsetParent borders
+      parentOffset.top  += parseFloat( $(offsetParent[0]).css('border-top-width') ) || 0
+      parentOffset.left += parseFloat( $(offsetParent[0]).css('border-left-width') ) || 0
+
+      // Subtract the two offsets
+      return {
+        top:  offset.top  - parentOffset.top,
+        left: offset.left - parentOffset.left
+      }
+    },
+    offsetParent: function() {
+      return this.map(function(){
+        var parent = this.offsetParent || document.body
+        while (parent && !rootNodeRE.test(parent.nodeName) && $(parent).css("position") == "static")
+          parent = parent.offsetParent
+        return parent
+      })
+    }
+  }
+
+  // for now
+  $.fn.detach = $.fn.remove
+
+  // Generate the `width` and `height` functions
+  ;['width', 'height'].forEach(function(dimension){
+    var dimensionProperty =
+      dimension.replace(/./, function(m){ return m[0].toUpperCase() })
+
+    $.fn[dimension] = function(value){
+      var offset, el = this[0]
+      if (value === undefined) return isWindow(el) ? el['inner' + dimensionProperty] :
+        isDocument(el) ? el.documentElement['scroll' + dimensionProperty] :
+        (offset = this.offset()) && offset[dimension]
+      else return this.each(function(idx){
+        el = $(this)
+        el.css(dimension, funcArg(this, value, idx, el[dimension]()))
+      })
+    }
+  })
+
+  function traverseNode(node, fun) {
+    fun(node)
+    for (var key in node.childNodes) traverseNode(node.childNodes[key], fun)
+  }
+
+  // Generate the `after`, `prepend`, `before`, `append`,
+  // `insertAfter`, `insertBefore`, `appendTo`, and `prependTo` methods.
+  adjacencyOperators.forEach(function(operator, operatorIndex) {
+    var inside = operatorIndex % 2 //=> prepend, append
+
+    $.fn[operator] = function(){
+      // arguments can be nodes, arrays of nodes, Zepto objects and HTML strings
+      var argType, nodes = $.map(arguments, function(arg) {
+            argType = type(arg)
+            return argType == "object" || argType == "array" || arg == null ?
+              arg : zepto.fragment(arg)
+          }),
+          parent, copyByClone = this.length > 1
+      if (nodes.length < 1) return this
+
+      return this.each(function(_, target){
+        parent = inside ? target : target.parentNode
+
+        // convert all methods to a "before" operation
+        target = operatorIndex == 0 ? target.nextSibling :
+                 operatorIndex == 1 ? target.firstChild :
+                 operatorIndex == 2 ? target :
+                 null
+
+        nodes.forEach(function(node){
+          if (copyByClone) node = node.cloneNode(true)
+          else if (!parent) return $(node).remove()
+
+          traverseNode(parent.insertBefore(node, target), function(el){
+            if (el.nodeName != null && el.nodeName.toUpperCase() === 'SCRIPT' &&
+               (!el.type || el.type === 'text/javascript') && !el.src)
+              window['eval'].call(window, el.innerHTML)
+          })
+        })
+      })
+    }
+
+    // after    => insertAfter
+    // prepend  => prependTo
+    // before   => insertBefore
+    // append   => appendTo
+    $.fn[inside ? operator+'To' : 'insert'+(operatorIndex ? 'Before' : 'After')] = function(html){
+      $(html)[operator](this)
+      return this
+    }
+  })
+
+  zepto.Z.prototype = $.fn
+
+  // Export internal API functions in the `$.zepto` namespace
+  zepto.uniq = uniq
+  zepto.deserializeValue = deserializeValue
+  $.zepto = zepto
+
+  return $
+})()
+
+window.Zepto = Zepto
+window.$ === undefined && (window.$ = Zepto)
+
+;(function($){
+  var $$ = $.zepto.qsa, _zid = 1, undefined,
+      slice = Array.prototype.slice,
+      isFunction = $.isFunction,
+      isString = function(obj){ return typeof obj == 'string' },
+      handlers = {},
+      specialEvents={},
+      focusinSupported = 'onfocusin' in window,
+      focus = { focus: 'focusin', blur: 'focusout' },
+      hover = { mouseenter: 'mouseover', mouseleave: 'mouseout' }
+
+  specialEvents.click = specialEvents.mousedown = specialEvents.mouseup = specialEvents.mousemove = 'MouseEvents'
+
+  function zid(element) {
+    return element._zid || (element._zid = _zid++)
+  }
+  function findHandlers(element, event, fn, selector) {
+    event = parse(event)
+    if (event.ns) var matcher = matcherFor(event.ns)
+    return (handlers[zid(element)] || []).filter(function(handler) {
+      return handler
+        && (!event.e  || handler.e == event.e)
+        && (!event.ns || matcher.test(handler.ns))
+        && (!fn       || zid(handler.fn) === zid(fn))
+        && (!selector || handler.sel == selector)
+    })
+  }
+  function parse(event) {
+    var parts = ('' + event).split('.')
+    return {e: parts[0], ns: parts.slice(1).sort().join(' ')}
+  }
+  function matcherFor(ns) {
+    return new RegExp('(?:^| )' + ns.replace(' ', ' .* ?') + '(?: |$)')
+  }
+
+  function eventCapture(handler, captureSetting) {
+    return handler.del &&
+      (!focusinSupported && (handler.e in focus)) ||
+      !!captureSetting
+  }
+
+  function realEvent(type) {
+    return hover[type] || (focusinSupported && focus[type]) || type
+  }
+
+  function add(element, events, fn, data, selector, delegator, capture){
+    var id = zid(element), set = (handlers[id] || (handlers[id] = []))
+    events.split(/\s/).forEach(function(event){
+      if (event == 'ready') return $(document).ready(fn)
+      var handler   = parse(event)
+      handler.fn    = fn
+      handler.sel   = selector
+      // emulate mouseenter, mouseleave
+      if (handler.e in hover) fn = function(e){
+        var related = e.relatedTarget
+        if (!related || (related !== this && !$.contains(this, related)))
+          return handler.fn.apply(this, arguments)
+      }
+      handler.del   = delegator
+      var callback  = delegator || fn
+      handler.proxy = function(e){
+        e = compatible(e)
+        if (e.isImmediatePropagationStopped()) return
+        e.data = data
+        var result = callback.apply(element, e._args == undefined ? [e] : [e].concat(e._args))
+        if (result === false) e.preventDefault(), e.stopPropagation()
+        return result
+      }
+      handler.i = set.length
+      set.push(handler)
+      if ('addEventListener' in element)
+        element.addEventListener(realEvent(handler.e), handler.proxy, eventCapture(handler, capture))
+    })
+  }
+  function remove(element, events, fn, selector, capture){
+    var id = zid(element)
+    ;(events || '').split(/\s/).forEach(function(event){
+      findHandlers(element, event, fn, selector).forEach(function(handler){
+        delete handlers[id][handler.i]
+      if ('removeEventListener' in element)
+        element.removeEventListener(realEvent(handler.e), handler.proxy, eventCapture(handler, capture))
+      })
+    })
+  }
+
+  $.event = { add: add, remove: remove }
+
+  $.proxy = function(fn, context) {
+    if (isFunction(fn)) {
+      var proxyFn = function(){ return fn.apply(context, arguments) }
+      proxyFn._zid = zid(fn)
+      return proxyFn
+    } else if (isString(context)) {
+      return $.proxy(fn[context], fn)
+    } else {
+      throw new TypeError("expected function")
+    }
+  }
+
+  $.fn.bind = function(event, data, callback){
+    return this.on(event, data, callback)
+  }
+  $.fn.unbind = function(event, callback){
+    return this.off(event, callback)
+  }
+  $.fn.one = function(event, selector, data, callback){
+    return this.on(event, selector, data, callback, 1)
+  }
+
+  var returnTrue = function(){return true},
+      returnFalse = function(){return false},
+      ignoreProperties = /^([A-Z]|returnValue$|layer[XY]$)/,
+      eventMethods = {
+        preventDefault: 'isDefaultPrevented',
+        stopImmediatePropagation: 'isImmediatePropagationStopped',
+        stopPropagation: 'isPropagationStopped'
+      }
+
+  function compatible(event, source) {
+    if (source || !event.isDefaultPrevented) {
+      source || (source = event)
+
+      $.each(eventMethods, function(name, predicate) {
+        var sourceMethod = source[name]
+        event[name] = function(){
+          this[predicate] = returnTrue
+          return sourceMethod && sourceMethod.apply(source, arguments)
+        }
+        event[predicate] = returnFalse
+      })
+
+      if (source.defaultPrevented !== undefined ? source.defaultPrevented :
+          'returnValue' in source ? source.returnValue === false :
+          source.getPreventDefault && source.getPreventDefault())
+        event.isDefaultPrevented = returnTrue
+    }
+    return event
+  }
+
+  function createProxy(event) {
+    var key, proxy = { originalEvent: event }
+    for (key in event)
+      if (!ignoreProperties.test(key) && event[key] !== undefined) proxy[key] = event[key]
+
+    return compatible(proxy, event)
+  }
+
+  $.fn.delegate = function(selector, event, callback){
+    return this.on(event, selector, callback)
+  }
+  $.fn.undelegate = function(selector, event, callback){
+    return this.off(event, selector, callback)
+  }
+
+  $.fn.live = function(event, callback){
+    $(document.body).delegate(this.selector, event, callback)
+    return this
+  }
+  $.fn.die = function(event, callback){
+    $(document.body).undelegate(this.selector, event, callback)
+    return this
+  }
+
+  $.fn.on = function(event, selector, data, callback, one){
+    var autoRemove, delegator, $this = this
+    if (event && !isString(event)) {
+      $.each(event, function(type, fn){
+        $this.on(type, selector, data, fn, one)
+      })
+      return $this
+    }
+
+    if (!isString(selector) && !isFunction(callback) && callback !== false)
+      callback = data, data = selector, selector = undefined
+    if (isFunction(data) || data === false)
+      callback = data, data = undefined
+
+    if (callback === false) callback = returnFalse
+
+    return $this.each(function(_, element){
+      if (one) autoRemove = function(e){
+        remove(element, e.type, callback)
+        return callback.apply(this, arguments)
+      }
+
+      if (selector) delegator = function(e){
+        var evt, match = $(e.target).closest(selector, element).get(0)
+        if (match && match !== element) {
+          evt = $.extend(createProxy(e), {currentTarget: match, liveFired: element})
+          return (autoRemove || callback).apply(match, [evt].concat(slice.call(arguments, 1)))
+        }
+      }
+
+      add(element, event, callback, data, selector, delegator || autoRemove)
+    })
+  }
+  $.fn.off = function(event, selector, callback){
+    var $this = this
+    if (event && !isString(event)) {
+      $.each(event, function(type, fn){
+        $this.off(type, selector, fn)
+      })
+      return $this
+    }
+
+    if (!isString(selector) && !isFunction(callback) && callback !== false)
+      callback = selector, selector = undefined
+
+    if (callback === false) callback = returnFalse
+
+    return $this.each(function(){
+      remove(this, event, callback, selector)
+    })
+  }
+
+  $.fn.trigger = function(event, args){
+    event = (isString(event) || $.isPlainObject(event)) ? $.Event(event) : compatible(event)
+    event._args = args
+    return this.each(function(){
+      // items in the collection might not be DOM elements
+      if('dispatchEvent' in this) this.dispatchEvent(event)
+      else $(this).triggerHandler(event, args)
+    })
+  }
+
+  // triggers event handlers on current element just as if an event occurred,
+  // doesn't trigger an actual event, doesn't bubble
+  $.fn.triggerHandler = function(event, args){
+    var e, result
+    this.each(function(i, element){
+      e = createProxy(isString(event) ? $.Event(event) : event)
+      e._args = args
+      e.target = element
+      $.each(findHandlers(element, event.type || event), function(i, handler){
+        result = handler.proxy(e)
+        if (e.isImmediatePropagationStopped()) return false
+      })
+    })
+    return result
+  }
+
+  // shortcut methods for `.bind(event, fn)` for each event type
+  ;('focusin focusout load resize scroll unload click dblclick '+
+  'mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave '+
+  'change select keydown keypress keyup error').split(' ').forEach(function(event) {
+    $.fn[event] = function(callback) {
+      return callback ?
+        this.bind(event, callback) :
+        this.trigger(event)
+    }
+  })
+
+  ;['focus', 'blur'].forEach(function(name) {
+    $.fn[name] = function(callback) {
+      if (callback) this.bind(name, callback)
+      else this.each(function(){
+        try { this[name]() }
+        catch(e) {}
+      })
+      return this
+    }
+  })
+
+  $.Event = function(type, props) {
+    if (!isString(type)) props = type, type = props.type
+    var event = document.createEvent(specialEvents[type] || 'Events'), bubbles = true
+    if (props) for (var name in props) (name == 'bubbles') ? (bubbles = !!props[name]) : (event[name] = props[name])
+    event.initEvent(type, bubbles, true)
+    return compatible(event)
+  }
+
+})(Zepto)
+
+;(function($){
+  var jsonpID = 0,
+      document = window.document,
+      key,
+      name,
+      rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+      scriptTypeRE = /^(?:text|application)\/javascript/i,
+      xmlTypeRE = /^(?:text|application)\/xml/i,
+      jsonType = 'application/json',
+      htmlType = 'text/html',
+      blankRE = /^\s*$/
+
+  // trigger a custom event and return false if it was cancelled
+  function triggerAndReturn(context, eventName, data) {
+    var event = $.Event(eventName)
+    $(context).trigger(event, data)
+    return !event.isDefaultPrevented()
+  }
+
+  // trigger an Ajax "global" event
+  function triggerGlobal(settings, context, eventName, data) {
+    if (settings.global) return triggerAndReturn(context || document, eventName, data)
+  }
+
+  // Number of active Ajax requests
+  $.active = 0
+
+  function ajaxStart(settings) {
+    if (settings.global && $.active++ === 0) triggerGlobal(settings, null, 'ajaxStart')
+  }
+  function ajaxStop(settings) {
+    if (settings.global && !(--$.active)) triggerGlobal(settings, null, 'ajaxStop')
+  }
+
+  // triggers an extra global event "ajaxBeforeSend" that's like "ajaxSend" but cancelable
+  function ajaxBeforeSend(xhr, settings) {
+    var context = settings.context
+    if (settings.beforeSend.call(context, xhr, settings) === false ||
+        triggerGlobal(settings, context, 'ajaxBeforeSend', [xhr, settings]) === false)
+      return false
+
+    triggerGlobal(settings, context, 'ajaxSend', [xhr, settings])
+  }
+  function ajaxSuccess(data, xhr, settings, deferred) {
+    var context = settings.context, status = 'success'
+    settings.success.call(context, data, status, xhr)
+    if (deferred) deferred.resolveWith(context, [data, status, xhr])
+    triggerGlobal(settings, context, 'ajaxSuccess', [xhr, settings, data])
+    ajaxComplete(status, xhr, settings)
+  }
+  // type: "timeout", "error", "abort", "parsererror"
+  function ajaxError(error, type, xhr, settings, deferred) {
+    var context = settings.context
+    settings.error.call(context, xhr, type, error)
+    if (deferred) deferred.rejectWith(context, [xhr, type, error])
+    triggerGlobal(settings, context, 'ajaxError', [xhr, settings, error || type])
+    ajaxComplete(type, xhr, settings)
+  }
+  // status: "success", "notmodified", "error", "timeout", "abort", "parsererror"
+  function ajaxComplete(status, xhr, settings) {
+    var context = settings.context
+    settings.complete.call(context, xhr, status)
+    triggerGlobal(settings, context, 'ajaxComplete', [xhr, settings])
+    ajaxStop(settings)
+  }
+
+  // Empty function, used as default callback
+  function empty() {}
+
+  $.ajaxJSONP = function(options, deferred){
+    if (!('type' in options)) return $.ajax(options)
+
+    var _callbackName = options.jsonpCallback,
+      callbackName = ($.isFunction(_callbackName) ?
+        _callbackName() : _callbackName) || ('jsonp' + (++jsonpID)),
+      script = document.createElement('script'),
+      originalCallback = window[callbackName],
+      responseData,
+      abort = function(errorType) {
+        $(script).triggerHandler('error', errorType || 'abort')
+      },
+      xhr = { abort: abort }, abortTimeout
+
+    if (deferred) deferred.promise(xhr)
+
+    $(script).on('load error', function(e, errorType){
+      clearTimeout(abortTimeout)
+      $(script).off().remove()
+
+      if (e.type == 'error' || !responseData) {
+        ajaxError(null, errorType || 'error', xhr, options, deferred)
+      } else {
+        ajaxSuccess(responseData[0], xhr, options, deferred)
+      }
+
+      window[callbackName] = originalCallback
+      if (responseData && $.isFunction(originalCallback))
+        originalCallback(responseData[0])
+
+      originalCallback = responseData = undefined
+    })
+
+    if (ajaxBeforeSend(xhr, options) === false) {
+      abort('abort')
+      return xhr
+    }
+
+    window[callbackName] = function(){
+      responseData = arguments
+    }
+
+    script.src = options.url.replace(/=\?/, '=' + callbackName)
+    document.head.appendChild(script)
+
+    if (options.timeout > 0) abortTimeout = setTimeout(function(){
+      abort('timeout')
+    }, options.timeout)
+
+    return xhr
+  }
+
+  $.ajaxSettings = {
+    // Default type of request
+    type: 'GET',
+    // Callback that is executed before request
+    beforeSend: empty,
+    // Callback that is executed if the request succeeds
+    success: empty,
+    // Callback that is executed the the server drops error
+    error: empty,
+    // Callback that is executed on request complete (both: error and success)
+    complete: empty,
+    // The context for the callbacks
+    context: null,
+    // Whether to trigger "global" Ajax events
+    global: true,
+    // Transport
+    xhr: function () {
+      return new window.XMLHttpRequest()
+    },
+    // MIME types mapping
+    // IIS returns Javascript as "application/x-javascript"
+    accepts: {
+      script: 'text/javascript, application/javascript, application/x-javascript',
+      json:   jsonType,
+      xml:    'application/xml, text/xml',
+      html:   htmlType,
+      text:   'text/plain'
+    },
+    // Whether the request is to another domain
+    crossDomain: false,
+    // Default timeout
+    timeout: 0,
+    // Whether data should be serialized to string
+    processData: true,
+    // Whether the browser should be allowed to cache GET responses
+    cache: true
+  }
+
+  function mimeToDataType(mime) {
+    if (mime) mime = mime.split(';', 2)[0]
+    return mime && ( mime == htmlType ? 'html' :
+      mime == jsonType ? 'json' :
+      scriptTypeRE.test(mime) ? 'script' :
+      xmlTypeRE.test(mime) && 'xml' ) || 'text'
+  }
+
+  function appendQuery(url, query) {
+    if (query == '') return url
+    return (url + '&' + query).replace(/[&?]{1,2}/, '?')
+  }
+
+  // serialize payload and append it to the URL for GET requests
+  function serializeData(options) {
+    if (options.processData && options.data && $.type(options.data) != "string")
+      options.data = $.param(options.data, options.traditional)
+    if (options.data && (!options.type || options.type.toUpperCase() == 'GET'))
+      options.url = appendQuery(options.url, options.data), options.data = undefined
+  }
+
+  $.ajax = function(options){
+    var settings = $.extend({}, options || {}),
+        deferred = $.Deferred && $.Deferred()
+    for (key in $.ajaxSettings) if (settings[key] === undefined) settings[key] = $.ajaxSettings[key]
+
+    ajaxStart(settings)
+
+    if (!settings.crossDomain) settings.crossDomain = /^([\w-]+:)?\/\/([^\/]+)/.test(settings.url) &&
+      RegExp.$2 != window.location.host
+
+    if (!settings.url) settings.url = window.location.toString()
+    serializeData(settings)
+    if (settings.cache === false) settings.url = appendQuery(settings.url, '_=' + Date.now())
+
+    var dataType = settings.dataType, hasPlaceholder = /=\?/.test(settings.url)
+    if (dataType == 'jsonp' || hasPlaceholder) {
+      if (!hasPlaceholder)
+        settings.url = appendQuery(settings.url,
+          settings.jsonp ? (settings.jsonp + '=?') : settings.jsonp === false ? '' : 'callback=?')
+      return $.ajaxJSONP(settings, deferred)
+    }
+
+    var mime = settings.accepts[dataType],
+        headers = { },
+        setHeader = function(name, value) { headers[name.toLowerCase()] = [name, value] },
+        protocol = /^([\w-]+:)\/\//.test(settings.url) ? RegExp.$1 : window.location.protocol,
+        xhr = settings.xhr(),
+        nativeSetHeader = xhr.setRequestHeader,
+        abortTimeout
+
+    if (deferred) deferred.promise(xhr)
+
+    if (!settings.crossDomain) setHeader('X-Requested-With', 'XMLHttpRequest')
+    setHeader('Accept', mime || '*/*')
+    if (mime = settings.mimeType || mime) {
+      if (mime.indexOf(',') > -1) mime = mime.split(',', 2)[0]
+      xhr.overrideMimeType && xhr.overrideMimeType(mime)
+    }
+    if (settings.contentType || (settings.contentType !== false && settings.data && settings.type.toUpperCase() != 'GET'))
+      setHeader('Content-Type', settings.contentType || 'application/x-www-form-urlencoded')
+
+    if (settings.headers) for (name in settings.headers) setHeader(name, settings.headers[name])
+    xhr.setRequestHeader = setHeader
+
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState == 4) {
+        xhr.onreadystatechange = empty
+        clearTimeout(abortTimeout)
+        var result, error = false
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || (xhr.status == 0 && protocol == 'file:')) {
+          dataType = dataType || mimeToDataType(settings.mimeType || xhr.getResponseHeader('content-type'))
+          result = xhr.responseText
+
+          try {
+            // http://perfectionkills.com/global-eval-what-are-the-options/
+            if (dataType == 'script')    (1,eval)(result)
+            else if (dataType == 'xml')  result = xhr.responseXML
+            else if (dataType == 'json') result = blankRE.test(result) ? null : $.parseJSON(result)
+          } catch (e) { error = e }
+
+          if (error) ajaxError(error, 'parsererror', xhr, settings, deferred)
+          else ajaxSuccess(result, xhr, settings, deferred)
+        } else {
+          ajaxError(xhr.statusText || null, xhr.status ? 'error' : 'abort', xhr, settings, deferred)
+        }
+      }
+    }
+
+    if (ajaxBeforeSend(xhr, settings) === false) {
+      xhr.abort()
+      ajaxError(null, 'abort', xhr, settings, deferred)
+      return xhr
+    }
+
+    if (settings.xhrFields) for (name in settings.xhrFields) xhr[name] = settings.xhrFields[name]
+
+    var async = 'async' in settings ? settings.async : true
+    xhr.open(settings.type, settings.url, async, settings.username, settings.password)
+
+    for (name in headers) nativeSetHeader.apply(xhr, headers[name])
+
+    if (settings.timeout > 0) abortTimeout = setTimeout(function(){
+        xhr.onreadystatechange = empty
+        xhr.abort()
+        ajaxError(null, 'timeout', xhr, settings, deferred)
+      }, settings.timeout)
+
+    // avoid sending empty string (#319)
+    xhr.send(settings.data ? settings.data : null)
+    return xhr
+  }
+
+  // handle optional data/success arguments
+  function parseArguments(url, data, success, dataType) {
+    var hasData = !$.isFunction(data)
+    return {
+      url:      url,
+      data:     hasData  ? data : undefined,
+      success:  !hasData ? data : $.isFunction(success) ? success : undefined,
+      dataType: hasData  ? dataType || success : success
+    }
+  }
+
+  $.get = function(url, data, success, dataType){
+    return $.ajax(parseArguments.apply(null, arguments))
+  }
+
+  $.post = function(url, data, success, dataType){
+    var options = parseArguments.apply(null, arguments)
+    options.type = 'POST'
+    return $.ajax(options)
+  }
+
+  $.getJSON = function(url, data, success){
+    var options = parseArguments.apply(null, arguments)
+    options.dataType = 'json'
+    return $.ajax(options)
+  }
+
+  $.fn.load = function(url, data, success){
+    if (!this.length) return this
+    var self = this, parts = url.split(/\s/), selector,
+        options = parseArguments(url, data, success),
+        callback = options.success
+    if (parts.length > 1) options.url = parts[0], selector = parts[1]
+    options.success = function(response){
+      self.html(selector ?
+        $('<div>').html(response.replace(rscript, "")).find(selector)
+        : response)
+      callback && callback.apply(self, arguments)
+    }
+    $.ajax(options)
+    return this
+  }
+
+  var escape = encodeURIComponent
+
+  function serialize(params, obj, traditional, scope){
+    var type, array = $.isArray(obj), hash = $.isPlainObject(obj)
+    $.each(obj, function(key, value) {
+      type = $.type(value)
+      if (scope) key = traditional ? scope :
+        scope + '[' + (hash || type == 'object' || type == 'array' ? key : '') + ']'
+      // handle data in serializeArray() format
+      if (!scope && array) params.add(value.name, value.value)
+      // recurse into nested objects
+      else if (type == "array" || (!traditional && type == "object"))
+        serialize(params, value, traditional, key)
+      else params.add(key, value)
+    })
+  }
+
+  $.param = function(obj, traditional){
+    var params = []
+    params.add = function(k, v){ this.push(escape(k) + '=' + escape(v)) }
+    serialize(params, obj, traditional)
+    return params.join('&').replace(/%20/g, '+')
+  }
+})(Zepto)
+
+;(function($){
+  $.fn.serializeArray = function() {
+    var result = [], el
+    $([].slice.call(this.get(0).elements)).each(function(){
+      el = $(this)
+      var type = el.attr('type')
+      if (this.nodeName.toLowerCase() != 'fieldset' &&
+        !this.disabled && type != 'submit' && type != 'reset' && type != 'button' &&
+        ((type != 'radio' && type != 'checkbox') || this.checked))
+        result.push({
+          name: el.attr('name'),
+          value: el.val()
+        })
+    })
+    return result
+  }
+
+  $.fn.serialize = function(){
+    var result = []
+    this.serializeArray().forEach(function(elm){
+      result.push(encodeURIComponent(elm.name) + '=' + encodeURIComponent(elm.value))
+    })
+    return result.join('&')
+  }
+
+  $.fn.submit = function(callback) {
+    if (callback) this.bind('submit', callback)
+    else if (this.length) {
+      var event = $.Event('submit')
+      this.eq(0).trigger(event)
+      if (!event.isDefaultPrevented()) this.get(0).submit()
+    }
+    return this
+  }
+
+})(Zepto)
+
+;(function($){
+  // __proto__ doesn't exist on IE<11, so redefine
+  // the Z function to use object extension instead
+  if (!('__proto__' in {})) {
+    $.extend($.zepto, {
+      Z: function(dom, selector){
+        dom = dom || []
+        $.extend(dom, $.fn)
+        dom.selector = selector || ''
+        dom.__Z = true
+        return dom
+      },
+      // this is a kludge but works
+      isZ: function(object){
+        return $.type(object) === 'array' && '__Z' in object
+      }
+    })
+  }
+
+  // getComputedStyle shouldn't freak out when called
+  // without a valid element as argument
+  try {
+    getComputedStyle(undefined)
+  } catch(e) {
+    var nativeGetComputedStyle = getComputedStyle;
+    window.getComputedStyle = function(element){
+      try {
+        return nativeGetComputedStyle(element)
+      } catch(e) {
+        return null
+      }
+    }
+  }
+})(Zepto)//     Zepto.js
+//     (c) 2010-2014 Thomas Fuchs
+//     Zepto.js may be freely distributed under the MIT license.
+
+;(function($){
+  var touch = {},
+    touchTimeout, tapTimeout, swipeTimeout, longTapTimeout,
+    longTapDelay = 750,
+    gesture
+
+  function swipeDirection(x1, x2, y1, y2) {
+    return Math.abs(x1 - x2) >=
+      Math.abs(y1 - y2) ? (x1 - x2 > 0 ? 'Left' : 'Right') : (y1 - y2 > 0 ? 'Up' : 'Down')
+  }
+
+  function longTap() {
+    longTapTimeout = null
+    if (touch.last) {
+      touch.el.trigger('longTap')
+      touch = {}
+    }
+  }
+
+  function cancelLongTap() {
+    if (longTapTimeout) clearTimeout(longTapTimeout)
+    longTapTimeout = null
+  }
+
+  function cancelAll() {
+    if (touchTimeout) clearTimeout(touchTimeout)
+    if (tapTimeout) clearTimeout(tapTimeout)
+    if (swipeTimeout) clearTimeout(swipeTimeout)
+    if (longTapTimeout) clearTimeout(longTapTimeout)
+    touchTimeout = tapTimeout = swipeTimeout = longTapTimeout = null
+    touch = {}
+  }
+
+  function isPrimaryTouch(event){
+    return (event.pointerType == 'touch' ||
+      event.pointerType == event.MSPOINTER_TYPE_TOUCH)
+      && event.isPrimary
+  }
+
+  function isPointerEventType(e, type){
+    return (e.type == 'pointer'+type ||
+      e.type.toLowerCase() == 'mspointer'+type)
+  }
+
+  $(document).ready(function(){
+    var now, delta, deltaX = 0, deltaY = 0, firstTouch, _isPointerType
+
+    if ('MSGesture' in window) {
+      gesture = new MSGesture()
+      gesture.target = document.body
+    }
+
+    $(document)
+      .bind('MSGestureEnd', function(e){
+        var swipeDirectionFromVelocity =
+          e.velocityX > 1 ? 'Right' : e.velocityX < -1 ? 'Left' : e.velocityY > 1 ? 'Down' : e.velocityY < -1 ? 'Up' : null;
+        if (swipeDirectionFromVelocity) {
+          touch.el.trigger('swipe')
+          touch.el.trigger('swipe'+ swipeDirectionFromVelocity)
+        }
+      })
+      .on('touchstart MSPointerDown pointerdown', function(e){
+        if((_isPointerType = isPointerEventType(e, 'down')) &&
+          !isPrimaryTouch(e)) return
+        firstTouch = _isPointerType ? e : e.touches[0]
+        if (e.touches && e.touches.length === 1 && touch.x2) {
+          // Clear out touch movement data if we have it sticking around
+          // This can occur if touchcancel doesn't fire due to preventDefault, etc.
+          touch.x2 = undefined
+          touch.y2 = undefined
+        }
+        now = Date.now()
+        delta = now - (touch.last || now)
+        touch.el = $('tagName' in firstTouch.target ?
+          firstTouch.target : firstTouch.target.parentNode)
+        touchTimeout && clearTimeout(touchTimeout)
+        touch.x1 = firstTouch.pageX
+        touch.y1 = firstTouch.pageY
+        if (delta > 0 && delta <= 250) touch.isDoubleTap = true
+        touch.last = now
+        longTapTimeout = setTimeout(longTap, longTapDelay)
+        // adds the current touch contact for IE gesture recognition
+        if (gesture && _isPointerType) gesture.addPointer(e.pointerId);
+      })
+      .on('touchmove MSPointerMove pointermove', function(e){
+        if((_isPointerType = isPointerEventType(e, 'move')) &&
+          !isPrimaryTouch(e)) return
+        firstTouch = _isPointerType ? e : e.touches[0]
+        cancelLongTap()
+        touch.x2 = firstTouch.pageX
+        touch.y2 = firstTouch.pageY
+
+        deltaX += Math.abs(touch.x1 - touch.x2)
+        deltaY += Math.abs(touch.y1 - touch.y2)
+      })
+      .on('touchend MSPointerUp pointerup', function(e){
+        if((_isPointerType = isPointerEventType(e, 'up')) &&
+          !isPrimaryTouch(e)) return
+        cancelLongTap()
+
+        // swipe
+        if ((touch.x2 && Math.abs(touch.x1 - touch.x2) > 30) ||
+            (touch.y2 && Math.abs(touch.y1 - touch.y2) > 30))
+
+          swipeTimeout = setTimeout(function() {
+            touch.el.trigger('swipe')
+            touch.el.trigger('swipe' + (swipeDirection(touch.x1, touch.x2, touch.y1, touch.y2)))
+            touch = {}
+          }, 0)
+
+        // normal tap
+        else if ('last' in touch)
+          // don't fire tap when delta position changed by more than 30 pixels,
+          // for instance when moving to a point and back to origin
+          if (deltaX < 30 && deltaY < 30) {
+            // delay by one tick so we can cancel the 'tap' event if 'scroll' fires
+            // ('tap' fires before 'scroll')
+            tapTimeout = setTimeout(function() {
+
+              // trigger universal 'tap' with the option to cancelTouch()
+              // (cancelTouch cancels processing of single vs double taps for faster 'tap' response)
+              var event = $.Event('tap')
+              event.cancelTouch = cancelAll
+              touch.el.trigger(event)
+
+              // trigger double tap immediately
+              if (touch.isDoubleTap) {
+                if (touch.el) touch.el.trigger('doubleTap')
+                touch = {}
+              }
+
+              // trigger single tap after 250ms of inactivity
+              else {
+                touchTimeout = setTimeout(function(){
+                  touchTimeout = null
+                  if (touch.el) touch.el.trigger('singleTap')
+                  touch = {}
+                }, 250)
+              }
+            }, 0)
+          } else {
+            touch = {}
+          }
+          deltaX = deltaY = 0
+
+      })
+      // when the browser window loses focus,
+      // for example when a modal dialog is shown,
+      // cancel all ongoing events
+      .on('touchcancel MSPointerCancel pointercancel', cancelAll)
+
+    // scrolling the window indicates intention of the user
+    // to scroll, not tap or swipe, so cancel all ongoing events
+    $(window).on('scroll', cancelAll)
+  })
+
+  ;['swipe', 'swipeLeft', 'swipeRight', 'swipeUp', 'swipeDown',
+    'doubleTap', 'tap', 'singleTap', 'longTap'].forEach(function(eventName){
+    $.fn[eventName] = function(callback){ return this.on(eventName, callback) }
+  })
+})(Zepto);/*!
+ * imagesLoaded PACKAGED v3.1.1
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+
+/*!
+ * EventEmitter v4.2.6 - git.io/ee
+ * Oliver Caldwell
+ * MIT license
+ * @preserve
+ */
+
+(function () {
+
+
+  /**
+   * Class for managing events.
+   * Can be extended to provide event functionality in other classes.
+   *
+   * @class EventEmitter Manages event registering and emitting.
+   */
+  function EventEmitter() {}
+
+  // Shortcuts to improve speed and size
+  var proto = EventEmitter.prototype;
+  var exports = this;
+  var originalGlobalValue = exports.EventEmitter;
+
+  /**
+   * Finds the index of the listener for the event in it's storage array.
+   *
+   * @param {Function[]} listeners Array of listeners to search through.
+   * @param {Function} listener Method to look for.
+   * @return {Number} Index of the specified listener, -1 if not found
+   * @api private
+   */
+  function indexOfListener(listeners, listener) {
+    var i = listeners.length;
+    while (i--) {
+      if (listeners[i].listener === listener) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
+  /**
+   * Alias a method while keeping the context correct, to allow for overwriting of target method.
+   *
+   * @param {String} name The name of the target method.
+   * @return {Function} The aliased method
+   * @api private
+   */
+  function alias(name) {
+    return function aliasClosure() {
+      return this[name].apply(this, arguments);
+    };
+  }
+
+  /**
+   * Returns the listener array for the specified event.
+   * Will initialise the event object and listener arrays if required.
+   * Will return an object if you use a regex search. The object contains keys for each matched event. So /ba[rz]/ might return an object containing bar and baz. But only if you have either defined them with defineEvent or added some listeners to them.
+   * Each property in the object response is an array of listener functions.
+   *
+   * @param {String|RegExp} evt Name of the event to return the listeners from.
+   * @return {Function[]|Object} All listener functions for the event.
+   */
+  proto.getListeners = function getListeners(evt) {
+    var events = this._getEvents();
+    var response;
+    var key;
+
+    // Return a concatenated array of all matching events if
+    // the selector is a regular expression.
+    if (typeof evt === 'object') {
+      response = {};
+      for (key in events) {
+        if (events.hasOwnProperty(key) && evt.test(key)) {
+          response[key] = events[key];
+        }
+      }
+    }
+    else {
+      response = events[evt] || (events[evt] = []);
+    }
+
+    return response;
+  };
+
+  /**
+   * Takes a list of listener objects and flattens it into a list of listener functions.
+   *
+   * @param {Object[]} listeners Raw listener objects.
+   * @return {Function[]} Just the listener functions.
+   */
+  proto.flattenListeners = function flattenListeners(listeners) {
+    var flatListeners = [];
+    var i;
+
+    for (i = 0; i < listeners.length; i += 1) {
+      flatListeners.push(listeners[i].listener);
+    }
+
+    return flatListeners;
+  };
+
+  /**
+   * Fetches the requested listeners via getListeners but will always return the results inside an object. This is mainly for internal use but others may find it useful.
+   *
+   * @param {String|RegExp} evt Name of the event to return the listeners from.
+   * @return {Object} All listener functions for an event in an object.
+   */
+  proto.getListenersAsObject = function getListenersAsObject(evt) {
+    var listeners = this.getListeners(evt);
+    var response;
+
+    if (listeners instanceof Array) {
+      response = {};
+      response[evt] = listeners;
+    }
+
+    return response || listeners;
+  };
+
+  /**
+   * Adds a listener function to the specified event.
+   * The listener will not be added if it is a duplicate.
+   * If the listener returns true then it will be removed after it is called.
+   * If you pass a regular expression as the event name then the listener will be added to all events that match it.
+   *
+   * @param {String|RegExp} evt Name of the event to attach the listener to.
+   * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.addListener = function addListener(evt, listener) {
+    var listeners = this.getListenersAsObject(evt);
+    var listenerIsWrapped = typeof listener === 'object';
+    var key;
+
+    for (key in listeners) {
+      if (listeners.hasOwnProperty(key) && indexOfListener(listeners[key], listener) === -1) {
+        listeners[key].push(listenerIsWrapped ? listener : {
+          listener: listener,
+          once: false
+        });
+      }
+    }
+
+    return this;
+  };
+
+  /**
+   * Alias of addListener
+   */
+  proto.on = alias('addListener');
+
+  /**
+   * Semi-alias of addListener. It will add a listener that will be
+   * automatically removed after it's first execution.
+   *
+   * @param {String|RegExp} evt Name of the event to attach the listener to.
+   * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.addOnceListener = function addOnceListener(evt, listener) {
+    return this.addListener(evt, {
+      listener: listener,
+      once: true
+    });
+  };
+
+  /**
+   * Alias of addOnceListener.
+   */
+  proto.once = alias('addOnceListener');
+
+  /**
+   * Defines an event name. This is required if you want to use a regex to add a listener to multiple events at once. If you don't do this then how do you expect it to know what event to add to? Should it just add to every possible match for a regex? No. That is scary and bad.
+   * You need to tell it what event names should be matched by a regex.
+   *
+   * @param {String} evt Name of the event to create.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.defineEvent = function defineEvent(evt) {
+    this.getListeners(evt);
+    return this;
+  };
+
+  /**
+   * Uses defineEvent to define multiple events.
+   *
+   * @param {String[]} evts An array of event names to define.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.defineEvents = function defineEvents(evts) {
+    for (var i = 0; i < evts.length; i += 1) {
+      this.defineEvent(evts[i]);
+    }
+    return this;
+  };
+
+  /**
+   * Removes a listener function from the specified event.
+   * When passed a regular expression as the event name, it will remove the listener from all events that match it.
+   *
+   * @param {String|RegExp} evt Name of the event to remove the listener from.
+   * @param {Function} listener Method to remove from the event.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.removeListener = function removeListener(evt, listener) {
+    var listeners = this.getListenersAsObject(evt);
+    var index;
+    var key;
+
+    for (key in listeners) {
+      if (listeners.hasOwnProperty(key)) {
+        index = indexOfListener(listeners[key], listener);
+
+        if (index !== -1) {
+          listeners[key].splice(index, 1);
+        }
+      }
+    }
+
+    return this;
+  };
+
+  /**
+   * Alias of removeListener
+   */
+  proto.off = alias('removeListener');
+
+  /**
+   * Adds listeners in bulk using the manipulateListeners method.
+   * If you pass an object as the second argument you can add to multiple events at once. The object should contain key value pairs of events and listeners or listener arrays. You can also pass it an event name and an array of listeners to be added.
+   * You can also pass it a regular expression to add the array of listeners to all events that match it.
+   * Yeah, this function does quite a bit. That's probably a bad thing.
+   *
+   * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add to multiple events at once.
+   * @param {Function[]} [listeners] An optional array of listener functions to add.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.addListeners = function addListeners(evt, listeners) {
+    // Pass through to manipulateListeners
+    return this.manipulateListeners(false, evt, listeners);
+  };
+
+  /**
+   * Removes listeners in bulk using the manipulateListeners method.
+   * If you pass an object as the second argument you can remove from multiple events at once. The object should contain key value pairs of events and listeners or listener arrays.
+   * You can also pass it an event name and an array of listeners to be removed.
+   * You can also pass it a regular expression to remove the listeners from all events that match it.
+   *
+   * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to remove from multiple events at once.
+   * @param {Function[]} [listeners] An optional array of listener functions to remove.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.removeListeners = function removeListeners(evt, listeners) {
+    // Pass through to manipulateListeners
+    return this.manipulateListeners(true, evt, listeners);
+  };
+
+  /**
+   * Edits listeners in bulk. The addListeners and removeListeners methods both use this to do their job. You should really use those instead, this is a little lower level.
+   * The first argument will determine if the listeners are removed (true) or added (false).
+   * If you pass an object as the second argument you can add/remove from multiple events at once. The object should contain key value pairs of events and listeners or listener arrays.
+   * You can also pass it an event name and an array of listeners to be added/removed.
+   * You can also pass it a regular expression to manipulate the listeners of all events that match it.
+   *
+   * @param {Boolean} remove True if you want to remove listeners, false if you want to add.
+   * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add/remove from multiple events at once.
+   * @param {Function[]} [listeners] An optional array of listener functions to add/remove.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.manipulateListeners = function manipulateListeners(remove, evt, listeners) {
+    var i;
+    var value;
+    var single = remove ? this.removeListener : this.addListener;
+    var multiple = remove ? this.removeListeners : this.addListeners;
+
+    // If evt is an object then pass each of it's properties to this method
+    if (typeof evt === 'object' && !(evt instanceof RegExp)) {
+      for (i in evt) {
+        if (evt.hasOwnProperty(i) && (value = evt[i])) {
+          // Pass the single listener straight through to the singular method
+          if (typeof value === 'function') {
+            single.call(this, i, value);
+          }
+          else {
+            // Otherwise pass back to the multiple function
+            multiple.call(this, i, value);
+          }
+        }
+      }
+    }
+    else {
+      // So evt must be a string
+      // And listeners must be an array of listeners
+      // Loop over it and pass each one to the multiple method
+      i = listeners.length;
+      while (i--) {
+        single.call(this, evt, listeners[i]);
+      }
+    }
+
+    return this;
+  };
+
+  /**
+   * Removes all listeners from a specified event.
+   * If you do not specify an event then all listeners will be removed.
+   * That means every event will be emptied.
+   * You can also pass a regex to remove all events that match it.
+   *
+   * @param {String|RegExp} [evt] Optional name of the event to remove all listeners for. Will remove from every event if not passed.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.removeEvent = function removeEvent(evt) {
+    var type = typeof evt;
+    var events = this._getEvents();
+    var key;
+
+    // Remove different things depending on the state of evt
+    if (type === 'string') {
+      // Remove all listeners for the specified event
+      delete events[evt];
+    }
+    else if (type === 'object') {
+      // Remove all events matching the regex.
+      for (key in events) {
+        if (events.hasOwnProperty(key) && evt.test(key)) {
+          delete events[key];
+        }
+      }
+    }
+    else {
+      // Remove all listeners in all events
+      delete this._events;
+    }
+
+    return this;
+  };
+
+  /**
+   * Alias of removeEvent.
+   *
+   * Added to mirror the node API.
+   */
+  proto.removeAllListeners = alias('removeEvent');
+
+  /**
+   * Emits an event of your choice.
+   * When emitted, every listener attached to that event will be executed.
+   * If you pass the optional argument array then those arguments will be passed to every listener upon execution.
+   * Because it uses `apply`, your array of arguments will be passed as if you wrote them out separately.
+   * So they will not arrive within the array on the other side, they will be separate.
+   * You can also pass a regular expression to emit to all events that match it.
+   *
+   * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
+   * @param {Array} [args] Optional array of arguments to be passed to each listener.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.emitEvent = function emitEvent(evt, args) {
+    var listeners = this.getListenersAsObject(evt);
+    var listener;
+    var i;
+    var key;
+    var response;
+
+    for (key in listeners) {
+      if (listeners.hasOwnProperty(key)) {
+        i = listeners[key].length;
+
+        while (i--) {
+          // If the listener returns true then it shall be removed from the event
+          // The function is executed either with a basic call or an apply if there is an args array
+          listener = listeners[key][i];
+
+          if (listener.once === true) {
+            this.removeListener(evt, listener.listener);
+          }
+
+          response = listener.listener.apply(this, args || []);
+
+          if (response === this._getOnceReturnValue()) {
+            this.removeListener(evt, listener.listener);
+          }
+        }
+      }
+    }
+
+    return this;
+  };
+
+  /**
+   * Alias of emitEvent
+   */
+  proto.trigger = alias('emitEvent');
+
+  /**
+   * Subtly different from emitEvent in that it will pass its arguments on to the listeners, as opposed to taking a single array of arguments to pass on.
+   * As with emitEvent, you can pass a regex in place of the event name to emit to all events that match it.
+   *
+   * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
+   * @param {...*} Optional additional arguments to be passed to each listener.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.emit = function emit(evt) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return this.emitEvent(evt, args);
+  };
+
+  /**
+   * Sets the current value to check against when executing listeners. If a
+   * listeners return value matches the one set here then it will be removed
+   * after execution. This value defaults to true.
+   *
+   * @param {*} value The new value to check for when executing listeners.
+   * @return {Object} Current instance of EventEmitter for chaining.
+   */
+  proto.setOnceReturnValue = function setOnceReturnValue(value) {
+    this._onceReturnValue = value;
+    return this;
+  };
+
+  /**
+   * Fetches the current value to check against when executing listeners. If
+   * the listeners return value matches this one then it should be removed
+   * automatically. It will return true by default.
+   *
+   * @return {*|Boolean} The current value to check for or the default, true.
+   * @api private
+   */
+  proto._getOnceReturnValue = function _getOnceReturnValue() {
+    if (this.hasOwnProperty('_onceReturnValue')) {
+      return this._onceReturnValue;
+    }
+    else {
+      return true;
+    }
+  };
+
+  /**
+   * Fetches the events object and creates one if required.
+   *
+   * @return {Object} The events storage object.
+   * @api private
+   */
+  proto._getEvents = function _getEvents() {
+    return this._events || (this._events = {});
+  };
+
+  /**
+   * Reverts the global {@link EventEmitter} to its previous value and returns a reference to this version.
+   *
+   * @return {Function} Non conflicting EventEmitter class.
+   */
+  EventEmitter.noConflict = function noConflict() {
+    exports.EventEmitter = originalGlobalValue;
+    return EventEmitter;
+  };
+
+  // Expose the class either via AMD, CommonJS or the global object
+  if (typeof define === 'function' && define.amd) {
+    define('eventEmitter/EventEmitter',[],function () {
+      return EventEmitter;
+    });
+  }
+  else if (typeof module === 'object' && module.exports){
+    module.exports = EventEmitter;
+  }
+  else {
+    this.EventEmitter = EventEmitter;
+  }
+}.call(this));
+
+/*!
+ * eventie v1.0.4
+ * event binding helper
+ *   eventie.bind( elem, 'click', myFn )
+ *   eventie.unbind( elem, 'click', myFn )
+ */
+
+/*jshint browser: true, undef: true, unused: true */
+/*global define: false */
+
+( function( window ) {
+
+
+
+var docElem = document.documentElement;
+
+var bind = function() {};
+
+function getIEEvent( obj ) {
+  var event = window.event;
+  // add event.target
+  event.target = event.target || event.srcElement || obj;
+  return event;
+}
+
+if ( docElem.addEventListener ) {
+  bind = function( obj, type, fn ) {
+    obj.addEventListener( type, fn, false );
+  };
+} else if ( docElem.attachEvent ) {
+  bind = function( obj, type, fn ) {
+    obj[ type + fn ] = fn.handleEvent ?
+      function() {
+        var event = getIEEvent( obj );
+        fn.handleEvent.call( fn, event );
+      } :
+      function() {
+        var event = getIEEvent( obj );
+        fn.call( obj, event );
+      };
+    obj.attachEvent( "on" + type, obj[ type + fn ] );
+  };
+}
+
+var unbind = function() {};
+
+if ( docElem.removeEventListener ) {
+  unbind = function( obj, type, fn ) {
+    obj.removeEventListener( type, fn, false );
+  };
+} else if ( docElem.detachEvent ) {
+  unbind = function( obj, type, fn ) {
+    obj.detachEvent( "on" + type, obj[ type + fn ] );
+    try {
+      delete obj[ type + fn ];
+    } catch ( err ) {
+      // can't delete window object properties
+      obj[ type + fn ] = undefined;
+    }
+  };
+}
+
+var eventie = {
+  bind: bind,
+  unbind: unbind
+};
+
+// transport
+if ( typeof define === 'function' && define.amd ) {
+  // AMD
+  define( 'eventie/eventie',eventie );
+} else {
+  // browser global
+  window.eventie = eventie;
+}
+
+})( this );
+
+/*!
+ * imagesLoaded v3.1.1
+ * JavaScript is all like "You images are done yet or what?"
+ * MIT License
+ */
+
+( function( window ) {
+
+
+
+var $ = window.jQuery;
+var console = window.console;
+var hasConsole = typeof console !== 'undefined';
+
+// -------------------------- helpers -------------------------- //
+
+// extend objects
+function extend( a, b ) {
+  for ( var prop in b ) {
+    a[ prop ] = b[ prop ];
+  }
+  return a;
+}
+
+var objToString = Object.prototype.toString;
+function isArray( obj ) {
+  return objToString.call( obj ) === '[object Array]';
+}
+
+// turn element or nodeList into an array
+function makeArray( obj ) {
+  var ary = [];
+  if ( isArray( obj ) ) {
+    // use object if already an array
+    ary = obj;
+  } else if ( typeof obj.length === 'number' ) {
+    // convert nodeList to array
+    for ( var i=0, len = obj.length; i < len; i++ ) {
+      ary.push( obj[i] );
+    }
+  } else {
+    // array of single index
+    ary.push( obj );
+  }
+  return ary;
+}
+
+// --------------------------  -------------------------- //
+
+function defineImagesLoaded( EventEmitter, eventie ) {
+
+  /**
+   * @param {Array, Element, NodeList, String} elem
+   * @param {Object or Function} options - if function, use as callback
+   * @param {Function} onAlways - callback function
+   */
+  function ImagesLoaded( elem, options, onAlways ) {
+    // coerce ImagesLoaded() without new, to be new ImagesLoaded()
+    if ( !( this instanceof ImagesLoaded ) ) {
+      return new ImagesLoaded( elem, options );
+    }
+    // use elem as selector string
+    if ( typeof elem === 'string' ) {
+      elem = document.querySelectorAll( elem );
+    }
+
+    this.elements = makeArray( elem );
+    this.options = extend( {}, this.options );
+
+    if ( typeof options === 'function' ) {
+      onAlways = options;
+    } else {
+      extend( this.options, options );
+    }
+
+    if ( onAlways ) {
+      this.on( 'always', onAlways );
+    }
+
+    this.getImages();
+
+    if ( $ ) {
+      // add jQuery Deferred object
+      this.jqDeferred = new $.Deferred();
+    }
+
+    // HACK check async to allow time to bind listeners
+    var _this = this;
+    setTimeout( function() {
+      _this.check();
+    });
+  }
+
+  ImagesLoaded.prototype = new EventEmitter();
+
+  ImagesLoaded.prototype.options = {};
+
+  ImagesLoaded.prototype.getImages = function() {
+    this.images = [];
+
+    // filter & find items if we have an item selector
+    for ( var i=0, len = this.elements.length; i < len; i++ ) {
+      var elem = this.elements[i];
+      // filter siblings
+      if ( elem.nodeName === 'IMG' ) {
+        this.addImage( elem );
+      }
+      // find children
+      var childElems = elem.querySelectorAll('img');
+      // concat childElems to filterFound array
+      for ( var j=0, jLen = childElems.length; j < jLen; j++ ) {
+        var img = childElems[j];
+        this.addImage( img );
+      }
+    }
+  };
+
+  /**
+   * @param {Image} img
+   */
+  ImagesLoaded.prototype.addImage = function( img ) {
+    var loadingImage = new LoadingImage( img );
+    this.images.push( loadingImage );
+  };
+
+  ImagesLoaded.prototype.check = function() {
+    var _this = this;
+    var checkedCount = 0;
+    var length = this.images.length;
+    this.hasAnyBroken = false;
+    // complete if no images
+    if ( !length ) {
+      this.complete();
+      return;
+    }
+
+    function onConfirm( image, message ) {
+      if ( _this.options.debug && hasConsole ) {
+        console.log( 'confirm', image, message );
+      }
+
+      _this.progress( image );
+      checkedCount++;
+      if ( checkedCount === length ) {
+        _this.complete();
+      }
+      return true; // bind once
+    }
+
+    for ( var i=0; i < length; i++ ) {
+      var loadingImage = this.images[i];
+      loadingImage.on( 'confirm', onConfirm );
+      loadingImage.check();
+    }
+  };
+
+  ImagesLoaded.prototype.progress = function( image ) {
+    this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
+    // HACK - Chrome triggers event before object properties have changed. #83
+    var _this = this;
+    setTimeout( function() {
+      _this.emit( 'progress', _this, image );
+      if ( _this.jqDeferred ) {
+        _this.jqDeferred.notify( _this, image );
+      }
+    });
+  };
+
+  ImagesLoaded.prototype.complete = function() {
+    var eventName = this.hasAnyBroken ? 'fail' : 'done';
+    this.isComplete = true;
+    var _this = this;
+    // HACK - another setTimeout so that confirm happens after progress
+    setTimeout( function() {
+      _this.emit( eventName, _this );
+      _this.emit( 'always', _this );
+      if ( _this.jqDeferred ) {
+        var jqMethod = _this.hasAnyBroken ? 'reject' : 'resolve';
+        _this.jqDeferred[ jqMethod ]( _this );
+      }
+    });
+  };
+
+  // -------------------------- jquery -------------------------- //
+
+  if ( $ ) {
+    $.fn.imagesLoaded = function( options, callback ) {
+      var instance = new ImagesLoaded( this, options, callback );
+      return instance.jqDeferred.promise( $(this) );
+    };
+  }
+
+
+  // --------------------------  -------------------------- //
+
+  function LoadingImage( img ) {
+    this.img = img;
+  }
+
+  LoadingImage.prototype = new EventEmitter();
+
+  LoadingImage.prototype.check = function() {
+    // first check cached any previous images that have same src
+    var resource = cache[ this.img.src ] || new Resource( this.img.src );
+    if ( resource.isConfirmed ) {
+      this.confirm( resource.isLoaded, 'cached was confirmed' );
+      return;
+    }
+
+    // If complete is true and browser supports natural sizes,
+    // try to check for image status manually.
+    if ( this.img.complete && this.img.naturalWidth !== undefined ) {
+      // report based on naturalWidth
+      this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+      return;
+    }
+
+    // If none of the checks above matched, simulate loading on detached element.
+    var _this = this;
+    resource.on( 'confirm', function( resrc, message ) {
+      _this.confirm( resrc.isLoaded, message );
+      return true;
+    });
+
+    resource.check();
+  };
+
+  LoadingImage.prototype.confirm = function( isLoaded, message ) {
+    this.isLoaded = isLoaded;
+    this.emit( 'confirm', this, message );
+  };
+
+  // -------------------------- Resource -------------------------- //
+
+  // Resource checks each src, only once
+  // separate class from LoadingImage to prevent memory leaks. See #115
+
+  var cache = {};
+
+  function Resource( src ) {
+    this.src = src;
+    // add to cache
+    cache[ src ] = this;
+  }
+
+  Resource.prototype = new EventEmitter();
+
+  Resource.prototype.check = function() {
+    // only trigger checking once
+    if ( this.isChecked ) {
+      return;
+    }
+    // simulate loading on detached element
+    var proxyImage = new Image();
+    eventie.bind( proxyImage, 'load', this );
+    eventie.bind( proxyImage, 'error', this );
+    proxyImage.src = this.src;
+    // set flag
+    this.isChecked = true;
+  };
+
+  // ----- events ----- //
+
+  // trigger specified handler for event type
+  Resource.prototype.handleEvent = function( event ) {
+    var method = 'on' + event.type;
+    if ( this[ method ] ) {
+      this[ method ]( event );
+    }
+  };
+
+  Resource.prototype.onload = function( event ) {
+    this.confirm( true, 'onload' );
+    this.unbindProxyEvents( event );
+  };
+
+  Resource.prototype.onerror = function( event ) {
+    this.confirm( false, 'onerror' );
+    this.unbindProxyEvents( event );
+  };
+
+  // ----- confirm ----- //
+
+  Resource.prototype.confirm = function( isLoaded, message ) {
+    this.isConfirmed = true;
+    this.isLoaded = isLoaded;
+    this.emit( 'confirm', this, message );
+  };
+
+  Resource.prototype.unbindProxyEvents = function( event ) {
+    eventie.unbind( event.target, 'load', this );
+    eventie.unbind( event.target, 'error', this );
+  };
+
+  // -----  ----- //
+
+  return ImagesLoaded;
+}
+
+// -------------------------- transport -------------------------- //
+
+if ( typeof define === 'function' && define.amd ) {
+  // AMD
+  define( [
+      'eventEmitter/EventEmitter',
+      'eventie/eventie'
+    ],
+    defineImagesLoaded );
+} else {
+  // browser global
+  window.imagesLoaded = defineImagesLoaded(
+    window.EventEmitter,
+    window.eventie
+  );
+}
+
+})( window );(function() {
+  var $background, $backgroundItems, $code, $codeMask, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $halfViewportHeights, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $viewportHeights, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, MIXPANEL_ID, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, copyForegroundContentToBackgroundForPhone, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockCodeMask, popLockForeground, renderHeaderBackgrounds, renderSocialShares, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIScroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
+
+  MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f";
+
+  TOTAL_HEADER_BACKGROUNDS = 3;
+
+  SCROLL_TO_EL_TIME = 700;
+
+  GAP_PERCENT_OF_VIEWPORT = 0.5;
+
+  CONTENT_GAP_PERCENT_OF_VIEWPORT = 0.8;
+
+  MID_FADE_PERCENT = 0.5;
+
+  FADE_GAP_OF_BLACK = 0.6;
+
+  startOffest = function(vpHeight) {
+    return 0;
+  };
+
+  END_OFFSET = 1.1;
+
+  endOffest = function(vpHeight) {
+    return vpHeight * END_OFFSET;
+  };
+
+  $scroller = null;
+
+  $backgroundItems = null;
+
+  $foreground = null;
+
+  $mainHeader = null;
+
+  $content = null;
+
+  $wrapper = null;
+
+  $mainArrow = null;
+
+  $foregroundItems = null;
+
+  $footer = null;
+
+  $background = null;
+
+  $fgFacebookLink = null;
+
+  $fgTwitterLink = null;
+
+  $headerLogo = null;
+
+  $headerBackgrounds = null;
+
+  $firstForegroundItem = null;
+
+  $viewportHeights = null;
+
+  $halfViewportHeights = null;
+
+  $codeMask = null;
+
+  $code = null;
+
+  myScroll = null;
+
+  contentGap = 0;
+
+  scrollTop = 0;
+
+  viewportHeight = 0;
+
+  init = function() {
+    renderHeaderBackgrounds();
+    cacheElements();
+    $(window).on('resize', onResize);
+    onResize();
+    setupIScroll();
+    $mainArrow.click(onClickHeaderDownArrow);
+    $mainArrow.on('tap', onClickHeaderDownArrow);
+    $fgFacebookLink.click(shareOnFacebook);
+    $fgTwitterLink.click(shareOnTwitter);
+    setContentGap();
+    transitionHeaderBackground();
+    renderSocialShares();
+    mixpanel.init(MIXPANEL_ID);
+    mixpanel.track("Viewed page");
+    return copyForegroundContentToBackgroundForPhone();
+  };
+
+  renderHeaderBackgrounds = function() {
+    var i;
+    $('#header-background ul').html(((function() {
+      var _i, _results;
+      _results = [];
+      for (i = _i = 0; 0 <= TOTAL_HEADER_BACKGROUNDS ? _i <= TOTAL_HEADER_BACKGROUNDS : _i >= TOTAL_HEADER_BACKGROUNDS; i = 0 <= TOTAL_HEADER_BACKGROUNDS ? ++_i : --_i) {
+        _results.push("<li style='background-image: url(images/header/" + i + ".jpg)'></li>");
+      }
+      return _results;
+    })()).join(''));
+    return $('#header-background li').first().show();
+  };
+
+  renderSocialShares = function() {
+    var shareUrl;
+    shareUrl = "http://2013.artsy.net/" || location.href;
+    $.ajax({
+      url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=" + shareUrl,
+      success: function(res) {
+        return $('#social-button-facebook-count').html($(res).find('share_count').text() || 0).show();
+      }
+    });
+    window.twitterCountJSONPCallback = function(res) {
+      if (res.count == null) {
+        return;
+      }
+      return $('#social-button-twitter-count').html(res.count || 0).show();
+    };
+    return $.ajax({
+      url: "http://urls.api.twitter.com/1/urls/count.json?url=" + shareUrl + "&callback=twitterCountJSONPCallback",
+      dataType: 'jsonp'
+    });
+  };
+
+  setupIScroll = function() {
+    $wrapper.height(viewportHeight);
+    myScroll = new IScroll('#wrapper', {
+      probeType: 3,
+      mouseWheel: true
+    });
+    myScroll.on('scroll', setScrollTop);
+    myScroll.on('scrollEnd', setScrollTop);
+    myScroll.on('scroll', onScroll);
+    myScroll.on('scrollEnd', onScroll);
+    return document.addEventListener('touchmove', (function(e) {
+      return e.preventDefault();
+    }), false);
+  };
+
+  copyForegroundContentToBackgroundForPhone = function() {
+    return $foregroundItems.each(function(i, el) {
+      var $container;
+      $container = $backgroundItems.eq(i).find('.phone-foreground-container');
+      return $container.html("<div class='phone-foreground-content'>" + $(el).html() + "</div>");
+    });
+  };
+
+  cacheElements = function() {
+    $scroller = $('#scroller');
+    $backgroundItems = $('#background-content > li');
+    $foreground = $('#foreground');
+    $foregroundItems = $("#foreground li");
+    $mainHeader = $('#main-header');
+    $content = $('#content');
+    $wrapper = $('#wrapper');
+    $mainArrow = $('#main-header-down-arrow');
+    $footer = $('#footer');
+    $background = $('#background');
+    $fgFacebookLink = $('#foreground .social-button-facebook');
+    $fgTwitterLink = $('#foreground .social-button-twitter');
+    $headerBackgrounds = $('#header-background li');
+    $headerLogo = $('#main-header-logo');
+    $firstForegroundItem = $('#foreground li:first-child');
+    $viewportHeights = $('.viewport-height');
+    $halfViewportHeights = $('.half-viewport-height');
+    $codeMask = $('#background-code-mask');
+    return $code = $('#background-code');
+  };
+
+  offset = function($el) {
+    var top, _ref, _ref1, _ref2;
+    top = -(((_ref = $scroller.offset()) != null ? _ref.top : void 0) - ((_ref1 = $el.offset()) != null ? _ref1.top : void 0));
+    return {
+      top: top,
+      left: (_ref2 = $el.offset()) != null ? _ref2.left : void 0,
+      bottom: top + $el.height()
+    };
+  };
+
+  onClickHeaderDownArrow = function() {
+    myScroll.scrollToElement('#content', 1200, null, null, IScroll.utils.ease.quadratic);
+    return false;
+  };
+
+  shareOnFacebook = function(e) {
+    var opts, url;
+    mixpanel.track("Shared on Facebook");
+    opts = "status=1,width=750,height=400,top=249.5,left=1462";
+    url = "https://www.facebook.com/sharer/sharer.php?u=" + location.href;
+    window.open(url, 'facebook', opts);
+    return false;
+  };
+
+  shareOnTwitter = function(e) {
+    var $curHeader, opts, text, url;
+    mixpanel.track("Shared on Twitter");
+    opts = "status=1,width=750,height=400,top=249.5,left=1462";
+    $curHeader = $("#foreground li[data-slug='" + (location.hash.replace('#', '')) + "'] h1");
+    text = encodeURIComponent($curHeader.text() + ' | ' + $('title').text());
+    url = "https://twitter.com/intent/tweet?" + ("original_referer=" + location.href) + ("&text=" + text) + ("&url=" + location.href);
+    window.open(url, 'twitter', opts);
+    return false;
+  };
+
+  onScroll = function() {
+    popLockForeground();
+    fadeBetweenForegroundItems();
+    fadeOutHeaderImage();
+    fadeInFirstForegroundItem();
+    return popLockCodeMask();
+  };
+
+  setScrollTop = function() {
+    return scrollTop = -(this.y >> 0);
+  };
+
+  fadeBetweenForegroundItems = function() {
+    return $backgroundItems.each(function() {
+      var $curItem, $nextItem, elBottom, elTop, endPoint, firstMidPoint, index, midPoint, nextTop, percentNextItem, percentPrevItem, startPoint, viewportBottom;
+      index = $(this).index();
+      $curItem = $foregroundItems.eq(index);
+      $nextItem = $foregroundItems.eq(index + 1);
+      viewportBottom = scrollTop + viewportHeight;
+      elTop = offset($(this)).top;
+      elBottom = offset($(this)).bottom;
+      nextTop = offset($(this).next()).top;
+      startPoint = elBottom + startOffest(viewportHeight);
+      endPoint = nextTop + endOffest(viewportHeight);
+      midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint;
+      firstMidPoint = midPoint - (viewportHeight * GAP_PERCENT_OF_VIEWPORT) * FADE_GAP_OF_BLACK;
+      if (scrollTop > elTop && viewportBottom < elBottom) {
+        $foregroundItems.removeClass('foreground-item-active');
+        return $curItem.css({
+          opacity: 1
+        }).addClass('foreground-item-active');
+      } else if (viewportBottom > startPoint && viewportBottom < endPoint) {
+        percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint);
+        percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint);
+        $curItem.css({
+          opacity: percentPrevItem
+        });
+        return $nextItem.css({
+          opacity: percentNextItem
+        });
+      }
+    });
+  };
+
+  fadeOutHeaderImage = function() {
+    $('#header-background').css({
+      opacity: 1 - (scrollTop / viewportHeight)
+    });
+    return $('#header-background-gradient').css({
+      opacity: (scrollTop / viewportHeight) * 2
+    });
+  };
+
+  popLockForeground = function() {
+    var top, x;
+    top = scrollTop - contentGap;
+    x = offset($background).bottom - viewportHeight - contentGap;
+    top = Math.min(top, x);
+    return $foreground.css({
+      top: Math.max(0, top)
+    });
+  };
+
+  transitionHeaderBackground = function() {
+    $headerLogo.addClass('active');
+    return setTimeout(function() {
+      return setTimeout(function() {
+        var $cur, $next, index, nextIndex;
+        index = $($headerBackgrounds.filter(function() {
+          return $(this).hasClass('active');
+        })[0]).index();
+        nextIndex = index + 1 >= TOTAL_HEADER_BACKGROUNDS ? 0 : index + 1;
+        $cur = $($headerBackgrounds.eq(index));
+        $next = $($headerBackgrounds.eq(nextIndex));
+        $cur.removeClass('active');
+        $next.addClass('active');
+        return transitionHeaderBackground();
+      }, 700);
+    }, 1000);
+  };
+
+  popLockCodeMask = function() {
+    var codeBottom, codeTop, maskTop;
+    codeTop = offset($code).top;
+    codeBottom = offset($code).bottom;
+    if (scrollTop < codeTop || (scrollTop + viewportHeight) > codeBottom) {
+      return;
+    }
+    maskTop = scrollTop - codeTop;
+    return $codeMask.css({
+      'margin-top': maskTop
+    });
+  };
+
+  fadeInFirstForegroundItem = function() {
+    var end, opacity, start;
+    end = offset($firstForegroundItem).top;
+    if (scrollTop >= end) {
+      return;
+    }
+    start = offset($firstForegroundItem).top - (viewportHeight / 2);
+    opacity = (scrollTop - start) / (end - start);
+    return $firstForegroundItem.css({
+      opacity: opacity
+    });
+  };
+
+  onResize = function() {
+    viewportHeight = $(window).height();
+    setBackgroundItemGap();
+    setContentGap();
+    setHeaderSize();
+    $viewportHeights.height(viewportHeight);
+    return $halfViewportHeights.height(viewportHeight / 2);
+  };
+
+  setHeaderSize = function() {
+    return $('#header-background').height(viewportHeight);
+  };
+
+  setContentGap = function() {
+    $content.css({
+      'margin-top': viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT
+    });
+    return contentGap = offset($content).top;
+  };
+
+  setBackgroundItemGap = function() {
+    $backgroundItems.css({
+      'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
+    });
+    return $backgroundItems.last().css({
+      'margin-bottom': 0
+    });
+  };
+
+  $(function() {
+    return imagesLoaded('body', init);
+  });
+
+}).call(this);
+</script></div></body></html>

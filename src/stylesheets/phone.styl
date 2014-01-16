@@ -1,0 +1,18 @@
+instead-of-viewport-height-margin = 40px
+
+@media (max-width: 640px)
+  #foreground
+    display none
+  .phone-foreground-container
+    display block
+    margin-bottom 30px
+  #background 
+    padding 30px
+    ul
+      width 100%
+      li
+        margin-bottom instead-of-viewport-height-margin !important
+  #background .half-viewport-height, #background .viewport-height:not(#background-code-mask)
+    height instead-of-viewport-height-margin !important
+  #content
+    margin-top 200px !important
