@@ -15,6 +15,8 @@
     "browserify-dev-middleware": "*",
     "coffeeify": "*",
     "uglify-js": "*",
-    "sqwish": "*"
+    "sqwish": "*",
+    "underscore": "*",
+    "iscroll": "*"
   }
 }
