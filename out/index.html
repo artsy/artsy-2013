@@ -6900,7 +6900,10 @@ if ( typeof define === 'function' && define.amd ) {
   };
 
   $(function() {
-    return imagesLoaded('body', init);
+    init();
+    return imagesLoaded('body', function() {
+      return myScroll.refresh();
+    });
   });
 
 }).call(this);

@@ -72,7 +72,7 @@ viewportHeight = 0
 init = ->
   renderHeaderBackgrounds()
   cacheElements()
-  $(window).on 'resize', _.debounce onResize, 100
+  $(window).on 'resize', _.throttle onResize, 200
   onResize()
   setupIScroll()
   $mainArrow.click onClickHeaderDownArrow
