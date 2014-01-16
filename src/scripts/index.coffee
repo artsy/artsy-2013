@@ -65,6 +65,7 @@ contentGap = 0 # The distance from the top of the page to the content
 # iScroll support.
 scrollTop = 0
 viewportHeight = 0
+viewportWidth = null
 
 # Setup functions
 # ---------------
@@ -188,11 +189,12 @@ shareOnTwitter = (e) ->
 # -------------------
 
 onScroll = ->
+  popLockCodeMask()
+  return if viewportWidth <= 640
   popLockForeground()
   fadeBetweenForegroundItems()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
-  popLockCodeMask()
 
 setScrollTop = ->
   scrollTop = -(this.y>>0)
@@ -274,6 +276,7 @@ fadeInFirstForegroundItem = ->
 
 onResize = ->
   viewportHeight = $(window).height()
+  viewportWidth = $(window).width()
   setBackgroundItemGap()
   setContentGap()
   setHeaderSize()

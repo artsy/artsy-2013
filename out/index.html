@@ -17,52 +17,41 @@
   -ms-filter: none;
   filter: none;
 }
-#foreground li small {
+#foreground header {
+  width: calc(40% - 40px);
+}
+#foreground small,
+.phone-foreground-container small {
   display: block;
   margin-top: 20px;
   font-size: 18px;
 }
-#foreground li p {
+#foreground p,
+.phone-foreground-container p {
   margin-bottom: 1em;
 }
-#foreground li blockquote {
+#foreground blockquote,
+.phone-foreground-container blockquote {
   font-style: italic;
 }
-@media (max-width: 700px) {
-  #foreground li {
-    padding: 20px;
-  }
-}
-#foreground li header {
-  width: calc(40% - 40px);
+#foreground header,
+.phone-foreground-container header {
   padding-top: 30px;
   border-top: 3px solid #fff;
   position: absolute;
   position: relative;
 }
-#foreground li header h1 {
+#foreground header h1,
+.phone-foreground-container header h1 {
   font-size: 54px;
   line-height: 1em;
 }
-#foreground li header .foreground-header-body {
+#foreground header .foreground-header-body,
+.phone-foreground-container header .foreground-header-body {
   bottom: 50px;
   font-size: 18px;
   line-height: 1.4em;
   margin-top: 40px;
-}
-@media (max-width: 700px) {
-  #foreground li header {
-    padding-top: 15px;
-    width: calc(50% - 10px);
-  }
-  #foreground li header h1 {
-    font-size: 26px;
-    font-weight: bold;
-    line-height: 1.1em;
-  }
-  #foreground li header .foreground-header-body {
-    margin-top: 15px;
-  }
 }
 #foreground-gradient {
   background: -webkit-linear-gradient(top, transparent, #000);
@@ -91,7 +80,7 @@
 }
 #background > ul {
   float: right;
-  width: calc(50% - 10px);
+  width: 60%;
 }
 #background-content li img {
   width: 100%;
@@ -144,6 +133,9 @@
 }
 .artist-info {
   color: #999;
+}
+.phone-foreground-container {
+  display: none;
 }
 #header-background {
   position: absolute;
@@ -388,6 +380,28 @@
   right: 0;
   margin-right: 20px;
 }
+@media (max-width: 640px) {
+  #foreground {
+    display: none;
+  }
+  .phone-foreground-container {
+    display: block;
+    margin-bottom: 30px;
+  }
+  #background {
+    padding: 30px;
+  }
+  #background ul {
+    width: 100%;
+  }
+  #background ul li {
+    margin-bottom: 40px !important;
+  }
+  .half-viewport-height,
+  .viewport-height {
+    height: 40px !important;
+  }
+}
 html,
 body,
 div,
@@ -486,7 +500,6 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.4em;
   font-size: 16px;
-  min-width: 640px;
 }
 * {
   -webkit-box-sizing: border-box;
@@ -526,96 +539,7 @@ a {
   font-style: normal;
   src: url("fonts/c18aee57-7585-4a8b-9a1c-69d226301d73.woff") format("woff");
 }
-</style></head><body><div id="wrapper"><div id="scroller"><div id="header-background"><div id="header-background-gradient"></div><ul></ul></div><header id="main-header" class="viewport-height"><div id="main-header-logo"></div><div id="main-header-down-arrow"></div></header><main id="content"><div id="foreground" class="viewport-height"><div id="foreground-gradient"></div><ul id="foreground-content"><li><header><h1><em>January &mdash;</em><br>The Average Sale:<br> Over 2,000 miles</h1><div class="foreground-header-body"><p>In January we sold works between New York and Oslo, London and Los Angeles, Singapore and Houston.</p><blockquote>“Thanks to Artsy, we sold 3 works prior to the opening. The client felt comfortable buying the work, site unseen, because of the quality of presentation on the Artsy site.”<br>– Deborah Herringer Kiss, Gallery Owner</blockquote></div></header></li><li><header><h1><em>February &mdash;</em><br>Eye Contact</h1><div class="foreground-header-body"><p>In 2013, we added our 1,000th category to The Art Genome project – the classification system for art that powers Artsy. Our favorite in February was “Eye Contact.”</p><p>During the year our Art Genome team analyzed over 44,000 artworks and applied over 700,000 categories.</p><a href="http://artsy.net/gene/eye-contact" target="_blank" class="faux-underline">Explore Eye Contact</a></div></header></li><li><header><h1><em>March &mdash;</em><br>The Armory Show</h1><div class="foreground-header-body"><p>Artsy’s partnership with The Armory Show included 97% of exhibitors participating and over 200,000 visitors viewing 10 million artworks.</p><p>In 2013 Artsy covered 17 art fairs from around the world, including Art Basel in Basel, Hong Kong, and Miami; Frieze London; ArtRio; and Contemporary Istanbul.</p><a href="http://artsy.net/thearmoryshow" target="_blank" class="faux-underline">Revisit the fairs from 2013 on Artsy</a></div></header></li><li><header><h1><em>May &mdash;</em><br>Ragnar Relay</h1><div class="foreground-header-body"><p>In May we ran the Ragnar relay. 26 hours and 52 minutes of continuous running. 197 miles covered. Beaten by teams like “U.S. Department of Minimal Effort” and “Fanny Pack Gold” but we got an A for effort.</p><a href="https://artsy.net/about/jobs" target="_blank" class="faux-underline">Run the relay with us in 2014</a></div></header></li><li><header><h1><em>June &mdash;</em><br>JR turns Artsy inside out</h1><div class="foreground-header-body"><p>In June the Artsy NYC team headed uptown to have our portraits taken by the artist JR; and soon after, displayed with pride across our 25th floor headquarters.</p><a href="https://artsy.net/artist/jr" target="_blank" class="faux-underline">Follow JR on Artsy</a></div></header></li><li><header><h1><em>July &mdash;</em><br>30th Open-Source Project Released</h1><div class="foreground-header-body"><p>In July we released our 30th open-source project. We love open-source at Artsy. It lets us build better software, faster. We also like to give back to the community by contributing to existing open-source libraries, and by releasing our own code under open-source licences.</p><a href="http://artsy.github.io" target="_blank" class="faux-underline">Go to Arty's Engineering Blog</a></div></header></li><li><header><h1><em>August &mdash;</em><br>Art & Science</h1><div class="foreground-header-body"><p>In August Artsy’s 7th artist/engineer,<a href="https://artsy.net/artist/damon-zucconi">Damon,</a>joined the team. We are now 66 artists, engineers, art historians, designers, curators, writers, and mathematicians. 40 of us are women, 26 men. 6 of us have kids, and 5 of us are avid Magic the Gathering players.</p><a href="https://artsy.net/about/team" target="_blank" class="faux-underline">Find out more about the roles at Artsy</a></div></header></li><li><header><h1><em>September &mdash;</em><br>Art in your pocket</h1><div class="foreground-header-body"><p>In September we shrunk Artsy. 120,000 people downloaded our iPhone app–named a “Best new app” by Apple. Art lovers have viewed and saved more than 4 million artworks since the launch.</p><a href="http://iphone.artsy.net/" target="_blank" class="faux-underline">Download the Artsy iPhone app</a></div></header></li><li><header><h1><em>October &mdash;</em><br>Art in Schools</h1><div class="foreground-header-body"><p>In October Artsy become an official part of public education in New York as a partner for Digital Ready – a program designed to help NYC public high schools use technology to improve their students’ readiness for college and careers. More than 25,000 open-access images on Artsy are freely downloadable for educational use.</p><a href="#" target="_blank" class="faux-underline">Learn more about how Artsy is used the classroom</a></div></header></li><li><header><h1><em>November &mdash;</em><br>Better tools for Benefit Auctions</h1><div class="foreground-header-body"><p>November we partnered with Independent Curators International (ICI) to support their annual benefit auction. This year bidding wasn’t limited to the 300 people at the gala event. Anyone from around the world could participate from computer, tablet or mobile phone. All lots sold, and we helped raise 50% more than ICI’s target to support their educational programming.</p><p>For more information about our auctions, get in touch with us at&nbsp;<br><a href="mailto:partners@artsy.net" target="_blank" class="faux-underline">partners@artsy.net</a></p></div></header></li><li><header><h1><em>December &mdash;</em><br>Gallery meets Collector</h1><div class="foreground-header-body"><p>In the last week of December we introduced more collectors to galleries than in the entire year of 2012.</p><a href="http://artsy.net" target="_blank" class="faux-underline">Find your new favorite work on Artsy</a></div></header></li></ul><div id="foreground-social-buttons"><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></div><div id="background"><ul id="background-content"><li><img src="images/content/map.svg"><div class="half-viewport-height"></div></li><li><ul class="two-column-images"><li><img src="images/content/eye-contact-thomas.jpg"><p>Mickalene Thomas</p><em>Qusuquzah, Une Trés Belle Négresse 1,, 2012</em><em>Lehmann Maupin</em><em>$18,500</em></li><li><img src="images/content/eye-contact-abramovic.jpg"><p>Marina Abramović</p><em>Golden Lips, 2009</em><p>Sean Kelly Gallery</p></li><li><img src="images/content/eye-contact-longo.jpg"><p>Robert Longo</p><em>Untitled (Leo)</em><p>Christie's Post-War & Contemporary Art</p><em>$250,000 - 350,000</em></li><li><img src="images/content/eye-contact-roversi.jpg"><p>Paolo Roversi</p><em>Tanel Bedrossiantz (Jean Paul Gaultier’s “Barbès” women’s ready-to-wear fall-winter collection of 1984–85), 1992</em><p>Brooklyn Museum</p></li><li><img src="images/content/eye-contact-vermeer.jpg"><p>Johannes Vermeer</p><em>Girl with the Red Hat, ca. 1665/1666</em><p>National Gallery of Art, Washington D.C.</p></li><li><img src="images/content/eye-contact-close.jpg"><p>Chuck Close</p><em>Untitled (Kate - 16), 2011</em><p>Adamson Gallery</p><em>$38,000</em></li><div class="half-viewport-height"></div></ul></li><li><figure><img src="images/content/fairs-armory.jpg"><figcaption>The Armory Show at Pier 92 and Pier 94 in New York</figcaption></figure><figure><img src="images/content/fairs-dm.jpg"><figcaption>Design Miami — Formlessfinder's “Tent Pile”</figcaption></figure><figure><img src="images/content/fairs-frieze.jpg"><figcaption>Frieeze – Geometric Mirrors VI by Jeppe Hein in the Frieze Sculpture park</figcaption></figure></li><li><ul class="two-column-images"><li><img src="images/content/ragnar-pose.jpg"></li><li><img src="images/content/ragnar-camp.jpg"></li><li><img src="images/content/ragnar-carter.jpg"></li><li><img src="images/content/ragnar-party.jpg"></li><li><img src="images/content/ragnar-woot.jpg"></li><li><img src="images/content/ragnar-group.jpg"></li></ul><img src="images/content/ragnar-course.jpg"></li><li><img src="images/content/jr-wide.jpg"><img src="images/content/jr-close.jpg"><img src="images/content/jr-inside.jpg"></li><li><div id="background-code"><div class="viewport-height"></div><pre>var $background, $backgroundItems, $code, $codeMask, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $halfViewportHeights, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $viewportHeights, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, MIXPANEL_ID, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockCodeMask, popLockForeground, renderHeaderBackgrounds, renderSocialShares, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIScroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
-
-MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f";
-
-TOTAL_HEADER_BACKGROUNDS = 3;
-
-SCROLL_TO_EL_TIME = 700;
-
-GAP_PERCENT_OF_VIEWPORT = 0.5;
-
-CONTENT_GAP_PERCENT_OF_VIEWPORT = 0.8;
-
-MID_FADE_PERCENT = 0.5;
-
-FADE_GAP_OF_BLACK = 0.6;
-
-startOffest = function(vpHeight) {
-  return 0;
-};
-
-END_OFFSET = 1.1;
-
-endOffest = function(vpHeight) {
-  return vpHeight * END_OFFSET;
-};
-
-$scroller = null;
-
-$backgroundItems = null;
-
-$foreground = null;
-
-$mainHeader = null;
-
-$content = null;
-
-$wrapper = null;
-
-$mainArrow = null;
-
-$foregroundItems = null;
-
-$footer = null;
-
-$background = null;
-
-$fgFacebookLink = null;
-
-$fgTwitterLink = null;
-
-$headerLogo = null;
-
-$headerBackgrounds = null;
-
-$firstForegroundItem = null;
-
-$viewportHeights = null;
-
-$halfViewportHeights = null;
-
-$codeMask = null;
-
-$code = null;
-
-myScroll = null;
-
-contentGap = 0;
-
-scrollTop = 0;
-
-viewportHeight = 0;
-
-init = function() {
-  renderHeaderBackgrounds();
-  cacheElements();
-  $(window).on('resize', onResize);
-  onResize();
-  setupIScroll();
-  $mainArrow.click(onClickHeaderDownArrow);
-  $mainArrow.on('tap', onClickHeaderDownArrow);
-  $fgFacebookLink.click(shareOnFacebook);
-  $fgTwitterLink.click(shareOnTwitter);
-  setContentGap();
-  transitionHeaderBackground();
-  renderSocialShares();
-  mixpanel.init(MIXPANEL_ID);
-  return mixpanel.track("Viewed page");
-};
-
-renderHeaderBackgrounds = function() {
+</style></head><body><div id="wrapper"><div id="scroller"><div id="header-background"><div id="header-background-gradient"></div><ul></ul></div><header id="main-header" class="viewport-height"><div id="main-header-logo"></div><div id="main-header-down-arrow"></div></header><main id="content"><div id="foreground" class="viewport-height"><div id="foreground-gradient"></div><ul id="foreground-content"><li><header><h1><em>January &mdash;</em><br>The Average Sale:<br> Over 2,000 miles</h1><div class="foreground-header-body"><p>In January we sold works between New York and Oslo, London and Los Angeles, Singapore and Houston.</p><blockquote>“Thanks to Artsy, we sold 3 works prior to the opening. The client felt comfortable buying the work, site unseen, because of the quality of presentation on the Artsy site.”<br>– Deborah Herringer Kiss, Gallery Owner</blockquote></div></header></li><li><header><h1><em>February &mdash;</em><br>Eye Contact</h1><div class="foreground-header-body"><p>In 2013, we added our 1,000th category to The Art Genome project – the classification system for art that powers Artsy. Our favorite in February was “Eye Contact.”</p><p>During the year our Art Genome team analyzed over 44,000 artworks and applied over 700,000 categories.</p><a href="http://artsy.net/gene/eye-contact" target="_blank" class="faux-underline">Explore Eye Contact</a></div></header></li><li><header><h1><em>March &mdash;</em><br>The Armory Show</h1><div class="foreground-header-body"><p>Artsy’s partnership with The Armory Show included 97% of exhibitors participating and over 200,000 visitors viewing 10 million artworks.</p><p>In 2013 Artsy covered 17 art fairs from around the world, including Art Basel in Basel, Hong Kong, and Miami; Frieze London; ArtRio; and Contemporary Istanbul.</p><a href="http://artsy.net/thearmoryshow" target="_blank" class="faux-underline">Revisit the fairs from 2013 on Artsy</a></div></header></li><li><header><h1><em>May &mdash;</em><br>Ragnar Relay</h1><div class="foreground-header-body"><p>In May we ran the Ragnar relay. 26 hours and 52 minutes of continuous running. 197 miles covered. Beaten by teams like “U.S. Department of Minimal Effort” and “Fanny Pack Gold” but we got an A for effort.</p><a href="https://artsy.net/about/jobs" target="_blank" class="faux-underline">Run the relay with us in 2014</a></div></header></li><li><header><h1><em>June &mdash;</em><br>JR turns Artsy inside out</h1><div class="foreground-header-body"><p>In June the Artsy NYC team headed uptown to have our portraits taken by the artist JR; and soon after, displayed with pride across our 25th floor headquarters.</p><a href="https://artsy.net/artist/jr" target="_blank" class="faux-underline">Follow JR on Artsy</a></div></header></li><li><header><h1><em>July &mdash;</em><br>30th Open-Source Project Released</h1><div class="foreground-header-body"><p>In July we released our 30th open-source project. We love open-source at Artsy. It lets us build better software, faster. We also like to give back to the community by contributing to existing open-source libraries, and by releasing our own code under open-source licences.</p><a href="http://artsy.github.io" target="_blank" class="faux-underline">Go to Arty's Engineering Blog</a></div></header></li><li><header><h1><em>August &mdash;</em><br>Art & Science</h1><div class="foreground-header-body"><p>In August Artsy’s 7th artist/engineer,<a href="https://artsy.net/artist/damon-zucconi">Damon,</a>joined the team. We are now 66 artists, engineers, art historians, designers, curators, writers, and mathematicians. 40 of us are women, 26 men. 6 of us have kids, and 5 of us are avid Magic the Gathering players.</p><a href="https://artsy.net/about/team" target="_blank" class="faux-underline">Find out more about the roles at Artsy</a></div></header></li><li><header><h1><em>September &mdash;</em><br>Art in your pocket</h1><div class="foreground-header-body"><p>In September we shrunk Artsy. 120,000 people downloaded our iPhone app–named a “Best new app” by Apple. Art lovers have viewed and saved more than 4 million artworks since the launch.</p><a href="http://iphone.artsy.net/" target="_blank" class="faux-underline">Download the Artsy iPhone app</a></div></header></li><li><header><h1><em>October &mdash;</em><br>Art in Schools</h1><div class="foreground-header-body"><p>In October Artsy become an official part of public education in New York as a partner for Digital Ready – a program designed to help NYC public high schools use technology to improve their students’ readiness for college and careers. More than 25,000 open-access images on Artsy are freely downloadable for educational use.</p><a href="#" target="_blank" class="faux-underline">Learn more about how Artsy is used the classroom</a></div></header></li><li><header><h1><em>November &mdash;</em><br>Better tools for Benefit Auctions</h1><div class="foreground-header-body"><p>November we partnered with Independent Curators International (ICI) to support their annual benefit auction. This year bidding wasn’t limited to the 300 people at the gala event. Anyone from around the world could participate from computer, tablet or mobile phone. All lots sold, and we helped raise 50% more than ICI’s target to support their educational programming.</p><p>For more information about our auctions, get in touch with us at&nbsp;<br><a href="mailto:partners@artsy.net" target="_blank" class="faux-underline">partners@artsy.net</a></p></div></header></li><li><header><h1><em>December &mdash;</em><br>Gallery meets Collector</h1><div class="foreground-header-body"><p>In the last week of December we introduced more collectors to galleries than in the entire year of 2012.</p><a href="http://artsy.net" target="_blank" class="faux-underline">Find your new favorite work on Artsy</a></div></header></li></ul><div id="foreground-social-buttons"><a class="social-button-facebook"></a><a class="social-button-twitter"></a></div></div><div id="background"><ul id="background-content"><li><div class="phone-foreground-container"></div><img src="images/content/map.svg"><div class="half-viewport-height"></div></li><li><div class="phone-foreground-container"></div><ul class="two-column-images"><li><img src="images/content/eye-contact-thomas.jpg"><p>Mickalene Thomas</p><em>Qusuquzah, Une Trés Belle Négresse 1,, 2012</em><em>Lehmann Maupin</em><em>$18,500</em></li><li><img src="images/content/eye-contact-abramovic.jpg"><p>Marina Abramović</p><em>Golden Lips, 2009</em><p>Sean Kelly Gallery</p></li><li><img src="images/content/eye-contact-longo.jpg"><p>Robert Longo</p><em>Untitled (Leo)</em><p>Christie's Post-War & Contemporary Art</p><em>$250,000 - 350,000</em></li><li><img src="images/content/eye-contact-roversi.jpg"><p>Paolo Roversi</p><em>Tanel Bedrossiantz (Jean Paul Gaultier’s “Barbès” women’s ready-to-wear fall-winter collection of 1984–85), 1992</em><p>Brooklyn Museum</p></li><li><img src="images/content/eye-contact-vermeer.jpg"><p>Johannes Vermeer</p><em>Girl with the Red Hat, ca. 1665/1666</em><p>National Gallery of Art, Washington D.C.</p></li><li><img src="images/content/eye-contact-close.jpg"><p>Chuck Close</p><em>Untitled (Kate - 16), 2011</em><p>Adamson Gallery</p><em>$38,000</em></li><div class="half-viewport-height"></div></ul></li><li><div class="phone-foreground-container"></div><figure><img src="images/content/fairs-armory.jpg"><figcaption>The Armory Show at Pier 92 and Pier 94 in New York</figcaption></figure><figure><img src="images/content/fairs-dm.jpg"><figcaption>Design Miami — Formlessfinder's “Tent Pile”</figcaption></figure><figure><img src="images/content/fairs-frieze.jpg"><figcaption>Frieeze – Geometric Mirrors VI by Jeppe Hein in the Frieze Sculpture park</figcaption></figure></li><li><div class="phone-foreground-container"></div><ul class="two-column-images"><li><img src="images/content/ragnar-pose.jpg"></li><li><img src="images/content/ragnar-camp.jpg"></li><li><img src="images/content/ragnar-carter.jpg"></li><li><img src="images/content/ragnar-party.jpg"></li><li><img src="images/content/ragnar-woot.jpg"></li><li><img src="images/content/ragnar-group.jpg"></li></ul><img src="images/content/ragnar-course.jpg"></li><li><div class="phone-foreground-container"></div><img src="images/content/jr-wide.jpg"><img src="images/content/jr-close.jpg"><img src="images/content/jr-inside.jpg"></li><li><div class="phone-foreground-container"></div><div id="background-code"><div class="viewport-height"></div><pre>renderHeaderBackgrounds = function() {
   var i;
   $('#header-background ul').html(((function() {
     var _i, _results;
@@ -662,28 +586,6 @@ setupIScroll = function() {
   return document.addEventListener('touchmove', (function(e) {
     return e.preventDefault();
   }), false);
-};
-
-cacheElements = function() {
-  $scroller = $('#scroller');
-  $backgroundItems = $('#background-content > li');
-  $foreground = $('#foreground');
-  $foregroundItems = $("#foreground li");
-  $mainHeader = $('#main-header');
-  $content = $('#content');
-  $wrapper = $('#wrapper');
-  $mainArrow = $('#main-header-down-arrow');
-  $footer = $('#footer');
-  $background = $('#background');
-  $fgFacebookLink = $('#foreground .social-button-facebook');
-  $fgTwitterLink = $('#foreground .social-button-twitter');
-  $headerBackgrounds = $('#header-background li');
-  $headerLogo = $('#main-header-logo');
-  $firstForegroundItem = $('#foreground li:first-child');
-  $viewportHeights = $('.viewport-height');
-  $halfViewportHeights = $('.half-viewport-height');
-  $codeMask = $('#background-code-mask');
-  return $code = $('#background-code');
 };
 
 offset = function($el) {
@@ -765,25 +667,6 @@ fadeBetweenForegroundItems = function() {
   });
 };
 
-fadeOutHeaderImage = function() {
-  $('#header-background').css({
-    opacity: 1 - (scrollTop / viewportHeight)
-  });
-  return $('#header-background-gradient').css({
-    opacity: (scrollTop / viewportHeight) * 2
-  });
-};
-
-popLockForeground = function() {
-  var top, x;
-  top = scrollTop - contentGap;
-  x = offset($background).bottom - viewportHeight - contentGap;
-  top = Math.min(top, x);
-  return $foreground.css({
-    top: Math.max(0, top)
-  });
-};
-
 transitionHeaderBackground = function() {
   $headerLogo.addClass('active');
   return setTimeout(function() {
@@ -800,67 +683,7 @@ transitionHeaderBackground = function() {
       return transitionHeaderBackground();
     }, 700);
   }, 1000);
-};
-
-popLockCodeMask = function() {
-  var codeBottom, codeTop, maskTop;
-  codeTop = offset($code).top;
-  codeBottom = offset($code).bottom;
-  if (scrollTop < codeTop || (scrollTop + viewportHeight) > codeBottom) {
-    return;
-  }
-  maskTop = scrollTop - codeTop;
-  return $codeMask.css({
-    'margin-top': maskTop
-  });
-};
-
-fadeInFirstForegroundItem = function() {
-  var end, opacity, start;
-  end = offset($firstForegroundItem).top;
-  if (scrollTop >= end) {
-    return;
-  }
-  start = offset($firstForegroundItem).top - (viewportHeight / 2);
-  opacity = (scrollTop - start) / (end - start);
-  return $firstForegroundItem.css({
-    opacity: opacity
-  });
-};
-
-onResize = function() {
-  viewportHeight = $(window).height();
-  setBackgroundItemGap();
-  setContentGap();
-  setHeaderSize();
-  $viewportHeights.height(viewportHeight);
-  return $halfViewportHeights.height(viewportHeight / 2);
-};
-
-setHeaderSize = function() {
-  return $('#header-background').height(viewportHeight);
-};
-
-setContentGap = function() {
-  $content.css({
-    'margin-top': viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT
-  });
-  return contentGap = offset($content).top;
-};
-
-setBackgroundItemGap = function() {
-  $backgroundItems.css({
-    'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
-  });
-  return $backgroundItems.last().css({
-    'margin-bottom': 0
-  });
-};
-
-$(function() {
-  return imagesLoaded('body', init);
-});
-RunLink</pre><div class="viewport-height"></div><img id="background-code-mask" src="images/logo-mask.svg" class="viewport-height"></div></li><li><figure><img src="images/content/damon.jpg"><figcaption class="artist-info"><p>Damon Zucconi</p><p>Tetradic Edit, 2013</p><p>JTT Gallery</p></figcaption></figure><div class="half-viewport-height"></div></li><li><img src="images/content/iphone-screens.jpg"></li><li><figure><img src="images/content/doe-kids.jpg"><figcaption>Three students at Brooklyn International High School, one of ten schools participating in New York Citi’s Digital Ready program.</figcaption></figure><figure><img src="images/content/doe-meeting.jpg"><figcaption>Mayor Bloomberg and Chancellor Walcott announce the expansion of New York City’s Digital Roadmap for New York schools.</figcaption></figure></li><li><img src="images/content/auction-phone.jpg"><img src="images/content/auction-ici.jpg"><img src="images/content/auction-marina.jpg"></li><li><img src="images/content/dec-graph.jpg"></li></ul></div></main><footer id="footer" class="viewport-height"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><div class="social-button-container"><small id="social-button-facebook-count">0</small><a class="social-button-facebook"></a></div><div class="social-button-container"><small id="social-button-twitter-count">0</small><a class="social-button-twitter"></a></div></div></footer></div></div><div id="scripts"><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
+};</pre><div class="viewport-height"></div><img id="background-code-mask" src="images/logo-mask.svg" class="viewport-height"></div></li><li><div class="phone-foreground-container"></div><figure><img src="images/content/damon.jpg"><figcaption class="artist-info"><p>Damon Zucconi</p><p>Tetradic Edit, 2013</p><p>JTT Gallery</p></figcaption></figure><div class="half-viewport-height"></div></li><li><div class="phone-foreground-container"></div><img src="images/content/iphone-screens.jpg"></li><li><div class="phone-foreground-container"></div><figure><img src="images/content/doe-kids.jpg"><figcaption>Three students at Brooklyn International High School, one of ten schools participating in New York Citi’s Digital Ready program.</figcaption></figure><figure><img src="images/content/doe-meeting.jpg"><figcaption>Mayor Bloomberg and Chancellor Walcott announce the expansion of New York City’s Digital Roadmap for New York schools.</figcaption></figure></li><li><div class="phone-foreground-container"></div><img src="images/content/auction-phone.jpg"><img src="images/content/auction-ici.jpg"><img src="images/content/auction-marina.jpg"></li><li><div class="phone-foreground-container"></div><img src="images/content/dec-graph.jpg"></li></ul></div></main><footer id="footer" class="viewport-height"><h3 id="footer-header">Thank you.</h3><nav id="footer-links"><a>Join the Artsy Team</a><a>Partner with Artsy</a><a>Go to Artsy</a></nav><div id="footer-social-buttons"><h4>Share This:</h4><div class="social-button-container"><small id="social-button-facebook-count">0</small><a class="social-button-facebook"></a></div><div class="social-button-container"><small id="social-button-twitter-count">0</small><a class="social-button-twitter"></a></div></div></footer></div></div><div id="scripts"><script>var MTIProjectId='f7f47a40-b25b-44ee-9f9c-cfdfc8bb2741';
 (function() {
   var mtiTracking = document.createElement('script');
   mtiTracking.type='text/javascript';
@@ -5480,7 +5303,7 @@ if ( typeof define === 'function' && define.amd ) {
 }
 
 })( window );(function() {
-  var $background, $backgroundItems, $code, $codeMask, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $halfViewportHeights, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $viewportHeights, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, MIXPANEL_ID, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockCodeMask, popLockForeground, renderHeaderBackgrounds, renderSocialShares, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIScroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
+  var $background, $backgroundItems, $code, $codeMask, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $halfViewportHeights, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $viewportHeights, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, MIXPANEL_ID, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, copyForegroundContentToBackgroundForPhone, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockCodeMask, popLockForeground, renderHeaderBackgrounds, renderSocialShares, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIScroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
 
   MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f";
 
@@ -5566,7 +5389,8 @@ if ( typeof define === 'function' && define.amd ) {
     transitionHeaderBackground();
     renderSocialShares();
     mixpanel.init(MIXPANEL_ID);
-    return mixpanel.track("Viewed page");
+    mixpanel.track("Viewed page");
+    return copyForegroundContentToBackgroundForPhone();
   };
 
   renderHeaderBackgrounds = function() {
@@ -5616,6 +5440,14 @@ if ( typeof define === 'function' && define.amd ) {
     return document.addEventListener('touchmove', (function(e) {
       return e.preventDefault();
     }), false);
+  };
+
+  copyForegroundContentToBackgroundForPhone = function() {
+    return $foregroundItems.each(function(i, el) {
+      var $container;
+      $container = $backgroundItems.eq(i).find('.phone-foreground-container');
+      return $container.html("<div class='phone-foreground-content'>" + $(el).html() + "</div>");
+    });
   };
 
   cacheElements = function() {
