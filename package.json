@@ -10,6 +10,11 @@
     "nib": "*",
     "knox": "*",
     "glob": "*",
-    "express": "*"
+    "express": "*",
+    "browserify": "*",
+    "browserify-dev-middleware": "*",
+    "coffeeify": "*",
+    "uglify-js": "*",
+    "sqwish": "*"
   }
 }

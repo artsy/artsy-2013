@@ -1,3 +1,8 @@
+_ = require './vendor/underscore.js'
+IScroll = require './vendor/iscroll-probe.js'
+require './vendor/zepto.js'
+require './vendor/zepto.touch.js'
+
 # Constants
 # ---------
 
@@ -73,7 +78,7 @@ viewportWidth = null
 init = ->
   renderHeaderBackgrounds()
   cacheElements()
-  $(window).on 'resize', _.debounce onResize, 100
+  $(window).on 'resize', _.throttle onResize, 200
   onResize()
   setupIScroll()
   $mainArrow.click onClickHeaderDownArrow
@@ -83,6 +88,7 @@ init = ->
   setContentGap()
   transitionHeaderBackground()
   renderSocialShares()
+  refreshIscrollOnImageLoads()
   mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
@@ -109,9 +115,11 @@ renderSocialShares = ->
 
 setupIScroll = ->
   $wrapper.height viewportHeight
-  myScroll = new IScroll '#wrapper',
+  window.myScroll = myScroll = new IScroll '#wrapper',
     probeType: 3
     mouseWheel: true
+    scrollbars: true
+    interactiveScrollbars: true
   myScroll.on('scroll', setScrollTop)
   myScroll.on('scrollEnd', setScrollTop)
   myScroll.on('scroll', onScroll)
@@ -147,6 +155,9 @@ cacheElements = ->
   $halfViewportHeights = $('.half-viewport-height')
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
+
+refreshIscrollOnImageLoads = ->
+  $('#background img').on 'load', _.debounce (-> myScroll.refresh()), 1000
 
 # Utility functions
 # -----------------
@@ -274,7 +285,7 @@ fadeInFirstForegroundItem = ->
 # On resize functions
 # -------------------
 
-onResize = ->
+window.onResize = ->
   viewportHeight = $(window).height()
   viewportWidth = $(window).width()
   setBackgroundItemGap()
@@ -298,4 +309,4 @@ setBackgroundItemGap = ->
 # Start your engines
 # ------------------
 
-$ -> imagesLoaded 'body', init
+$ init
