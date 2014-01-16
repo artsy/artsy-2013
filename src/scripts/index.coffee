@@ -65,6 +65,7 @@ contentGap = 0 # The distance from the top of the page to the content
 # iScroll support.
 scrollTop = 0
 viewportHeight = 0
+viewportWidth = null
 
 # Setup functions
 # ---------------
@@ -84,6 +85,7 @@ init = ->
   renderSocialShares()
   mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
+  copyForegroundContentToBackgroundForPhone()
 
 renderHeaderBackgrounds = ->
   $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
@@ -115,6 +117,15 @@ setupIScroll = ->
   myScroll.on('scroll', onScroll)
   myScroll.on('scrollEnd', onScroll)
   document.addEventListener 'touchmove', ((e) -> e.preventDefault()), false
+
+copyForegroundContentToBackgroundForPhone = ->
+  $foregroundItems.each (i, el) ->
+    $container = $backgroundItems.eq(i).find('.phone-foreground-container')
+    $container.html(
+      "<div class='phone-foreground-content'>" +
+        $(el).html() +
+      "</div>"
+    )
 
 cacheElements = ->
   $scroller = $('#scroller')
@@ -178,11 +189,12 @@ shareOnTwitter = (e) ->
 # -------------------
 
 onScroll = ->
+  popLockCodeMask()
+  return if viewportWidth <= 640
   popLockForeground()
   fadeBetweenForegroundItems()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
-  popLockCodeMask()
 
 setScrollTop = ->
   scrollTop = -(this.y>>0)
@@ -264,6 +276,7 @@ fadeInFirstForegroundItem = ->
 
 onResize = ->
   viewportHeight = $(window).height()
+  viewportWidth = $(window).width()
   setBackgroundItemGap()
   setContentGap()
   setHeaderSize()

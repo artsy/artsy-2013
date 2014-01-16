@@ -4,15 +4,18 @@
   position absolute
   width 100%
   z-index 2
+  li
+    padding foreground-padding
+    height 100%
+    width 100%
+    position absolute
+    opacity 0
+    &:first-child
+      opacity 1
+  header
+    width foreground-width
 
-#foreground li
-  padding foreground-padding
-  height 100%
-  width 100%
-  position absolute
-  opacity 0
-  &:first-child
-    opacity 1
+#foreground, .phone-foreground-container
   small
     display block
     margin-top 20px
@@ -21,36 +24,19 @@
     margin-bottom 1em
   blockquote
     font-style italic
-
-@media (max-width: 700px)
-  #foreground li
-    padding 20px
-
-#foreground li header
-  width foreground-width
-  padding-top 30px
-  border-top 3px solid white
-  position absolute
-  position relative
-  h1
-    font-size foreground-header-font-size
-    line-height 1em
-  .foreground-header-body
-    bottom foreground-padding
-    font-size 18px
-    line-height 1.4em
-    margin-top 40px
-
-@media (max-width: 700px)
-  #foreground li header
-    padding-top 15px
-    width foreground-width-phone
+  header
+    padding-top 30px
+    border-top 3px solid white
+    position absolute
+    position relative
     h1
-      font-size 26px
-      font-weight bold
-      line-height 1.1em
+      font-size foreground-header-font-size
+      line-height 1em
     .foreground-header-body
-      margin-top 15px
+      bottom foreground-padding
+      font-size 18px
+      line-height 1.4em
+      margin-top 40px
 
 #foreground-gradient
   background linear-gradient(top, transparent, black)
