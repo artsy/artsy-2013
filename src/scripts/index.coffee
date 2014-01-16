@@ -1,3 +1,8 @@
+_ = require './vendor/underscore.js'
+IScroll = require './vendor/iscroll-probe.js'
+require './vendor/zepto.js'
+require './vendor/zepto.touch.js'
+
 # Constants
 # ---------
 
@@ -82,6 +87,7 @@ init = ->
   setContentGap()
   transitionHeaderBackground()
   renderSocialShares()
+  refreshIscrollOnImageLoads()
   mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
 
@@ -138,6 +144,9 @@ cacheElements = ->
   $halfViewportHeights = $('.half-viewport-height')
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
+
+refreshIscrollOnImageLoads = ->
+  $('#background img').on 'load', _.debounce (-> myScroll.refresh()), 1000
 
 # Utility functions
 # -----------------
@@ -287,6 +296,4 @@ setBackgroundItemGap = ->
 # Start your engines
 # ------------------
 
-$ ->
-  init()
-  imagesLoaded 'body', -> myScroll.refresh()
+$ init

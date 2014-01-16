@@ -4,8 +4,7 @@ html(lang="en")
     title Artsy 2013 Annual Review
     meta( name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" )
     meta( property="og:image" content="http://2013.artsy.net/images/fb-thumb.jpg" )
-    style
-      include:stylus ../stylesheets/index.styl
+    link( type='text/css', rel='stylesheet', href=('index.css') )
   body
     #wrapper
       #scroller
@@ -17,14 +16,8 @@ html(lang="en")
           #main-header-down-arrow
         main#content
           include content
-        footer#footer.viewport-height
+        footer#footer.viewport-height( style="background-image: url('images/footer/1.jpg')" )
           include footer
     #scripts
       include scripts
-      script
-        include ../scripts/underscore.js
-        include ../scripts/iscroll-probe.js
-        include ../scripts/zepto.js
-        include ../scripts/zepto.touch.js
-        include ../scripts/imagesloaded.js
-        include:coffeescript ../scripts/index.coffee
+      script( src='index.js' )
