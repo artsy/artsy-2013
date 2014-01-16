@@ -285,4 +285,6 @@ setBackgroundItemGap = ->
 # Start your engines
 # ------------------
 
-$ -> imagesLoaded 'body', init
+$ ->
+  init()
+  imagesLoaded 'body', -> myScroll.refresh()
