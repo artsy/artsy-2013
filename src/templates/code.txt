@@ -1,92 +1,3 @@
-var $background, $backgroundItems, $code, $codeMask, $content, $fgFacebookLink, $fgTwitterLink, $firstForegroundItem, $footer, $foreground, $foregroundItems, $halfViewportHeights, $headerBackgrounds, $headerLogo, $mainArrow, $mainHeader, $scroller, $viewportHeights, $wrapper, CONTENT_GAP_PERCENT_OF_VIEWPORT, END_OFFSET, FADE_GAP_OF_BLACK, GAP_PERCENT_OF_VIEWPORT, MID_FADE_PERCENT, MIXPANEL_ID, SCROLL_TO_EL_TIME, TOTAL_HEADER_BACKGROUNDS, cacheElements, contentGap, endOffest, fadeBetweenForegroundItems, fadeInFirstForegroundItem, fadeOutHeaderImage, init, myScroll, offset, onClickHeaderDownArrow, onResize, onScroll, popLockCodeMask, popLockForeground, renderHeaderBackgrounds, renderSocialShares, scrollTop, setBackgroundItemGap, setContentGap, setHeaderSize, setScrollTop, setupIScroll, shareOnFacebook, shareOnTwitter, startOffest, transitionHeaderBackground, viewportHeight;
-
-MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f";
-
-TOTAL_HEADER_BACKGROUNDS = 3;
-
-SCROLL_TO_EL_TIME = 700;
-
-GAP_PERCENT_OF_VIEWPORT = 0.5;
-
-CONTENT_GAP_PERCENT_OF_VIEWPORT = 0.8;
-
-MID_FADE_PERCENT = 0.5;
-
-FADE_GAP_OF_BLACK = 0.6;
-
-startOffest = function(vpHeight) {
-  return 0;
-};
-
-END_OFFSET = 1.1;
-
-endOffest = function(vpHeight) {
-  return vpHeight * END_OFFSET;
-};
-
-$scroller = null;
-
-$backgroundItems = null;
-
-$foreground = null;
-
-$mainHeader = null;
-
-$content = null;
-
-$wrapper = null;
-
-$mainArrow = null;
-
-$foregroundItems = null;
-
-$footer = null;
-
-$background = null;
-
-$fgFacebookLink = null;
-
-$fgTwitterLink = null;
-
-$headerLogo = null;
-
-$headerBackgrounds = null;
-
-$firstForegroundItem = null;
-
-$viewportHeights = null;
-
-$halfViewportHeights = null;
-
-$codeMask = null;
-
-$code = null;
-
-myScroll = null;
-
-contentGap = 0;
-
-scrollTop = 0;
-
-viewportHeight = 0;
-
-init = function() {
-  renderHeaderBackgrounds();
-  cacheElements();
-  $(window).on('resize', onResize);
-  onResize();
-  setupIScroll();
-  $mainArrow.click(onClickHeaderDownArrow);
-  $mainArrow.on('tap', onClickHeaderDownArrow);
-  $fgFacebookLink.click(shareOnFacebook);
-  $fgTwitterLink.click(shareOnTwitter);
-  setContentGap();
-  transitionHeaderBackground();
-  renderSocialShares();
-  mixpanel.init(MIXPANEL_ID);
-  return mixpanel.track("Viewed page");
-};
-
 renderHeaderBackgrounds = function() {
   var i;
   $('#header-background ul').html(((function() {
@@ -134,28 +45,6 @@ setupIScroll = function() {
   return document.addEventListener('touchmove', (function(e) {
     return e.preventDefault();
   }), false);
-};
-
-cacheElements = function() {
-  $scroller = $('#scroller');
-  $backgroundItems = $('#background-content > li');
-  $foreground = $('#foreground');
-  $foregroundItems = $("#foreground li");
-  $mainHeader = $('#main-header');
-  $content = $('#content');
-  $wrapper = $('#wrapper');
-  $mainArrow = $('#main-header-down-arrow');
-  $footer = $('#footer');
-  $background = $('#background');
-  $fgFacebookLink = $('#foreground .social-button-facebook');
-  $fgTwitterLink = $('#foreground .social-button-twitter');
-  $headerBackgrounds = $('#header-background li');
-  $headerLogo = $('#main-header-logo');
-  $firstForegroundItem = $('#foreground li:first-child');
-  $viewportHeights = $('.viewport-height');
-  $halfViewportHeights = $('.half-viewport-height');
-  $codeMask = $('#background-code-mask');
-  return $code = $('#background-code');
 };
 
 offset = function($el) {
@@ -237,25 +126,6 @@ fadeBetweenForegroundItems = function() {
   });
 };
 
-fadeOutHeaderImage = function() {
-  $('#header-background').css({
-    opacity: 1 - (scrollTop / viewportHeight)
-  });
-  return $('#header-background-gradient').css({
-    opacity: (scrollTop / viewportHeight) * 2
-  });
-};
-
-popLockForeground = function() {
-  var top, x;
-  top = scrollTop - contentGap;
-  x = offset($background).bottom - viewportHeight - contentGap;
-  top = Math.min(top, x);
-  return $foreground.css({
-    top: Math.max(0, top)
-  });
-};
-
 transitionHeaderBackground = function() {
   $headerLogo.addClass('active');
   return setTimeout(function() {
@@ -273,63 +143,3 @@ transitionHeaderBackground = function() {
     }, 700);
   }, 1000);
 };
-
-popLockCodeMask = function() {
-  var codeBottom, codeTop, maskTop;
-  codeTop = offset($code).top;
-  codeBottom = offset($code).bottom;
-  if (scrollTop < codeTop || (scrollTop + viewportHeight) > codeBottom) {
-    return;
-  }
-  maskTop = scrollTop - codeTop;
-  return $codeMask.css({
-    'margin-top': maskTop
-  });
-};
-
-fadeInFirstForegroundItem = function() {
-  var end, opacity, start;
-  end = offset($firstForegroundItem).top;
-  if (scrollTop >= end) {
-    return;
-  }
-  start = offset($firstForegroundItem).top - (viewportHeight / 2);
-  opacity = (scrollTop - start) / (end - start);
-  return $firstForegroundItem.css({
-    opacity: opacity
-  });
-};
-
-onResize = function() {
-  viewportHeight = $(window).height();
-  setBackgroundItemGap();
-  setContentGap();
-  setHeaderSize();
-  $viewportHeights.height(viewportHeight);
-  return $halfViewportHeights.height(viewportHeight / 2);
-};
-
-setHeaderSize = function() {
-  return $('#header-background').height(viewportHeight);
-};
-
-setContentGap = function() {
-  $content.css({
-    'margin-top': viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT
-  });
-  return contentGap = offset($content).top;
-};
-
-setBackgroundItemGap = function() {
-  $backgroundItems.css({
-    'margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT
-  });
-  return $backgroundItems.last().css({
-    'margin-bottom': 0
-  });
-};
-
-$(function() {
-  return imagesLoaded('body', init);
-});
-RunLink
