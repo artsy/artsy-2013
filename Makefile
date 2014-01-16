@@ -10,6 +10,6 @@ compile:
 	mv out/index.min.css out/index.css
 	$(BIN)/browserify src/scripts/index.coffee -t coffeeify | $(BIN)/uglifyjs > out/index.js
 
-deploy:
+deploy: compile
 	$(BIN)/coffee scripts/to-s3.coffee
 	open http://2013.artsy.net/
