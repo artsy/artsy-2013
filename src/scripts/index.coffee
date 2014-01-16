@@ -115,7 +115,7 @@ renderSocialShares = ->
 
 setupIScroll = ->
   $wrapper.height viewportHeight
-  window.myScroll = myScroll = new IScroll '#wrapper',
+  myScroll = new IScroll '#wrapper',
     probeType: 3
     mouseWheel: true
     scrollbars: true
@@ -181,7 +181,7 @@ shareOnFacebook = (e) ->
   mixpanel.track "Shared on Facebook"
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
   url = "https://www.facebook.com/sharer/sharer.php?u=#{location.href}"
-  window.open url, 'facebook', opts
+  open url, 'facebook', opts
   false
 
 shareOnTwitter = (e) ->
@@ -193,7 +193,7 @@ shareOnTwitter = (e) ->
         "original_referer=#{location.href}" +
         "&text=#{text}" +
         "&url=#{location.href}"
-  window.open url, 'twitter', opts
+  open url, 'twitter', opts
   false
 
 # On scroll functions
@@ -285,7 +285,7 @@ fadeInFirstForegroundItem = ->
 # On resize functions
 # -------------------
 
-window.onResize = ->
+onResize = ->
   viewportHeight = $(window).height()
   viewportWidth = $(window).width()
   setBackgroundItemGap()
