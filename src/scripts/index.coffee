@@ -239,6 +239,13 @@ onScroll = ->
   fadeInFirstForegroundItem()
   fadeBetweenBackgroundItems()
 
+window.test = ->
+  for i in [0..5]
+    t = new Date().getTime()
+    for i in [0..500]
+      onScroll()
+    console.log "Took: " + (new Date().getTime() - t)
+
 fadeBetweenBackgroundItems = ->
   for el, index in $backgroundItems
     $el = $ el
@@ -259,13 +266,20 @@ fadeBetweenBackgroundItems = ->
     endFadeOutPoint -= viewportHeight * FADE_GAP_OFFSET
     startFadeInPoint -= viewportHeight * FADE_GAP_OFFSET
 
+    # In between an item so ensure that this item is at opacity 1.
+    if scrollTop > elTop and (scrollTop + viewportHeight) < elBottom and
+       currentItemIndex isnt index
+      $foregroundItems.css opacity: 0
+      $curItem.css opacity: 1
+      currentItemIndex = index
+      break
+
     # In the gap between items so transition opacities as you scroll
-    if (scrollTop + viewportHeight) > elBottom and scrollTop < nextTop
+    else if (scrollTop + viewportHeight) > elBottom and scrollTop < nextTop
       percentCurItem = 1 - percentBetween (elBottom - viewportHeight), endFadeOutPoint
       percentNextItem = percentBetween startFadeInPoint, nextTop
       $curItem.css opacity: percentCurItem, 'z-index': Math.round(percentCurItem)
       $nextItem.css opacity: percentNextItem, 'z-index': Math.round(percentNextItem)
-      currentItemIndex = if percentNextItem > 0.5 then index + 1 else index
       break
 
 fadeOutHeaderImage = ->
