@@ -19,29 +19,32 @@ TOTAL_HEADER_BACKGROUNDS = 3
 SCROLL_TO_EL_TIME = 700
 
 # The gap between items is based on the viewport size
-GAP_PERCENT_OF_VIEWPORT = 0.5
+GAP_PERCENT_OF_VIEWPORT = 0.6
 
 # The gap between the content and the header
 CONTENT_GAP_PERCENT_OF_VIEWPORT = 0.8
 
-# The point at which one foreground item is at 0 opacity and the next item is fading in.
-# e.g. 0.9 will mean the fade out of the first item is long and the fade in of the next
-# item is very short.
-MID_FADE_PERCENT = 0.5
+# The gap between fades of each item. e.g. 0.5 will mean the fade out of the first
+# item will end right when the fade in of the next item starts.
+FADE_GAP_OFFSET = 0.4
 
-# The gap size based on the viewport. Dial this number down to have a smaller gap where
-# the foreground item is at 0 opacity, dial it up to have a sharper fade out and a longer
-# gap of black between items.
-FADE_GAP_OF_BLACK = 0.6
-
-# Offset what point the fade begins after the bottom of the previous element,
-# based on viewportHeight
-startOffest = (vpHeight) -> 0 # (vpHeight / 2)
-
-# Offset what point the fade begins after the bottom of the previous element,
-# based on viewportHeight
-END_OFFSET = 1.1
-endOffest = (vpHeight) -> (vpHeight * END_OFFSET)
+# Shre on Twitter texts ordered by the content.
+TWITTER_TEXTS = [
+  'Turns out the average sale on Artsy travels over 2,000 miles. See the rest: 2013.artsy.net'
+  'Turns out @Artsy has a gene for Eye Contact, and it makes me uncomfortable: See the rest: 2013.artsy.net'
+  'Turns out @Artsy had over 10 million artworks viewed when it launched The Armory Show. See the rest: 2013.artsy.net'
+  'Turns out that @Artsy has partnered with over 200 institutions including The Getty and SFMOMA. See the rest: 2013.artsy.net'
+  'Turns out the @Artsy team ran 197 miles in 26 hours. But were beaten by team “Fanny Pack Gold.” See the rest: 2013.artsy.net'
+  'Turns out that JR (@JRart) made portraits of the entire @Artsy team and turned their office into an artwork. See the rest: 2013.artsy.net'
+  'Turns out that @Artsy has released 37 open-source projects: See the rest: 2013.artsy.net'
+  'Turns out 7 of @Artsy’s engineers are artists, and 1 is an artist on Artsy... so meta. See the rest: 2013.artsy.net'
+  'Turns out over 120,000 people downloaded the @Artsy iPhone app. See the rest: 2013.artsy.net'
+  # 'Turns out the @Artsy team is almost 2/3’s women: See the rest: 2013.artsy.net'
+  'Turns out @Artsy’s 90,000 artworks are now part of NYC’s Public Schools Digital Literacy curriculum. See the rest: 2013.artsy.net'
+  "Turns out @Artsy opened ICI's (@CuratorsINTL) benefit auction to the whole world. See the rest: 2013.artsy.net"
+  'Turns out @Artsy introed more collectors to galleries in the last week of December, than all of 2012. See the rest: 2013.artsy.net'
+  # 'Turns out the @Artsy team is really into Burning Man. See the rest: 2013.artsy.net'
+]
 
 # Top-level variables
 # -------------------
@@ -69,8 +72,12 @@ $code = null
 $headerBackground = null
 $headerGradient = null
 $graphLine = null
+$facebookLinks = null
+$twitterLinks = null
 
-graphLineLength = 0
+# Cached values
+currentItemIndex = 0 # The current index of the item being viewed
+graphLineLength = 0 # The total length of the graph line for SVG animation
 slideshowTimeout = null # Timeout until next slide is show
 stopSlideShow = false # Used to stop the slideshow after scrolling down
 myScroll = null # Reference to iScroll instance
@@ -91,10 +98,9 @@ init = ->
   $(window).on 'resize', _.throttle onResize, 200
   onResize()
   setupIScroll()
-  $mainArrow.click onClickHeaderDownArrow
-  $mainArrow.on 'tap', onClickHeaderDownArrow
-  $fgFacebookLink.click shareOnFacebook
-  $fgTwitterLink.click shareOnTwitter
+  $mainArrow.on 'tap click', onClickHeaderDownArrow
+  $facebookLinks.on 'tap click', shareOnFacebook
+  $twitterLinks.on 'tap click', shareOnTwitter
   setContentGap()
   nextHeaderSlide()
   renderSocialShares()
@@ -160,8 +166,8 @@ cacheElements = ->
   $mainArrow = $('#main-header-down-arrow')
   $footer = $('#footer')
   $background = $('#background')
-  $fgFacebookLink = $('#foreground .social-button-facebook')
-  $fgTwitterLink = $('#foreground .social-button-twitter')
+  $facebookLinks = $('.social-button-facebook')
+  $twitterLinks = $('.social-button-twitter')
   $headerBackground = $('#header-background')
   $headerBackgrounds = $('#header-background li')
   $headerGradient = $('#header-background-gradient')
@@ -187,7 +193,9 @@ offset = ($el) ->
     bottom: top + $el.height()
   }
 
-percentAlong = (start, end) ->
+# Returns how far between scrolling two points you are. e.g. If you're halway between
+# the start point and end point this will return 0.5.
+percentBetween = (start, end) ->
   perc = 1 - (end - scrollTop) / (end - start)
   perc = 0 if perc < 0
   perc = 1 if perc > 1
@@ -210,12 +218,10 @@ shareOnFacebook = (e) ->
 shareOnTwitter = (e) ->
   mixpanel.track "Shared on Twitter"
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
-  $curHeader = $("#foreground li[data-slug='#{location.hash.replace('#', '')}'] h1")
-  text = encodeURIComponent $curHeader.text() + ' | ' + $('title').text()
+  text = TWITTER_TEXTS[currentItemIndex]
   url = "https://twitter.com/intent/tweet?" +
         "original_referer=#{location.href}" +
-        "&text=#{text}" +
-        "&url=#{location.href}"
+        "&text=#{text}"
   open url, 'twitter', opts
   false
 
@@ -226,16 +232,15 @@ onScroll = ->
   scrollTop = -(this.y>>0)
   popLockCodeMask()
   toggleSlideShow()
-  animateGraphLine()
   return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
+  animateGraphLine()
   popLockForeground()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
-  fadeBetweenForegroundItems()
+  fadeBetweenBackgroundItems()
 
-fadeBetweenForegroundItems = ->
-  items = $backgroundItems
-  for el, index in items
+fadeBetweenBackgroundItems = ->
+  for el, index in $backgroundItems
     $el = $ el
 
     # Alias current and next items
@@ -243,28 +248,29 @@ fadeBetweenForegroundItems = ->
     $nextItem = $foregroundItems.eq(index + 1)
 
     # Alias common positions we'll be calculating
-    viewportBottom = scrollTop + viewportHeight
     elTop = offset($el).top
     elBottom = elTop + $el.height()
-    nextTop = elBottom + (viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT / 2)
+    nextTop = elBottom + (viewportHeight * GAP_PERCENT_OF_VIEWPORT)
+    gapSize = nextTop - elBottom
 
     # Values pertaining to when to start fading and when to fade in the next one
-    startPoint = elBottom + startOffest(viewportHeight)
-    endPoint = nextTop + endOffest(viewportHeight)
-    midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint
-    firstMidPoint = midPoint - ((viewportHeight * GAP_PERCENT_OF_VIEWPORT)) * FADE_GAP_OF_BLACK
+    endFadeOutPoint = elBottom - (gapSize * FADE_GAP_OFFSET)
+    startFadeInPoint = nextTop - (gapSize * FADE_GAP_OFFSET)
+    endFadeOutPoint -= viewportHeight * FADE_GAP_OFFSET
+    startFadeInPoint -= viewportHeight * FADE_GAP_OFFSET
 
     # In the gap between items so transition opacities as you scroll
-    if viewportBottom > startPoint and viewportBottom < endPoint
-      percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint)
-      percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint)
-      $curItem.css opacity: percentPrevItem, 'z-index': Math.round(percentPrevItem)
+    if (scrollTop + viewportHeight) > elBottom and scrollTop < nextTop
+      percentCurItem = 1 - percentBetween (elBottom - viewportHeight), endFadeOutPoint
+      percentNextItem = percentBetween startFadeInPoint, nextTop
+      $curItem.css opacity: percentCurItem, 'z-index': Math.round(percentCurItem)
       $nextItem.css opacity: percentNextItem, 'z-index': Math.round(percentNextItem)
+      currentItemIndex = if percentNextItem > 0.5 then index + 1 else index
       break
 
 fadeOutHeaderImage = ->
   return if scrollTop > viewportHeight
-  # $headerBackground.css opacity: 1 - (scrollTop / viewportHeight)
+  $headerBackground.css opacity: 1 - (scrollTop / viewportHeight)
   $headerGradient.css opacity: (scrollTop / viewportHeight) * 2
 
 popLockForeground = ->
@@ -281,8 +287,8 @@ popLockCodeMask = ->
   $codeMask.css 'margin-top': maskTop
 
 fadeInFirstForegroundItem = ->
+  return if parseInt($foreground.css('top')) > 0
   end = offset($firstForegroundItem).top
-  return if scrollTop >= end
   start = end - (viewportHeight / 2)
   opacity = (scrollTop - start) / (end - start)
   $firstForegroundItem.css opacity: opacity
@@ -317,7 +323,7 @@ nextHeaderSlide = ->
 animateGraphLine = ->
   start = offset($backgroundItems.last()).top - (viewportHeight / 2.5)
   end = start + (viewportHeight / 2)
-  pos = graphLineLength - ((graphLineLength * percentAlong(start, end)) +
+  pos = graphLineLength - ((graphLineLength * percentBetween(start, end)) +
                           (graphLineLength * START_GRAPH_AT))
   pos = Math.max pos, 0
   $graphLine.css 'stroke-dashoffset': pos
