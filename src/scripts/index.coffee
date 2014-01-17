@@ -8,6 +8,10 @@ require './vendor/zepto.touch.js'
 
 MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f"
 
+# What percent of the graph to start animating the line. E.g. 0.5 will start the line
+# animation with already half of the line filled.
+START_GRAPH_AT = 0.3
+
 # The total number of header background before it loops
 TOTAL_HEADER_BACKGROUNDS = 3
 
@@ -64,7 +68,9 @@ $codeMask = null
 $code = null
 $headerBackground = null
 $headerGradient = null
+$graphLine = null
 
+graphLineLength = 0
 slideshowTimeout = null # Timeout until next slide is show
 stopSlideShow = false # Used to stop the slideshow after scrolling down
 myScroll = null # Reference to iScroll instance
@@ -81,6 +87,7 @@ viewportWidth = null
 
 init = ->
   cacheElements()
+  setupGraph()
   $(window).on 'resize', _.throttle onResize, 200
   onResize()
   setupIScroll()
@@ -96,6 +103,10 @@ init = ->
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
   revealOnFirstBannerLoad()
+
+setupGraph = ->
+  graphLineLength = $graphLine[0].getTotalLength()
+  $graphLine.css 'stroke-dasharray': graphLineLength
 
 revealOnFirstBannerLoad = ->
   image = new Image
@@ -160,6 +171,7 @@ cacheElements = ->
   $halfViewportHeights = $('.half-viewport-height')
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
+  $graphLine = $('#graph-line')
 
 refreshIScrollOnImageLoads = ->
   $('#background img').on 'load', _.debounce (-> myScroll.refresh()), 1000
@@ -174,6 +186,12 @@ offset = ($el) ->
     left: $el.offset()?.left
     bottom: top + $el.height()
   }
+
+percentAlong = (start, end) ->
+  perc = 1 - (end - scrollTop) / (end - start)
+  perc = 0 if perc < 0
+  perc = 1 if perc > 1
+  perc
 
 # Click handlers
 # --------------
@@ -208,6 +226,7 @@ onScroll = ->
   scrollTop = -(this.y>>0)
   popLockCodeMask()
   toggleSlideShow()
+  animateGraphLine()
   return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
   popLockForeground()
   fadeOutHeaderImage()
@@ -239,16 +258,9 @@ fadeBetweenForegroundItems = ->
     if viewportBottom > startPoint and viewportBottom < endPoint
       percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint)
       percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint)
-      $curItem.css opacity: percentPrevItem
-      $nextItem.css opacity: percentNextItem
+      $curItem.css opacity: percentPrevItem, 'z-index': Math.round(percentPrevItem)
+      $nextItem.css opacity: percentNextItem, 'z-index': Math.round(percentNextItem)
       break
-
-window.test = ->
-  for i in [0..5]
-    d = new Date().getTime()
-    for i in [0..500]
-      onScroll()
-    console.log "That took ", new Date().getTime() - d
 
 fadeOutHeaderImage = ->
   return if scrollTop > viewportHeight
@@ -259,13 +271,7 @@ popLockForeground = ->
   top = scrollTop - contentGap
   x = (offset($background).bottom - viewportHeight - contentGap)
   top = Math.round(Math.max 0, Math.min(top, x))
-  val = "translate3d(0px, #{top}px, 0px)"
-  $foreground.css
-    '-webkit-transform': val
-    '-moz-transform': val
-    '-o-transform': val
-    '-ms-transform': val
-    'transform': val
+  $foreground.css top: top
 
 popLockCodeMask = ->
   codeTop = offset($code).top
@@ -307,6 +313,15 @@ nextHeaderSlide = ->
       nextHeaderSlide()
     , 700
   , 1500
+
+animateGraphLine = ->
+  start = offset($backgroundItems.last()).top - (viewportHeight / 2.5)
+  end = start + (viewportHeight / 2)
+  pos = graphLineLength - ((graphLineLength * percentAlong(start, end)) +
+                          (graphLineLength * START_GRAPH_AT))
+  pos = Math.max pos, 0
+  $graphLine.css 'stroke-dashoffset': pos
+
 
 # On resize functions
 # -------------------
