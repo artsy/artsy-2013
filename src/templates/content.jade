@@ -29,24 +29,18 @@ append background
         p Lehmann Maupin
         p $18,500
       li
-        img( src='images/content/eye-contact-abramovic.jpg' )
-        p Marina Abramović
-        em Golden Lips,&nbsp;
-          span 2009
-        p Sean Kelly Gallery
-      li
         img( src='images/content/eye-contact-longo.jpg' )
         p Robert Longo
         em Untitled (Leo)
         p Christie's Post-War & Contemporary Art
         p $250,000 - 350,000
-    ul.two-column-images.two-column-right
       li
-        img( src='images/content/eye-contact-roversi.jpg' )
-        p Paolo Roversi
-        em Tanel Bedrossiantz (Jean Paul Gaultier’s “Barbès” women’s ready-to-wear fall-winter collection of 1984–85),&nbsp;
-          span 1992
-        p Brooklyn Museum
+        img( src='images/content/eye-contact-abramovic.jpg' )
+        p Marina Abramović
+        em Golden Lips,&nbsp;
+          span 2009
+        p Sean Kelly Gallery
+    ul.two-column-images.two-column-right
       li
         img( src='images/content/eye-contact-vermeer.jpg' )
         p Johannes Vermeer
@@ -60,6 +54,12 @@ append background
           span 2011
         p Adamson Gallery
         p $38,000
+      li
+        img( src='images/content/eye-contact-roversi.jpg' )
+        p Paolo Roversi
+        em Tanel Bedrossiantz (Jean Paul Gaultier’s “Barbès” women’s ready-to-wear fall-winter collection of 1984–85),&nbsp;
+          span 1992
+        p Brooklyn Museum
       .half-viewport-height
 
 //- March: The Armory Show
@@ -73,12 +73,32 @@ append background
     figure
       img( src='images/content/fairs-armory.jpg' )
       figcaption The Armory Show at Pier 92 and Pier 94 in New York
+
     figure
       img( src='images/content/fairs-dm.jpg' )
       figcaption Design Miami — Formlessfinder's “Tent Pile”
+        .source Photo: James Harris courtesy Design Miami
+
     figure
       img( src='images/content/fairs-frieze.jpg' )
       figcaption Frieeze – Geometric Mirrors VI by Jeppe Hein in the Frieze Sculpture park
+        .source &copy; Iwan Baan
+
+//- April: Turrell
+append foreground
+  +fg-item('April', 'James Turrell at <br>The Guggenheim')
+    p We brought the highly anticipated James Turell Show online through our partnership with the Guggenheim Museum. In 2013 Artsy partnered with over 200 institutional partners including The Getty Museum, SFMOMA and The British Museum.
+    a.faux-underline( href="https://artsy.net/guggenheim", target='_blank' ) Follow the Guggenheim Museum on Artsy
+append background
+  +bg-item
+    figure
+      img( src='images/content/turrell-purple.jpg' )
+      figcaption &nbsp;
+        .source &copy; James Turrell / Rendering: Andreas Tjeldflaat, 2012 Solomon R. Guggenheim Foundation
+    figure
+      img( src='images/content/turrell-blue.jpg' )
+      figcaption &nbsp;
+        .source &copy; James Turrell / Rendering: Andreas Tjeldflaat, 2012 Solomon R. Guggenheim Foundation
 
 //- May: Ragnar Relay
 append foreground
@@ -131,9 +151,9 @@ append background
 //- August: Art & Science
 append foreground
   +fg-item('August', 'Art & Science')
-    p In August Artsy’s 7th artist/engineer, 
-      a( href='https://artsy.net/artist/damon-zucconi' ) Damon, 
-      | joined the team. We are now 66 artists, engineers, art historians, designers, curators, writers, and mathematicians. 40 of us are women, 26 men. 6 of us have kids, and 5 of us are avid Magic the Gathering players.
+    p In August Artsy’s 7th artist/engineer,&nbsp;
+      a( href='https://artsy.net/artist/damon-zucconi', target="_blank" ) Damon
+      | , joined the team. We are now 66 artists, engineers, art historians, designers, curators, writers, and mathematicians. 40 of us are women, 26 men. 6 of us have kids, and 5 of us are avid Magic the Gathering players.
     a.faux-underline( href="https://artsy.net/about/team", target='_blank' ) Find out more about the roles at Artsy
 append background
   +bg-item
@@ -158,15 +178,21 @@ append background
 append foreground
   +fg-item('October', 'Art in Schools')
     p In October Artsy become an official part of public education in New York as a partner for Digital Ready – a program designed to help NYC public high schools use technology to improve their students’ readiness for college and careers. More than 25,000 open-access images on Artsy are freely downloadable for educational use.
-    a.faux-underline( href="#", target='_blank' ) Learn more about how Artsy is used the classroom
+    a.faux-underline( href="http://artsy.net/feature/artsy-education", target='_blank' ) Learn more about how Artsy is used the classroom
 append background
   +bg-item
     figure
       img( src='images/content/doe-kids.jpg' )
-      figcaption Three students at Brooklyn International High School, one of ten schools participating in New York Citi’s Digital Ready program.
+      figcaption Three students at Brooklyn International High School, one of ten schools
+        br
+        | participating in New York Citi’s Digital Ready program.
+        .source Photo: Terence McCormack
     figure
       img( src='images/content/doe-meeting.jpg' )
-      figcaption Mayor Bloomberg and Chancellor Walcott announce the expansion of New York City’s Digital Roadmap for New York schools.
+      figcaption Mayor Bloomberg and Chancellor Walcott announce the expansion of New
+        br
+        | York City’s Digital Roadmap for New York schools.
+        .source Photo Credit: nyc.gov
 
 //- November: Better tools for Benefit Auctions
 append foreground
@@ -174,6 +200,7 @@ append foreground
     p November we partnered with Independent Curators International (ICI) to support their annual benefit auction. This year bidding wasn’t limited to the 300 people at the gala event. Anyone from around the world could participate from computer, tablet or mobile phone. All lots sold, and we helped raise 50% more than ICI’s target to support their educational programming.
     p For more information about our auctions, get in touch with us at&nbsp;
       a.faux-underline( href="mailto:partners@artsy.net", target='_blank' ) partners@artsy.net
+      | .
 append background
   +bg-item
     img( src='images/content/auction-phone.jpg' )
@@ -187,4 +214,5 @@ append foreground
     a.faux-underline( href="http://artsy.net", target='_blank' ) Find your new favorite work on Artsy
 append background
   +bg-item
-    img( src='images/content/dec-graph.jpg' )
+    include graph-svg.html
+    .half-viewport-height
