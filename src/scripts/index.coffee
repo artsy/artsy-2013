@@ -80,7 +80,6 @@ viewportWidth = null
 # ---------------
 
 init = ->
-  renderHeaderBackgrounds()
   cacheElements()
   $(window).on 'resize', _.throttle onResize, 200
   onResize()
@@ -92,16 +91,19 @@ init = ->
   setContentGap()
   nextHeaderSlide()
   renderSocialShares()
-  refreshIscrollOnImageLoads()
+  refreshIScrollOnImageLoads()
   mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
+  revealOnFirstBannerLoad()
 
-renderHeaderBackgrounds = ->
-  $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
-    "<li style='background-image: url(images/header/#{i}.jpg)'></li>"
-  ).join('')
-  $('#header-background li').first().show()
+revealOnFirstBannerLoad = ->
+  image = new Image
+  image.src = "images/header/0.jpg"
+  cb = -> $('body').removeClass 'body-loading'
+  image.onload = cb
+  image.onerror = cb
+  setTimeout cb, 3000
 
 renderSocialShares = ->
   shareUrl = "http://2013.artsy.net/" or location.href
@@ -124,10 +126,7 @@ setupIScroll = ->
     mouseWheel: true
     scrollbars: true
     interactiveScrollbars: true
-  myScroll.on('scroll', setScrollTop)
-  myScroll.on('scrollEnd', setScrollTop)
   myScroll.on('scroll', onScroll)
-  myScroll.on('scrollEnd', onScroll)
   document.addEventListener 'touchmove', ((e) -> e.preventDefault()), false
 
 copyForegroundContentToBackgroundForPhone = ->
@@ -162,7 +161,7 @@ cacheElements = ->
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
 
-refreshIscrollOnImageLoads = ->
+refreshIScrollOnImageLoads = ->
   $('#background img').on 'load', _.debounce (-> myScroll.refresh()), 1000
 
 # Utility functions
@@ -206,6 +205,7 @@ shareOnTwitter = (e) ->
 # -------------------
 
 onScroll = ->
+  scrollTop = -(this.y>>0)
   popLockCodeMask()
   toggleSlideShow()
   return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
@@ -214,12 +214,10 @@ onScroll = ->
   fadeInFirstForegroundItem()
   fadeBetweenForegroundItems()
 
-setScrollTop = ->
-  scrollTop = -(this.y>>0)
-
 fadeBetweenForegroundItems = ->
-  $backgroundItems.each ->
-    index = $(@).index()
+  items = $backgroundItems
+  for el, index in items
+    $el = $ el
 
     # Alias current and next items
     $curItem = $foregroundItems.eq(index)
@@ -227,9 +225,9 @@ fadeBetweenForegroundItems = ->
 
     # Alias common positions we'll be calculating
     viewportBottom = scrollTop + viewportHeight
-    elTop = offset($(@)).top
-    elBottom = offset($(@)).bottom
-    nextTop = offset($(@).next()).top
+    elTop = offset($el).top
+    elBottom = elTop + $el.height()
+    nextTop = elBottom + (viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT / 2)
 
     # Values pertaining to when to start fading and when to fade in the next one
     startPoint = elBottom + startOffest(viewportHeight)
@@ -237,21 +235,24 @@ fadeBetweenForegroundItems = ->
     midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint
     firstMidPoint = midPoint - ((viewportHeight * GAP_PERCENT_OF_VIEWPORT)) * FADE_GAP_OF_BLACK
 
-    # Between an item so make sure it's opacity is 1 and add an active class
-    if scrollTop > elTop and viewportBottom < elBottom
-      $foregroundItems.removeClass('foreground-item-active')
-      $curItem.css(opacity: 1).addClass('foreground-item-active')
-
     # In the gap between items so transition opacities as you scroll
-    else if viewportBottom > startPoint and viewportBottom < endPoint
+    if viewportBottom > startPoint and viewportBottom < endPoint
       percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint)
       percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint)
       $curItem.css opacity: percentPrevItem
       $nextItem.css opacity: percentNextItem
+      break
+
+window.test = ->
+  for i in [0..5]
+    d = new Date().getTime()
+    for i in [0..500]
+      onScroll()
+    console.log "That took ", new Date().getTime() - d
 
 fadeOutHeaderImage = ->
   return if scrollTop > viewportHeight
-  $headerBackground.css opacity: 1 - (scrollTop / viewportHeight)
+  # $headerBackground.css opacity: 1 - (scrollTop / viewportHeight)
   $headerGradient.css opacity: (scrollTop / viewportHeight) * 2
 
 popLockForeground = ->
@@ -268,7 +269,7 @@ popLockForeground = ->
 
 popLockCodeMask = ->
   codeTop = offset($code).top
-  codeBottom = offset($code).bottom
+  codeBottom = codeTop + $code.height()
   return if scrollTop < codeTop or (scrollTop + viewportHeight) > codeBottom
   maskTop = scrollTop - codeTop
   $codeMask.css 'margin-top': maskTop
@@ -276,7 +277,7 @@ popLockCodeMask = ->
 fadeInFirstForegroundItem = ->
   end = offset($firstForegroundItem).top
   return if scrollTop >= end
-  start = offset($firstForegroundItem).top - (viewportHeight / 2)
+  start = end - (viewportHeight / 2)
   opacity = (scrollTop - start) / (end - start)
   $firstForegroundItem.css opacity: opacity
 

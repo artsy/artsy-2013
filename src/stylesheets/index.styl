@@ -6,6 +6,7 @@
 @import 'social'
 @import 'footer'
 @import 'phone'
+@import 'spinners'
 
 global-reset()
 
@@ -15,6 +16,20 @@ body
   garamond()
   line-height 1.4em
   font-size default-font-size
+  #wrapper
+    transition opacity 1s cubic-bezier(0.550, 0.055, 0.675, 0.190)
+  &.body-loading
+    #wrapper
+      opacity 0
+    #body-loading-spinner
+      display block
+
+#body-loading-spinner
+  display none
+  top 50%
+  left 50%
+  position fixed
+  background white
 
 *
   box-sizing border-box
