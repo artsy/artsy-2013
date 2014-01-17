@@ -1,140 +1,145 @@
-
-
-
-
-module.exports.js = function(pkg, gzip) {
-  var contents, filename, fingerprint, output, src, _ref, _ref1;
-  if (gzip == null) {
-    gzip = _this.gzip;
-  }
-  if (_this.assets.js[pkg] == null) {
-    throw new Error("Cannot find package '" + pkg + "'");
-  }
-  if (_this.mode === 'production') {
-    if (_this.mode === 'production') {
-      fingerprint = '-' + fingerprintForPkg('js', pkg);
-    }
-    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".js");
-    if (gzip) {
-      src += '.jgz';
-    }
-    return "<script src='" + src + "' type='text/javascript'></script>";
-  }
-  expandAssetGlobs();
-  output = '';
-  _ref1 = preprocessPkg(pkg, 'js');
-  for (filename in _ref1) {
-    contents = _ref1[filename];
-    if (!_this.usingMiddleware) {
-      writeFile(filename, contents);
-    }
-    output += "<script src='" + _this._assetsDir + "/" + filename + "' type='text/javascript'></script>";
-  }
-  return output;
-};
-
-module.exports.css = function(pkg, gzip) {
-  var contents, filename, fingerprint, output, src, _ref, _ref1;
-  if (gzip == null) {
-    gzip = _this.gzip;
-  }
-  if (_this.assets.css[pkg] == null) {
-    throw new Error("Cannot find package '" + pkg + "'");
-  }
-  if (_this.mode === 'production') {
-    if (_this.mode === 'production') {
-      fingerprint = '-' + fingerprintForPkg('css', pkg);
-    }
-    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".css");
-    if (gzip) {
-      src += '.cgz';
-    }
-    return "<link href='" + src + "' rel='stylesheet' type='text/css'>";
-  }
-  expandAssetGlobs();
-  output = '';
-  _ref1 = preprocessPkg(pkg, 'css');
-  for (filename in _ref1) {
-    contents = _ref1[filename];
-    if (!_this.usingMiddleware) {
-      writeFile(filename, contents);
-    }
-    output += "<link href='" + _this._assetsDir + "/" + filename + "' rel='stylesheet' type='text/css'>";
-  }
-  return output;
-};
-
-module.exports.jst = function(pkg, gzip) {
-  var fingerprint, src, _ref;
-  if (gzip == null) {
-    gzip = _this.gzip;
-  }
-  if (_this.assets.jst[pkg] == null) {
-    throw new Error("Cannot find package '" + pkg + "'");
-  }
-  if (_this.mode === 'production') {
-    if (_this.mode === 'production') {
-      fingerprint = '-' + fingerprintForPkg('jst', pkg);
-    }
-    src = ((_ref = _this.cdnUrl) != null ? _ref : _this._assetsDir) + '/' + ("" + pkg + (fingerprint != null ? fingerprint : '') + ".jst.js");
-    if (gzip) {
-      src += '.jgz';
-    }
-    return "<script src='" + src + "' type='text/javascript'></script>";
-  }
-  expandAssetGlobs();
-  if (!_this.usingMiddleware) {
-    fs.writeFileSync(_this._outputDir + '/' + pkg + '.jst.js', generateJSTs(pkg));
-    fs.writeFileSync(_this._outputDir + '/nap-templates-prefix.js', _this._tmplPrefix);
-  }
-  return "<script src='" + _this._assetsDir + "/nap-templates-prefix.js' type='text/javascript'></script>\n<script src='" + _this._assetsDir + "/" + pkg + ".jst.js' type='text/javascript'></script>";
-};
-
-module.exports["package"] = function(callback) {
-  var contents, filename, files, fingerprint, fn, key, pkg, pkgs, total, _ref, _ref1, _ref2, _results;
-  if (callback == null) {
-    callback = function() {};
-  }
-  clearAssetsDir();
-  total = _.reduce((function() {
-    var _ref, _results;
-    _ref = this.assets;
+renderHeaderBackgrounds = function() {
+  var i;
+  $('#header-background ul').html(((function() {
+    var _i, _results;
     _results = [];
-    for (key in _ref) {
-      pkgs = _ref[key];
-      _results.push(_.values(pkgs).length);
+    for (i = _i = 0; 0 <= TOTAL_HEADER_BACKGROUNDS ? _i <= TOTAL_HEADER_BACKGROUNDS : _i >= TOTAL_HEADER_BACKGROUNDS; i = 0 <= TOTAL_HEADER_BACKGROUNDS ? ++_i : --_i) {
+      _results.push("<li style='background-image: url(images/header/" + i + ".jpg)'></li>");
     }
     return _results;
-  }).call(_this), function(memo, num) {
-    return memo + num;
-  });
-  callback = _.after(total, callback);
-  if (_this.assets.js != null) {
-    _ref = _this.assets.js;
-    for (pkg in _ref) {
-      files = _ref[pkg];
-      contents = ((function() {
-        var _ref1, _results;
-        _ref1 = preprocessPkg(pkg, 'js');
-        _results = [];
-        for (fn in _ref1) {
-          contents = _ref1[fn];
-          _results.push(contents);
-        }
-        return _results;
-      })()).join(';\n');
-      if (_this.mode === 'production' && _this.minify) {
-        contents = uglify(contents);
-      }
-      fingerprint = '-' + fingerprintForPkg('js', pkg);
-      filename = "" + pkg + (fingerprint != null ? fingerprint : '') + ".js";
-      writeFile(filename, contents);
-      if (_this.gzip) {
-        gzipPkg(contents, filename, callback);
-      } else {
-        callback();
-      }
-      total++;
+  })()).join(''));
+  return $('#header-background li').first().show();
+};
+
+renderSocialShares = function() {
+  var shareUrl;
+  shareUrl = "http://2013.artsy.net/" || location.href;
+  $.ajax({
+    url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=" + shareUrl,
+    success: function(res) {
+      return $('#social-button-facebook-count').html($(res).find('share_count').text() || 0).show();
     }
-  }
+  });
+  window.twitterCountJSONPCallback = function(res) {
+    if (res.count == null) {
+      return;
+    }
+    return $('#social-button-twitter-count').html(res.count || 0).show();
+  };
+  return $.ajax({
+    url: "http://urls.api.twitter.com/1/urls/count.json?url=" + shareUrl + "&callback=twitterCountJSONPCallback",
+    dataType: 'jsonp'
+  });
+};
+
+setupIScroll = function() {
+  $wrapper.height(viewportHeight);
+  myScroll = new IScroll('#wrapper', {
+    probeType: 3,
+    mouseWheel: true
+  });
+  myScroll.on('scroll', setScrollTop);
+  myScroll.on('scrollEnd', setScrollTop);
+  myScroll.on('scroll', onScroll);
+  myScroll.on('scrollEnd', onScroll);
+  return document.addEventListener('touchmove', (function(e) {
+    return e.preventDefault();
+  }), false);
+};
+
+offset = function($el) {
+  var top, _ref, _ref1, _ref2;
+  top = -(((_ref = $scroller.offset()) != null ? _ref.top : void 0) - ((_ref1 = $el.offset()) != null ? _ref1.top : void 0));
+  return {
+    top: top,
+    left: (_ref2 = $el.offset()) != null ? _ref2.left : void 0,
+    bottom: top + $el.height()
+  };
+};
+
+onClickHeaderDownArrow = function() {
+  myScroll.scrollToElement('#content', 1200, null, null, IScroll.utils.ease.quadratic);
+  return false;
+};
+
+shareOnFacebook = function(e) {
+  var opts, url;
+  mixpanel.track("Shared on Facebook");
+  opts = "status=1,width=750,height=400,top=249.5,left=1462";
+  url = "https://www.facebook.com/sharer/sharer.php?u=" + location.href;
+  window.open(url, 'facebook', opts);
+  return false;
+};
+
+shareOnTwitter = function(e) {
+  var $curHeader, opts, text, url;
+  mixpanel.track("Shared on Twitter");
+  opts = "status=1,width=750,height=400,top=249.5,left=1462";
+  $curHeader = $("#foreground li[data-slug='" + (location.hash.replace('#', '')) + "'] h1");
+  text = encodeURIComponent($curHeader.text() + ' | ' + $('title').text());
+  url = "https://twitter.com/intent/tweet?" + ("original_referer=" + location.href) + ("&text=" + text) + ("&url=" + location.href);
+  window.open(url, 'twitter', opts);
+  return false;
+};
+
+onScroll = function() {
+  popLockForeground();
+  fadeBetweenForegroundItems();
+  fadeOutHeaderImage();
+  fadeInFirstForegroundItem();
+  return popLockCodeMask();
+};
+
+setScrollTop = function() {
+  return scrollTop = -(this.y >> 0);
+};
+
+fadeBetweenForegroundItems = function() {
+  return $backgroundItems.each(function() {
+    var $curItem, $nextItem, elBottom, elTop, endPoint, firstMidPoint, index, midPoint, nextTop, percentNextItem, percentPrevItem, startPoint, viewportBottom;
+    index = $(this).index();
+    $curItem = $foregroundItems.eq(index);
+    $nextItem = $foregroundItems.eq(index + 1);
+    viewportBottom = scrollTop + viewportHeight;
+    elTop = offset($(this)).top;
+    elBottom = offset($(this)).bottom;
+    nextTop = offset($(this).next()).top;
+    startPoint = elBottom + startOffest(viewportHeight);
+    endPoint = nextTop + endOffest(viewportHeight);
+    midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint;
+    firstMidPoint = midPoint - (viewportHeight * GAP_PERCENT_OF_VIEWPORT) * FADE_GAP_OF_BLACK;
+    if (scrollTop > elTop && viewportBottom < elBottom) {
+      $foregroundItems.removeClass('foreground-item-active');
+      return $curItem.css({
+        opacity: 1
+      }).addClass('foreground-item-active');
+    } else if (viewportBottom > startPoint && viewportBottom < endPoint) {
+      percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint);
+      percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint);
+      $curItem.css({
+        opacity: percentPrevItem
+      });
+      return $nextItem.css({
+        opacity: percentNextItem
+      });
+    }
+  });
+};
+
+transitionHeaderBackground = function() {
+  $headerLogo.addClass('active');
+  return setTimeout(function() {
+    return setTimeout(function() {
+      var $cur, $next, index, nextIndex;
+      index = $($headerBackgrounds.filter(function() {
+        return $(this).hasClass('active');
+      })[0]).index();
+      nextIndex = index + 1 >= TOTAL_HEADER_BACKGROUNDS ? 0 : index + 1;
+      $cur = $($headerBackgrounds.eq(index));
+      $next = $($headerBackgrounds.eq(nextIndex));
+      $cur.removeClass('active');
+      $next.addClass('active');
+      return transitionHeaderBackground();
+    }, 700);
+  }, 1000);
 };

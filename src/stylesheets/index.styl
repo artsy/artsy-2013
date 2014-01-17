@@ -5,6 +5,8 @@
 @import 'iscroll'
 @import 'social'
 @import 'footer'
+@import 'phone'
+@import 'spinners'
 
 global-reset()
 
@@ -13,8 +15,21 @@ body
   color white
   garamond()
   line-height 1.4em
-  font-size 16px
-  min-width 640px
+  font-size default-font-size
+  #wrapper
+    transition opacity 1s cubic-bezier(0.550, 0.055, 0.675, 0.190)
+  &.body-loading
+    #wrapper
+      opacity 0
+    #body-loading-spinner
+      display block
+
+#body-loading-spinner
+  display none
+  top 50%
+  left 50%
+  position fixed
+  background white
 
 *
   box-sizing border-box
@@ -44,8 +59,11 @@ button, a
   &:hover
     text-decoration: none
 
+.iScrollIndicator
+  border 1px solid #999 !important
+
 @font-face
   font-family 'AvantGardeGothicITCW01D 731075'
   font-weight normal
-  font-style style
+  font-style normal
   src url("fonts/c18aee57-7585-4a8b-9a1c-69d226301d73.woff") format("woff")

@@ -2,28 +2,26 @@ doctype html
 html(lang="en")
   head
     title Artsy 2013 Annual Review
-    meta( name="viewport", content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=no" )
+    meta( name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" )
     meta( property="og:image" content="http://2013.artsy.net/images/fb-thumb.jpg" )
-    style
-      include:stylus ../stylesheets/index.styl
-  body
+    link( type='text/css', rel='stylesheet', href=('index.css') )
+  body.body-loading
+    #body-loading-spinner.loading-spinner
     #wrapper
       #scroller
         #header-background
           #header-background-gradient
           ul
+            for x, i in new Array(4)
+              li( style='background-image: url(images/header/#{i}.jpg)',
+                  class=(i == 0 ? 'active' : null) )
         header#main-header.viewport-height
           #main-header-logo
           #main-header-down-arrow
         main#content
           include content
-        footer#footer.viewport-height
+        footer#footer.viewport-height( style="background-image: url('images/footer/1.jpg')" )
           include footer
     #scripts
       include scripts
-      script
-        include ../scripts/iscroll-probe.js
-        include ../scripts/zepto.js
-        include ../scripts/zepto.touch.js
-        include ../scripts/underscore.js
-        include:coffeescript ../scripts/index.coffee
+      script( src='index.js' )

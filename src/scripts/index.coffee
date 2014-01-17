@@ -1,8 +1,15 @@
+_ = require 'underscore'
+IScroll = require 'iscroll/build/iscroll-probe.js'
+require './vendor/zepto.js'
+require './vendor/zepto.touch.js'
+
 # Constants
 # ---------
 
+MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f"
+
 # The total number of header background before it loops
-TOTAL_HEADER_BACKGROUNDS = 4
+TOTAL_HEADER_BACKGROUNDS = 3
 
 # The time it takes to scroll to an element with iscroll
 SCROLL_TO_EL_TIME = 700
@@ -55,7 +62,11 @@ $viewportHeights = null
 $halfViewportHeights = null
 $codeMask = null
 $code = null
+$headerBackground = null
+$headerGradient = null
 
+slideshowTimeout = null # Timeout until next slide is show
+stopSlideShow = false # Used to stop the slideshow after scrolling down
 myScroll = null # Reference to iScroll instance
 contentGap = 0 # The distance from the top of the page to the content
 
@@ -63,43 +74,69 @@ contentGap = 0 # The distance from the top of the page to the content
 # iScroll support.
 scrollTop = 0
 viewportHeight = 0
+viewportWidth = null
 
 # Setup functions
 # ---------------
 
 init = ->
-  renderHeaderBackgrounds()
   cacheElements()
-  $(window).on 'resize', onResize
+  $(window).on 'resize', _.throttle onResize, 200
   onResize()
-  setupIscroll()
+  setupIScroll()
   $mainArrow.click onClickHeaderDownArrow
   $mainArrow.on 'tap', onClickHeaderDownArrow
   $fgFacebookLink.click shareOnFacebook
   $fgTwitterLink.click shareOnTwitter
   setContentGap()
-  transitionHeaderBackground()
+  nextHeaderSlide()
+  renderSocialShares()
+  refreshIScrollOnImageLoads()
+  mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
+  copyForegroundContentToBackgroundForPhone()
+  revealOnFirstBannerLoad()
 
-renderBackgroundCode = ->
-  $('#background-code').text $('html').html()
+revealOnFirstBannerLoad = ->
+  image = new Image
+  image.src = "images/header/0.jpg"
+  cb = -> $('body').removeClass 'body-loading'
+  image.onload = cb
+  image.onerror = cb
+  setTimeout cb, 3000
 
-renderHeaderBackgrounds = ->
-  $('#header-background ul').html (for i in [0..TOTAL_HEADER_BACKGROUNDS]
-    "<li style='background-image: url(images/header/#{i}.jpg)'></li>"
-  ).join('')
-  $('#header-background li').first().show()
+renderSocialShares = ->
+  shareUrl = "http://2013.artsy.net/" or location.href
+  $.ajax
+    url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=#{shareUrl}"
+    success: (res) ->
+      $('#social-button-facebook-count')
+        .html($(res).find('share_count').text() or 0).show()
+  window.twitterCountJSONPCallback = (res) ->
+    return unless res.count?
+    $('#social-button-twitter-count').html(res.count or 0).show()
+  $.ajax
+    url: "http://urls.api.twitter.com/1/urls/count.json?url=#{shareUrl}&callback=twitterCountJSONPCallback"
+    dataType: 'jsonp'
 
-setupIscroll = ->
+setupIScroll = ->
   $wrapper.height viewportHeight
   myScroll = new IScroll '#wrapper',
     probeType: 3
     mouseWheel: true
-  myScroll.on('scroll', setScrollTop)
-  myScroll.on('scrollEnd', setScrollTop)
+    scrollbars: true
+    interactiveScrollbars: true
   myScroll.on('scroll', onScroll)
-  myScroll.on('scrollEnd', onScroll)
   document.addEventListener 'touchmove', ((e) -> e.preventDefault()), false
+
+copyForegroundContentToBackgroundForPhone = ->
+  $foregroundItems.each (i, el) ->
+    $container = $backgroundItems.eq(i).find('.phone-foreground-container')
+    $container.html(
+      "<div class='phone-foreground-content'>" +
+        $(el).html() +
+      "</div>"
+    )
 
 cacheElements = ->
   $scroller = $('#scroller')
@@ -114,13 +151,18 @@ cacheElements = ->
   $background = $('#background')
   $fgFacebookLink = $('#foreground .social-button-facebook')
   $fgTwitterLink = $('#foreground .social-button-twitter')
+  $headerBackground = $('#header-background')
   $headerBackgrounds = $('#header-background li')
+  $headerGradient = $('#header-background-gradient')
   $headerLogo = $('#main-header-logo')
   $firstForegroundItem = $('#foreground li:first-child')
   $viewportHeights = $('.viewport-height')
   $halfViewportHeights = $('.half-viewport-height')
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
+
+refreshIScrollOnImageLoads = ->
+  $('#background img').on 'load', _.debounce (-> myScroll.refresh()), 1000
 
 # Utility functions
 # -----------------
@@ -143,8 +185,8 @@ onClickHeaderDownArrow = ->
 shareOnFacebook = (e) ->
   mixpanel.track "Shared on Facebook"
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
-  url = "https://www.facebook.com/sharer/sharer.php?u=#{encodeURIComponent location.href}"
-  window.open url, 'facebook', opts
+  url = "https://www.facebook.com/sharer/sharer.php?u=#{location.href}"
+  open url, 'facebook', opts
   false
 
 shareOnTwitter = (e) ->
@@ -152,27 +194,30 @@ shareOnTwitter = (e) ->
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
   $curHeader = $("#foreground li[data-slug='#{location.hash.replace('#', '')}'] h1")
   text = encodeURIComponent $curHeader.text() + ' | ' + $('title').text()
-  href = encodeURIComponent location.href
-  url = "https://twitter.com/intent/tweet?original_referer=#{href}&text=#{text}&url=#{href}"
-  window.open url, 'twitter', opts
+  url = "https://twitter.com/intent/tweet?" +
+        "original_referer=#{location.href}" +
+        "&text=#{text}" +
+        "&url=#{location.href}"
+  open url, 'twitter', opts
   false
 
 # On scroll functions
 # -------------------
 
 onScroll = ->
+  scrollTop = -(this.y>>0)
+  popLockCodeMask()
+  toggleSlideShow()
+  return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
   popLockForeground()
-  fadeBetweenForegroundItems()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
-  popLockCodeMask()
-
-setScrollTop = ->
-  scrollTop = -(this.y>>0)
+  fadeBetweenForegroundItems()
 
 fadeBetweenForegroundItems = ->
-  $backgroundItems.each ->
-    index = $(@).index()
+  items = $backgroundItems
+  for el, index in items
+    $el = $ el
 
     # Alias current and next items
     $curItem = $foregroundItems.eq(index)
@@ -180,9 +225,9 @@ fadeBetweenForegroundItems = ->
 
     # Alias common positions we'll be calculating
     viewportBottom = scrollTop + viewportHeight
-    elTop = offset($(@)).top
-    elBottom = offset($(@)).bottom
-    nextTop = offset($(@).next()).top
+    elTop = offset($el).top
+    elBottom = elTop + $el.height()
+    nextTop = elBottom + (viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT / 2)
 
     # Values pertaining to when to start fading and when to fade in the next one
     startPoint = elBottom + startOffest(viewportHeight)
@@ -190,69 +235,91 @@ fadeBetweenForegroundItems = ->
     midPoint = (endPoint - startPoint) * MID_FADE_PERCENT + startPoint
     firstMidPoint = midPoint - ((viewportHeight * GAP_PERCENT_OF_VIEWPORT)) * FADE_GAP_OF_BLACK
 
-    # Between an item so make sure it's opacity is 1 and the social icons are
-    # pointing to the right place.
-    if scrollTop > elTop and viewportBottom < elBottom
-      $foregroundItems.removeClass('foreground-item-active')
-      $curItem.css(opacity: 1).addClass('foreground-item-active')
-
     # In the gap between items so transition opacities as you scroll
-    else if viewportBottom > startPoint and viewportBottom < endPoint
+    if viewportBottom > startPoint and viewportBottom < endPoint
       percentPrevItem = 1 - (viewportBottom - startPoint) / (firstMidPoint - startPoint)
       percentNextItem = (viewportBottom - midPoint) / (endPoint - midPoint)
       $curItem.css opacity: percentPrevItem
       $nextItem.css opacity: percentNextItem
+      break
+
+window.test = ->
+  for i in [0..5]
+    d = new Date().getTime()
+    for i in [0..500]
+      onScroll()
+    console.log "That took ", new Date().getTime() - d
 
 fadeOutHeaderImage = ->
-  $('#header-background').css opacity: 1 - (scrollTop / viewportHeight)
-  $('#header-background-gradient').css opacity: (scrollTop / viewportHeight) * 2
+  return if scrollTop > viewportHeight
+  # $headerBackground.css opacity: 1 - (scrollTop / viewportHeight)
+  $headerGradient.css opacity: (scrollTop / viewportHeight) * 2
 
 popLockForeground = ->
   top = scrollTop - contentGap
   x = (offset($background).bottom - viewportHeight - contentGap)
-  top = Math.min(top, x)
-  $foreground.css top: Math.max 0, top
-
-transitionHeaderBackground = ->
-  $headerLogo.addClass 'active'
-  setTimeout ->
-    setTimeout ->
-      index = $($headerBackgrounds.filter(-> $(@).hasClass('active'))[0]).index()
-      nextIndex = if index + 1 >= TOTAL_HEADER_BACKGROUNDS then 0 else index + 1
-      # $headerLogo.removeClass 'active'
-      $cur = $ $headerBackgrounds.eq(index)
-      $next = $ $headerBackgrounds.eq(nextIndex)
-      $cur.removeClass 'active'
-      $next.addClass 'active'
-      transitionHeaderBackground()
-    , 700
-  , 1000
+  top = Math.round(Math.max 0, Math.min(top, x))
+  val = "translate3d(0px, #{top}px, 0px)"
+  $foreground.css
+    '-webkit-transform': val
+    '-moz-transform': val
+    '-o-transform': val
+    '-ms-transform': val
+    'transform': val
 
 popLockCodeMask = ->
   codeTop = offset($code).top
-  codeBottom = offset($code).bottom
+  codeBottom = codeTop + $code.height()
   return if scrollTop < codeTop or (scrollTop + viewportHeight) > codeBottom
   maskTop = scrollTop - codeTop
-  console.log codeTop, maskTop
   $codeMask.css 'margin-top': maskTop
 
 fadeInFirstForegroundItem = ->
   end = offset($firstForegroundItem).top
   return if scrollTop >= end
-  start = offset($firstForegroundItem).top - (viewportHeight / 2)
+  start = end - (viewportHeight / 2)
   opacity = (scrollTop - start) / (end - start)
   $firstForegroundItem.css opacity: opacity
+
+toggleSlideShow = ->
+  if stopSlideShow and scrollTop <= 10
+    stopSlideShow = false
+    nextHeaderSlide()
+  else if scrollTop > 10
+    stopSlideShow = true
+    clearTimeout slideshowTimeout
+  if scrollTop > viewportHeight
+    $headerBackgrounds.removeClass('active')
+  else
+    $headerBackgrounds.first().addClass('active')
+
+nextHeaderSlide = ->
+  return if stopSlideShow
+  $headerLogo.addClass 'active'
+  slideshowTimeout = setTimeout ->
+    slideshowTimeout = setTimeout ->
+      index = $($headerBackgrounds.filter(-> $(@).hasClass('active'))[0]).index()
+      nextIndex = if index + 1 > TOTAL_HEADER_BACKGROUNDS then 0 else index + 1
+      $cur = $ $headerBackgrounds.eq(index)
+      $next = $ $headerBackgrounds.eq(nextIndex)
+      $cur.removeClass 'active'
+      $next.addClass 'active'
+      nextHeaderSlide()
+    , 700
+  , 1500
 
 # On resize functions
 # -------------------
 
 onResize = ->
   viewportHeight = $(window).height()
+  viewportWidth = $(window).width()
   setBackgroundItemGap()
   setContentGap()
   setHeaderSize()
   $viewportHeights.height viewportHeight
   $halfViewportHeights.height viewportHeight / 2
+  _.defer -> myScroll.refresh()
 
 setHeaderSize = ->
   $('#header-background').height viewportHeight

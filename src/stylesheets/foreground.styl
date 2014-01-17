@@ -4,45 +4,45 @@
   position absolute
   width 100%
   z-index 2
-
-#foreground li
-  padding foreground-padding
-  height 100%
-  width 100%
-  position absolute
-  opacity 0
-  &:first-child
-    opacity 1
-
-  header, footer
-    width 40%
-    padding-top 30px
-    border-top 3px solid white
+  transform translate3d(0,0,0)
+  li
+    padding foreground-padding
+    height 100%
+    width 100%
     position absolute
-
+    opacity 0
+    &:first-child
+      opacity 1
   header
-    top foreground-padding
-    h1
-      font-size foreground-header-font-size
-      line-height 1em
+    width foreground-width
 
-  footer
-    bottom foreground-padding
-    font-size 22px
-    line-height 1.2em
-
+#foreground, .phone-foreground-container
   small
     display block
     margin-top 20px
-    font-size 18px
-
+    font-size default-font-size
   p
     margin-bottom 1em
+  blockquote
+    font-style italic
+  header
+    padding-top 30px
+    border-top 3px solid white
+    position absolute
+    position relative
+    h1
+      font-size foreground-header-font-size
+      line-height 1em
+    .foreground-header-body
+      bottom foreground-padding
+      font-size default-font-size
+      line-height 1.4em
+      margin-top 40px
 
 #foreground-gradient
   background linear-gradient(top, transparent, black)
   width 100%
-  height 40%
-  bottom 0
+  height 30%
+  bottom -5px
   position absolute
   left 0

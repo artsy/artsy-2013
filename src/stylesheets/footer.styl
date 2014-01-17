@@ -1,6 +1,6 @@
 #footer
   position relative
-  background url('images/footer/1.jpg') center center no-repeat
+  background center center no-repeat
   margin-top 200px
   &::after
     content '.'
@@ -40,6 +40,7 @@
   font-size 54px
   display block
   width 100%
+  z-index 2
 
 #footer-links
   text-align center
@@ -49,5 +50,25 @@
   position absolute
   font-size 26px
   line-height 1.4em
+  z-index 2
   a
     display block
+
+.social-button-container
+  position relative
+  width 80px
+  height @width
+  vertical-align top
+  display inline-block
+  small
+    display block
+    position absolute
+    top 0
+    right 0
+    display none
+  a
+    display block
+    position absolute
+    bottom 0
+    right 0
+    margin-right 20px

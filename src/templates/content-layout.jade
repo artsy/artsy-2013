@@ -5,8 +5,13 @@ mixin fg-item(month, title)
         em #{month} &mdash;
         br
         != title
-    footer
-      block
+      .foreground-header-body
+        block
+
+mixin bg-item
+  li
+    .phone-foreground-container
+    block
 
 #foreground.viewport-height
   #foreground-gradient
