@@ -17,7 +17,7 @@ html(lang="en")
               li( style='background-image: url(images/header/#{i}.jpg)',
                   class=(i == 0 ? 'active' : null) )
         header#main-header.viewport-height
-          #main-header-logo
+          include header-logo-svg.html
           #main-header-down-arrow
         main#content
           include content

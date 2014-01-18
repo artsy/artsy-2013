@@ -98,9 +98,6 @@ init = ->
   $(window).on 'resize', _.throttle onResize, 200
   onResize()
   setupIScroll()
-  $mainArrow.on 'tap click', onClickHeaderDownArrow
-  $facebookLinks.on 'tap click', shareOnFacebook
-  $twitterLinks.on 'tap click', shareOnTwitter
   setContentGap()
   nextHeaderSlide()
   renderSocialShares()
@@ -108,6 +105,7 @@ init = ->
   mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
+  attachClickHandlers()
   revealOnFirstBannerLoad()
 
 setupGraph = ->
@@ -138,7 +136,7 @@ renderSocialShares = ->
 
 setupIScroll = ->
   $wrapper.height viewportHeight
-  myScroll = new IScroll '#wrapper',
+  window.myScroll = myScroll = new IScroll '#wrapper',
     probeType: 3
     mouseWheel: true
     scrollbars: true
@@ -180,7 +178,7 @@ cacheElements = ->
   $graphLine = $('#graph-line')
 
 refreshIScrollOnImageLoads = ->
-  $('#background img').on 'load', _.debounce (-> myScroll.refresh()), 1000
+  $('#background img').on 'load', _.debounce (-> myScroll?.refresh()), 1000
 
 # Utility functions
 # -----------------
@@ -201,8 +199,17 @@ percentBetween = (start, end) ->
   perc = 1 if perc > 1
   perc
 
+getScrollTop = ->
+  scrollTop = -myScroll?.getComputedPosition().y
+
 # Click handlers
 # --------------
+
+attachClickHandlers = ->
+  $mainArrow.on 'tap click', onClickHeaderDownArrow
+  $facebookLinks.on 'tap click', shareOnFacebook
+  $twitterLinks.on 'tap click', shareOnTwitter
+  $('a').on 'tap click', followLinksOnTap
 
 onClickHeaderDownArrow = ->
   myScroll.scrollToElement '#content', 1200, null, null, IScroll.utils.ease.quadratic
@@ -225,11 +232,16 @@ shareOnTwitter = (e) ->
   open url, 'twitter', opts
   false
 
+followLinksOnTap = (e) ->
+  e.preventDefault()
+  _.defer -> window.location = $(e.target).attr 'href'
+  false
+
 # On scroll functions
 # -------------------
 
 onScroll = ->
-  scrollTop = -(this.y>>0)
+  getScrollTop()
   popLockCodeMask()
   toggleSlideShow()
   return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
@@ -354,7 +366,11 @@ onResize = ->
   setHeaderSize()
   $viewportHeights.height viewportHeight
   $halfViewportHeights.height viewportHeight / 2
-  _.defer -> myScroll.refresh()
+  _.defer -> myScroll?.refresh()
+  setTimeout ->
+    getScrollTop()
+    popLockForeground()
+  , 500
 
 setHeaderSize = ->
   $('#header-background').height viewportHeight
