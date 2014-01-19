@@ -2,6 +2,7 @@ _ = require 'underscore'
 IScroll = require 'iscroll/build/iscroll-probe.js'
 require './vendor/zepto.js'
 require './vendor/zepto.touch.js'
+morpheus = require 'morpheus'
 
 # Constants
 # ---------
@@ -72,6 +73,8 @@ $graphLine = null
 $facebookLinks = null
 $twitterLinks = null
 $graphContainer = null
+$window = null
+$body = null
 
 # Cached values
 currentItemIndex = 0 # The current index of the item being viewed
@@ -93,9 +96,16 @@ viewportWidth = null
 init = ->
   cacheElements()
   setupGraph()
-  $(window).on 'resize', _.throttle onResize, 200
+  $window.on 'resize', _.throttle onResize, 200
   onResize()
-  setupIScroll()
+  # Use IScroll to handle scroll events on an IPad, otherwise normal scroll handlers.
+  # Phone uses a more responsive technique which will just toggle off the `onScroll`
+  # handler based on screen size.
+  if navigator.userAgent.match(/iPad/i)
+    setupIScroll()
+  else if not navigator.userAgent.match(/iPhone/i)
+    $window.on 'scroll', onScroll
+    onScroll()
   setContentGap()
   nextHeaderSlide()
   renderSocialShares()
@@ -133,6 +143,7 @@ renderSocialShares = ->
     dataType: 'jsonp'
 
 setupIScroll = ->
+  $body.addClass 'iscroll'
   $wrapper.height viewportHeight
   window.myScroll = myScroll = new IScroll '#wrapper',
     probeType: 3
@@ -176,6 +187,8 @@ cacheElements = ->
   $graphLine = $('#graph-line')
   $graph = $('#graph')
   $graphContainer = $('#graph-container')
+  $window = $(window)
+  $body = $('body')
 
 refreshIScrollOnImageLoads = ->
   $('#background img').on 'load', _.debounce (-> myScroll?.refresh()), 1000
@@ -183,6 +196,7 @@ refreshIScrollOnImageLoads = ->
 # Utility functions
 # -----------------
 
+# Used instead of $(el).offset to support IScroll
 offset = ($el) ->
   top = -($scroller.offset()?.top - $el.offset()?.top)
   {
@@ -199,8 +213,18 @@ percentBetween = (start, end) ->
   perc = 1 if perc > 1
   perc
 
+# Get scroll top from iScroll or plain ol' window
 getScrollTop = ->
-  scrollTop = -myScroll?.getComputedPosition().y
+  scrollTop = -myScroll?.getComputedPosition().y or $window.scrollTop()
+
+# Wrapper over IScroll's scrollToElement to use normal window animation.
+scrollToElement = (selector) ->
+  time = 1000
+  if myScroll
+    myScroll.scrollToElement selector, time, null, null, IScroll.utils.ease.quadratic
+  else
+    elTop = $(selector).offset().top
+    morpheus.tween time, ((pos) => $body[0].scrollTop = elTop * pos), morpheus.easings.quadratic
 
 # Click handlers
 # --------------
@@ -212,7 +236,7 @@ attachClickHandlers = ->
   $('a').on 'tap click', followLinksOnTap
 
 onClickHeaderDownArrow = ->
-  myScroll.scrollToElement '#content', 1200, null, null, IScroll.utils.ease.quadratic
+  scrollToElement '#content'
   false
 
 shareOnFacebook = (e) ->
@@ -241,15 +265,15 @@ followLinksOnTap = (e) ->
 # -------------------
 
 onScroll = ->
+  return if viewportWidth <= 640 # For phone we ignore scroll transitions
   getScrollTop()
   toggleSlideShow()
-  return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
-  popLockCodeMask()
   animateGraphLine()
-  popLockForeground()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
   fadeBetweenBackgroundItems()
+  popLockForeground()
+  popLockCodeMask()
   popLockGraph()
 
 fadeBetweenBackgroundItems = ->
@@ -357,8 +381,8 @@ popLockGraph = ->
 # -------------------
 
 onResize = ->
-  viewportHeight = $(window).height()
-  viewportWidth = $(window).width()
+  viewportHeight = $window.height()
+  viewportWidth = $window.width()
   setBackgroundItemGap()
   setContentGap()
   setHeaderSize()
