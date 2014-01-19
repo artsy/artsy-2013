@@ -1,5 +1,24 @@
 instead-of-viewport-height-margin = 40px
 
+@keyframes code-repeat
+  0%
+    margin-top 0%
+    animation-timing-function linear
+  50%
+    margin-top -50%
+    animation-timing-function linear
+  100%
+    margin-top -100%
+    animation-timing-function linear
+
+// Vertical iPad
+@media (max-width: 800px)
+  #foreground-content li h1
+    font-size 38px
+    br:nth-of-type(2)
+      display  none
+
+// Phone
 @media (max-width: 640px)
   #foreground
     display none
@@ -20,6 +39,8 @@ instead-of-viewport-height-margin = 40px
         margin-bottom instead-of-viewport-height-margin !important
   #background .half-viewport-height, #background .viewport-height:not(#background-code-mask)
     height instead-of-viewport-height-margin !important
+  #background-content li figure .source
+    position relative
   #content
     margin-top 200px !important
   #footer-header
@@ -39,3 +60,9 @@ instead-of-viewport-height-margin = 40px
     margin-bottom 5px
   .iScrollIndicator
     display none !important
+  #background-code
+    height 300px !important
+    #background-code-mask
+      height auto !important
+    pre
+      animation code-repeat 5s infinite

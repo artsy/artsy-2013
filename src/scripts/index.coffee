@@ -8,10 +8,6 @@ require './vendor/zepto.touch.js'
 
 MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f"
 
-# What percent of the graph to start animating the line. E.g. 0.5 will start the line
-# animation with already half of the line filled.
-START_GRAPH_AT = 0.3
-
 # The total number of header background before it loops
 TOTAL_HEADER_BACKGROUNDS = 3
 
@@ -71,9 +67,11 @@ $codeMask = null
 $code = null
 $headerBackground = null
 $headerGradient = null
+$graph = null
 $graphLine = null
 $facebookLinks = null
 $twitterLinks = null
+$graphContainer = null
 
 # Cached values
 currentItemIndex = 0 # The current index of the item being viewed
@@ -98,9 +96,6 @@ init = ->
   $(window).on 'resize', _.throttle onResize, 200
   onResize()
   setupIScroll()
-  $mainArrow.on 'tap click', onClickHeaderDownArrow
-  $facebookLinks.on 'tap click', shareOnFacebook
-  $twitterLinks.on 'tap click', shareOnTwitter
   setContentGap()
   nextHeaderSlide()
   renderSocialShares()
@@ -108,6 +103,7 @@ init = ->
   mixpanel.init MIXPANEL_ID
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
+  attachClickHandlers()
   revealOnFirstBannerLoad()
 
 setupGraph = ->
@@ -138,7 +134,7 @@ renderSocialShares = ->
 
 setupIScroll = ->
   $wrapper.height viewportHeight
-  myScroll = new IScroll '#wrapper',
+  window.myScroll = myScroll = new IScroll '#wrapper',
     probeType: 3
     mouseWheel: true
     scrollbars: true
@@ -178,9 +174,11 @@ cacheElements = ->
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
   $graphLine = $('#graph-line')
+  $graph = $('#graph')
+  $graphContainer = $('#graph-container')
 
 refreshIScrollOnImageLoads = ->
-  $('#background img').on 'load', _.debounce (-> myScroll.refresh()), 1000
+  $('#background img').on 'load', _.debounce (-> myScroll?.refresh()), 1000
 
 # Utility functions
 # -----------------
@@ -201,8 +199,17 @@ percentBetween = (start, end) ->
   perc = 1 if perc > 1
   perc
 
+getScrollTop = ->
+  scrollTop = -myScroll?.getComputedPosition().y
+
 # Click handlers
 # --------------
+
+attachClickHandlers = ->
+  $mainArrow.on 'tap click', onClickHeaderDownArrow
+  $facebookLinks.on 'tap click', shareOnFacebook
+  $twitterLinks.on 'tap click', shareOnTwitter
+  $('a').on 'tap click', followLinksOnTap
 
 onClickHeaderDownArrow = ->
   myScroll.scrollToElement '#content', 1200, null, null, IScroll.utils.ease.quadratic
@@ -225,26 +232,25 @@ shareOnTwitter = (e) ->
   open url, 'twitter', opts
   false
 
+followLinksOnTap = (e) ->
+  e.preventDefault()
+  _.defer -> window.location = $(e.target).attr 'href'
+  false
+
 # On scroll functions
 # -------------------
 
 onScroll = ->
-  scrollTop = -(this.y>>0)
-  popLockCodeMask()
+  getScrollTop()
   toggleSlideShow()
   return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
+  popLockCodeMask()
   animateGraphLine()
   popLockForeground()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
   fadeBetweenBackgroundItems()
-
-window.test = ->
-  for i in [0..5]
-    t = new Date().getTime()
-    for i in [0..500]
-      onScroll()
-    console.log "Took: " + (new Date().getTime() - t)
+  popLockGraph()
 
 fadeBetweenBackgroundItems = ->
   for el, index in $backgroundItems
@@ -335,13 +341,17 @@ nextHeaderSlide = ->
   , 1500
 
 animateGraphLine = ->
-  start = offset($backgroundItems.last()).top - (viewportHeight / 2.5)
-  end = start + (viewportHeight / 2)
-  pos = graphLineLength - ((graphLineLength * percentBetween(start, end)) +
-                          (graphLineLength * START_GRAPH_AT))
+  start = offset($backgroundItems.last()).top
+  end = start + (viewportHeight * 0.8)
+  pos = graphLineLength - (graphLineLength * percentBetween(start, end))
   pos = Math.max pos, 0
   $graphLine.css 'stroke-dashoffset': pos
 
+popLockGraph = ->
+  graphContainerTop = offset($graphContainer).top
+  graphContainerBottom = graphContainerTop + $graphContainer.height()
+  return if scrollTop < graphContainerTop or scrollTop + viewportHeight >= graphContainerBottom
+  $graph.css 'margin-top': scrollTop - graphContainerTop
 
 # On resize functions
 # -------------------
@@ -354,7 +364,11 @@ onResize = ->
   setHeaderSize()
   $viewportHeights.height viewportHeight
   $halfViewportHeights.height viewportHeight / 2
-  _.defer -> myScroll.refresh()
+  _.defer -> myScroll?.refresh()
+  setTimeout ->
+    getScrollTop()
+    popLockForeground()
+  , 500
 
 setHeaderSize = ->
   $('#header-background').height viewportHeight
