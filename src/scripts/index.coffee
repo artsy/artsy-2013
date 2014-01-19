@@ -265,9 +265,9 @@ followLinksOnTap = (e) ->
 # -------------------
 
 onScroll = ->
-  return if viewportWidth <= 640 # For phone we ignore scroll transitions
   getScrollTop()
   toggleSlideShow()
+  return if viewportWidth <= 640 # For phone we ignore scroll transitions
   animateGraphLine()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
