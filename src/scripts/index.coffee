@@ -8,10 +8,6 @@ require './vendor/zepto.touch.js'
 
 MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f"
 
-# What percent of the graph to start animating the line. E.g. 0.5 will start the line
-# animation with already half of the line filled.
-START_GRAPH_AT = 0.3
-
 # The total number of header background before it loops
 TOTAL_HEADER_BACKGROUNDS = 3
 
@@ -71,9 +67,11 @@ $codeMask = null
 $code = null
 $headerBackground = null
 $headerGradient = null
+$graph = null
 $graphLine = null
 $facebookLinks = null
 $twitterLinks = null
+$graphContainer = null
 
 # Cached values
 currentItemIndex = 0 # The current index of the item being viewed
@@ -176,6 +174,8 @@ cacheElements = ->
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
   $graphLine = $('#graph-line')
+  $graph = $('#graph')
+  $graphContainer = $('#graph-container')
 
 refreshIScrollOnImageLoads = ->
   $('#background img').on 'load', _.debounce (-> myScroll?.refresh()), 1000
@@ -242,21 +242,15 @@ followLinksOnTap = (e) ->
 
 onScroll = ->
   getScrollTop()
-  popLockCodeMask()
   toggleSlideShow()
   return if viewportWidth <= 640 # For phone we ignore a lot of scroll transitions
+  popLockCodeMask()
   animateGraphLine()
   popLockForeground()
   fadeOutHeaderImage()
   fadeInFirstForegroundItem()
   fadeBetweenBackgroundItems()
-
-window.test = ->
-  for i in [0..5]
-    t = new Date().getTime()
-    for i in [0..500]
-      onScroll()
-    console.log "Took: " + (new Date().getTime() - t)
+  popLockGraph()
 
 fadeBetweenBackgroundItems = ->
   for el, index in $backgroundItems
@@ -347,13 +341,17 @@ nextHeaderSlide = ->
   , 1500
 
 animateGraphLine = ->
-  start = offset($backgroundItems.last()).top - (viewportHeight / 2.5)
-  end = start + (viewportHeight / 2)
-  pos = graphLineLength - ((graphLineLength * percentBetween(start, end)) +
-                          (graphLineLength * START_GRAPH_AT))
+  start = offset($backgroundItems.last()).top
+  end = start + (viewportHeight * 0.8)
+  pos = graphLineLength - (graphLineLength * percentBetween(start, end))
   pos = Math.max pos, 0
   $graphLine.css 'stroke-dashoffset': pos
 
+popLockGraph = ->
+  graphContainerTop = offset($graphContainer).top
+  graphContainerBottom = graphContainerTop + $graphContainer.height()
+  return if scrollTop < graphContainerTop or scrollTop + viewportHeight >= graphContainerBottom
+  $graph.css 'margin-top': scrollTop - graphContainerTop
 
 # On resize functions
 # -------------------

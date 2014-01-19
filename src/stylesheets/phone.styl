@@ -1,5 +1,15 @@
 instead-of-viewport-height-margin = 40px
 
+@keyframes code-repeat
+  0%
+    margin-top 0%
+    animation-timing-function linear
+  50%
+    margin-top -50%
+    animation-timing-function linear
+  100%
+    margin-top -100%
+    animation-timing-function linear
 
 // Vertical iPad
 @media (max-width: 800px)
@@ -50,3 +60,9 @@ instead-of-viewport-height-margin = 40px
     margin-bottom 5px
   .iScrollIndicator
     display none !important
+  #background-code
+    height 300px !important
+    #background-code-mask
+      height auto !important
+    pre
+      animation code-repeat 5s infinite
