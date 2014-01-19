@@ -17,6 +17,7 @@
     "uglify-js": "*",
     "sqwish": "*",
     "underscore": "*",
-    "iscroll": "*"
+    "iscroll": "*",
+    "morpheus": "*"
   }
 }
