@@ -34,11 +34,9 @@ TWITTER_TEXTS = [
   'Turns out that @Artsy has released 37 open-source projects: See the rest: 2013.artsy.net'
   'Turns out 7 of @Artsy’s engineers are artists, and 1 is an artist on Artsy... so meta. See the rest: 2013.artsy.net'
   'Turns out over 120,000 people downloaded the @Artsy iPhone app. See the rest: 2013.artsy.net'
-  # 'Turns out the @Artsy team is almost 2/3’s women: See the rest: 2013.artsy.net'
   'Turns out @Artsy’s 90,000 artworks are now part of NYC’s Public Schools Digital Literacy curriculum. See the rest: 2013.artsy.net'
   "Turns out @Artsy opened ICI's (@CuratorsINTL) benefit auction to the whole world. See the rest: 2013.artsy.net"
   'Turns out @Artsy introed more collectors to galleries in the last week of December, than all of 2012. See the rest: 2013.artsy.net'
-  # 'Turns out the @Artsy team is really into Burning Man. See the rest: 2013.artsy.net'
 ]
 
 IS_IPHONE = navigator.userAgent.match(/iPhone/i)
