@@ -99,7 +99,6 @@ viewportWidth = null
 # ---------------
 
 init = ->
-
   cacheElements()
   setupGraph()
   $window.on 'resize', _.throttle onResize, 100
