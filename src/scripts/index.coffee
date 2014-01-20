@@ -115,11 +115,19 @@ init = ->
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
   attachClickHandlers()
-  $body.removeClass 'body-loading'
+  revealOnFirstBannerLoad()
 
 setupGraph = ->
   graphLineLength = $graphLine[0].getTotalLength()
   $graphLine.css 'stroke-dasharray': graphLineLength
+
+revealOnFirstBannerLoad = ->
+  image = new Image
+  image.src = $headerBackgrounds.first().css('background-image').replace('url(','').replace(')','')
+  cb = -> $('body').removeClass 'body-loading'
+  image.onload = cb
+  image.onerror = cb
+  setTimeout cb, 3000
 
 renderSocialShares = ->
   shareUrl = "http://2013.artsy.net/" or location.href
