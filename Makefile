@@ -10,7 +10,7 @@ compile:
 	mv out/index.min.css out/index.css
 	$(BIN)/browserify src/scripts/index.coffee -t coffeeify | $(BIN)/uglifyjs > out/index.js
 
-deploy: compile
+deploy:
 	$(BIN)/coffee scripts/to-s3.coffee
 	open http://2013.artsy.net/
 
@@ -21,4 +21,4 @@ images:
 		convert out/images/_content/$(file).jpg -resize 1200x1200 -quality 80 out/images/content/$(file)-large.jpg; \
 	)
 
-.PHONY: content
+.PHONY: content images
