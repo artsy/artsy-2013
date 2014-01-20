@@ -10,36 +10,37 @@ html(lang="en")
     link( rel='apple-touch-icon', sizes='72x72', href='images/icon-72.png' )
     link( rel='apple-touch-icon', sizes='114x114', href='images/icon-114.png' )
     link( rel='icon', type='image/png', href='images/favicon.ico' )
-  body.body-loading
+  body.body-loading.logo-loading
     #body-loading-spinner.loading-spinner
     #wrapper
       #scroller
-        #header-background
+        #header-background.non-logo
           #header-background-gradient
           ul
             for x, i in new Array(8)
               li( class=(i == 0 ? 'active' : null) )
         header#main-header.viewport-height
-          #main-header-logo
-          #main-header-down-arrow
-        #intro-statement
-          .half-viewport-height
-          #intro-statement-inner
-            hr
-            p
-              | Artsy was created to bring all the world's
-              br
-              | art into one place — a tool for collectors
-              br
-              | and educators.
-            p In 2013 we took our first steps to making
-              br
-              | that a reality.
-          .half-viewport-height
-        main#content
-          include content
-        footer#footer
-          include footer
+          #main-logo
+          #main-header-down-arrow.non-logo
+        .non-logo
+          #intro-statement
+            .half-viewport-height
+            #intro-statement-inner
+              hr
+              p
+                | Artsy was created to bring all the world's
+                br
+                | art into one place — a tool for collectors
+                br
+                | students, and art lovers.
+              p In 2013 we took our first steps to making
+                br
+                | that a reality.
+            .half-viewport-height
+          main#content
+            include content
+          footer#footer
+            include footer
     #scripts
       include scripts
       script( src='index.js' )

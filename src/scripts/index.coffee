@@ -102,7 +102,7 @@ init = ->
   # Use IScroll to handle scroll events on an IPad, otherwise normal scroll handlers.
   # Phone uses a more responsive technique which will just toggle off the `onScroll`
   # handler based on screen size.
-  if navigator.userAgent.match(/iPad/i)
+  if navigator.userAgent.match(/iPad/i) or true
     setupIScroll()
   else if not navigator.userAgent.match(/iPhone/i)
     $window.on 'scroll', onScroll
@@ -122,15 +122,22 @@ setupGraph = ->
   $graphLine.css 'stroke-dasharray': graphLineLength
 
 revealOnFirstBannerLoad = ->
+  firstHeader = $headerBackgrounds.first().css('background-image')
+  firstHeader.replace('url(','').replace(')','')
+  onLoadImg 'out/images/logo.png', 500, ->
+    $('body').removeClass 'logo-loading'
+    onLoadImg firstHeader, 3000, ->
+      $('body').removeClass 'body-loading'
+
+onLoadImg = (src, timeout, callback) ->
   image = new Image
-  image.src = $headerBackgrounds.first().css('background-image').replace('url(','').replace(')','')
-  cb = -> $('body').removeClass 'body-loading'
-  image.onload = cb
-  image.onerror = cb
-  setTimeout cb, 3000
+  image.src = src
+  image.onload = callback
+  image.onerror = callback
+  setTimeout callback, timeout
 
 renderSocialShares = ->
-  shareUrl = "http://2013.artsy.net/" or location.href
+  shareUrl = location.href
   $.ajax
     url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=#{shareUrl}"
     success: (res) ->
@@ -179,7 +186,6 @@ cacheElements = ->
   $headerBackground = $('#header-background')
   $headerBackgrounds = $('#header-background li')
   $headerGradient = $('#header-background-gradient')
-  $headerLogo = $('#main-header-logo')
   $firstForegroundItem = $('#foreground li:first-child')
   $viewportHeights = $('.viewport-height')
   $halfViewportHeights = $('.half-viewport-height')
@@ -361,6 +367,7 @@ toggleSlideShow = ->
   if scrollTop > viewportHeight
     $headerBackgrounds.removeClass('active')
   else
+    $headerBackgrounds.removeClass('active')
     $headerBackgrounds.first().addClass('active')
 
 nextHeaderSlide = ->
