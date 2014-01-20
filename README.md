@@ -1,6 +1,6 @@
 # artsy-2013
 
-Artsy's static "2013 yearly review" site found at [2013.artsy.net](http://2013.artsy.net) using [Node.js](http://nodejs.org/) for some preprocessors.
+The [2013.artsy.net](http://2013.artsy.net) static site using [Node.js](http://nodejs.org/) for some preprocessors.
 
 ## Getting Started
 
