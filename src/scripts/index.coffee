@@ -115,14 +115,29 @@ init = ->
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
   attachClickHandlers()
-  $body.removeClass 'body-loading'
+  revealOnFirstBannerLoad()
 
 setupGraph = ->
   graphLineLength = $graphLine[0].getTotalLength()
   $graphLine.css 'stroke-dasharray': graphLineLength
 
+revealOnFirstBannerLoad = ->
+  firstHeader = $headerBackgrounds.first().css('background-image')
+  firstHeader = firstHeader.replace('url(','').replace(')','')
+  onLoadImg 'images/logo.png', 500, ->
+    $('body').removeClass 'logo-loading'
+    onLoadImg firstHeader, 3000, ->
+      $('body').removeClass 'body-loading'
+
+onLoadImg = (src, timeout, callback) ->
+  image = new Image
+  image.src = src
+  image.onload = callback
+  image.onerror = callback
+  setTimeout callback, timeout
+
 renderSocialShares = ->
-  shareUrl = "http://2013.artsy.net/" or location.href
+  shareUrl = location.href
   $.ajax
     url: "http://api.facebook.com/restserver.php?method=links.getStats&urls[]=#{shareUrl}"
     success: (res) ->
@@ -171,7 +186,6 @@ cacheElements = ->
   $headerBackground = $('#header-background')
   $headerBackgrounds = $('#header-background li')
   $headerGradient = $('#header-background-gradient')
-  $headerLogo = $('#main-header-logo')
   $firstForegroundItem = $('#foreground li:first-child')
   $viewportHeights = $('.viewport-height')
   $halfViewportHeights = $('.half-viewport-height')
@@ -353,6 +367,7 @@ toggleSlideShow = ->
   if scrollTop > viewportHeight
     $headerBackgrounds.removeClass('active')
   else
+    $headerBackgrounds.removeClass('active')
     $headerBackgrounds.first().addClass('active')
 
 nextHeaderSlide = ->

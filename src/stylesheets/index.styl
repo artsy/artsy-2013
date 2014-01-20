@@ -10,19 +10,26 @@
 
 global-reset()
 
+html
+  background black
+
 body
   background black
   color white
   garamond()
   line-height 1.4em
   font-size default-font-size
-  #wrapper
-    transition opacity 1s cubic-bezier(0.550, 0.055, 0.675, 0.190)
-  &.body-loading
-    #wrapper
+  &.logo-loading
+    #main-logo
       opacity 0
     #body-loading-spinner
       display block
+  &.body-loading
+    .non-logo
+      opacity 0
+
+.non-logo
+  transition opacity 1s cubic-bezier(0.550, 0.055, 0.675, 0.190)
 
 #body-loading-spinner
   display none
@@ -41,6 +48,10 @@ em
 button, a
   outline none
   color white
+
+#intro-statement, #content
+  max-width 1800px
+  margin auto
 
 #content
   position relative
