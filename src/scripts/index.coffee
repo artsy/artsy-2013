@@ -346,6 +346,7 @@ fadeBetweenBackgroundItems = ->
         $foreground.css opacity: percentCurItem
         $curItem.css 'z-index': Math.round(percentCurItem)
       else
+        $foreground.css opacity: 1
         $curItem.css opacity: percentCurItem, 'z-index': Math.ceil(percentCurItem)
         $nextItem.css opacity: percentNextItem, 'z-index': Math.ceil(percentNextItem)
       break
