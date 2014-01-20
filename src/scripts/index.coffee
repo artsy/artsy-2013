@@ -102,7 +102,7 @@ init = ->
   # Use IScroll to handle scroll events on an IPad, otherwise normal scroll handlers.
   # Phone uses a more responsive technique which will just toggle off the `onScroll`
   # handler based on screen size.
-  if navigator.userAgent.match(/iPad/i) or true
+  if navigator.userAgent.match(/iPad/i)
     setupIScroll()
   else if not navigator.userAgent.match(/iPhone/i)
     $window.on 'scroll', onScroll
@@ -123,8 +123,8 @@ setupGraph = ->
 
 revealOnFirstBannerLoad = ->
   firstHeader = $headerBackgrounds.first().css('background-image')
-  firstHeader.replace('url(','').replace(')','')
-  onLoadImg 'out/images/logo.png', 500, ->
+  firstHeader = firstHeader.replace('url(','').replace(')','')
+  onLoadImg 'images/logo.png', 500, ->
     $('body').removeClass 'logo-loading'
     onLoadImg firstHeader, 3000, ->
       $('body').removeClass 'body-loading'

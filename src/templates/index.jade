@@ -14,13 +14,15 @@ html(lang="en")
     #body-loading-spinner.loading-spinner
     #wrapper
       #scroller
-        #header-background.non-logo
-          #header-background-gradient
-          ul
-            for x, i in new Array(8)
-              li( class=(i == 0 ? 'active' : null) )
+        .non-logo
+          #header-background
+            #header-background-gradient
+            ul
+              for x, i in new Array(8)
+                li( class=(i == 0 ? 'active' : null) )
         header#main-header.viewport-height
           #main-logo
+            img( src='images/logo.png' )
           #main-header-down-arrow.non-logo
         .non-logo
           #intro-statement

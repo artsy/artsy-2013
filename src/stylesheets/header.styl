@@ -36,16 +36,33 @@
   position relative
 
 #main-logo
-  background url('images/logo.png') center center no-repeat
-  background-size contain
+  width 100%
   top 50%
-  height 16%
-  margin-left 20px
-  width calc(100% - 40px)
+  padding 0 38%
   position absolute
-  margin-top -(@height / 2)
+  margin-top -(16% / 2)
   transition opacity 0.3s ease-in
   z-index 4
+  text-align center
+  img
+    display inline-block
+    max-width 100%
+
+@media (max-width: 1600px)
+  #main-logo
+    padding 0 30%
+@media (max-width: 1440px)
+  #main-logo
+    padding 0 27%
+@media (max-width: 1024px)
+  #main-logo
+    padding 0 23%
+@media (max-width: 1024px)
+  #main-logo
+    padding 0 20%
+@media (max-width: 640px)
+  #main-logo
+    padding 0 20px
 
 #main-header-down-arrow
   background center center no-repeat url('images/down-arrow.svg')
