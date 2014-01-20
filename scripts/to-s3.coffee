@@ -13,7 +13,7 @@ headers =
 client = knox.createClient
   key: process.env.S3_KEY
   secret: process.env.S3_SECRET
-  bucket: '2013.artsy.net'
+  bucket: if process.argv[2] is 'production' then '2013.artsy.net' else 'staging.2013.artsy.net'
 
 uploadFile = (file) ->
   console.log "Uploading #{file}...."

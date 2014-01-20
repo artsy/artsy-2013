@@ -7,7 +7,7 @@ The [2013.artsy.net](http://2013.artsy.net) static site using [Node.js](http://n
 1. Install [Node.js](http://nodejs.org/)
 2. Install node modules `npm install`
 3. Edit in development mode `make s` and open [localhost:3000](http://localhost:3000)
-4. Generate the static site under /out `make compile`
+4. Generate the static site under /out `make generate`
 
 Optionally...
 

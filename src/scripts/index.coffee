@@ -311,7 +311,7 @@ fadeBetweenBackgroundItems = ->
   for el, index in $backgroundItems
     $el = $ el
 
-    # Alias current and next items
+    # Alias current and next foreground items
     $curItem = $foregroundItems.eq(index)
     $nextItem = $foregroundItems.eq(index + 1)
 
@@ -356,9 +356,20 @@ fadeOutHeaderImage = ->
 
 popLockForeground = ->
   top = scrollTop - contentGap
-  x = (offset($background).bottom - viewportHeight - contentGap)
-  top = Math.round(Math.max 0, Math.min(top, x))
-  $foreground.css top: top
+  end = (offset($background).bottom - viewportHeight - contentGap)
+  top = Math.round(Math.max 0, Math.min(top, end))
+  if myScroll?
+    $foreground.css(top: top)
+  # Because Safari can't handle manual fixing without jitters we do this
+  # hacky use of plain ol' fixed position... ironic iPad's Safari choke on fixed
+  # and desktop Safari chokes on fixed work-arounds.
+  else if top > 0 and top < end
+    $foreground.css(top: 0, position: 'fixed')
+  else if top <= 0
+    $foreground.css(top: 0, position: 'absolute')
+  else if top >= end
+    $foreground.css(bottom: 0, top: 'auto', position: 'absolute')
+
 
 popLockCodeMask = ->
   codeTop = offset($code).top
@@ -368,9 +379,10 @@ popLockCodeMask = ->
   $codeMask.css 'margin-top': maskTop
 
 fadeInFirstForegroundItem = ->
-  # iPad will see the text above fold
-  return if parseInt($foreground.css('top')) > 0
-  if viewportWidth <= 1024
+  return if $foreground.css('position') is 'fixed' or
+            $foreground.css('bottom') is '0px' or
+            parseInt($foreground.css('top')) > 0
+  if viewportWidth <= 1024 # iPad will see the text above fold
     opacity = 1
   else
     end = offset($firstForegroundItem).top
