@@ -11,8 +11,19 @@ instead-of-viewport-height-margin = 40px
     margin-top -100%
     animation-timing-function linear
 
-// Vertical iPad
+// Landscape iPad
+@media (max-width: 1024px)
+  #graph-wrapper h4
+    margin-bottom -80px !important
+  #intro-statement .half-viewport-height
+    display none
+  #foreground header
+    width calc(40% - 40px)
+
+// Portrait iPad
 @media (max-width: 800px)
+  #graph-wrapper h4
+    margin-bottom -120px !important
   #foreground-content li h1
     br:nth-of-type(2)
       display  none
@@ -24,11 +35,15 @@ instead-of-viewport-height-margin = 40px
 
 // Phone
 @media (max-width: 640px)
-  #intro-statement, .phone-foreground-container header h1
+  .phone-foreground-container header h1
     font-size 36px
-    line-height 1.2em
-  #intro-statement #intro-statement-inner hr
-    width 100%
+    line-height 1em
+  #intro-statement #intro-statement-inner
+    position relative
+    font-size 30px !important
+    hr
+      width 100%
+      left 0
   #foreground
     display none
   .phone-foreground-container
@@ -44,6 +59,7 @@ instead-of-viewport-height-margin = 40px
     display none
   #intro-statement
     margin-top 40px
+    margin-bottom 0
   #background
     ul
       width 100%
@@ -55,6 +71,7 @@ instead-of-viewport-height-margin = 40px
     position relative
     display block
     float none
+  .main + .source
     margin-top 1em
   #footer
     background-image url('images/bottom-image-small.jpg')
@@ -71,6 +88,8 @@ instead-of-viewport-height-margin = 40px
   .social-button-container
     width 70px
     height 70px
+    small
+      width 83%
   #footer-social-buttons
     margin-bottom 5px
   .iScrollIndicator
@@ -100,3 +119,20 @@ instead-of-viewport-height-margin = 40px
     font-size 27px
     padding 0 20px
     bottom 340px
+    line-height 1.1em
+  figcaption
+    .main, .source
+      width 100% !important
+      float none !important
+    .source
+      text-align left !important
+  #footer-links
+    bottom 190px !important
+    line-height 1.5em !important
+  #graph-wrapper
+    position relative !important
+    h4
+      margin-top 0 !important
+      line-height 1.4em
+    #graph
+      height 530px !important
