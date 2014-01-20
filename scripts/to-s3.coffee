@@ -23,4 +23,5 @@ uploadFile = (file) ->
     res.resume()
 
 for ext in ['html', 'css', 'js', 'jpg', 'png', 'svg']
-  uploadFile(file) for file in glob.sync('out/**/*.' + ext)
+  for file in glob.sync('out/**/*.' + ext)
+    uploadFile(file) unless file.match('_content')

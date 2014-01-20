@@ -1,23 +1,28 @@
 #footer
   position relative
-  background center center no-repeat
+  background center bottom no-repeat url('images/bottom-image-large.jpg')
+  background-size cover
   margin-top 200px
-  &::after
-    content '.'
-    color 'transparent'
-    background linear-gradient(top, transparent, black)
-    position absolute
-    bottom 0
-    width 100%
-    height 30%
-  &::before
-    content '.'
-    color 'transparent'
-    background linear-gradient(bottom, transparent, black)
-    position absolute
-    top 0
-    width 100%
-    height 20%
+  // &::after
+  //   content '.'
+  //   color 'transparent'
+  //   background linear-gradient(top, transparent, black)
+  //   position absolute
+  //   bottom 0
+  //   width 100%
+  //   height 30%
+  // &::before
+  //   content '.'
+  //   color 'transparent'
+  //   background linear-gradient(bottom, transparent, black)
+  //   position absolute
+  //   top 0
+  //   width 100%
+  //   height 20%
+
+#footer-bg-image
+  width 100%
+  display block
 
 #footer-social-buttons
   position absolute
@@ -35,7 +40,7 @@
 #footer-header
   text-align center
   position absolute
-  top 50%
+  bottom 400px
   margin-top -40px
   font-size 54px
   display block

@@ -34,19 +34,14 @@
   position relative
 
 #main-header-logo
-  opacity 0
-  background url('images/header-logo.svg') center center no-repeat
+  background url('images/logo.png') center center no-repeat
   background-size contain
   top 50%
   height 16%
   margin-left 20px
-  width calc(100% - 40px)
+  width 100%
   position absolute
   margin-top -(@height / 2)
-  transition opacity 0s
-  &.active
-    opacity 1
-    transition opacity 0.5s ease-in
 
 #main-header-down-arrow
   background center center no-repeat url('images/down-arrow.svg')
@@ -58,3 +53,21 @@
   cursor pointer
   border 0
   z-index 2
+
+#intro-statement
+  font-size 54px
+  line-height 1.2em
+  padding 0 foreground-padding
+  position relative
+  p
+    margin-bottom 1em
+  #intro-statement-inner
+    padding-top 60px
+    position relative
+    hr
+      width calc(40% - 80px)
+      position absolute
+      left 0
+      top 0
+      border 0
+      border-top 3px solid white
