@@ -19,6 +19,8 @@ body
   #wrapper
     transition opacity 1s cubic-bezier(0.550, 0.055, 0.675, 0.190)
   &.body-loading
+    #main-header-logo
+      opacity 0
     #wrapper
       opacity 0
     #body-loading-spinner
@@ -28,11 +30,15 @@ body
   display none
   top 50%
   left 50%
+  margin-left -15px
   position fixed
   background white
 
 *
   box-sizing border-box
+
+em
+  font-style italic
 
 button, a
   outline none

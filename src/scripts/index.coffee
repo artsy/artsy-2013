@@ -75,6 +75,7 @@ $twitterLinks = null
 $graphContainer = null
 $window = null
 $body = null
+$imgs = null
 
 # Cached values
 currentItemIndex = 0 # The current index of the item being viewed
@@ -96,7 +97,7 @@ viewportWidth = null
 init = ->
   cacheElements()
   setupGraph()
-  $window.on 'resize', _.throttle onResize, 200
+  $window.on 'resize', _.throttle onResize, 100
   onResize()
   # Use IScroll to handle scroll events on an IPad, otherwise normal scroll handlers.
   # Phone uses a more responsive technique which will just toggle off the `onScroll`
@@ -189,6 +190,7 @@ cacheElements = ->
   $graphContainer = $('#graph-container')
   $window = $(window)
   $body = $('body')
+  $imgs = $('img')
 
 refreshIScrollOnImageLoads = ->
   $('#background img').on 'load', _.debounce (-> myScroll?.refresh()), 1000
@@ -224,7 +226,14 @@ scrollToElement = (selector) ->
     myScroll.scrollToElement selector, time, null, null, IScroll.utils.ease.quadratic
   else
     elTop = $(selector).offset().top
-    morpheus.tween time, ((pos) => $body[0].scrollTop = elTop * pos), morpheus.easings.quadratic
+    # Phone has trouble animating
+    if viewportWidth <= 640
+      $body[0].scrollTop = elTop
+    else
+      morpheus.tween time, ((pos) =>
+        $body[0].scrollTop = elTop * pos
+      ), morpheus.easings.quadratic
+
 
 # Click handlers
 # --------------
@@ -233,27 +242,27 @@ attachClickHandlers = ->
   $mainArrow.on 'tap click', onClickHeaderDownArrow
   $facebookLinks.on 'tap click', shareOnFacebook
   $twitterLinks.on 'tap click', shareOnTwitter
-  $('a').on 'tap click', followLinksOnTap
+  $('a').on 'tap', followLinksOnTap
 
 onClickHeaderDownArrow = ->
-  scrollToElement '#content'
+  scrollToElement '#intro-statement-inner'
   false
 
 shareOnFacebook = (e) ->
-  mixpanel.track "Shared on Facebook"
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
   url = "https://www.facebook.com/sharer/sharer.php?u=#{location.href}"
   open url, 'facebook', opts
+  mixpanel.track "Shared on Facebook"
   false
 
 shareOnTwitter = (e) ->
-  mixpanel.track "Shared on Twitter"
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
   text = TWITTER_TEXTS[currentItemIndex]
   url = "https://twitter.com/intent/tweet?" +
         "original_referer=#{location.href}" +
         "&text=#{text}"
   open url, 'twitter', opts
+  mixpanel.track "Shared on Twitter", { text: text }
   false
 
 followLinksOnTap = (e) ->
@@ -351,7 +360,6 @@ toggleSlideShow = ->
 
 nextHeaderSlide = ->
   return if stopSlideShow
-  $headerLogo.addClass 'active'
   slideshowTimeout = setTimeout ->
     slideshowTimeout = setTimeout ->
       index = $($headerBackgrounds.filter(-> $(@).hasClass('active'))[0]).index()
@@ -386,24 +394,34 @@ onResize = ->
   setBackgroundItemGap()
   setContentGap()
   setHeaderSize()
+  swapForHigherResImages()
+  setViewportHeights()
+  _.defer -> myScroll?.refresh()
+  setTimeout relockItems, 500
+
+relockItems = ->
+  getScrollTop()
+  popLockForeground()
+
+setViewportHeights = ->
   $viewportHeights.height viewportHeight
   $halfViewportHeights.height viewportHeight / 2
-  _.defer -> myScroll?.refresh()
-  setTimeout ->
-    getScrollTop()
-    popLockForeground()
-  , 500
 
 setHeaderSize = ->
   $('#header-background').height viewportHeight
 
 setContentGap = ->
-  $content.css 'margin-top': (viewportHeight * CONTENT_GAP_PERCENT_OF_VIEWPORT)
   contentGap = offset($content).top
 
 setBackgroundItemGap = ->
   $backgroundItems.css('margin-bottom': viewportHeight * GAP_PERCENT_OF_VIEWPORT)
   $backgroundItems.last().css('margin-bottom': 0)
+
+swapForHigherResImages = ->
+  if viewportWidth >= 640
+    $imgs.each -> $(@).attr 'src', $(@).attr('src').replace('small', 'large')
+  else
+    $imgs.each -> $(@).attr 'src', $(@).attr('src').replace('large', 'small')
 
 # Start your engines
 # ------------------
