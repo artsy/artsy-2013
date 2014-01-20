@@ -99,7 +99,7 @@ viewportWidth = null
 
 init = ->
   cacheElements()
-  totalHeaderBackgrounds = $headerBackgrounds.length
+  totalHeaderBackgrounds = $headerBackgrounds.length - 1
   setupGraph()
   $window.on 'resize', _.throttle onResize, 100
   onResize()
@@ -291,7 +291,7 @@ shareOnTwitter = (e) ->
 
 followLinksOnTap = (e) ->
   e.preventDefault()
-  _.defer -> window.location = $(e.target).attr 'href'
+  _.defer -> open $(e.target).attr('href'), '_blank'
   false
 
 # On scroll functions
@@ -369,10 +369,14 @@ popLockCodeMask = ->
   $codeMask.css 'margin-top': maskTop
 
 fadeInFirstForegroundItem = ->
+  # iPad will see the text above fold
   return if parseInt($foreground.css('top')) > 0
-  end = offset($firstForegroundItem).top
-  start = end - (viewportHeight / 2)
-  opacity = (scrollTop - start) / (end - start)
+  if viewportWidth <= 1024
+    opacity = 1
+  else
+    end = offset($firstForegroundItem).top
+    start = end - (viewportHeight / 2)
+    opacity = (scrollTop - start) / (end - start)
   $firstForegroundItem.css opacity: opacity
 
 toggleSlideShow = ->
