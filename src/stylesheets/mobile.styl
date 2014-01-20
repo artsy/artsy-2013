@@ -18,7 +18,7 @@ instead-of-viewport-height-margin = 40px
   #intro-statement .half-viewport-height
     display none
   #foreground header
-    width calc(40%, 40px)
+    width calc(40% - 40px)
 
 // Portrait iPad
 @media (max-width: 800px)
@@ -71,6 +71,7 @@ instead-of-viewport-height-margin = 40px
     position relative
     display block
     float none
+  .main + .source
     margin-top 1em
   #footer
     background-image url('images/bottom-image-small.jpg')
@@ -87,6 +88,8 @@ instead-of-viewport-height-margin = 40px
   .social-button-container
     width 70px
     height 70px
+    small
+      width 83%
   #footer-social-buttons
     margin-bottom 5px
   .iScrollIndicator
@@ -116,3 +119,20 @@ instead-of-viewport-height-margin = 40px
     font-size 27px
     padding 0 20px
     bottom 340px
+    line-height 1.1em
+  figcaption
+    .main, .source
+      width 100% !important
+      float none !important
+    .source
+      text-align left !important
+  #footer-links
+    bottom 190px !important
+    line-height 1.5em !important
+  #graph-wrapper
+    position relative !important
+    h4
+      margin-top 0 !important
+      line-height 1.4em
+    #graph
+      height 530px !important
