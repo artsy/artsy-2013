@@ -14,13 +14,18 @@ instead-of-viewport-height-margin = 40px
 // Vertical iPad
 @media (max-width: 800px)
   #intro-statement, #foreground-content li h1
-    font-size 38px
+    font-size 40px
   #foreground-content li h1
     br:nth-of-type(2)
       display  none
 
 // Phone
 @media (max-width: 640px)
+  #intro-statement, .phone-foreground-container header h1
+    font-size 36px
+    line-height 1.2em
+  #intro-statement #intro-statement-inner hr
+    width 100%
   #foreground
     display none
   .phone-foreground-container
@@ -28,12 +33,15 @@ instead-of-viewport-height-margin = 40px
     margin-bottom 30px
     header
       padding-top 30px
-      h1
-        font-size 36px
       .foreground-header-body
         margin-top 20px
-  #background
+  #intro-statement, #background
     padding 20px
+  #intro-statement .half-viewport-height
+    display none
+  #intro-statement
+    margin-top 40px
+  #background
     ul
       width 100%
       li
@@ -42,8 +50,6 @@ instead-of-viewport-height-margin = 40px
     height instead-of-viewport-height-margin !important
   #background-content li figure .source
     position relative
-  #content
-    margin-top 200px !important
   #footer
     background-image url('images/bottom-image-small.jpg')
   #footer-header

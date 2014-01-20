@@ -17,9 +17,8 @@ html(lang="en")
         #header-background
           #header-background-gradient
           ul
-            for x, i in new Array(4)
-              li( style='background-image: url(images/header/#{i}.jpg)',
-                  class=(i == 0 ? 'active' : null) )
+            for x, i in new Array(8)
+              li( class=(i == 0 ? 'active' : null) )
         header#main-header.viewport-height
           #main-header-logo
           #main-header-down-arrow

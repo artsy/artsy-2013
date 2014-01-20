@@ -115,19 +115,11 @@ init = ->
   mixpanel.track "Viewed page"
   copyForegroundContentToBackgroundForPhone()
   attachClickHandlers()
-  revealOnFirstBannerLoad()
+  $body.removeClass 'body-loading'
 
 setupGraph = ->
   graphLineLength = $graphLine[0].getTotalLength()
   $graphLine.css 'stroke-dasharray': graphLineLength
-
-revealOnFirstBannerLoad = ->
-  image = new Image
-  image.src = "images/header/0.jpg"
-  cb = -> $('body').removeClass 'body-loading'
-  image.onload = cb
-  image.onerror = cb
-  setTimeout cb, 3000
 
 renderSocialShares = ->
   shareUrl = "http://2013.artsy.net/" or location.href
@@ -317,8 +309,13 @@ fadeBetweenBackgroundItems = ->
     else if (scrollTop + viewportHeight) > elBottom and scrollTop < nextTop
       percentCurItem = 1 - percentBetween (elBottom - viewportHeight), endFadeOutPoint
       percentNextItem = percentBetween startFadeInPoint, nextTop
-      $curItem.css opacity: percentCurItem, 'z-index': Math.round(percentCurItem)
-      $nextItem.css opacity: percentNextItem, 'z-index': Math.round(percentNextItem)
+      # Fade out the entire foreground if it's the last item
+      if index is $backgroundItems.length - 1
+        $foreground.css opacity: percentCurItem
+        $curItem.css 'z-index': Math.round(percentCurItem)
+      else
+        $curItem.css opacity: percentCurItem, 'z-index': Math.round(percentCurItem)
+        $nextItem.css opacity: percentNextItem, 'z-index': Math.round(percentNextItem)
       break
 
 fadeOutHeaderImage = ->
