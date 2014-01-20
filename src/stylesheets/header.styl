@@ -39,7 +39,7 @@
   top 50%
   height 16%
   margin-left 20px
-  width 100%
+  width calc(100% - 40px)
   position absolute
   margin-top -(@height / 2)
 
@@ -65,9 +65,21 @@
     padding-top 60px
     position relative
     hr
-      width calc(40% - 80px)
+      width foreground-width
       position absolute
       left 0
       top 0
       border 0
       border-top 3px solid white
+
+backgrounds(size)
+  #header-background ul
+    for i in (0..8)
+      li:nth-child({i})
+        background-image url('images/header/Cover_0' + i + '_' + size + '.jpg')
+
+backgrounds(1920)
+@media (max-width: 1440px)
+  backgrounds(1440)
+@media (max-width: 640px)
+  backgrounds(640)
