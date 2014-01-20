@@ -106,14 +106,14 @@ append foreground
     a.faux-underline( href="https://artsy.net/about/jobs", target='_blank' ) Run the Ragnar Relay with us in 2014
 append background
   +bg-item
-    ul.two-column-images.two-column-left
+    ul.may-images.two-column-images.two-column-left
       li
         img( src='images/content/ragnar-pose-small.jpg' )
       li
         img( src='images/content/ragnar-camp-small.jpg' )
       li
         img( src='images/content/ragnar-carter-small.jpg' )
-    ul.two-column-images.two-column-right
+    ul.may-images.two-column-images.two-column-right
       li
         img( src='images/content/ragnar-party-small.jpg' )
       li
@@ -201,7 +201,7 @@ append background
       figcaption Three students at Brooklyn International High School, one of ten schools
         br
         | participating in New York Citi’s Digital Ready program.
-        a.source( href='http://www.flickr.com/photos/leprechaunspade/' ) Photo: Terence McCormack
+        a.faux-underline.source( href='http://www.flickr.com/photos/leprechaunspade/' ) Photo: Terence McCormack
     figure
       img( src='images/content/doe-meeting-small.jpg' )
       figcaption Mayor Bloomberg and Chancellor Walcott announce the expansion of New
@@ -219,7 +219,7 @@ append background
   +bg-item
     img( src='images/content/auction-phone-small.jpg' )
     img( src='images/content/auction-ici-small.jpg' )
-    img( src='images/content/auction-marina-small.jpg' )
+    img( src='images/content/auction-ici-2-small.jpg' )
 
 //- December: Gallery meets Collector
 append foreground
@@ -229,6 +229,8 @@ append foreground
 append background
   +bg-item
     #graph-container
-      include graph-svg.html
+      #graph-wrapper
+        h4 Monthly Collector introductions to Galleries
+        include graph-svg.html
       .viewport-height
       .viewport-height

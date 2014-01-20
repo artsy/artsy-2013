@@ -3,14 +3,12 @@ IScroll = require 'iscroll/build/iscroll-probe.js'
 require './vendor/zepto.js'
 require './vendor/zepto.touch.js'
 morpheus = require 'morpheus'
+easings = require './vendor/morpheus-easings.js'
 
 # Constants
 # ---------
 
 MIXPANEL_ID = "297ce2530b6c87b16195b5fb6556b38f"
-
-# The total number of header background before it loops
-TOTAL_HEADER_BACKGROUNDS = 3
 
 # The time it takes to scroll to an element with iscroll
 SCROLL_TO_EL_TIME = 700
@@ -72,7 +70,7 @@ $codeMask = null
 $code = null
 $headerBackground = null
 $headerGradient = null
-$graph = null
+$graphWrapper = null
 $graphLine = null
 $facebookLinks = null
 $twitterLinks = null
@@ -82,6 +80,7 @@ $body = null
 $imgs = null
 
 # Cached values
+totalHeaderBackgrounds = 0 # Used in slideshow
 currentItemIndex = 0 # The current index of the item being viewed
 graphLineLength = 0 # The total length of the graph line for SVG animation
 slideshowTimeout = null # Timeout until next slide is show
@@ -100,12 +99,12 @@ viewportWidth = null
 
 init = ->
   cacheElements()
+  totalHeaderBackgrounds = $headerBackgrounds.length
   setupGraph()
   $window.on 'resize', _.throttle onResize, 100
   onResize()
   adjustForDevices()
   setContentGap()
-  nextHeaderSlide()
   renderSocialShares()
   refreshIScrollOnImageLoads()
   mixpanel.init MIXPANEL_ID
@@ -122,7 +121,7 @@ adjustForDevices = ->
     setupIScroll()
   else if not IS_IPHONE
     $window.on 'scroll', onScroll
-    onScroll()
+  onScroll()
   $body.addClass 'ios6' if IS_IOS6
 
 setupGraph = ->
@@ -136,8 +135,16 @@ revealOnFirstBannerLoad = ->
     $('body').removeClass 'logo-loading'
     onLoadImg firstHeader, 3000, ->
       $('body').removeClass 'body-loading'
+      setTimeout ->
+        morpheus.tween 600, ((pos) =>
+          $mainArrow.css { bottom: -100 + (pos * 100) }
+        ), (->), easings.swingTo
+        $mainArrow.css opacity: 1
+        nextHeaderSlide()
+      , 1000
 
 onLoadImg = (src, timeout, callback) ->
+  callback = _.once callback
   image = new Image
   image.src = src
   image.onload = callback
@@ -200,7 +207,7 @@ cacheElements = ->
   $codeMask = $('#background-code-mask')
   $code = $('#background-code')
   $graphLine = $('#graph-line')
-  $graph = $('#graph')
+  $graphWrapper = $('#graph-wrapper')
   $graphContainer = $('#graph-container')
   $window = $(window)
   $body = $('body')
@@ -246,7 +253,7 @@ scrollToElement = (selector) ->
     else
       morpheus.tween time, ((pos) =>
         $body[0].scrollTop = elTop * pos
-      ), morpheus.easings.quadratic
+      ), easings.quadratic
 
 
 # Click handlers
@@ -383,7 +390,7 @@ nextHeaderSlide = ->
   slideshowTimeout = setTimeout ->
     slideshowTimeout = setTimeout ->
       index = $($headerBackgrounds.filter(-> $(@).hasClass('active'))[0]).index()
-      nextIndex = if index + 1 > TOTAL_HEADER_BACKGROUNDS then 0 else index + 1
+      nextIndex = if index + 1 > totalHeaderBackgrounds then 0 else index + 1
       $cur = $ $headerBackgrounds.eq(index)
       $next = $ $headerBackgrounds.eq(nextIndex)
       $cur.removeClass 'active'
@@ -403,7 +410,7 @@ popLockGraph = ->
   graphContainerTop = offset($graphContainer).top
   graphContainerBottom = graphContainerTop + $graphContainer.height()
   return if scrollTop < graphContainerTop or scrollTop + viewportHeight >= graphContainerBottom
-  $graph.css 'margin-top': scrollTop - graphContainerTop
+  $graphWrapper.css 'margin-top': scrollTop - graphContainerTop
 
 # On resize functions
 # -------------------
