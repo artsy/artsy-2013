@@ -328,8 +328,8 @@ fadeBetweenBackgroundItems = ->
         $foreground.css opacity: percentCurItem
         $curItem.css 'z-index': Math.round(percentCurItem)
       else
-        $curItem.css opacity: percentCurItem, 'z-index': Math.round(percentCurItem)
-        $nextItem.css opacity: percentNextItem, 'z-index': Math.round(percentNextItem)
+        $curItem.css opacity: percentCurItem, 'z-index': Math.ceil(percentCurItem)
+        $nextItem.css opacity: percentNextItem, 'z-index': Math.ceil(percentNextItem)
       break
 
 fadeOutHeaderImage = ->

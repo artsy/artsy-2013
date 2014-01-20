@@ -76,15 +76,17 @@
   z-index 2
 
 #intro-statement
-  font-size 54px
+  font-size 42px
   line-height 1.2em
   padding 0 foreground-padding
   position relative
+  margin 300px 0
   p
     margin-bottom 1em
   #intro-statement-inner
     padding-top 60px
     position relative
+    width 70%
     hr
       width foreground-width
       position absolute
@@ -92,6 +94,12 @@
       top 0
       border 0
       border-top 3px solid white
+@media (max-width: 1024px)
+  #intro-statement
+    margin 200px 0
+    #intro-statement-inner
+      width 100%
+
 
 backgrounds(size)
   #header-background ul
