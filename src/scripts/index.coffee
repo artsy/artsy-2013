@@ -278,7 +278,10 @@ shareOnFacebook = (e) ->
 
 shareOnTwitter = (e) ->
   opts = "status=1,width=750,height=400,top=249.5,left=1462"
-  text = TWITTER_TEXTS[currentItemIndex]
+  text = if $(e.target).hasClass('final-twitter-button')
+           "The Year in Artsy: 2013.artsy.net"
+         else
+           TWITTER_TEXTS[currentItemIndex]
   url = "https://twitter.com/intent/tweet?" +
         "original_referer=#{location.href}" +
         "&text=#{text}"
