@@ -5,6 +5,7 @@
   width 100%
   z-index 2
   transition opacity 0.3s ease-out
+  transform translate3d(0,0,0)
   li
     padding foreground-padding
     height 100%
@@ -49,3 +50,10 @@
 
 #foreground-social-buttons
   z-index 2
+
+// IOS6 has a hard time dealing with the fluid widths of the foreground headers
+body.ios6 #foreground header
+  width 290px !important
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait)
+  body.ios6 #foreground header
+    width 230px !important

@@ -43,6 +43,10 @@ TWITTER_TEXTS = [
   # 'Turns out the @Artsy team is really into Burning Man. See the rest: 2013.artsy.net'
 ]
 
+IS_IPHONE = navigator.userAgent.match(/iPhone/i)
+IS_IPAD = navigator.userAgent.match(/iPad/i)
+IS_IOS6 = (IS_IPAD or IS_IPHONE) and navigator.userAgent.match('Version/6.0')
+
 # Top-level variables
 # -------------------
 
@@ -95,18 +99,12 @@ viewportWidth = null
 # ---------------
 
 init = ->
+
   cacheElements()
   setupGraph()
   $window.on 'resize', _.throttle onResize, 100
   onResize()
-  # Use IScroll to handle scroll events on an IPad, otherwise normal scroll handlers.
-  # Phone uses a more responsive technique which will just toggle off the `onScroll`
-  # handler based on screen size.
-  if navigator.userAgent.match(/iPad/i)
-    setupIScroll()
-  else if not navigator.userAgent.match(/iPhone/i)
-    $window.on 'scroll', onScroll
-    onScroll()
+  adjustForDevices()
   setContentGap()
   nextHeaderSlide()
   renderSocialShares()
@@ -116,6 +114,17 @@ init = ->
   copyForegroundContentToBackgroundForPhone()
   attachClickHandlers()
   revealOnFirstBannerLoad()
+
+adjustForDevices = ->
+  # Use IScroll to handle scroll events on an IPad, otherwise normal scroll handlers.
+  # Phone uses a more responsive technique which will just toggle off the `onScroll`
+  # handler based on screen size.
+  if IS_IPAD
+    setupIScroll()
+  else if not IS_IPHONE
+    $window.on 'scroll', onScroll
+    onScroll()
+  $body.addClass 'ios6' if IS_IOS6
 
 setupGraph = ->
   graphLineLength = $graphLine[0].getTotalLength()
