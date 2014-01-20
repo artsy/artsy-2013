@@ -20,6 +20,7 @@ gray-color = #999
   img
     width 100%
     margin-bottom img-margin
+    display block
   figure
     margin 0 0 img-margin 0
     img
@@ -27,12 +28,19 @@ gray-color = #999
     figcaption
       font-style italic
       position relative
-      line-height 1.1em
+      line-height 20px
     .source
       color #666
       font-size 15px
       font-style italic
       float right
+    a.source
+      z-index 4
+      text-decoration none
+      position absolute
+      right 0
+      &:before
+        opacity 0.5
 
 .two-column-images
   width 50%
@@ -82,10 +90,15 @@ gray-color = #999
 .phone-foreground-container
   display none
 
-#graph
-  width 100%
+#graph-wrapper
   position absolute
   top 35px
+  h4
+    font-size 30px
+    margin-bottom 30px
+    margin-top 10px
+#graph, #graph-wrapper
+  width 100%
 
 #graph-container
   position relative
@@ -93,3 +106,11 @@ gray-color = #999
 #iphone-screens img
   margin 0
   display block
+
+.may-images
+  li
+    margin-bottom 20px
+    display block
+  img
+    margin 0 !important
+    display block

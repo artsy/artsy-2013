@@ -13,11 +13,14 @@ instead-of-viewport-height-margin = 40px
 
 // Vertical iPad
 @media (max-width: 800px)
-  #intro-statement, #foreground-content li h1
-    font-size 40px
   #foreground-content li h1
     br:nth-of-type(2)
       display  none
+  .faux-underline
+    display inline !important
+    &:before
+      display none !important
+    text-decoration underline !important
 
 // Phone
 @media (max-width: 640px)
